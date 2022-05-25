@@ -295,6 +295,7 @@
             this.DayEndMinuteNumber = new System.Windows.Forms.NumericUpDown();
             this.SaveSettingsDialog = new System.Windows.Forms.SaveFileDialog();
             this.SetFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.LoadSettingsDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -442,11 +443,10 @@
             // 
             // loadFileToolStripMenuItem
             // 
-            this.loadFileToolStripMenuItem.Enabled = false;
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
             this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.loadFileToolStripMenuItem.Text = "Load File";
-            this.loadFileToolStripMenuItem.ToolTipText = "Not implemented";
+            this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
@@ -482,8 +482,8 @@
             this.GameTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GameTypeComboBox.FormattingEnabled = true;
             this.GameTypeComboBox.Items.AddRange(new object[] {
-            "PvP",
-            "PvE"});
+            "PvE",
+            "PvP"});
             this.GameTypeComboBox.Location = new System.Drawing.Point(12, 42);
             this.GameTypeComboBox.MaxDropDownItems = 2;
             this.GameTypeComboBox.Name = "GameTypeComboBox";
@@ -648,7 +648,8 @@
             this.RelicSpawnTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RelicSpawnTypeComboBox.FormattingEnabled = true;
             this.RelicSpawnTypeComboBox.Items.AddRange(new object[] {
-            "Unique"});
+            "Unique",
+            "Plentiful"});
             this.RelicSpawnTypeComboBox.Location = new System.Drawing.Point(882, 42);
             this.RelicSpawnTypeComboBox.Name = "RelicSpawnTypeComboBox";
             this.RelicSpawnTypeComboBox.Size = new System.Drawing.Size(91, 23);
@@ -2292,7 +2293,7 @@
             this.CastleUnderAttackTimerNumber.DecimalPlaces = 2;
             this.CastleUnderAttackTimerNumber.Location = new System.Drawing.Point(497, 89);
             this.CastleUnderAttackTimerNumber.Maximum = new decimal(new int[] {
-            1800,
+            180,
             0,
             0,
             0});
@@ -2300,7 +2301,7 @@
             this.CastleUnderAttackTimerNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleUnderAttackTimerNumber.TabIndex = 75;
             this.CastleUnderAttackTimerNumber.Value = new decimal(new int[] {
-            180,
+            60,
             0,
             0,
             0});
@@ -2310,7 +2311,7 @@
             this.CastleSiegeTimerNumber.DecimalPlaces = 2;
             this.CastleSiegeTimerNumber.Location = new System.Drawing.Point(497, 65);
             this.CastleSiegeTimerNumber.Maximum = new decimal(new int[] {
-            10000,
+            1800,
             0,
             0,
             0});
@@ -2318,7 +2319,7 @@
             this.CastleSiegeTimerNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleSiegeTimerNumber.TabIndex = 73;
             this.CastleSiegeTimerNumber.Value = new decimal(new int[] {
-            1800,
+            420,
             0,
             0,
             0});
@@ -4234,13 +4235,17 @@
             this.SaveSettingsDialog.DefaultExt = "json";
             this.SaveSettingsDialog.FileName = "ServerGameSettings.json";
             this.SaveSettingsDialog.Filter = "\"JSON files\"|*.json";
-            this.SaveSettingsDialog.InitialDirectory = "Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)";
             this.SaveSettingsDialog.Title = "Save Settings";
             // 
             // SetFolderDialog
             // 
             this.SetFolderDialog.Description = "Select the save folder of your server.";
             this.SetFolderDialog.ShowNewFolderButton = false;
+            // 
+            // LoadSettingsDialog
+            // 
+            this.LoadSettingsDialog.FileName = "ServerGameSettings.json";
+            this.LoadSettingsDialog.Filter = "\"JSON files\"|*.json";
             // 
             // MainForm
             // 
@@ -4717,5 +4722,6 @@
         private System.Windows.Forms.NumericUpDown DayEndMinuteNumber;
         private System.Windows.Forms.SaveFileDialog SaveSettingsDialog;
         private System.Windows.Forms.FolderBrowserDialog SetFolderDialog;
+        private System.Windows.Forms.OpenFileDialog LoadSettingsDialog;
     }
 }

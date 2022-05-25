@@ -14,26 +14,26 @@ namespace WinFormsApp1
 
     public class CastleStatModifiersGlobal
     {
-        public double? TickPeriod { get; set; }
-        public double? DamageResistance { get; set; }
-        public int? SafetyBoxLimit { get; set; }
-        public int? TombLimit { get; set; }
-        public int? VerminNestLimit { get; set; }
+        public double TickPeriod { get; set; } = 5.0;
+        public double DamageResistance { get; set; } = 0.0;
+        public int SafetyBoxLimit { get; set; } = 1;
+        public int TombLimit { get; set; } = 12;
+        public int VerminNestLimit { get; set; } = 4;
         public PylonPenalties? PylonPenalties { get; set; }
         public FloorPenalties? FloorPenalties { get; set; }
         public HeartLimits? HeartLimits { get; set; }
-        public int? CastleLimit { get; set; }
+        public int CastleLimit { get; set; } = 2;
     }
 
     public class EquipmentStatModifiersGlobal
     {
-        public double? MaxEnergyModifier { get; set; }
-        public double? MaxHealthModifier { get; set; }
-        public double? ResourceYieldModifier { get; set; }
-        public double? PhysicalPowerModifier { get; set; }
-        public double? SpellPowerModifier { get; set; }
-        public double? SiegePowerModifier { get; set; }
-        public double? MovementSpeedModifier { get; set; }
+        public double MaxEnergyModifier { get; set; } = 1.0;
+        public double MaxHealthModifier { get; set; } = 1.0;
+        public double ResourceYieldModifier { get; set; } = 1.0;
+        public double PhysicalPowerModifier { get; set; } = 1.0;
+        public double SpellPowerModifier { get; set; } = 1.0;
+        public double SiegePowerModifier { get; set; } = 1.0;
+        public double MovementSpeedModifier { get; set; } = 1.0;
     }
 
     public class FloorPenalties
@@ -47,14 +47,14 @@ namespace WinFormsApp1
 
     public class GameTimeModifiers
     {
-        public double? DayDurationInSeconds { get; set; }
-        public int? DayStartHour { get; set; }
-        public int? DayStartMinute { get; set; }
-        public int? DayEndHour { get; set; }
-        public int? DayEndMinute { get; set; }
-        public int? BloodMoonFrequency_Min { get; set; }
-        public int? BloodMoonFrequency_Max { get; set; }
-        public double? BloodMoonBuff { get; set; }
+        public double DayDurationInSeconds { get; set; } = 1080.00;
+        public int DayStartHour { get; set; } = 9;
+        public int DayStartMinute { get; set; } = 0;
+        public int DayEndHour { get; set; } = 17;
+        public int DayEndMinute { get; set; } = 0;
+        public int BloodMoonFrequency_Min { get; set; } = 10;
+        public int BloodMoonFrequency_Max { get; set; } = 18;
+        public double BloodMoonBuff { get; set; } = 0.2;
     }
 
     public class HeartLimits
@@ -67,35 +67,35 @@ namespace WinFormsApp1
 
     public class Level1
     {
-        public int? Level { get; set; }
-        public int? FloorLimit { get; set; }
-        public int? ServantLimit { get; set; }
+        public int Level { get; set; } = 1;
+        public int FloorLimit { get; set; } = 30;
+        public int ServantLimit { get; set; } = 3;
     }
 
     public class Level2
     {
-        public int? Level { get; set; }
-        public int? FloorLimit { get; set; }
-        public int? ServantLimit { get; set; }
+        public int Level { get; set; } = 2;
+        public int FloorLimit { get; set; } = 80;
+        public int ServantLimit { get; set; } = 5;
     }
 
     public class Level3
     {
-        public int? Level { get; set; }
-        public int? FloorLimit { get; set; }
-        public int? ServantLimit { get; set; }
+        public int Level { get; set; } = 3;
+        public int FloorLimit { get; set; } = 150;
+        public int ServantLimit { get; set; } = 7;
     }
 
     public class Level4
     {
-        public int? Level { get; set; }
-        public int? FloorLimit { get; set; }
-        public int? ServantLimit { get; set; }
+        public int Level { get; set; } = 4;
+        public int FloorLimit { get; set; } = 250;
+        public int ServantLimit { get; set; } = 9;
     }
 
     public class PlayerInteractionSettings
     {
-        public string? TimeZone { get; set; }
+        public int TimeZone { get; set; } = 0;
         public VSPlayerWeekdayTime? VSPlayerWeekdayTime { get; set; }
         public VSPlayerWeekendTime? VSPlayerWeekendTime { get; set; }
         public VSCastleWeekdayTime? VSCastleWeekdayTime { get; set; }
@@ -148,117 +148,117 @@ namespace WinFormsApp1
 
     public class UnitStatModifiersGlobal
     {
-        public double? MaxHealthModifier { get; set; }
-        public double? PowerModifier { get; set; }
+        public double MaxHealthModifier { get; set; } = 1.0;
+        public double PowerModifier { get; set; } = 1.0;
     }
 
     public class UnitStatModifiersVBlood
     {
-        public double? MaxHealthModifier { get; set; }
-        public double? PowerModifier { get; set; }
+        public double MaxHealthModifier { get; set; } = 1.0;
+        public double PowerModifier { get; set; } = 1.0;
     }
 
     public class VampireStatModifiers
     {
-        public double? MaxHealthModifier { get; set; }
-        public double? MaxEnergyModifier { get; set; }
-        public double? PhysicalPowerModifier { get; set; }
-        public double? SpellPowerModifier { get; set; }
-        public double? ResourcePowerModifier { get; set; }
-        public double? SiegePowerModifier { get; set; }
-        public double? DamageReceivedModifier { get; set; }
-        public double? ReviveCancelDelay { get; set; }
+        public double MaxHealthModifier { get; set; } = 1.0;
+        public double MaxEnergyModifier { get; set; } = 1.0;
+        public double PhysicalPowerModifier { get; set; } = 1.0;
+        public double SpellPowerModifier { get; set; } = 1.0;
+        public double ResourcePowerModifier { get; set; } = 1.0;
+        public double SiegePowerModifier { get; set; } = 1.0;
+        public double DamageReceivedModifier { get; set; } = 1.0;
+        public double ReviveCancelDelay { get; set; } = 5.0;
     }
 
     public class VSCastleWeekdayTime
     {
-        public int? StartHour { get; set; }
-        public int? StartMinute { get; set; }
-        public int? EndHour { get; set; }
-        public int? EndMinute { get; set; }
+        public int StartHour { get; set; } = 17;
+        public int StartMinute { get; set; } = 0;
+        public int EndHour { get; set; } = 23;
+        public int EndMinute { get; set; } = 0;
     }
 
     public class VSCastleWeekendTime
     {
-        public int? StartHour { get; set; }
-        public int? StartMinute { get; set; }
-        public int? EndHour { get; set; }
-        public int? EndMinute { get; set; }
+        public int StartHour { get; set; } = 17;
+        public int StartMinute { get; set; } = 0;
+        public int EndHour { get; set; } = 23;
+        public int EndMinute { get; set; } = 0;
     }
 
     public class VSPlayerWeekdayTime
     {
-        public int? StartHour { get; set; }
-        public int? StartMinute { get; set; }
-        public int? EndHour { get; set; }
-        public int? EndMinute { get; set; }
+        public int StartHour { get; set; } = 17;
+        public int StartMinute { get; set; } = 0;
+        public int EndHour { get; set; } = 23;
+        public int EndMinute { get; set; } = 0;
     }
 
     public class VSPlayerWeekendTime
     {
-        public int? StartHour { get; set; }
-        public int? StartMinute { get; set; }
-        public int? EndHour { get; set; }
-        public int? EndMinute { get; set; }
+        public int StartHour { get; set; } = 17;
+        public int StartMinute { get; set; } = 0;
+        public int EndHour { get; set; } = 23;
+        public int EndMinute { get; set; } = 0;
     }
 
     public class RootSettings
     {
-        public int? GameModeType { get; set; }
-        public int? CastleDamageMode { get; set; }
-        public int? SiegeWeaponHealth { get; set; }
-        public int? PlayerDamageMode { get; set; }
-        public int? CastleHeartDamageMode { get; set; }
-        public int? PvPProtectionMode { get; set; }
-        public int? DeathContainerPermission { get; set; }
-        public int? RelicSpawnType { get; set; }
-        public bool CanLootEnemyContainers { get; set; }
-        public bool BloodBoundEquipment { get; set; }
-        public bool TeleportBoundItems { get; set; }
-        public bool AllowGlobalChat { get; set; }
-        public bool AllWaypointsUnlocked { get; set; }
-        public bool FreeCastleClaim { get; set; }
-        public bool FreeCastleDestroy { get; set; }
-        public bool InactivityKillEnabled { get; set; }
-        public int? InactivityKillTimeMin { get; set; }
-        public int? InactivityKillTimeMax { get; set; }
-        public int? InactivityKillSafeTimeAddition { get; set; }
-        public int? InactivityKillTimerMaxItemLevel { get; set; }
+        public int GameModeType { get; set; } = 0;
+        public int CastleDamageMode { get; set; } = 0;
+        public int SiegeWeaponHealth { get; set; } = 2;
+        public int PlayerDamageMode { get; set; } = 0;
+        public int CastleHeartDamageMode { get; set; } = 0;
+        public int PvPProtectionMode { get; set; } = 2;
+        public int DeathContainerPermission { get; set; } = 0;
+        public int RelicSpawnType { get; set; } = 0;
+        public bool CanLootEnemyContainers { get; set; } = true;
+        public bool BloodBoundEquipment { get; set; } = true;
+        public bool TeleportBoundItems { get; set; } = true;
+        public bool AllowGlobalChat { get; set; } = true;
+        public bool AllWaypointsUnlocked { get; set; } = false;
+        public bool FreeCastleClaim { get; set; } = false;
+        public bool FreeCastleDestroy { get; set; } = false;
+        public bool InactivityKillEnabled { get; set; } = true;
+        public int InactivityKillTimeMin { get; set; } = 3600;
+        public int InactivityKillTimeMax { get; set; } = 604800;
+        public int InactivityKillSafeTimeAddition { get; set; } = 172800;
+        public int InactivityKillTimerMaxItemLevel { get; set; } = 84;
         public bool DisableDisconnectedDeadEnabled { get; set; }
-        public int? DisableDisconnectedDeadTimer { get; set; }
-        public double? InventoryStacksModifier { get; set; }
-        public double? DropTableModifier_General { get; set; }
-        public double? DropTableModifier_Missions { get; set; }
-        public double? MaterialYieldModifier_Global { get; set; }
-        public double? BloodEssenceYieldModifier { get; set; }
-        public double? JournalVBloodSourceUnitMaxDistance { get; set; }
-        public double? PvPVampireRespawnModifier { get; set; }
-        public int? CastleMinimumDistanceInFloors { get; set; }
-        public int? ClanSize { get; set; }
-        public double? BloodDrainModifier { get; set; }
-        public double? DurabilityDrainModifier { get; set; }
-        public double? GarlicAreaStrengthModifier { get; set; }
-        public double? HolyAreaStrengthModifier { get; set; }
-        public double? SilverStrengthModifier { get; set; }
-        public double? SunDamageModifier { get; set; }
-        public double? CastleDecayRateModifier { get; set; }
-        public double? CastleBloodEssenceDrainModifier { get; set; }
-        public double? CastleSiegeTimer { get; set; }
-        public double? CastleUnderAttackTimer { get; set; }
-        public bool AnnounceSiegeWeaponSpawn { get; set; }
-        public bool ShowSiegeWeaponMapIcon { get; set; }
-        public double? BuildCostModifier { get; set; }
-        public double? RecipeCostModifier { get; set; }
-        public double? CraftRateModifier { get; set; }
-        public double? ResearchCostModifier { get; set; }
-        public double? RefinementCostModifier { get; set; }
-        public double? RefinementRateModifier { get; set; }
-        public double? ResearchTimeModifier { get; set; }
-        public double? DismantleResourceModifier { get; set; }
-        public double? ServantConvertRateModifier { get; set; }
-        public double? RepairCostModifier { get; set; }
-        public double? Death_DurabilityFactorLoss { get; set; }
-        public double? Death_DurabilityLossFactorAsResources { get; set; }
+        public int DisableDisconnectedDeadTimer { get; set; } = 60;
+        public double InventoryStacksModifier { get; set; } = 1.0;
+        public double DropTableModifier_General { get; set; } = 1.0;
+        public double DropTableModifier_Missions { get; set; } = 1.0;
+        public double MaterialYieldModifier_Global { get; set; } = 1.0;
+        public double BloodEssenceYieldModifier { get; set; } = 1.0;
+        public double JournalVBloodSourceUnitMaxDistance { get; set; } = 25.0;
+        public double PvPVampireRespawnModifier { get; set; } = 1.0;
+        public int CastleMinimumDistanceInFloors { get; set; } = 2;
+        public int ClanSize { get; set; } = 4;
+        public double BloodDrainModifier { get; set; } = 1.0;
+        public double DurabilityDrainModifier { get; set; } = 1.0;
+        public double GarlicAreaStrengthModifier { get; set; } = 1.0;
+        public double HolyAreaStrengthModifier { get; set; } = 1.0;
+        public double SilverStrengthModifier { get; set; } = 1.0;
+        public double SunDamageModifier { get; set; } = 1.0;
+        public double CastleDecayRateModifier { get; set; } = 1.0;
+        public double CastleBloodEssenceDrainModifier { get; set; } = 1.0;
+        public double CastleSiegeTimer { get; set; } = 420.0;
+        public double CastleUnderAttackTimer { get; set; } = 60.0;
+        public bool AnnounceSiegeWeaponSpawn { get; set; } = true;
+        public bool ShowSiegeWeaponMapIcon { get; set; } = true;
+        public double BuildCostModifier { get; set; } = 1.0;
+        public double RecipeCostModifier { get; set; } = 1.0;
+        public double CraftRateModifier { get; set; } = 1.0;
+        public double ResearchCostModifier { get; set; } = 1.0;
+        public double RefinementCostModifier { get; set; } = 1.0;
+        public double RefinementRateModifier { get; set; } = 1.0;
+        public double ResearchTimeModifier { get; set; } = 1.0;
+        public double DismantleResourceModifier { get; set; } = 1.0;
+        public double ServantConvertRateModifier { get; set; } = 1.0;
+        public double RepairCostModifier { get; set; } = 1.0;
+        public double Death_DurabilityFactorLoss { get; set; } = 0.25;
+        public double Death_DurabilityLossFactorAsResources { get; set; } = 1.0;
         public int? StarterEquipmentId { get; set; }
         public int? StarterResourcesId { get; set; }
         public List<object>? VBloodUnitSettings { get; set; }
