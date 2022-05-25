@@ -156,6 +156,8 @@
             this.DisableDisconnectedDeadEnabledNumber = new System.Windows.Forms.NumericUpDown();
             this.DisableDisconnectedDeadEnabledRadioFalse = new System.Windows.Forms.RadioButton();
             this.DisableDisconnectedDeadEnabledRadioTrue = new System.Windows.Forms.RadioButton();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.InventoryStacksModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_GeneralNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_MissionsNumber = new System.Windows.Forms.NumericUpDown();
@@ -166,11 +168,9 @@
             this.RepairCostModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.ServantConvertRateModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DismantleResourceModifierNumber = new System.Windows.Forms.NumericUpDown();
-            this.label39 = new System.Windows.Forms.Label();
             this.ResearchTimeModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.RefinementRateModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.RefinementCostModifierNumber = new System.Windows.Forms.NumericUpDown();
-            this.label37 = new System.Windows.Forms.Label();
             this.ResearchCostModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.CraftRateModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.RecipeCostModifierNumber = new System.Windows.Forms.NumericUpDown();
@@ -814,11 +814,13 @@
             this.groupBox5.TabIndex = 25;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "AllWaypointsUnlocked";
+            this.toolTip1.SetToolTip(this.groupBox5, "Does not work and breaks the game");
             // 
             // AllWaypointsUnlockedRadioFalse
             // 
             this.AllWaypointsUnlockedRadioFalse.AutoSize = true;
             this.AllWaypointsUnlockedRadioFalse.Checked = true;
+            this.AllWaypointsUnlockedRadioFalse.Enabled = false;
             this.AllWaypointsUnlockedRadioFalse.Location = new System.Drawing.Point(6, 47);
             this.AllWaypointsUnlockedRadioFalse.Name = "AllWaypointsUnlockedRadioFalse";
             this.AllWaypointsUnlockedRadioFalse.Size = new System.Drawing.Size(51, 19);
@@ -830,6 +832,7 @@
             // AllWaypointsUnlockedRadioTrue
             // 
             this.AllWaypointsUnlockedRadioTrue.AutoSize = true;
+            this.AllWaypointsUnlockedRadioTrue.Enabled = false;
             this.AllWaypointsUnlockedRadioTrue.Location = new System.Drawing.Point(6, 22);
             this.AllWaypointsUnlockedRadioTrue.Name = "AllWaypointsUnlockedRadioTrue";
             this.AllWaypointsUnlockedRadioTrue.Size = new System.Drawing.Size(47, 19);
@@ -918,7 +921,7 @@
             this.groupBox8.TabIndex = 28;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "InactivityKillEnabled";
-            this.toolTip1.SetToolTip(this.groupBox8, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.groupBox8, "Inactive players are automatically killed after a set duration.");
             // 
             // InactivityKillEnabledRadioFalse
             // 
@@ -953,7 +956,7 @@
             this.label10.Size = new System.Drawing.Size(118, 15);
             this.label10.TabIndex = 29;
             this.label10.Text = "InactivityKillTimeMin";
-            this.toolTip1.SetToolTip(this.label10, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label10, "Minimum timer before inactive player is killed in seconds based on gear level.");
             // 
             // InactivityKillTimeMinNumber
             // 
@@ -980,10 +983,11 @@
             this.label11.Size = new System.Drawing.Size(120, 15);
             this.label11.TabIndex = 32;
             this.label11.Text = "InactivityKillTimeMax";
-            this.toolTip1.SetToolTip(this.label11, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label11, "Not used.");
             // 
             // InactivityKillTimeMaxNumber
             // 
+            this.InactivityKillTimeMaxNumber.Enabled = false;
             this.InactivityKillTimeMaxNumber.Location = new System.Drawing.Point(787, 299);
             this.InactivityKillTimeMaxNumber.Maximum = new decimal(new int[] {
             1000000,
@@ -1007,10 +1011,11 @@
             this.label12.Size = new System.Drawing.Size(101, 30);
             this.label12.TabIndex = 34;
             this.label12.Text = "InactivityKill\r\nSafeTimeAddition";
-            this.toolTip1.SetToolTip(this.label12, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label12, "Not used.");
             // 
             // InactivityKillSafeTimeAdditionNumber
             // 
+            this.InactivityKillSafeTimeAdditionNumber.Enabled = false;
             this.InactivityKillSafeTimeAdditionNumber.Location = new System.Drawing.Point(787, 358);
             this.InactivityKillSafeTimeAdditionNumber.Maximum = new decimal(new int[] {
             1000000,
@@ -1034,10 +1039,11 @@
             this.label13.Size = new System.Drawing.Size(111, 30);
             this.label13.TabIndex = 36;
             this.label13.Text = "InactivityKill\r\nTimerMaxItemLevel";
-            this.toolTip1.SetToolTip(this.label13, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label13, "Not used.");
             // 
             // InactivityKillTimerMaxItemLevelNumber
             // 
+            this.InactivityKillTimerMaxItemLevelNumber.Enabled = false;
             this.InactivityKillTimerMaxItemLevelNumber.Location = new System.Drawing.Point(787, 417);
             this.InactivityKillTimerMaxItemLevelNumber.Maximum = new decimal(new int[] {
             200,
@@ -1295,7 +1301,7 @@
             this.label20.Size = new System.Drawing.Size(209, 15);
             this.label20.TabIndex = 48;
             this.label20.Text = "JournalVBloodSourceUnitMaxDistance";
-            this.toolTip1.SetToolTip(this.label20, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label20, "Currently not used.");
             // 
             // label19
             // 
@@ -1351,7 +1357,7 @@
             this.label47.Size = new System.Drawing.Size(106, 15);
             this.label47.TabIndex = 112;
             this.label47.Text = "ReviveCancelDelay";
-            this.toolTip1.SetToolTip(this.label47, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label47, "Not used.");
             // 
             // label52
             // 
@@ -1362,7 +1368,7 @@
             this.label52.Size = new System.Drawing.Size(111, 15);
             this.label52.TabIndex = 102;
             this.label52.Text = "MaxEnergyModifier";
-            this.toolTip1.SetToolTip(this.label52, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label52, "Not used.");
             // 
             // label48
             // 
@@ -1395,7 +1401,7 @@
             this.label49.Size = new System.Drawing.Size(113, 15);
             this.label49.TabIndex = 108;
             this.label49.Text = "SiegePowerModifier";
-            this.toolTip1.SetToolTip(this.label49, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label49, "Not used.");
             // 
             // label46
             // 
@@ -1450,7 +1456,7 @@
             this.label55.Size = new System.Drawing.Size(111, 15);
             this.label55.TabIndex = 100;
             this.label55.Text = "MaxEnergyModifier";
-            this.toolTip1.SetToolTip(this.label55, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label55, "Not used.");
             // 
             // label57
             // 
@@ -1494,7 +1500,7 @@
             this.label61.Size = new System.Drawing.Size(113, 15);
             this.label61.TabIndex = 110;
             this.label61.Text = "SiegePowerModifier";
-            this.toolTip1.SetToolTip(this.label61, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label61, "Not used.");
             // 
             // label62
             // 
@@ -1793,7 +1799,7 @@
             this.groupBox9.TabIndex = 22;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "DisableDisconnectedDeadEnabled";
-            this.toolTip1.SetToolTip(this.groupBox9, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.groupBox9, "If dead disconnected players are disabled.");
             // 
             // label14
             // 
@@ -1803,6 +1809,7 @@
             this.label14.Size = new System.Drawing.Size(37, 15);
             this.label14.TabIndex = 3;
             this.label14.Text = "Timer";
+            this.toolTip1.SetToolTip(this.label14, "The time for a disconnected dead player to become disabled.");
             // 
             // DisableDisconnectedDeadEnabledNumber
             // 
@@ -1844,6 +1851,26 @@
             this.DisableDisconnectedDeadEnabledRadioTrue.Text = "True";
             this.DisableDisconnectedDeadEnabledRadioTrue.UseVisualStyleBackColor = true;
             this.DisableDisconnectedDeadEnabledRadioTrue.CheckedChanged += new System.EventHandler(this.DisableDisconnectedDeadEnabledRadioTrue_CheckedChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(283, 259);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(125, 15);
+            this.label39.TabIndex = 88;
+            this.label39.Text = "ResearchTimeModifier";
+            this.toolTip1.SetToolTip(this.label39, "Not used.");
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(283, 187);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(123, 15);
+            this.label37.TabIndex = 82;
+            this.label37.Text = "ResearchCostModifier";
+            this.toolTip1.SetToolTip(this.label37, "Not used.");
             // 
             // InventoryStacksModifierNumber
             // 
@@ -2109,18 +2136,10 @@
             0,
             131072});
             // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(283, 259);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(125, 15);
-            this.label39.TabIndex = 88;
-            this.label39.Text = "ResearchTimeModifier";
-            // 
             // ResearchTimeModifierNumber
             // 
             this.ResearchTimeModifierNumber.DecimalPlaces = 2;
+            this.ResearchTimeModifierNumber.Enabled = false;
             this.ResearchTimeModifierNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -2187,18 +2206,10 @@
             0,
             0});
             // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(283, 187);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(123, 15);
-            this.label37.TabIndex = 82;
-            this.label37.Text = "ResearchCostModifier";
-            // 
             // ResearchCostModifierNumber
             // 
             this.ResearchCostModifierNumber.DecimalPlaces = 2;
+            this.ResearchCostModifierNumber.Enabled = false;
             this.ResearchCostModifierNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -2577,6 +2588,7 @@
             // JournalVBloodSourceUnitMaxDistanceNumber
             // 
             this.JournalVBloodSourceUnitMaxDistanceNumber.DecimalPlaces = 2;
+            this.JournalVBloodSourceUnitMaxDistanceNumber.Enabled = false;
             this.JournalVBloodSourceUnitMaxDistanceNumber.Location = new System.Drawing.Point(217, 137);
             this.JournalVBloodSourceUnitMaxDistanceNumber.Name = "JournalVBloodSourceUnitMaxDistanceNumber";
             this.JournalVBloodSourceUnitMaxDistanceNumber.Size = new System.Drawing.Size(60, 23);
@@ -2684,6 +2696,7 @@
             // VampireMaxEnergyModifierNumber
             // 
             this.VampireMaxEnergyModifierNumber.DecimalPlaces = 2;
+            this.VampireMaxEnergyModifierNumber.Enabled = false;
             this.VampireMaxEnergyModifierNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -2707,6 +2720,7 @@
             // VampireReviveCancelDelayNumber
             // 
             this.VampireReviveCancelDelayNumber.DecimalPlaces = 2;
+            this.VampireReviveCancelDelayNumber.Enabled = false;
             this.VampireReviveCancelDelayNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -2794,6 +2808,7 @@
             // VampireSiegePowerModifierNumber
             // 
             this.VampireSiegePowerModifierNumber.DecimalPlaces = 2;
+            this.VampireSiegePowerModifierNumber.Enabled = false;
             this.VampireSiegePowerModifierNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -3018,6 +3033,7 @@
             // SiegePowerModifier_EquipmentNumber
             // 
             this.SiegePowerModifier_EquipmentNumber.DecimalPlaces = 2;
+            this.SiegePowerModifier_EquipmentNumber.Enabled = false;
             this.SiegePowerModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 137);
             this.SiegePowerModifier_EquipmentNumber.Maximum = new decimal(new int[] {
             5,
@@ -3059,6 +3075,7 @@
             // MaxEnergyModifier_EquipmentNumber
             // 
             this.MaxEnergyModifier_EquipmentNumber.DecimalPlaces = 2;
+            this.MaxEnergyModifier_EquipmentNumber.Enabled = false;
             this.MaxEnergyModifier_EquipmentNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -3393,6 +3410,7 @@
             // DamageResistanceNumber
             // 
             this.DamageResistanceNumber.DecimalPlaces = 2;
+            this.DamageResistanceNumber.Enabled = false;
             this.DamageResistanceNumber.Increment = new decimal(new int[] {
             25,
             0,
@@ -3417,6 +3435,7 @@
             this.label67.Size = new System.Drawing.Size(106, 15);
             this.label67.TabIndex = 102;
             this.label67.Text = "DamageResistance";
+            this.toolTip1.SetToolTip(this.label67, "Not used.");
             // 
             // numericUpDown6
             // 
@@ -4086,10 +4105,15 @@
             131072});
             this.BloodMoonBuffNumber.Location = new System.Drawing.Point(383, 91);
             this.BloodMoonBuffNumber.Maximum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
+            this.BloodMoonBuffNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.BloodMoonBuffNumber.Name = "BloodMoonBuffNumber";
             this.BloodMoonBuffNumber.Size = new System.Drawing.Size(60, 23);
             this.BloodMoonBuffNumber.TabIndex = 113;
@@ -4132,6 +4156,11 @@
             // BloodMoonFrequency_MaxNumber
             // 
             this.BloodMoonFrequency_MaxNumber.Location = new System.Drawing.Point(383, 67);
+            this.BloodMoonFrequency_MaxNumber.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.BloodMoonFrequency_MaxNumber.Name = "BloodMoonFrequency_MaxNumber";
             this.BloodMoonFrequency_MaxNumber.Size = new System.Drawing.Size(60, 23);
             this.BloodMoonFrequency_MaxNumber.TabIndex = 111;
@@ -4189,6 +4218,11 @@
             // BloodMoonFrequency_MinNumber
             // 
             this.BloodMoonFrequency_MinNumber.Location = new System.Drawing.Point(383, 43);
+            this.BloodMoonFrequency_MinNumber.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.BloodMoonFrequency_MinNumber.Name = "BloodMoonFrequency_MinNumber";
             this.BloodMoonFrequency_MinNumber.Size = new System.Drawing.Size(60, 23);
             this.BloodMoonFrequency_MinNumber.TabIndex = 109;

@@ -463,12 +463,6 @@ namespace WinFormsApp1
             {
                 InactivityKillTimeMinNumber.ReadOnly = false;
                 InactivityKillTimeMinNumber.Increment = 1;
-                InactivityKillTimeMaxNumber.ReadOnly = false;
-                InactivityKillTimeMaxNumber.Increment = 1;
-                InactivityKillSafeTimeAdditionNumber.ReadOnly = false;
-                InactivityKillSafeTimeAdditionNumber.Increment = 1;
-                InactivityKillTimerMaxItemLevelNumber.ReadOnly = false;
-                InactivityKillTimerMaxItemLevelNumber.Increment = 1;
             }
         }
 
@@ -478,12 +472,6 @@ namespace WinFormsApp1
             {
                 InactivityKillTimeMinNumber.ReadOnly = true;
                 InactivityKillTimeMinNumber.Increment = 0;
-                InactivityKillTimeMaxNumber.ReadOnly = true;
-                InactivityKillTimeMaxNumber.Increment = 0;
-                InactivityKillSafeTimeAdditionNumber.ReadOnly = true;
-                InactivityKillSafeTimeAdditionNumber.Increment = 0;
-                InactivityKillTimerMaxItemLevelNumber.ReadOnly = true;
-                InactivityKillTimerMaxItemLevelNumber.Increment = 0;
             }
         }
 
