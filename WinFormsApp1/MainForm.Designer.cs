@@ -917,6 +917,7 @@
             this.groupBox8.TabIndex = 28;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "InactivityKillEnabled";
+            this.toolTip1.SetToolTip(this.groupBox8, "Unknown what this does. Change at own risk.");
             // 
             // InactivityKillEnabledRadioFalse
             // 
@@ -951,6 +952,7 @@
             this.label10.Size = new System.Drawing.Size(118, 15);
             this.label10.TabIndex = 29;
             this.label10.Text = "InactivityKillTimeMin";
+            this.toolTip1.SetToolTip(this.label10, "Unknown what this does. Change at own risk.");
             // 
             // InactivityKillTimeMinNumber
             // 
@@ -977,6 +979,7 @@
             this.label11.Size = new System.Drawing.Size(120, 15);
             this.label11.TabIndex = 32;
             this.label11.Text = "InactivityKillTimeMax";
+            this.toolTip1.SetToolTip(this.label11, "Unknown what this does. Change at own risk.");
             // 
             // InactivityKillTimeMaxNumber
             // 
@@ -1003,6 +1006,7 @@
             this.label12.Size = new System.Drawing.Size(101, 30);
             this.label12.TabIndex = 34;
             this.label12.Text = "InactivityKill\r\nSafeTimeAddition";
+            this.toolTip1.SetToolTip(this.label12, "Unknown what this does. Change at own risk.");
             // 
             // InactivityKillSafeTimeAdditionNumber
             // 
@@ -1029,6 +1033,7 @@
             this.label13.Size = new System.Drawing.Size(111, 30);
             this.label13.TabIndex = 36;
             this.label13.Text = "InactivityKill\r\nTimerMaxItemLevel";
+            this.toolTip1.SetToolTip(this.label13, "Unknown what this does. Change at own risk.");
             // 
             // InactivityKillTimerMaxItemLevelNumber
             // 
@@ -1787,6 +1792,7 @@
             this.groupBox9.TabIndex = 22;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "DisableDisconnectedDeadEnabled";
+            this.toolTip1.SetToolTip(this.groupBox9, "Unknown what this does. Change at own risk.");
             // 
             // label14
             // 
@@ -1848,7 +1854,7 @@
             131072});
             this.InventoryStacksModifierNumber.Location = new System.Drawing.Point(217, 17);
             this.InventoryStacksModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -1871,7 +1877,7 @@
             131072});
             this.DropTableModifier_GeneralNumber.Location = new System.Drawing.Point(217, 41);
             this.DropTableModifier_GeneralNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -1894,7 +1900,7 @@
             131072});
             this.DropTableModifier_MissionsNumber.Location = new System.Drawing.Point(217, 65);
             this.DropTableModifier_MissionsNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -1988,7 +1994,7 @@
             131072});
             this.Death_DurabilityLossFactorAsResourcesNumber.Location = new System.Drawing.Point(497, 377);
             this.Death_DurabilityLossFactorAsResourcesNumber.Maximum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -2011,7 +2017,7 @@
             131072});
             this.Death_DurabilityFactorLossNumber.Location = new System.Drawing.Point(497, 353);
             this.Death_DurabilityFactorLossNumber.Maximum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -2043,7 +2049,7 @@
             131072});
             this.RepairCostModifierNumber.Location = new System.Drawing.Point(497, 329);
             this.RepairCostModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2066,7 +2072,7 @@
             131072});
             this.ServantConvertRateModifierNumber.Location = new System.Drawing.Point(497, 305);
             this.ServantConvertRateModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2089,7 +2095,7 @@
             131072});
             this.DismantleResourceModifierNumber.Location = new System.Drawing.Point(497, 281);
             this.DismantleResourceModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -2121,7 +2127,7 @@
             131072});
             this.ResearchTimeModifierNumber.Location = new System.Drawing.Point(497, 257);
             this.ResearchTimeModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2144,7 +2150,7 @@
             131072});
             this.RefinementRateModifierNumber.Location = new System.Drawing.Point(497, 233);
             this.RefinementRateModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2167,7 +2173,7 @@
             131072});
             this.RefinementCostModifierNumber.Location = new System.Drawing.Point(497, 209);
             this.RefinementCostModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2199,7 +2205,7 @@
             131072});
             this.ResearchCostModifierNumber.Location = new System.Drawing.Point(497, 185);
             this.ResearchCostModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2222,7 +2228,7 @@
             131072});
             this.CraftRateModifierNumber.Location = new System.Drawing.Point(497, 161);
             this.CraftRateModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2245,7 +2251,7 @@
             131072});
             this.RecipeCostModifierNumber.Location = new System.Drawing.Point(497, 137);
             this.RecipeCostModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2268,7 +2274,7 @@
             131072});
             this.BuildCostModifierNumber.Location = new System.Drawing.Point(497, 113);
             this.BuildCostModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2286,7 +2292,7 @@
             this.CastleUnderAttackTimerNumber.DecimalPlaces = 2;
             this.CastleUnderAttackTimerNumber.Location = new System.Drawing.Point(497, 89);
             this.CastleUnderAttackTimerNumber.Maximum = new decimal(new int[] {
-            10000,
+            1800,
             0,
             0,
             0});
@@ -2294,7 +2300,7 @@
             this.CastleUnderAttackTimerNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleUnderAttackTimerNumber.TabIndex = 75;
             this.CastleUnderAttackTimerNumber.Value = new decimal(new int[] {
-            60,
+            180,
             0,
             0,
             0});
@@ -2312,7 +2318,7 @@
             this.CastleSiegeTimerNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleSiegeTimerNumber.TabIndex = 73;
             this.CastleSiegeTimerNumber.Value = new decimal(new int[] {
-            420,
+            1800,
             0,
             0,
             0});
@@ -2327,7 +2333,7 @@
             131072});
             this.CastleBloodEssenceDrainModifierNumber.Location = new System.Drawing.Point(497, 41);
             this.CastleBloodEssenceDrainModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2350,7 +2356,7 @@
             131072});
             this.CastleDecayRateModifierNumber.Location = new System.Drawing.Point(497, 17);
             this.CastleDecayRateModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2373,7 +2379,7 @@
             131072});
             this.SunDamageModifierNumber.Location = new System.Drawing.Point(217, 353);
             this.SunDamageModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2396,7 +2402,7 @@
             131072});
             this.SilverStrengthModifierNumber.Location = new System.Drawing.Point(217, 329);
             this.SilverStrengthModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2428,7 +2434,7 @@
             131072});
             this.HolyAreaStrengthModifierNumber.Location = new System.Drawing.Point(217, 305);
             this.HolyAreaStrengthModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2451,7 +2457,7 @@
             131072});
             this.GarlicAreaStrengthModifierNumber.Location = new System.Drawing.Point(217, 281);
             this.GarlicAreaStrengthModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2474,7 +2480,7 @@
             131072});
             this.DurabilityDrainModifierNumber.Location = new System.Drawing.Point(217, 257);
             this.DurabilityDrainModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2497,7 +2503,7 @@
             131072});
             this.BloodDrainModifierNumber.Location = new System.Drawing.Point(217, 233);
             this.BloodDrainModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2554,7 +2560,7 @@
             131072});
             this.PvPVampireRespawnModifierNumber.Location = new System.Drawing.Point(217, 161);
             this.PvPVampireRespawnModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2590,7 +2596,7 @@
             131072});
             this.BloodEssenceYieldModifierNumber.Location = new System.Drawing.Point(217, 113);
             this.BloodEssenceYieldModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2613,7 +2619,7 @@
             131072});
             this.MaterialYieldModifier_GlobalNumber.Location = new System.Drawing.Point(217, 89);
             this.MaterialYieldModifier_GlobalNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2661,7 +2667,7 @@
             131072});
             this.VampirePhysicalPowerModifierNumber.Location = new System.Drawing.Point(217, 65);
             this.VampirePhysicalPowerModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2684,7 +2690,7 @@
             131072});
             this.VampireMaxEnergyModifierNumber.Location = new System.Drawing.Point(217, 41);
             this.VampireMaxEnergyModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2724,6 +2730,11 @@
             // 
             this.VampireDamageReceivedModifierNumber.DecimalPlaces = 2;
             this.VampireDamageReceivedModifierNumber.Location = new System.Drawing.Point(217, 161);
+            this.VampireDamageReceivedModifierNumber.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.VampireDamageReceivedModifierNumber.Name = "VampireDamageReceivedModifierNumber";
             this.VampireDamageReceivedModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireDamageReceivedModifierNumber.TabIndex = 111;
@@ -2743,7 +2754,7 @@
             131072});
             this.VampireSpellPowerModifierNumber.Location = new System.Drawing.Point(217, 89);
             this.VampireSpellPowerModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2766,7 +2777,7 @@
             131072});
             this.VampireMaxHealthModifierNumber.Location = new System.Drawing.Point(217, 17);
             this.VampireMaxHealthModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2789,7 +2800,7 @@
             131072});
             this.VampireSiegePowerModifierNumber.Location = new System.Drawing.Point(217, 137);
             this.VampireSiegePowerModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2812,7 +2823,7 @@
             131072});
             this.VampireResourcePowerModifierNumber.Location = new System.Drawing.Point(217, 113);
             this.VampireResourcePowerModifierNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2852,7 +2863,7 @@
             131072});
             this.PowerModifier_GlobalNumber.Location = new System.Drawing.Point(217, 41);
             this.PowerModifier_GlobalNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2875,7 +2886,7 @@
             131072});
             this.MaxHealthModifier_VBloodNumber.Location = new System.Drawing.Point(217, 65);
             this.MaxHealthModifier_VBloodNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2898,7 +2909,7 @@
             131072});
             this.MaxHealthModifier_GlobalNumber.Location = new System.Drawing.Point(217, 17);
             this.MaxHealthModifier_GlobalNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2921,7 +2932,7 @@
             131072});
             this.PowerModifier_VBloodNumber.Location = new System.Drawing.Point(217, 89);
             this.PowerModifier_VBloodNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2967,7 +2978,7 @@
             131072});
             this.MaxHealthModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 41);
             this.MaxHealthModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -2990,7 +3001,7 @@
             131072});
             this.MovementSpeedModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 161);
             this.MovementSpeedModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3007,6 +3018,11 @@
             // 
             this.SiegePowerModifier_EquipmentNumber.DecimalPlaces = 2;
             this.SiegePowerModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 137);
+            this.SiegePowerModifier_EquipmentNumber.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.SiegePowerModifier_EquipmentNumber.Name = "SiegePowerModifier_EquipmentNumber";
             this.SiegePowerModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.SiegePowerModifier_EquipmentNumber.TabIndex = 111;
@@ -3026,7 +3042,7 @@
             131072});
             this.ResourceYieldModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 65);
             this.ResourceYieldModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3049,7 +3065,7 @@
             131072});
             this.MaxEnergyModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 17);
             this.MaxEnergyModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3072,7 +3088,7 @@
             131072});
             this.SpellPowerModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 113);
             this.SpellPowerModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3095,7 +3111,7 @@
             131072});
             this.PhysicalPowerModifier_EquipmentNumber.Location = new System.Drawing.Point(217, 89);
             this.PhysicalPowerModifier_EquipmentNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3137,7 +3153,7 @@
             // 
             this.CastleLimitNumber.Location = new System.Drawing.Point(301, 137);
             this.CastleLimitNumber.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -3189,7 +3205,7 @@
             // 
             this.ServantLimit1Number.Location = new System.Drawing.Point(133, 31);
             this.ServantLimit1Number.Maximum = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -3206,7 +3222,7 @@
             // 
             this.FloorLimit1Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit1Number.Maximum = new decimal(new int[] {
-            1000,
+            250,
             0,
             0,
             0});
@@ -3237,7 +3253,7 @@
             // 
             this.ServantLimit2Number.Location = new System.Drawing.Point(133, 31);
             this.ServantLimit2Number.Maximum = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -3254,7 +3270,7 @@
             // 
             this.FloorLimit2Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit2Number.Maximum = new decimal(new int[] {
-            1000,
+            250,
             0,
             0,
             0});
@@ -3285,7 +3301,7 @@
             // 
             this.ServantLimit3Number.Location = new System.Drawing.Point(133, 31);
             this.ServantLimit3Number.Maximum = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -3302,7 +3318,7 @@
             // 
             this.FloorLimit3Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit3Number.Maximum = new decimal(new int[] {
-            1000,
+            250,
             0,
             0,
             0});
@@ -3333,7 +3349,7 @@
             // 
             this.ServantLimit4Number.Location = new System.Drawing.Point(133, 31);
             this.ServantLimit4Number.Maximum = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -3350,7 +3366,7 @@
             // 
             this.FloorLimit4Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit4Number.Maximum = new decimal(new int[] {
-            1000,
+            250,
             0,
             0,
             0});
@@ -3405,6 +3421,11 @@
             // 
             this.numericUpDown6.DecimalPlaces = 2;
             this.numericUpDown6.Location = new System.Drawing.Point(163, 137);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(60, 23);
             this.numericUpDown6.TabIndex = 111;
@@ -3418,7 +3439,7 @@
             // 
             this.SafetyBoxLimitNumber.Location = new System.Drawing.Point(163, 65);
             this.SafetyBoxLimitNumber.Maximum = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -3467,6 +3488,11 @@
             // VerminNestLimitNumber
             // 
             this.VerminNestLimitNumber.Location = new System.Drawing.Point(163, 113);
+            this.VerminNestLimitNumber.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.VerminNestLimitNumber.Name = "VerminNestLimitNumber";
             this.VerminNestLimitNumber.Size = new System.Drawing.Size(60, 23);
             this.VerminNestLimitNumber.TabIndex = 109;
@@ -3479,6 +3505,11 @@
             // TombLimitNumber
             // 
             this.TombLimitNumber.Location = new System.Drawing.Point(163, 89);
+            this.TombLimitNumber.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.TombLimitNumber.Name = "TombLimitNumber";
             this.TombLimitNumber.Size = new System.Drawing.Size(60, 23);
             this.TombLimitNumber.TabIndex = 107;
