@@ -25,7 +25,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\vrising")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GameServers\\VRising")]
         public string Server_Path {
             get {
                 return ((string)(this["Server_Path"]));
@@ -37,7 +37,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\vrising\\saves")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GameServers\\VRising\\Saves")]
         public string Save_Path {
             get {
                 return ((string)(this["Save_Path"]));
@@ -49,7 +49,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\vrising\\logs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:GameServers\\VRising\\Logs")]
         public string Log_Path {
             get {
                 return ((string)(this["Log_Path"]));
