@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsApp1
+namespace ServerManager
 {
 
     public class EmptyJSON
@@ -202,7 +202,7 @@ namespace WinFormsApp1
         public int EndMinute { get; set; } = 0;
     }
 
-    public class RootSettings
+    public class GameSettings
     {
         public int GameModeType { get; set; } = 0;
         public int CastleDamageMode { get; set; } = 0;
@@ -272,5 +272,26 @@ namespace WinFormsApp1
         public CastleStatModifiersGlobal? CastleStatModifiers_Global { get; set; }
         public PlayerInteractionSettings? PlayerInteractionSettings { get; set; }
     }
+
+    public class ServerSettings
+    {
+        public string Name { get; set; } = "V Rising Server";
+        public string Description { get; set; } = "";
+        public int Port { get; set; } = 9876;
+        public int QueryPort { get; set; } = 9877;
+        public int MaxConnectedUsers { get; set; } = 40;
+        public int MaxConnectedAdmins { get; set; } = 4;
+        public int ServerFps { get; set; } = 30;
+        public string SaveName { get; set; } = "world1";
+        public string Password { get; set; } = "";
+        public bool Secure { get; set; } = false;
+        public bool ListOnMasterServer { get; set; } = true;
+        public int AutoSaveCount { get; set; } = 25;
+        public int AutoSaveInterval { get; set; } = 600;
+        public string GameSettingsPreset { get; set; } = "";
+        public bool AdminOnlyDebugEvents { get; set; } = true;
+        public bool DisableDebugEvents { get; set; } = false;
+    }
+
 
 }

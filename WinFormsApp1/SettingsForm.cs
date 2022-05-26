@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace WinFormsApp1
+namespace ServerManager
 {
-    public partial class MainForm : Form
+    public partial class SettingsForm : Form
     {
-        public MainForm()
+        public SettingsForm()
         {
             InitializeComponent();
             SetupDefaults();
@@ -86,7 +86,7 @@ namespace WinFormsApp1
                 ShowSiegeWeaponMapIconBool = false;
             }
 
-            RootSettings main = new RootSettings()
+            GameSettings main = new GameSettings()
             {
                 GameModeType = GameTypeComboBox.SelectedIndex,
                 CastleDamageMode = CastleDamageModeComboBox.SelectedIndex,
@@ -276,9 +276,16 @@ namespace WinFormsApp1
                 }
 
             };
-        string SettingsJSON = JsonConvert.SerializeObject(main, Formatting.Indented);
-        SaveSettingsDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low" + "\\Stunlock Studios\\VRising";
-        if (SaveSettingsDialog.ShowDialog() == DialogResult.OK)
+            string SettingsJSON = JsonConvert.SerializeObject(main, Formatting.Indented);
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            {
+                SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+            }
+            else
+            {
+                SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
+            }
+            if (SaveSettingsDialog.ShowDialog() == DialogResult.OK)
             {
                 if (File.Exists(SaveSettingsDialog.FileName))
                 {
@@ -292,12 +299,20 @@ namespace WinFormsApp1
 
         private void LoadSettings()
         {
-            if(LoadSettingsDialog.ShowDialog() == DialogResult.OK)
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            {
+                LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+            }
+            else
+            {
+                LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
+            }
+            if (LoadSettingsDialog.ShowDialog() == DialogResult.OK)
             {
                 using (StreamReader reader = new StreamReader(LoadSettingsDialog.FileName))
                 {
                     string LoadedJSON = reader.ReadToEnd();
-                    RootSettings LoadedSettings = JsonConvert.DeserializeObject<RootSettings>(LoadedJSON);
+                    GameSettings LoadedSettings = JsonConvert.DeserializeObject<GameSettings>(LoadedJSON);
                     GameTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.GameModeType);
                     CastleDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleDamageMode);
                     SiegeWeaponHealthComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.SiegeWeaponHealth);
@@ -453,7 +468,7 @@ namespace WinFormsApp1
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?\nAll unsaved data will be lost.", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                System.Windows.Forms.Application.Exit();
+                this.Close();
             }
         }
 

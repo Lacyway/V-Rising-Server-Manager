@@ -1,6 +1,6 @@
-﻿namespace WinFormsApp1
+﻿namespace ServerManager
 {
-    partial class MainForm
+    partial class SettingsForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -158,6 +158,24 @@
             this.DisableDisconnectedDeadEnabledRadioTrue = new System.Windows.Forms.RadioButton();
             this.label39 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
+            this.label95 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
+            this.label92 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
             this.InventoryStacksModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_GeneralNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_MissionsNumber = new System.Windows.Forms.NumericUpDown();
@@ -230,9 +248,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.ServantLimit4Number = new System.Windows.Forms.NumericUpDown();
             this.FloorLimit4Number = new System.Windows.Forms.NumericUpDown();
-            this.label64 = new System.Windows.Forms.Label();
             this.DamageResistanceNumber = new System.Windows.Forms.NumericUpDown();
-            this.label67 = new System.Windows.Forms.Label();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.SafetyBoxLimitNumber = new System.Windows.Forms.NumericUpDown();
             this.label68 = new System.Windows.Forms.Label();
@@ -241,39 +257,23 @@
             this.TombLimitNumber = new System.Windows.Forms.NumericUpDown();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
-            this.label93 = new System.Windows.Forms.Label();
             this.StartMinuteNumber_VSCastleWeekend = new System.Windows.Forms.NumericUpDown();
             this.EndMinuteNumber_VSCastleWeekend = new System.Windows.Forms.NumericUpDown();
-            this.label94 = new System.Windows.Forms.Label();
-            this.label95 = new System.Windows.Forms.Label();
-            this.label96 = new System.Windows.Forms.Label();
             this.StartHourNumber_VSCastleWeekend = new System.Windows.Forms.NumericUpDown();
             this.EndHourNumber_VSCastleWeekend = new System.Windows.Forms.NumericUpDown();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.label89 = new System.Windows.Forms.Label();
             this.StartMinuteNumber_VSCastleWeekday = new System.Windows.Forms.NumericUpDown();
             this.EndMinuteNumber_VSCastleWeekday = new System.Windows.Forms.NumericUpDown();
-            this.label90 = new System.Windows.Forms.Label();
-            this.label91 = new System.Windows.Forms.Label();
-            this.label92 = new System.Windows.Forms.Label();
             this.StartHourNumber_VSCastleWeekday = new System.Windows.Forms.NumericUpDown();
             this.EndHourNumber_VSCastleWeekday = new System.Windows.Forms.NumericUpDown();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
-            this.label85 = new System.Windows.Forms.Label();
             this.StartMinuteNumber_VSPlayerWeekend = new System.Windows.Forms.NumericUpDown();
             this.EndMinuteNumber_VSPlayerWeekend = new System.Windows.Forms.NumericUpDown();
-            this.label86 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
-            this.label88 = new System.Windows.Forms.Label();
             this.StartHourNumber_VSPlayerWeekend = new System.Windows.Forms.NumericUpDown();
             this.EndHourNumber_VSPlayerWeekend = new System.Windows.Forms.NumericUpDown();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.label81 = new System.Windows.Forms.Label();
             this.StartMinuteNumber_VSPlayerWeekday = new System.Windows.Forms.NumericUpDown();
             this.EndMinuteNumber_VSPlayerWeekday = new System.Windows.Forms.NumericUpDown();
-            this.label82 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
             this.StartHourNumber_VSPlayerWeekday = new System.Windows.Forms.NumericUpDown();
             this.EndHourNumber_VSPlayerWeekday = new System.Windows.Forms.NumericUpDown();
             this.TimeZoneComboBox = new System.Windows.Forms.ComboBox();
@@ -296,6 +296,7 @@
             this.SaveSettingsDialog = new System.Windows.Forms.SaveFileDialog();
             this.SetFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LoadSettingsDialog = new System.Windows.Forms.OpenFileDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -464,7 +465,7 @@
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Text = "Exit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // label1
@@ -1871,6 +1872,208 @@
             this.label37.TabIndex = 82;
             this.label37.Text = "ResearchCostModifier";
             this.toolTip1.SetToolTip(this.label37, "Not used.");
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label67.Location = new System.Drawing.Point(6, 43);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(106, 15);
+            this.label67.TabIndex = 102;
+            this.label67.Text = "DamageResistance";
+            this.toolTip1.SetToolTip(this.label67, "Not used.");
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label64.Location = new System.Drawing.Point(6, 19);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(62, 15);
+            this.label64.TabIndex = 100;
+            this.label64.Text = "TickPeriod";
+            this.toolTip1.SetToolTip(this.label64, "How often the castle decay damage should tick");
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label93.Location = new System.Drawing.Point(6, 19);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(58, 15);
+            this.label93.TabIndex = 116;
+            this.label93.Text = "StartHour";
+            this.toolTip1.SetToolTip(this.label93, "The real time starting hour for activating Castle PvP during weekends");
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label94.Location = new System.Drawing.Point(6, 67);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(54, 15);
+            this.label94.TabIndex = 120;
+            this.label94.Text = "EndHour";
+            this.toolTip1.SetToolTip(this.label94, "The real time ending hour for deactivating Castle PvP during weekends");
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label95.Location = new System.Drawing.Point(6, 91);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(65, 15);
+            this.label95.TabIndex = 122;
+            this.label95.Text = "EndMinute";
+            this.toolTip1.SetToolTip(this.label95, "The real time end minute for deactivating Castle PvP during weekends");
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label96.Location = new System.Drawing.Point(6, 43);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(69, 15);
+            this.label96.TabIndex = 118;
+            this.label96.Text = "StartMinute";
+            this.toolTip1.SetToolTip(this.label96, "The real time starting minute for activating Castle PvP during weekends");
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label89.Location = new System.Drawing.Point(6, 19);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(58, 15);
+            this.label89.TabIndex = 116;
+            this.label89.Text = "StartHour";
+            this.toolTip1.SetToolTip(this.label89, "The real time starting hour for activating Castle PvP during standard weekdays");
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label90.Location = new System.Drawing.Point(6, 67);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(54, 15);
+            this.label90.TabIndex = 120;
+            this.label90.Text = "EndHour";
+            this.toolTip1.SetToolTip(this.label90, "The real time ending hour for deactivating Castle PvP during standard weekdays");
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label91.Location = new System.Drawing.Point(6, 91);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(65, 15);
+            this.label91.TabIndex = 122;
+            this.label91.Text = "EndMinute";
+            this.toolTip1.SetToolTip(this.label91, "The real time end minute for deactivating Castle PvP during weekdays");
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label92.Location = new System.Drawing.Point(6, 43);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(69, 15);
+            this.label92.TabIndex = 118;
+            this.label92.Text = "StartMinute";
+            this.toolTip1.SetToolTip(this.label92, "The real time starting minute for activating Castle PvP during standard weekdays");
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label85.Location = new System.Drawing.Point(6, 19);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(58, 15);
+            this.label85.TabIndex = 116;
+            this.label85.Text = "StartHour";
+            this.toolTip1.SetToolTip(this.label85, "The real time starting hour for activating Player vs Player PvP during weekends");
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label86.Location = new System.Drawing.Point(6, 67);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(54, 15);
+            this.label86.TabIndex = 120;
+            this.label86.Text = "EndHour";
+            this.toolTip1.SetToolTip(this.label86, "The real time ending hour for deactivating Player vs Player PvP during weekends");
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label87.Location = new System.Drawing.Point(6, 91);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(65, 15);
+            this.label87.TabIndex = 122;
+            this.label87.Text = "EndMinute";
+            this.toolTip1.SetToolTip(this.label87, "The real time end minute for deactivating Player vs Player PvP during weekends");
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label88.Location = new System.Drawing.Point(6, 43);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(69, 15);
+            this.label88.TabIndex = 118;
+            this.label88.Text = "StartMinute";
+            this.toolTip1.SetToolTip(this.label88, "The real time starting minute for activating Player vs Player PvP during weekends" +
+        "");
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label81.Location = new System.Drawing.Point(6, 19);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(58, 15);
+            this.label81.TabIndex = 116;
+            this.label81.Text = "StartHour";
+            this.toolTip1.SetToolTip(this.label81, "The real time starting hour for activating Player vs Player PvP during standard w" +
+        "eekdays");
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label82.Location = new System.Drawing.Point(6, 67);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(54, 15);
+            this.label82.TabIndex = 120;
+            this.label82.Text = "EndHour";
+            this.toolTip1.SetToolTip(this.label82, "The real time ending hour for deactivating Player vs Player PvP during standard w" +
+        "eekdays");
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label84.Location = new System.Drawing.Point(6, 91);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(65, 15);
+            this.label84.TabIndex = 122;
+            this.label84.Text = "EndMinute";
+            this.toolTip1.SetToolTip(this.label84, "The real time end minute for deactivating Player vs Player PvP during weekdays");
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label83.Location = new System.Drawing.Point(6, 43);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(69, 15);
+            this.label83.TabIndex = 118;
+            this.label83.Text = "StartMinute";
+            this.toolTip1.SetToolTip(this.label83, "The real time starting minute for activating Player vs Player PvP during standard" +
+        " weekdays");
             // 
             // InventoryStacksModifierNumber
             // 
@@ -3397,16 +3600,6 @@
             0,
             0});
             // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label64.Location = new System.Drawing.Point(6, 19);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(62, 15);
-            this.label64.TabIndex = 100;
-            this.label64.Text = "TickPeriod";
-            // 
             // DamageResistanceNumber
             // 
             this.DamageResistanceNumber.DecimalPlaces = 2;
@@ -3425,17 +3618,6 @@
             this.DamageResistanceNumber.Name = "DamageResistanceNumber";
             this.DamageResistanceNumber.Size = new System.Drawing.Size(60, 23);
             this.DamageResistanceNumber.TabIndex = 103;
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label67.Location = new System.Drawing.Point(6, 43);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(106, 15);
-            this.label67.TabIndex = 102;
-            this.label67.Text = "DamageResistance";
-            this.toolTip1.SetToolTip(this.label67, "Not used.");
             // 
             // numericUpDown6
             // 
@@ -3571,16 +3753,6 @@
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "VSCastleWeekendTime";
             // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label93.Location = new System.Drawing.Point(6, 19);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(58, 15);
-            this.label93.TabIndex = 116;
-            this.label93.Text = "StartHour";
-            // 
             // StartMinuteNumber_VSCastleWeekend
             // 
             this.StartMinuteNumber_VSCastleWeekend.Location = new System.Drawing.Point(83, 41);
@@ -3604,36 +3776,6 @@
             this.EndMinuteNumber_VSCastleWeekend.Name = "EndMinuteNumber_VSCastleWeekend";
             this.EndMinuteNumber_VSCastleWeekend.Size = new System.Drawing.Size(60, 23);
             this.EndMinuteNumber_VSCastleWeekend.TabIndex = 123;
-            // 
-            // label94
-            // 
-            this.label94.AutoSize = true;
-            this.label94.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label94.Location = new System.Drawing.Point(6, 67);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(54, 15);
-            this.label94.TabIndex = 120;
-            this.label94.Text = "EndHour";
-            // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label95.Location = new System.Drawing.Point(6, 91);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(65, 15);
-            this.label95.TabIndex = 122;
-            this.label95.Text = "EndMinute";
-            // 
-            // label96
-            // 
-            this.label96.AutoSize = true;
-            this.label96.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label96.Location = new System.Drawing.Point(6, 43);
-            this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(69, 15);
-            this.label96.TabIndex = 118;
-            this.label96.Text = "StartMinute";
             // 
             // StartHourNumber_VSCastleWeekend
             // 
@@ -3686,16 +3828,6 @@
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "VSCastleWeekdayTime";
             // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label89.Location = new System.Drawing.Point(6, 19);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(58, 15);
-            this.label89.TabIndex = 116;
-            this.label89.Text = "StartHour";
-            // 
             // StartMinuteNumber_VSCastleWeekday
             // 
             this.StartMinuteNumber_VSCastleWeekday.Location = new System.Drawing.Point(83, 41);
@@ -3719,36 +3851,6 @@
             this.EndMinuteNumber_VSCastleWeekday.Name = "EndMinuteNumber_VSCastleWeekday";
             this.EndMinuteNumber_VSCastleWeekday.Size = new System.Drawing.Size(60, 23);
             this.EndMinuteNumber_VSCastleWeekday.TabIndex = 123;
-            // 
-            // label90
-            // 
-            this.label90.AutoSize = true;
-            this.label90.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label90.Location = new System.Drawing.Point(6, 67);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(54, 15);
-            this.label90.TabIndex = 120;
-            this.label90.Text = "EndHour";
-            // 
-            // label91
-            // 
-            this.label91.AutoSize = true;
-            this.label91.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label91.Location = new System.Drawing.Point(6, 91);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(65, 15);
-            this.label91.TabIndex = 122;
-            this.label91.Text = "EndMinute";
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label92.Location = new System.Drawing.Point(6, 43);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(69, 15);
-            this.label92.TabIndex = 118;
-            this.label92.Text = "StartMinute";
             // 
             // StartHourNumber_VSCastleWeekday
             // 
@@ -3801,16 +3903,6 @@
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "VSPlayerWeekendTime";
             // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label85.Location = new System.Drawing.Point(6, 19);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(58, 15);
-            this.label85.TabIndex = 116;
-            this.label85.Text = "StartHour";
-            // 
             // StartMinuteNumber_VSPlayerWeekend
             // 
             this.StartMinuteNumber_VSPlayerWeekend.Location = new System.Drawing.Point(83, 41);
@@ -3834,36 +3926,6 @@
             this.EndMinuteNumber_VSPlayerWeekend.Name = "EndMinuteNumber_VSPlayerWeekend";
             this.EndMinuteNumber_VSPlayerWeekend.Size = new System.Drawing.Size(60, 23);
             this.EndMinuteNumber_VSPlayerWeekend.TabIndex = 123;
-            // 
-            // label86
-            // 
-            this.label86.AutoSize = true;
-            this.label86.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label86.Location = new System.Drawing.Point(6, 67);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(54, 15);
-            this.label86.TabIndex = 120;
-            this.label86.Text = "EndHour";
-            // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label87.Location = new System.Drawing.Point(6, 91);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(65, 15);
-            this.label87.TabIndex = 122;
-            this.label87.Text = "EndMinute";
-            // 
-            // label88
-            // 
-            this.label88.AutoSize = true;
-            this.label88.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label88.Location = new System.Drawing.Point(6, 43);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(69, 15);
-            this.label88.TabIndex = 118;
-            this.label88.Text = "StartMinute";
             // 
             // StartHourNumber_VSPlayerWeekend
             // 
@@ -3916,16 +3978,6 @@
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "VSPlayerWeekdayTime";
             // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label81.Location = new System.Drawing.Point(6, 19);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(58, 15);
-            this.label81.TabIndex = 116;
-            this.label81.Text = "StartHour";
-            // 
             // StartMinuteNumber_VSPlayerWeekday
             // 
             this.StartMinuteNumber_VSPlayerWeekday.Location = new System.Drawing.Point(83, 41);
@@ -3949,36 +4001,6 @@
             this.EndMinuteNumber_VSPlayerWeekday.Name = "EndMinuteNumber_VSPlayerWeekday";
             this.EndMinuteNumber_VSPlayerWeekday.Size = new System.Drawing.Size(60, 23);
             this.EndMinuteNumber_VSPlayerWeekday.TabIndex = 123;
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label82.Location = new System.Drawing.Point(6, 67);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(54, 15);
-            this.label82.TabIndex = 120;
-            this.label82.Text = "EndHour";
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label84.Location = new System.Drawing.Point(6, 91);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(65, 15);
-            this.label84.TabIndex = 122;
-            this.label84.Text = "EndMinute";
-            // 
-            // label83
-            // 
-            this.label83.AutoSize = true;
-            this.label83.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label83.Location = new System.Drawing.Point(6, 43);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(69, 15);
-            this.label83.TabIndex = 118;
-            this.label83.Text = "StartMinute";
             // 
             // StartHourNumber_VSPlayerWeekday
             // 
@@ -4280,13 +4302,23 @@
             // 
             this.LoadSettingsDialog.FileName = "ServerGameSettings.json";
             this.LoadSettingsDialog.Filter = "\"JSON files\"|*.json";
+            this.LoadSettingsDialog.Title = "Load Settings";
             // 
-            // MainForm
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1129);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(990, 22);
+            this.statusStrip1.TabIndex = 117;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(990, 1143);
+            this.ClientSize = new System.Drawing.Size(990, 1151);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox22);
             this.Controls.Add(this.groupBox17);
             this.Controls.Add(this.groupBox16);
@@ -4332,7 +4364,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "SettingsForm";
             this.Text = "Settings Editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -4757,5 +4789,6 @@
         private System.Windows.Forms.SaveFileDialog SaveSettingsDialog;
         private System.Windows.Forms.FolderBrowserDialog SetFolderDialog;
         private System.Windows.Forms.OpenFileDialog LoadSettingsDialog;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
