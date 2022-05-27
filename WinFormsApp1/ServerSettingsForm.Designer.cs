@@ -72,6 +72,13 @@
             this.SaveServerSettingsDialog = new System.Windows.Forms.SaveFileDialog();
             this.LoadServerSettingsDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.RCONPortNumber = new System.Windows.Forms.NumericUpDown();
+            this.RCONPasswordValue = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.RCONRadioFalse = new System.Windows.Forms.RadioButton();
+            this.label12 = new System.Windows.Forms.Label();
+            this.RCONRadioTrue = new System.Windows.Forms.RadioButton();
             this.menuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,6 +91,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServerFpsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AutoSaveCountNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AutoSaveIntervalNumber)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RCONPortNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -526,9 +535,90 @@
             this.LoadServerSettingsDialog.Filter = "\"JSON files\"|*.json";
             this.LoadServerSettingsDialog.Title = "Load Server Settings";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.RCONPortNumber);
+            this.groupBox5.Controls.Add(this.RCONPasswordValue);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.RCONRadioFalse);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.RCONRadioTrue);
+            this.groupBox5.Location = new System.Drawing.Point(8, 488);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(352, 88);
+            this.groupBox5.TabIndex = 25;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "RCON";
+            // 
+            // RCONPortNumber
+            // 
+            this.RCONPortNumber.Location = new System.Drawing.Point(240, 56);
+            this.RCONPortNumber.Maximum = new decimal(new int[] {
+            66000,
+            0,
+            0,
+            0});
+            this.RCONPortNumber.Name = "RCONPortNumber";
+            this.RCONPortNumber.Size = new System.Drawing.Size(104, 23);
+            this.RCONPortNumber.TabIndex = 27;
+            this.RCONPortNumber.Value = new decimal(new int[] {
+            25575,
+            0,
+            0,
+            0});
+            // 
+            // RCONPasswordValue
+            // 
+            this.RCONPasswordValue.Location = new System.Drawing.Point(168, 32);
+            this.RCONPasswordValue.Name = "RCONPasswordValue";
+            this.RCONPasswordValue.Size = new System.Drawing.Size(176, 23);
+            this.RCONPasswordValue.TabIndex = 27;
+            this.RCONPasswordValue.Text = "somepassword";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(8, 64);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 15);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Port";
+            // 
+            // RCONRadioFalse
+            // 
+            this.RCONRadioFalse.AutoSize = true;
+            this.RCONRadioFalse.Checked = true;
+            this.RCONRadioFalse.Location = new System.Drawing.Point(56, 16);
+            this.RCONRadioFalse.Name = "RCONRadioFalse";
+            this.RCONRadioFalse.Size = new System.Drawing.Size(51, 19);
+            this.RCONRadioFalse.TabIndex = 3;
+            this.RCONRadioFalse.TabStop = true;
+            this.RCONRadioFalse.Text = "False";
+            this.RCONRadioFalse.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 40);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 15);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Password";
+            // 
+            // RCONRadioTrue
+            // 
+            this.RCONRadioTrue.AutoSize = true;
+            this.RCONRadioTrue.Location = new System.Drawing.Point(8, 16);
+            this.RCONRadioTrue.Name = "RCONRadioTrue";
+            this.RCONRadioTrue.Size = new System.Drawing.Size(47, 19);
+            this.RCONRadioTrue.TabIndex = 2;
+            this.RCONRadioTrue.Text = "True";
+            this.RCONRadioTrue.UseVisualStyleBackColor = true;
+            // 
             // ServerSettingsForm
             // 
-            this.ClientSize = new System.Drawing.Size(370, 484);
+            this.ClientSize = new System.Drawing.Size(370, 581);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.AutoSaveIntervalNumber);
             this.Controls.Add(this.AutoSaveCountNumber);
             this.Controls.Add(this.PasswordValue);
@@ -556,8 +646,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
             this.Name = "ServerSettingsForm";
+            this.Text = "Server Settings Editor";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -575,6 +668,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServerFpsNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AutoSaveCountNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AutoSaveIntervalNumber)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RCONPortNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -624,5 +720,12 @@
         private System.Windows.Forms.SaveFileDialog SaveServerSettingsDialog;
         private System.Windows.Forms.OpenFileDialog LoadServerSettingsDialog;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton RCONRadioFalse;
+        private System.Windows.Forms.RadioButton RCONRadioTrue;
+        private System.Windows.Forms.TextBox RCONPasswordValue;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown RCONPortNumber;
+        private System.Windows.Forms.Label label13;
     }
 }

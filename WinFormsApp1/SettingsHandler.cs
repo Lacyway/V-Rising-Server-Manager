@@ -202,6 +202,13 @@ namespace ServerManager
         public int EndMinute { get; set; } = 0;
     }
 
+    public class Rcon
+    {
+        public bool Enabled { get; set; } = false;
+        public string Password { get; set; } = "somepassword";
+        public int Port { get; set; } = 25575;
+    }
+
     public class GameSettings
     {
         public int GameModeType { get; set; } = 0;
@@ -291,6 +298,7 @@ namespace ServerManager
         public string GameSettingsPreset { get; set; } = "";
         public bool AdminOnlyDebugEvents { get; set; } = true;
         public bool DisableDebugEvents { get; set; } = false;
+        public Rcon? Rcon { get; set; }
     }
 
 

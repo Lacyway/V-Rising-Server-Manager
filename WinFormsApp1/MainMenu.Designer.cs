@@ -47,6 +47,7 @@
             this.RunningPic = new System.Windows.Forms.PictureBox();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StoppedPic = new System.Windows.Forms.PictureBox();
+            this.RCONButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).BeginInit();
@@ -229,11 +230,22 @@
             this.StoppedPic.TabIndex = 18;
             this.StoppedPic.TabStop = false;
             // 
+            // RCONButton
+            // 
+            this.RCONButton.Location = new System.Drawing.Point(472, 200);
+            this.RCONButton.Name = "RCONButton";
+            this.RCONButton.Size = new System.Drawing.Size(149, 50);
+            this.RCONButton.TabIndex = 19;
+            this.RCONButton.Text = "Open RCON Console";
+            this.RCONButton.UseVisualStyleBackColor = true;
+            this.RCONButton.Click += new System.EventHandler(this.RCONButton_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.RCONButton);
             this.Controls.Add(this.StoppedPic);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.RunningPic);
@@ -249,6 +261,7 @@
             this.Controls.Add(this.MainMenuConsole);
             this.Controls.Add(this.AppSettingsButton);
             this.Controls.Add(this.SteamCMDButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainMenu";
             this.Text = "V Rising Server Manager";
@@ -280,5 +293,6 @@
         private System.Windows.Forms.PictureBox RunningPic;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.PictureBox StoppedPic;
+        private System.Windows.Forms.Button RCONButton;
     }
 }

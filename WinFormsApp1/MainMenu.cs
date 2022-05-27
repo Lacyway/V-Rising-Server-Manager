@@ -213,5 +213,11 @@ namespace ServerManager
                 StartGameServerButton.Enabled = true;
             }
         }
+
+        private void RCONButton_Click(object sender, EventArgs e)
+        {
+            RconConsole RconConsoleMenu = new RconConsole();
+            RconConsoleMenu.ShowDialog();
+        }
     }
 }

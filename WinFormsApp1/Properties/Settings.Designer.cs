@@ -82,5 +82,41 @@ namespace ServerManager.Properties {
                 this["Save_Name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("notset")]
+        public string Last_RCON_Address {
+            get {
+                return ((string)(this["Last_RCON_Address"]));
+            }
+            set {
+                this["Last_RCON_Address"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25575")]
+        public int Last_RCON_Port {
+            get {
+                return ((int)(this["Last_RCON_Port"]));
+            }
+            set {
+                this["Last_RCON_Port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("notset")]
+        public string Last_RCON_Pass {
+            get {
+                return ((string)(this["Last_RCON_Pass"]));
+            }
+            set {
+                this["Last_RCON_Pass"] = value;
+            }
+        }
     }
 }

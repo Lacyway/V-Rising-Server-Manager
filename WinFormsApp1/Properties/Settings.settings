@@ -17,5 +17,14 @@
     <Setting Name="Save_Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">world1</Value>
     </Setting>
+    <Setting Name="Last_RCON_Address" Type="System.String" Scope="User">
+      <Value Profile="(Default)">notset</Value>
+    </Setting>
+    <Setting Name="Last_RCON_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25575</Value>
+    </Setting>
+    <Setting Name="Last_RCON_Pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">notset</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

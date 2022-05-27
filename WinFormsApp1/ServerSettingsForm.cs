@@ -26,6 +26,7 @@ namespace ServerManager
             bool ListOnMasterServer = true;
             bool AdminOnlyDebugEvents = true;
             bool DisableDebugEvents = false;
+            bool RconEnabled = false;
 
             if (SecureRadioTrue.Checked == true)
             {
@@ -42,6 +43,10 @@ namespace ServerManager
             if (DisableDebugEventsRadioTrue.Checked == true)
             {
                 DisableDebugEvents = true;
+            }
+            if (RCONRadioTrue.Checked == true)
+            {
+                RconEnabled = true;
             }
 
             ServerSettings mainServer = new ServerSettings()
@@ -61,7 +66,13 @@ namespace ServerManager
                 AutoSaveInterval = Convert.ToInt16(AutoSaveIntervalNumber.Value),
                 GameSettingsPreset = "",
                 AdminOnlyDebugEvents = AdminOnlyDebugEvents,
-                DisableDebugEvents = DisableDebugEvents
+                DisableDebugEvents = DisableDebugEvents,
+                Rcon = new Rcon()
+                {
+                    Enabled = RconEnabled,
+                    Password = RCONPasswordValue.Text,
+                    Port = Convert.ToInt16(RCONPortNumber.Value)
+                }
             };
             string ServerSettingsJSON = JsonConvert.SerializeObject(mainServer, Formatting.Indented);
             if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
@@ -126,6 +137,12 @@ namespace ServerManager
                     {
                         DisableDebugEventsRadioTrue.Checked = true;
                     }
+                    if (LoadedServerSettings.Rcon.Enabled == true)
+                    {
+                        RCONRadioTrue.Checked = true;
+                    }
+                    RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
+                    RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
                 }
             }
         }
@@ -142,7 +159,11 @@ namespace ServerManager
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?\nAll unsaved data will be lost.", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }
