@@ -9,7 +9,7 @@
       <Value Profile="(Default)">C:\GameServers\VRising\Saves</Value>
     </Setting>
     <Setting Name="Log_Path" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:GameServers\VRising\Logs</Value>
+      <Value Profile="(Default)">C:\GameServers\VRising\Logs</Value>
     </Setting>
     <Setting Name="Server_Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">V Rising Server</Value>

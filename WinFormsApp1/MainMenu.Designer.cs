@@ -44,7 +44,12 @@
             this.SaveNameValue = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.OpenGameFolderButton = new System.Windows.Forms.Button();
+            this.RunningPic = new System.Windows.Forms.PictureBox();
+            this.StatusLabel = new System.Windows.Forms.Label();
+            this.StoppedPic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).BeginInit();
             this.SuspendLayout();
             // 
             // SettingsButton
@@ -194,11 +199,44 @@
             this.OpenGameFolderButton.UseVisualStyleBackColor = true;
             this.OpenGameFolderButton.Click += new System.EventHandler(this.OpenGameFolderButton_Click);
             // 
+            // RunningPic
+            // 
+            this.RunningPic.Image = global::ServerManager.Properties.Resources.running;
+            this.RunningPic.Location = new System.Drawing.Point(336, 176);
+            this.RunningPic.Name = "RunningPic";
+            this.RunningPic.Size = new System.Drawing.Size(32, 32);
+            this.RunningPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RunningPic.TabIndex = 16;
+            this.RunningPic.TabStop = false;
+            this.RunningPic.Visible = false;
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(280, 184);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(51, 15);
+            this.StatusLabel.TabIndex = 17;
+            this.StatusLabel.Text = "Stopped";
+            // 
+            // StoppedPic
+            // 
+            this.StoppedPic.Image = global::ServerManager.Properties.Resources.stopped;
+            this.StoppedPic.Location = new System.Drawing.Point(336, 176);
+            this.StoppedPic.Name = "StoppedPic";
+            this.StoppedPic.Size = new System.Drawing.Size(32, 32);
+            this.StoppedPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.StoppedPic.TabIndex = 18;
+            this.StoppedPic.TabStop = false;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.StoppedPic);
+            this.Controls.Add(this.StatusLabel);
+            this.Controls.Add(this.RunningPic);
             this.Controls.Add(this.OpenGameFolderButton);
             this.Controls.Add(this.SaveNameValue);
             this.Controls.Add(this.label2);
@@ -215,6 +253,8 @@
             this.Name = "MainMenu";
             this.Text = "V Rising Server Manager";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +277,8 @@
         private System.Windows.Forms.TextBox SaveNameValue;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button OpenGameFolderButton;
+        private System.Windows.Forms.PictureBox RunningPic;
+        private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.PictureBox StoppedPic;
     }
 }

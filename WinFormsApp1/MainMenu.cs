@@ -121,34 +121,30 @@ namespace ServerManager
             }
             if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer.exe") == true)
             {
+                GlobalVars.serverRunning = true;
+                StopGameServerButton.Enabled = true;
+                StartGameServerButton.Enabled = false;
                 string parameters = String.Format("-persistentDataPath {0} -serverName \"{1}\" -saveName \"{2}\" -logFile \"{3}\\VRisingServer.log\"", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path);
                 Process serverProcess = new Process();
                 serverProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 serverProcess.StartInfo.FileName = Properties.Settings.Default.Server_Path + "\\VRisingServer.exe";
                 serverProcess.StartInfo.UseShellExecute = true;
                 serverProcess.StartInfo.Arguments = parameters;
+                serverProcess.EnableRaisingEvents = true;
+                serverProcess.Exited += new EventHandler(serverProcessExited);
                 serverProcess.Start();
+                StoppedPic.Visible = false;
+                RunningPic.Visible = true;
+                StatusLabel.Text = "Running";
                 MainMenuConsole.AppendText("\nServer starting.\nServer name: " + Properties.Settings.Default.Server_Name + "\nSave Name: " + Properties.Settings.Default.Save_Name);
                 GlobalVars.userStopped = false;
+                /*
                 while (!serverProcess.HasExited)
                 {
                     MainMenuConsole.AppendText(Environment.NewLine + "Server running.");
                     await ServerCheck();
-                }
-                
-                if (GlobalVars.userStopped == false && AutoRestartCheck.Checked == true)
-                {
-                    MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");
-                    StartServer();
-                }
-                else
-                {
-                    MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
-                    GlobalVars.userStopped = false;
-                    GlobalVars.serverRunning = false;
-                    StopGameServerButton.Enabled = false;
-                    StartGameServerButton.Enabled = true;
-                }
+                }    
+                */
             }
             else
             {
@@ -157,10 +153,7 @@ namespace ServerManager
         }
 
         public void StartGameServerButton_Click(object sender, EventArgs e)
-        {
-            GlobalVars.serverRunning = true;
-            StopGameServerButton.Enabled = true;
-            StartGameServerButton.Enabled = false;
+        {            
             StartServer();
         }
 
@@ -196,6 +189,29 @@ namespace ServerManager
         private void OpenGameFolderButton_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Properties.Settings.Default.Server_Path);
+        }
+
+        private void serverProcessExited(object sender, EventArgs e)
+        {
+            if (GlobalVars.userStopped == false && AutoRestartCheck.Checked == true)
+            {
+                StoppedPic.Visible = true;
+                RunningPic.Visible = false;
+                StatusLabel.Text = "Stopped";
+                MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");
+                StartServer();                
+            }
+            else
+            {
+                StoppedPic.Visible = true;
+                RunningPic.Visible = false;
+                StatusLabel.Text = "Stopped";
+                MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
+                GlobalVars.userStopped = false;
+                GlobalVars.serverRunning = false;
+                StopGameServerButton.Enabled = false;
+                StartGameServerButton.Enabled = true;
+            }
         }
     }
 }

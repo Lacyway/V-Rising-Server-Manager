@@ -427,7 +427,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(990, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(973, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -4306,9 +4306,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1129);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1128);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(990, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(973, 22);
             this.statusStrip1.TabIndex = 117;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -4317,7 +4317,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(990, 1151);
+            this.ClientSize = new System.Drawing.Size(990, 782);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox22);
             this.Controls.Add(this.groupBox17);

@@ -49,7 +49,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:GameServers\\VRising\\Logs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GameServers\\VRising\\Logs")]
         public string Log_Path {
             get {
                 return ((string)(this["Log_Path"]));
