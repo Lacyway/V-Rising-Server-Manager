@@ -37,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ConnectButton = new System.Windows.Forms.Button();
             this.RconConsoleMain = new System.Windows.Forms.RichTextBox();
-            this.DisconnectButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CommandList = new System.Windows.Forms.ListBox();
             this.CommandInfoBox = new System.Windows.Forms.RichTextBox();
@@ -130,7 +129,7 @@
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(75, 23);
             this.ConnectButton.TabIndex = 1;
-            this.ConnectButton.Text = "Save";
+            this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
@@ -146,17 +145,6 @@
             this.RconConsoleMain.TabIndex = 2;
             this.RconConsoleMain.Text = "";
             this.RconConsoleMain.TextChanged += new System.EventHandler(this.RconConsoleMain_TextChanged);
-            // 
-            // DisconnectButton
-            // 
-            this.DisconnectButton.Enabled = false;
-            this.DisconnectButton.Location = new System.Drawing.Point(88, 120);
-            this.DisconnectButton.Name = "DisconnectButton";
-            this.DisconnectButton.Size = new System.Drawing.Size(80, 23);
-            this.DisconnectButton.TabIndex = 3;
-            this.DisconnectButton.Text = "Disconnect";
-            this.DisconnectButton.UseVisualStyleBackColor = true;
-            this.DisconnectButton.Click += new System.EventHandler(this.DisconnectButton_Click);
             // 
             // groupBox2
             // 
@@ -225,7 +213,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CommandInfoBox);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.DisconnectButton);
             this.Controls.Add(this.RconConsoleMain);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.groupBox1);
@@ -251,7 +238,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.RichTextBox RconConsoleMain;
-        private System.Windows.Forms.Button DisconnectButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox CommandList;
         private System.Windows.Forms.RichTextBox CommandInfoBox;
