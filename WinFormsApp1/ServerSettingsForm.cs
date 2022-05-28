@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
-using System.Collections.Generic;
 
 namespace ServerManager
 {
@@ -108,41 +107,49 @@ namespace ServerManager
             {
                 using (StreamReader reader = new StreamReader(LoadServerSettingsDialog.FileName))
                 {
-                    string LoadedServerJSON = reader.ReadToEnd();
-                    ServerSettings LoadedServerSettings = JsonConvert.DeserializeObject<ServerSettings>(LoadedServerJSON);
-                    NameValue.Text = LoadedServerSettings.Name;
-                    DescriptionValue.Text = LoadedServerSettings.Description;
-                    PortNumber.Value = LoadedServerSettings.Port;
-                    QueryPortNumber.Value = LoadedServerSettings.QueryPort;
-                    MaxConnectedUsersNumber.Value = LoadedServerSettings.MaxConnectedUsers;
-                    MaxConnectedAdminsNumber.Value = LoadedServerSettings.MaxConnectedAdmins;
-                    ServerFpsNumber.Value = LoadedServerSettings.ServerFps;
-                    SaveNameValue.Text = LoadedServerSettings.SaveName;
-                    PasswordValue.Text = LoadedServerSettings.Password;
-                    if (LoadedServerSettings.Secure == true)
+                    try
                     {
-                        SecureRadioTrue.Checked = true;
+                        string LoadedServerJSON = reader.ReadToEnd();
+                        ServerSettings LoadedServerSettings = JsonConvert.DeserializeObject<ServerSettings>(LoadedServerJSON);
+                        NameValue.Text = LoadedServerSettings.Name;
+                        DescriptionValue.Text = LoadedServerSettings.Description;
+                        PortNumber.Value = LoadedServerSettings.Port;
+                        QueryPortNumber.Value = LoadedServerSettings.QueryPort;
+                        MaxConnectedUsersNumber.Value = LoadedServerSettings.MaxConnectedUsers;
+                        MaxConnectedAdminsNumber.Value = LoadedServerSettings.MaxConnectedAdmins;
+                        ServerFpsNumber.Value = LoadedServerSettings.ServerFps;
+                        SaveNameValue.Text = LoadedServerSettings.SaveName;
+                        PasswordValue.Text = LoadedServerSettings.Password;
+                        if (LoadedServerSettings.Secure == true)
+                        {
+                            SecureRadioTrue.Checked = true;
+                        }
+                        if (LoadedServerSettings.ListOnMasterServer == false)
+                        {
+                            ListOnMasterServerRadioFalse.Checked = true;
+                        }
+                        AutoSaveCountNumber.Value = LoadedServerSettings.AutoSaveCount;
+                        AutoSaveIntervalNumber.Value = LoadedServerSettings.AutoSaveInterval;
+                        if (LoadedServerSettings.AdminOnlyDebugEvents == false)
+                        {
+                            AdminOnlyDebugEventsRadioFalse.Checked = true;
+                        }
+                        if (LoadedServerSettings.DisableDebugEvents == true)
+                        {
+                            DisableDebugEventsRadioTrue.Checked = true;
+                        }
+                        if (LoadedServerSettings.Rcon.Enabled == true)
+                        {
+                            RCONRadioTrue.Checked = true;
+                        }
+                        RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
+                        RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
                     }
-                    if (LoadedServerSettings.ListOnMasterServer == false)
+                    catch (NullReferenceException)
                     {
-                        ListOnMasterServerRadioFalse.Checked = true;
+                        MessageBox.Show("One or more default values was missing.\nDefault values will be used.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                    AutoSaveCountNumber.Value = LoadedServerSettings.AutoSaveCount;
-                    AutoSaveIntervalNumber.Value = LoadedServerSettings.AutoSaveInterval;
-                    if (LoadedServerSettings.AdminOnlyDebugEvents == false)
-                    {
-                        AdminOnlyDebugEventsRadioFalse.Checked = true;
-                    }
-                    if (LoadedServerSettings.DisableDebugEvents == true)
-                    {
-                        DisableDebugEventsRadioTrue.Checked = true;
-                    }
-                    if (LoadedServerSettings.Rcon.Enabled == true)
-                    {
-                        RCONRadioTrue.Checked = true;
-                    }
-                    RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
-                    RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
+
                 }
             }
         }

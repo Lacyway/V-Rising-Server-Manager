@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ParameterBox = new System.Windows.Forms.TextBox();
             this.SendCommandButton = new System.Windows.Forms.Button();
+            this.DisconnectButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PortNumber)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -188,6 +189,7 @@
             // 
             // ParameterBox
             // 
+            this.ParameterBox.Enabled = false;
             this.ParameterBox.Location = new System.Drawing.Point(8, 296);
             this.ParameterBox.Name = "ParameterBox";
             this.ParameterBox.Size = new System.Drawing.Size(696, 23);
@@ -195,6 +197,7 @@
             // 
             // SendCommandButton
             // 
+            this.SendCommandButton.Enabled = false;
             this.SendCommandButton.Location = new System.Drawing.Point(712, 296);
             this.SendCommandButton.Name = "SendCommandButton";
             this.SendCommandButton.Size = new System.Drawing.Size(75, 23);
@@ -203,11 +206,23 @@
             this.SendCommandButton.UseVisualStyleBackColor = true;
             this.SendCommandButton.Click += new System.EventHandler(this.SendCommandButton_Click);
             // 
+            // DisconnectButton
+            // 
+            this.DisconnectButton.Enabled = false;
+            this.DisconnectButton.Location = new System.Drawing.Point(88, 120);
+            this.DisconnectButton.Name = "DisconnectButton";
+            this.DisconnectButton.Size = new System.Drawing.Size(75, 23);
+            this.DisconnectButton.TabIndex = 9;
+            this.DisconnectButton.Text = "Disconnect";
+            this.DisconnectButton.UseVisualStyleBackColor = true;
+            this.DisconnectButton.Click += new System.EventHandler(this.DisconnectButton_Click);
+            // 
             // RconConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.DisconnectButton);
             this.Controls.Add(this.SendCommandButton);
             this.Controls.Add(this.ParameterBox);
             this.Controls.Add(this.label4);
@@ -216,6 +231,7 @@
             this.Controls.Add(this.RconConsoleMain);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RconConsole";
             this.Text = "RCON Console";
             this.groupBox1.ResumeLayout(false);
@@ -244,5 +260,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox ParameterBox;
         private System.Windows.Forms.Button SendCommandButton;
+        private System.Windows.Forms.Button DisconnectButton;
     }
 }

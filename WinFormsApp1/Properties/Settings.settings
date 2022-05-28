@@ -21,7 +21,7 @@
       <Value Profile="(Default)">notset</Value>
     </Setting>
     <Setting Name="Last_RCON_Port" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">25575</Value>
+      <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="Last_RCON_Pass" Type="System.String" Scope="User">
       <Value Profile="(Default)">notset</Value>

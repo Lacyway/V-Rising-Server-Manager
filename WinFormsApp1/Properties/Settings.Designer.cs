@@ -97,7 +97,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25575")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public int Last_RCON_Port {
             get {
                 return ((int)(this["Last_RCON_Port"]));
