@@ -8,6 +8,8 @@ Made for Windows.
 
 ## Usage
 ### Installation
+Download the latest [release](https://github.com/Lacyway/V-Rising-Server-Manager/releases).
+
 Extract the files to any folder. Run the program and go to 'Settings' and set up each entry.
 If you have already installed a VRising Server you can point it to that folder. If not, when you are done click 'Update Game Server' and wait for SteamCMD to finish downloading the game.
 
