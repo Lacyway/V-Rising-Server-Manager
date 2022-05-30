@@ -14,6 +14,12 @@ namespace ServerManager
             SetupDefaults();
         }
 
+        public class ListBoxItem
+        {
+            public string? Text { get; set; }
+            public int Value { get; set; }
+        }
+
         public void SetupDefaults()
         {
             GameTypeComboBox.SelectedIndex = 0;
@@ -24,7 +30,33 @@ namespace ServerManager
             PvPProtectionModeComboBox.SelectedIndex = 2;
             DeathContainerPermissionComboBox.SelectedIndex = 0;
             RelicSpawnTypeComboBox.SelectedIndex = 0;
-            TimeZoneComboBox.SelectedIndex = 0;            
+            TimeZoneComboBox.SelectedIndex = 0;
+            UnlockedResearchCheckedListBox.DisplayMember = "Text";
+            UnlockedResearchCheckedListBox.ValueMember = "Value";
+            UnlockedResearchCheckedListBox.Items.Insert(0, new ListBoxItem { Text = "Tier 1", Value = -495424062 });
+            UnlockedResearchCheckedListBox.Items.Insert(1, new ListBoxItem { Text = "Tier 2", Value = -1292809886 });
+            UnlockedResearchCheckedListBox.Items.Insert(2, new ListBoxItem { Text = "Tier 3", Value = -1262194203 });
+            UnlockedAchievementsCheckedListBox.DisplayMember = "Text";
+            UnlockedAchievementsCheckedListBox.ValueMember = "Value";
+            UnlockedAchievementsCheckedListBox.Items.Insert(0, new ListBoxItem { Text = "Collecting the Remains", Value = -1770927128 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(1, new ListBoxItem { Text = "Wielding the Sword", Value = 436375429 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(2, new ListBoxItem { Text = "Mastering Magic", Value = -1400391027 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(3, new ListBoxItem { Text = "Armour of Bones", Value = -2071097880 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(4, new ListBoxItem { Text = "Into the Woods", Value = 1695239324 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(5, new ListBoxItem { Text = "Stone Breaker", Value = 1502386974 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(6, new ListBoxItem { Text = "Lord of Shadows", Value = 1694767961 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(7, new ListBoxItem { Text = "Fortify", Value = -1899098914 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(8, new ListBoxItem { Text = "Getting Ready for the Hunt", Value = 560247139 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(9, new ListBoxItem { Text = "Blood Hunt", Value = -1995132640 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(10, new ListBoxItem { Text = "The first book in the Library", Value = -1434604634 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(11, new ListBoxItem { Text = "Expanding my Domain", Value = 1668809517 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(12, new ListBoxItem { Text = "Building a Castle", Value = 334973636 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(13, new ListBoxItem { Text = "Lord of the Manor", Value = 606418711 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(14, new ListBoxItem { Text = "Servants", Value = -892747762 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(15, new ListBoxItem { Text = "Army of Darkness", Value = -437605270 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(16, new ListBoxItem { Text = "Throne of Command", Value = -2104585843 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(17, new ListBoxItem { Text = "Soul Stones", Value = -327597689 });
+            UnlockedAchievementsCheckedListBox.Items.Insert(17, new ListBoxItem { Text = "Blood of Liminance", Value = 1762480233 });
         }
 
         private void SaveSettings()
@@ -40,6 +72,8 @@ namespace ServerManager
             bool DisableDisconnectedDeadEnabledBool = true;
             bool AnnounceSiegeWeaponSpawnBool = true;
             bool ShowSiegeWeaponMapIconBool = true;
+            int StarterEquipment = 0;
+            int StarterResources = 0;
 
             if (CanLootEnemyContainersRadioFalse.Checked)
             {
@@ -84,6 +118,51 @@ namespace ServerManager
             if (ShowSiegeWeaponMapIconRadioFalse.Checked)
             {
                 ShowSiegeWeaponMapIconBool = false;
+            }
+            switch (StarterEquipmentComboBox.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    StarterEquipment = -376135143;
+                    break;
+                case 2:
+                    StarterEquipment = -1613823352;
+                    break;
+                case 3:
+                    StarterEquipment = -258598606;
+                    break;
+                case 4:
+                    StarterEquipment = 1177675846;
+                    break;
+            }
+            switch (StarterResourcesComboBox.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    StarterResources = -696202180;
+                    break;
+                case 2:
+                    StarterResources = 481718792;
+                    break;
+                case 3:
+                    StarterResources = -766909665;
+                    break;
+            }
+
+            List<int> unlockedResearch = new List<int>();
+            foreach (ListBoxItem item in UnlockedResearchCheckedListBox.CheckedItems)
+            {
+                int value = (item).Value;
+                unlockedResearch.Add(value);
+            }
+
+            List<int> unlockedAchievements = new List<int>();
+            foreach (ListBoxItem item in UnlockedAchievementsCheckedListBox.CheckedItems)
+            {
+                int value = (item).Value;
+                unlockedAchievements.Add(value);
             }
 
             GameSettings main = new GameSettings()
@@ -143,11 +222,11 @@ namespace ServerManager
                 RepairCostModifier = decimal.ToDouble(RepairCostModifierNumber.Value),
                 Death_DurabilityFactorLoss = decimal.ToDouble(Death_DurabilityFactorLossNumber.Value),
                 Death_DurabilityLossFactorAsResources = decimal.ToDouble(Death_DurabilityLossFactorAsResourcesNumber.Value),
-                StarterEquipmentId = 0,
-                StarterResourcesId = 0,
+                StarterEquipmentId = StarterEquipment,
+                StarterResourcesId = StarterResources,
                 VBloodUnitSettings = new List<object>(),
-                UnlockedAchievements = new List<object>(),
-                UnlockedResearchs = new List<object>(),
+                UnlockedAchievements = unlockedAchievements,
+                UnlockedResearchs = unlockedResearch,
                 GameTimeModifiers = new GameTimeModifiers()
                 {
                     DayDurationInSeconds = decimal.ToDouble(DayDurationInSecondsNumber.Value),
@@ -355,6 +434,39 @@ namespace ServerManager
                         {
                             InactivityKillEnabledRadioTrue.Checked = true;
                         }
+                        switch (LoadedSettings.StarterEquipmentId)
+                        {
+                            case -376135143:
+                                StarterEquipmentComboBox.SelectedIndex = 1;
+                                break;
+                            case -1613823352:
+                                StarterEquipmentComboBox.SelectedIndex = 2;
+                                break;
+                            case -258598606:
+                                StarterEquipmentComboBox.SelectedIndex = 3;
+                                break;
+                            case 1177675846:
+                                StarterEquipmentComboBox.SelectedIndex = 4;
+                                break;
+                            default:
+                                StarterEquipmentComboBox.SelectedIndex = 0;
+                                break;
+                        }
+                        switch (LoadedSettings.StarterResourcesId)
+                        {
+                            case -696202180:
+                                StarterResourcesComboBox.SelectedIndex = 1;
+                                break;
+                            case 481718792:
+                                StarterResourcesComboBox.SelectedIndex = 2;
+                                break;
+                            case -766909665:
+                                StarterResourcesComboBox.SelectedIndex = 3;
+                                break;
+                            default:
+                                StarterResourcesComboBox.SelectedIndex = 0;
+                                break;
+                        }
                         InactivityKillTimeMinNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMin);
                         InactivityKillTimeMaxNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMax);
                         InactivityKillSafeTimeAdditionNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillSafeTimeAddition);
@@ -460,6 +572,94 @@ namespace ServerManager
                         StartMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartMinute);
                         EndHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndHour);
                         EndMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndMinute);
+                        if (LoadedSettings.UnlockedResearchs.Contains(-495424062))
+                        {
+                            UnlockedResearchCheckedListBox.SetItemChecked(0, true);
+                        }
+                        if (LoadedSettings.UnlockedResearchs.Contains(-1292809886))
+                        {
+                            UnlockedResearchCheckedListBox.SetItemChecked(1, true);
+                        }
+                        if (LoadedSettings.UnlockedResearchs.Contains(-1262194203))
+                        {
+                            UnlockedResearchCheckedListBox.SetItemChecked(2, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-1770927128))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(0, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(436375429))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(1, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-1400391027))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(2, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-2071097880))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(3, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(1695239324))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(4, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(1502386974))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(5, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(1694767961))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(6, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-1899098914))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(7, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(560247139))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(8, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-1995132640))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(9, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-1434604634))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(10, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(1668809517))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(11, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(334973636))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(12, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(606418711))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(13, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-892747762))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(14, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-437605270))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(15, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-2104585843))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(16, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(-327597689))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(17, true);
+                        }
+                        if (LoadedSettings.UnlockedAchievements.Contains(1762480233))
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(18, true);
+                        }
                     }
                     catch (NullReferenceException)
                     {

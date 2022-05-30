@@ -296,7 +296,15 @@
             this.SaveSettingsDialog = new System.Windows.Forms.SaveFileDialog();
             this.SetFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LoadSettingsDialog = new System.Windows.Forms.OpenFileDialog();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.UnlockedAchievementsCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.label109 = new System.Windows.Forms.Label();
+            this.label108 = new System.Windows.Forms.Label();
+            this.UnlockedResearchCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.StarterResourcesComboBox = new System.Windows.Forms.ComboBox();
+            this.label107 = new System.Windows.Forms.Label();
+            this.StarterEquipmentComboBox = new System.Windows.Forms.ComboBox();
+            this.label106 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -419,6 +427,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DayDurationInSecondsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BloodMoonFrequency_MinNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DayEndMinuteNumber)).BeginInit();
+            this.groupBox23.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -471,7 +480,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
+            this.label1.Location = new System.Drawing.Point(8, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 15);
             this.label1.TabIndex = 1;
@@ -485,7 +494,7 @@
             this.GameTypeComboBox.Items.AddRange(new object[] {
             "PvE",
             "PvP"});
-            this.GameTypeComboBox.Location = new System.Drawing.Point(12, 42);
+            this.GameTypeComboBox.Location = new System.Drawing.Point(8, 40);
             this.GameTypeComboBox.MaxDropDownItems = 2;
             this.GameTypeComboBox.Name = "GameTypeComboBox";
             this.GameTypeComboBox.Size = new System.Drawing.Size(69, 23);
@@ -494,7 +503,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(87, 24);
+            this.label2.Location = new System.Drawing.Point(80, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 15);
             this.label2.TabIndex = 3;
@@ -509,7 +518,7 @@
             "Never",
             "Always",
             "Time Restricted"});
-            this.CastleDamageModeComboBox.Location = new System.Drawing.Point(87, 42);
+            this.CastleDamageModeComboBox.Location = new System.Drawing.Point(80, 40);
             this.CastleDamageModeComboBox.Name = "CastleDamageModeComboBox";
             this.CastleDamageModeComboBox.Size = new System.Drawing.Size(114, 23);
             this.CastleDamageModeComboBox.TabIndex = 4;
@@ -517,7 +526,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(207, 24);
+            this.label3.Location = new System.Drawing.Point(200, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 15);
             this.label3.TabIndex = 5;
@@ -534,7 +543,7 @@
             "1500 Health",
             "2000 Health",
             "2500 Health"});
-            this.SiegeWeaponHealthComboBox.Location = new System.Drawing.Point(207, 42);
+            this.SiegeWeaponHealthComboBox.Location = new System.Drawing.Point(200, 40);
             this.SiegeWeaponHealthComboBox.Name = "SiegeWeaponHealthComboBox";
             this.SiegeWeaponHealthComboBox.Size = new System.Drawing.Size(114, 23);
             this.SiegeWeaponHealthComboBox.TabIndex = 6;
@@ -542,7 +551,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(327, 24);
+            this.label4.Location = new System.Drawing.Point(320, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 15);
             this.label4.TabIndex = 7;
@@ -556,7 +565,7 @@
             this.PlayerDamageModeComboBox.Items.AddRange(new object[] {
             "Always",
             "Time Restricted"});
-            this.PlayerDamageModeComboBox.Location = new System.Drawing.Point(327, 42);
+            this.PlayerDamageModeComboBox.Location = new System.Drawing.Point(320, 40);
             this.PlayerDamageModeComboBox.Name = "PlayerDamageModeComboBox";
             this.PlayerDamageModeComboBox.Size = new System.Drawing.Size(114, 23);
             this.PlayerDamageModeComboBox.TabIndex = 8;
@@ -564,7 +573,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(447, 24);
+            this.label5.Location = new System.Drawing.Point(440, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(143, 15);
             this.label5.TabIndex = 9;
@@ -579,7 +588,7 @@
             "When in Decay",
             "Enemy Players",
             "Can be destroyed or Seized"});
-            this.CastleHeartDamageModeComboBox.Location = new System.Drawing.Point(447, 42);
+            this.CastleHeartDamageModeComboBox.Location = new System.Drawing.Point(440, 40);
             this.CastleHeartDamageModeComboBox.Name = "CastleHeartDamageModeComboBox";
             this.CastleHeartDamageModeComboBox.Size = new System.Drawing.Size(156, 23);
             this.CastleHeartDamageModeComboBox.TabIndex = 10;
@@ -587,7 +596,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(608, 24);
+            this.label6.Location = new System.Drawing.Point(600, 24);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(113, 15);
             this.label6.TabIndex = 11;
@@ -605,7 +614,7 @@
             "Short (30 min)",
             "Medium (1 hour)",
             "Long (2 hours)"});
-            this.PvPProtectionModeComboBox.Location = new System.Drawing.Point(609, 42);
+            this.PvPProtectionModeComboBox.Location = new System.Drawing.Point(600, 40);
             this.PvPProtectionModeComboBox.Name = "PvPProtectionModeComboBox";
             this.PvPProtectionModeComboBox.Size = new System.Drawing.Size(113, 23);
             this.PvPProtectionModeComboBox.TabIndex = 12;
@@ -613,7 +622,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(727, 24);
+            this.label7.Location = new System.Drawing.Point(720, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(148, 15);
             this.label7.TabIndex = 13;
@@ -628,7 +637,7 @@
             "Anyone",
             "Clan Members",
             "Only Self"});
-            this.DeathContainerPermissionComboBox.Location = new System.Drawing.Point(728, 42);
+            this.DeathContainerPermissionComboBox.Location = new System.Drawing.Point(720, 40);
             this.DeathContainerPermissionComboBox.Name = "DeathContainerPermissionComboBox";
             this.DeathContainerPermissionComboBox.Size = new System.Drawing.Size(148, 23);
             this.DeathContainerPermissionComboBox.TabIndex = 14;
@@ -636,7 +645,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(881, 24);
+            this.label8.Location = new System.Drawing.Point(872, 24);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 15);
             this.label8.TabIndex = 15;
@@ -651,7 +660,7 @@
             this.RelicSpawnTypeComboBox.Items.AddRange(new object[] {
             "Unique",
             "Plentiful"});
-            this.RelicSpawnTypeComboBox.Location = new System.Drawing.Point(882, 42);
+            this.RelicSpawnTypeComboBox.Location = new System.Drawing.Point(872, 40);
             this.RelicSpawnTypeComboBox.Name = "RelicSpawnTypeComboBox";
             this.RelicSpawnTypeComboBox.Size = new System.Drawing.Size(91, 23);
             this.RelicSpawnTypeComboBox.TabIndex = 16;
@@ -669,7 +678,7 @@
             // 
             this.groupBox1.Controls.Add(this.CanLootEnemyContainersRadioFalse);
             this.groupBox1.Controls.Add(this.CanLootEnemyContainersRadioTrue);
-            this.groupBox1.Location = new System.Drawing.Point(12, 71);
+            this.groupBox1.Location = new System.Drawing.Point(8, 72);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(164, 75);
             this.groupBox1.TabIndex = 21;
@@ -704,7 +713,7 @@
             // 
             this.groupBox2.Controls.Add(this.BloodBoundEquipmentRadioFalse);
             this.groupBox2.Controls.Add(this.BloodBoundEquipmentRadioTrue);
-            this.groupBox2.Location = new System.Drawing.Point(182, 71);
+            this.groupBox2.Location = new System.Drawing.Point(176, 72);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(148, 75);
             this.groupBox2.TabIndex = 22;
@@ -739,7 +748,7 @@
             // 
             this.groupBox3.Controls.Add(this.TeleportBoundItemsRadioFalse);
             this.groupBox3.Controls.Add(this.TeleportBoundItemsRadioTrue);
-            this.groupBox3.Location = new System.Drawing.Point(336, 71);
+            this.groupBox3.Location = new System.Drawing.Point(328, 72);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(133, 75);
             this.groupBox3.TabIndex = 23;
@@ -774,7 +783,7 @@
             // 
             this.groupBox4.Controls.Add(this.AllowGlobalChatRadioFalse);
             this.groupBox4.Controls.Add(this.AllowGlobalChatRadioTrue);
-            this.groupBox4.Location = new System.Drawing.Point(475, 71);
+            this.groupBox4.Location = new System.Drawing.Point(464, 72);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(116, 75);
             this.groupBox4.TabIndex = 24;
@@ -809,7 +818,7 @@
             // 
             this.groupBox5.Controls.Add(this.AllWaypointsUnlockedRadioFalse);
             this.groupBox5.Controls.Add(this.AllWaypointsUnlockedRadioTrue);
-            this.groupBox5.Location = new System.Drawing.Point(597, 71);
+            this.groupBox5.Location = new System.Drawing.Point(584, 72);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(141, 75);
             this.groupBox5.TabIndex = 25;
@@ -846,7 +855,7 @@
             // 
             this.groupBox6.Controls.Add(this.FreeCastleClaimRadioFalse);
             this.groupBox6.Controls.Add(this.FreeCastleClaimRadioTrue);
-            this.groupBox6.Location = new System.Drawing.Point(744, 71);
+            this.groupBox6.Location = new System.Drawing.Point(728, 72);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(107, 75);
             this.groupBox6.TabIndex = 26;
@@ -881,9 +890,9 @@
             // 
             this.groupBox7.Controls.Add(this.FreeCastleDestroyRadioFalse);
             this.groupBox7.Controls.Add(this.FreeCastleDestroyRadioTrue);
-            this.groupBox7.Location = new System.Drawing.Point(857, 71);
+            this.groupBox7.Location = new System.Drawing.Point(840, 72);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(115, 75);
+            this.groupBox7.Size = new System.Drawing.Size(120, 75);
             this.groupBox7.TabIndex = 27;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "FreeCastleDestroy";
@@ -916,7 +925,7 @@
             // 
             this.groupBox8.Controls.Add(this.InactivityKillEnabledRadioFalse);
             this.groupBox8.Controls.Add(this.InactivityKillEnabledRadioTrue);
-            this.groupBox8.Location = new System.Drawing.Point(787, 152);
+            this.groupBox8.Location = new System.Drawing.Point(784, 152);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(128, 75);
             this.groupBox8.TabIndex = 28;
@@ -1701,7 +1710,7 @@
             // 
             this.groupBox12.Controls.Add(this.ShowSiegeWeaponMapIconRadioFalse);
             this.groupBox12.Controls.Add(this.ShowSiegeWeaponMapIconRadioTrue);
-            this.groupBox12.Location = new System.Drawing.Point(12, 318);
+            this.groupBox12.Location = new System.Drawing.Point(8, 320);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(201, 47);
             this.groupBox12.TabIndex = 23;
@@ -1735,7 +1744,7 @@
             // 
             this.groupBox11.Controls.Add(this.AnnounceSiegeWeaponSpawnRadioFalse);
             this.groupBox11.Controls.Add(this.AnnounceSiegeWeaponSpawnRadioTrue);
-            this.groupBox11.Location = new System.Drawing.Point(12, 265);
+            this.groupBox11.Location = new System.Drawing.Point(8, 264);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(201, 47);
             this.groupBox11.TabIndex = 22;
@@ -1794,7 +1803,7 @@
             this.groupBox9.Controls.Add(this.DisableDisconnectedDeadEnabledNumber);
             this.groupBox9.Controls.Add(this.DisableDisconnectedDeadEnabledRadioFalse);
             this.groupBox9.Controls.Add(this.DisableDisconnectedDeadEnabledRadioTrue);
-            this.groupBox9.Location = new System.Drawing.Point(12, 152);
+            this.groupBox9.Location = new System.Drawing.Point(8, 152);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(201, 110);
             this.groupBox9.TabIndex = 22;
@@ -2208,9 +2217,9 @@
             this.groupBox10.Controls.Add(this.label16);
             this.groupBox10.Controls.Add(this.label17);
             this.groupBox10.Controls.Add(this.DropTableModifier_GeneralNumber);
-            this.groupBox10.Location = new System.Drawing.Point(219, 152);
+            this.groupBox10.Location = new System.Drawing.Point(216, 152);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(562, 405);
+            this.groupBox10.Size = new System.Drawing.Size(562, 408);
             this.groupBox10.TabIndex = 46;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Global Settings";
@@ -4304,13 +4313,103 @@
             this.LoadSettingsDialog.Filter = "\"JSON files\"|*.json";
             this.LoadSettingsDialog.Title = "Load Settings";
             // 
-            // statusStrip1
+            // groupBox23
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1128);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(986, 22);
-            this.statusStrip1.TabIndex = 117;
-            this.statusStrip1.Text = "statusStrip1";
+            this.groupBox23.Controls.Add(this.UnlockedAchievementsCheckedListBox);
+            this.groupBox23.Controls.Add(this.label109);
+            this.groupBox23.Controls.Add(this.label108);
+            this.groupBox23.Controls.Add(this.UnlockedResearchCheckedListBox);
+            this.groupBox23.Controls.Add(this.StarterResourcesComboBox);
+            this.groupBox23.Controls.Add(this.label107);
+            this.groupBox23.Controls.Add(this.StarterEquipmentComboBox);
+            this.groupBox23.Controls.Add(this.label106);
+            this.groupBox23.Location = new System.Drawing.Point(680, 944);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(200, 312);
+            this.groupBox23.TabIndex = 118;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "StarterSettings";
+            // 
+            // UnlockedAchievementsCheckedListBox
+            // 
+            this.UnlockedAchievementsCheckedListBox.FormattingEnabled = true;
+            this.UnlockedAchievementsCheckedListBox.Location = new System.Drawing.Point(8, 192);
+            this.UnlockedAchievementsCheckedListBox.Name = "UnlockedAchievementsCheckedListBox";
+            this.UnlockedAchievementsCheckedListBox.Size = new System.Drawing.Size(184, 112);
+            this.UnlockedAchievementsCheckedListBox.TabIndex = 121;
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.Location = new System.Drawing.Point(8, 176);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(135, 15);
+            this.label109.TabIndex = 120;
+            this.label109.Text = "Unlocked Achievements";
+            // 
+            // label108
+            // 
+            this.label108.AutoSize = true;
+            this.label108.Location = new System.Drawing.Point(8, 96);
+            this.label108.Name = "label108";
+            this.label108.Size = new System.Drawing.Size(112, 15);
+            this.label108.TabIndex = 4;
+            this.label108.Text = "Unlocked Researchs";
+            // 
+            // UnlockedResearchCheckedListBox
+            // 
+            this.UnlockedResearchCheckedListBox.FormattingEnabled = true;
+            this.UnlockedResearchCheckedListBox.Location = new System.Drawing.Point(8, 112);
+            this.UnlockedResearchCheckedListBox.Name = "UnlockedResearchCheckedListBox";
+            this.UnlockedResearchCheckedListBox.Size = new System.Drawing.Size(184, 58);
+            this.UnlockedResearchCheckedListBox.TabIndex = 119;
+            // 
+            // StarterResourcesComboBox
+            // 
+            this.StarterResourcesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.StarterResourcesComboBox.FormattingEnabled = true;
+            this.StarterResourcesComboBox.Items.AddRange(new object[] {
+            "",
+            "Copper Material (Lvl 30)",
+            "Iron Material (Lvl 50)",
+            "Darksilver Material (Lvl 70)"});
+            this.StarterResourcesComboBox.Location = new System.Drawing.Point(8, 72);
+            this.StarterResourcesComboBox.Name = "StarterResourcesComboBox";
+            this.StarterResourcesComboBox.Size = new System.Drawing.Size(184, 23);
+            this.StarterResourcesComboBox.TabIndex = 3;
+            // 
+            // label107
+            // 
+            this.label107.AutoSize = true;
+            this.label107.Location = new System.Drawing.Point(8, 56);
+            this.label107.Name = "label107";
+            this.label107.Size = new System.Drawing.Size(97, 15);
+            this.label107.TabIndex = 2;
+            this.label107.Text = "Starter Resources";
+            // 
+            // StarterEquipmentComboBox
+            // 
+            this.StarterEquipmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.StarterEquipmentComboBox.FormattingEnabled = true;
+            this.StarterEquipmentComboBox.Items.AddRange(new object[] {
+            "",
+            "Copper Equipment (Lvl 30)",
+            "Iron Equipment (Lvl 50)",
+            "Darksilver Equipment (Lvl 70)",
+            "Sanguine Equipment (Lvl 80)"});
+            this.StarterEquipmentComboBox.Location = new System.Drawing.Point(8, 32);
+            this.StarterEquipmentComboBox.Name = "StarterEquipmentComboBox";
+            this.StarterEquipmentComboBox.Size = new System.Drawing.Size(184, 23);
+            this.StarterEquipmentComboBox.TabIndex = 1;
+            // 
+            // label106
+            // 
+            this.label106.AutoSize = true;
+            this.label106.Location = new System.Drawing.Point(8, 16);
+            this.label106.Name = "label106";
+            this.label106.Size = new System.Drawing.Size(102, 15);
+            this.label106.TabIndex = 0;
+            this.label106.Text = "Starter Equipment";
             // 
             // SettingsForm
             // 
@@ -4318,7 +4417,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1003, 782);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.groupBox23);
             this.Controls.Add(this.groupBox22);
             this.Controls.Add(this.groupBox17);
             this.Controls.Add(this.groupBox16);
@@ -4364,7 +4463,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1019, 1200);
+            this.MaximumSize = new System.Drawing.Size(1019, 1300);
             this.MinimumSize = new System.Drawing.Size(1019, 821);
             this.Name = "SettingsForm";
             this.Text = "Settings Editor";
@@ -4517,6 +4616,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DayDurationInSecondsNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BloodMoonFrequency_MinNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DayEndMinuteNumber)).EndInit();
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4791,6 +4892,14 @@
         private System.Windows.Forms.SaveFileDialog SaveSettingsDialog;
         private System.Windows.Forms.FolderBrowserDialog SetFolderDialog;
         private System.Windows.Forms.OpenFileDialog LoadSettingsDialog;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private System.Windows.Forms.ComboBox StarterEquipmentComboBox;
+        private System.Windows.Forms.Label label106;
+        private System.Windows.Forms.ComboBox StarterResourcesComboBox;
+        private System.Windows.Forms.Label label107;
+        private System.Windows.Forms.CheckedListBox UnlockedResearchCheckedListBox;
+        private System.Windows.Forms.Label label108;
+        private System.Windows.Forms.CheckedListBox UnlockedAchievementsCheckedListBox;
+        private System.Windows.Forms.Label label109;
     }
 }

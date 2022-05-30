@@ -269,8 +269,8 @@ namespace ServerManager
         public int? StarterEquipmentId { get; set; }
         public int? StarterResourcesId { get; set; }
         public List<object>? VBloodUnitSettings { get; set; }
-        public List<object>? UnlockedAchievements { get; set; }
-        public List<object>? UnlockedResearchs { get; set; }
+        public List<int>? UnlockedAchievements { get; set; }
+        public List<int>? UnlockedResearchs { get; set; }
         public GameTimeModifiers? GameTimeModifiers { get; set; }
         public VampireStatModifiers? VampireStatModifiers { get; set; }
         public UnitStatModifiersGlobal? UnitStatModifiers_Global { get; set; }
