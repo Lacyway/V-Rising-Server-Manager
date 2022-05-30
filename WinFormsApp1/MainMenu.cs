@@ -22,6 +22,12 @@ namespace ServerManager
         public MainMenu()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
             MainMenuConsole.AppendText("V Rising Server Manager Started\nServer Path: " + Properties.Settings.Default.Server_Path);
             ServerNameValue.Text = Properties.Settings.Default.Server_Name;
             SaveNameValue.Text = Properties.Settings.Default.Save_Name;
