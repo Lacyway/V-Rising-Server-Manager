@@ -15,13 +15,42 @@ using System.Diagnostics;
 namespace ServerManager
 {
         public partial class MainMenu : Form
-    {
+        {
+
+        public Process serverProcess = new Process();
+
         public MainMenu()
         {
             InitializeComponent();
             MainMenuConsole.AppendText("V Rising Server Manager Started\nServer Path: " + Properties.Settings.Default.Server_Path);
             ServerNameValue.Text = Properties.Settings.Default.Server_Name;
             SaveNameValue.Text = Properties.Settings.Default.Save_Name;
+            CheckServer();
+        }
+
+        public void CheckServer()
+        {
+            Process[] processList = Process.GetProcessesByName("vrisingserver");
+            bool foundServer = false;
+            foreach (Process proc in processList)
+            {
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                {
+                    Process serverProcess = proc;
+                    serverProcess.EnableRaisingEvents = true;
+                    serverProcess.Exited += new EventHandler(serverProcessExited);
+                    foundServer = true;
+                }
+            }
+            if (foundServer == true)
+            {
+                StartGameServerButton.Enabled = false;
+                StopGameServerButton.Enabled = true;
+                StoppedPic.Visible = false;
+                RunningPic.Visible = true;
+                StatusLabel.Text = "Running";
+                MainMenuConsole.AppendText(Environment.NewLine + "Server found running.");
+            }
         }
 
         public static class GlobalVars
@@ -138,13 +167,6 @@ namespace ServerManager
                 StatusLabel.Text = "Running";
                 MainMenuConsole.AppendText("\nServer starting.\nServer name: " + Properties.Settings.Default.Server_Name + "\nSave Name: " + Properties.Settings.Default.Save_Name);
                 GlobalVars.userStopped = false;
-                /*
-                while (!serverProcess.HasExited)
-                {
-                    MainMenuConsole.AppendText(Environment.NewLine + "Server running.");
-                    await ServerCheck();
-                }    
-                */
             }
             else
             {
@@ -166,12 +188,18 @@ namespace ServerManager
             MainMenuConsole.ScrollToCaret();
         }
 
-        private void StopGameServerButton_Click(object sender, EventArgs e)
+        public void StopGameServerButton_Click(object sender, EventArgs e)
         {
             GlobalVars.userStopped = true;
             MainMenuConsole.AppendText(Environment.NewLine + "Stopping server.");
-            var serverProcess = Process.GetProcessesByName("vrisingserver");
-            serverProcess[0].CloseMainWindow();
+            Process[] processList = Process.GetProcessesByName("vrisingserver");
+            foreach (Process proc in processList)
+            {
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                {
+                    proc.CloseMainWindow();
+                }
+            }
         }
 
         private void ServerNameValue_Leave(object sender, EventArgs e)
@@ -195,22 +223,28 @@ namespace ServerManager
         {
             if (GlobalVars.userStopped == false && AutoRestartCheck.Checked == true)
             {
-                StoppedPic.Visible = true;
-                RunningPic.Visible = false;
-                StatusLabel.Text = "Stopped";
-                MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");
-                StartServer();                
+                Invoke(new Action(() =>
+                {
+                    StoppedPic.Visible = true;
+                    RunningPic.Visible = false;
+                    StatusLabel.Text = "Stopped";
+                    MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");
+                    StartServer();
+                }));                            
             }
             else
             {
-                StoppedPic.Visible = true;
-                RunningPic.Visible = false;
-                StatusLabel.Text = "Stopped";
-                MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
-                GlobalVars.userStopped = false;
-                GlobalVars.serverRunning = false;
-                StopGameServerButton.Enabled = false;
-                StartGameServerButton.Enabled = true;
+                Invoke(new Action(() =>
+                {
+                    StoppedPic.Visible = true;
+                    RunningPic.Visible = false;
+                    StatusLabel.Text = "Stopped";
+                    StopGameServerButton.Enabled = false;
+                    StartGameServerButton.Enabled = true;
+                    MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
+                    GlobalVars.userStopped = false;
+                    GlobalVars.serverRunning = false;
+                }));                   
             }
         }
 

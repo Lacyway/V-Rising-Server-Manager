@@ -57,10 +57,11 @@ namespace ServerManager
             Properties.Settings.Default.Save();
 
             rClient = new RemoteConClient();
+            rClient.UseUtf8 = true;
             ConnectButton.Enabled = false;
             rClient.OnLog += message => 
             {
-                RconConsoleMain.AppendText(Environment.NewLine + message); 
+                RconConsoleMain.AppendText(Environment.NewLine + message);
             };
             rClient.OnConnectionStateChange += state =>
             {
@@ -88,6 +89,22 @@ namespace ServerManager
                     SendCommandButton.Enabled = false;
                     RconConsoleMain.AppendText(Environment.NewLine + "Connection lost.");
                 }
+                if (state == RemoteConClient.ConnectionStateChange.ConnectionTimeout)
+                {
+                    DisconnectButton.Enabled = false;
+                    ConnectButton.Enabled = true;
+                    ParameterBox.Enabled = false;
+                    SendCommandButton.Enabled = false;
+                    RconConsoleMain.AppendText(Environment.NewLine + "Connection timeout.");
+                }
+                if (state == RemoteConClient.ConnectionStateChange.NoConnection)
+                {
+                    DisconnectButton.Enabled = false;
+                    ConnectButton.Enabled = true;
+                    ParameterBox.Enabled = false;
+                    SendCommandButton.Enabled = false;
+                    RconConsoleMain.AppendText(Environment.NewLine + "No connection.");
+                }                
             };
             await AttemptConnect();
 
@@ -126,9 +143,9 @@ namespace ServerManager
 
         private void SendCommandButton_Click(object sender, EventArgs e)
         {
-            if (CommandList.SelectedIndex != -1 && rClient.Connected)
+            if (CommandList.SelectedIndex != -1 && rClient.Connected == true)
             {
-                rClient.SendCommand(String.Format("{0} {1}", CommandList.SelectedItem.ToString(), ParameterBox.Text), result => { Console.WriteLine("CMD Result: " + result); });
+                rClient.SendCommand(String.Format("{0} {1}", CommandList.SelectedItem.ToString(), ParameterBox.Text), result => { RconConsoleMain.AppendText(result); });
                 RconConsoleMain.AppendText(String.Format("\nSent command '{0}' with parameter '{1}'.", CommandList.SelectedItem.ToString(), ParameterBox.Text));
             }
             else
