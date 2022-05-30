@@ -176,6 +176,10 @@
             this.label82 = new System.Windows.Forms.Label();
             this.label84 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
+            this.label109 = new System.Windows.Forms.Label();
+            this.label108 = new System.Windows.Forms.Label();
+            this.label107 = new System.Windows.Forms.Label();
+            this.label106 = new System.Windows.Forms.Label();
             this.InventoryStacksModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_GeneralNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_MissionsNumber = new System.Windows.Forms.NumericUpDown();
@@ -298,13 +302,9 @@
             this.LoadSettingsDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
             this.UnlockedAchievementsCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.label109 = new System.Windows.Forms.Label();
-            this.label108 = new System.Windows.Forms.Label();
             this.UnlockedResearchCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.StarterResourcesComboBox = new System.Windows.Forms.ComboBox();
-            this.label107 = new System.Windows.Forms.Label();
             this.StarterEquipmentComboBox = new System.Windows.Forms.ComboBox();
-            this.label106 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -2083,6 +2083,46 @@
             this.label83.Text = "StartMinute";
             this.toolTip1.SetToolTip(this.label83, "The real time starting minute for activating Player vs Player PvP during standard" +
         " weekdays");
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.Location = new System.Drawing.Point(8, 176);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(135, 15);
+            this.label109.TabIndex = 120;
+            this.label109.Text = "Unlocked Achievements";
+            this.toolTip1.SetToolTip(this.label109, "Choose which achievements the player start with unlocked.");
+            // 
+            // label108
+            // 
+            this.label108.AutoSize = true;
+            this.label108.Location = new System.Drawing.Point(8, 96);
+            this.label108.Name = "label108";
+            this.label108.Size = new System.Drawing.Size(112, 15);
+            this.label108.TabIndex = 4;
+            this.label108.Text = "Unlocked Researchs";
+            this.toolTip1.SetToolTip(this.label108, "Choose which research tiers the player start with.");
+            // 
+            // label107
+            // 
+            this.label107.AutoSize = true;
+            this.label107.Location = new System.Drawing.Point(8, 56);
+            this.label107.Name = "label107";
+            this.label107.Size = new System.Drawing.Size(97, 15);
+            this.label107.TabIndex = 2;
+            this.label107.Text = "Starter Resources";
+            this.toolTip1.SetToolTip(this.label107, "A set of resources the player start with.");
+            // 
+            // label106
+            // 
+            this.label106.AutoSize = true;
+            this.label106.Location = new System.Drawing.Point(8, 16);
+            this.label106.Name = "label106";
+            this.label106.Size = new System.Drawing.Size(102, 15);
+            this.label106.TabIndex = 0;
+            this.label106.Text = "Starter Equipment";
+            this.toolTip1.SetToolTip(this.label106, "A set of items the player starts with.");
             // 
             // InventoryStacksModifierNumber
             // 
@@ -4338,24 +4378,6 @@
             this.UnlockedAchievementsCheckedListBox.Size = new System.Drawing.Size(184, 112);
             this.UnlockedAchievementsCheckedListBox.TabIndex = 121;
             // 
-            // label109
-            // 
-            this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(8, 176);
-            this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(135, 15);
-            this.label109.TabIndex = 120;
-            this.label109.Text = "Unlocked Achievements";
-            // 
-            // label108
-            // 
-            this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(8, 96);
-            this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(112, 15);
-            this.label108.TabIndex = 4;
-            this.label108.Text = "Unlocked Researchs";
-            // 
             // UnlockedResearchCheckedListBox
             // 
             this.UnlockedResearchCheckedListBox.FormattingEnabled = true;
@@ -4378,15 +4400,6 @@
             this.StarterResourcesComboBox.Size = new System.Drawing.Size(184, 23);
             this.StarterResourcesComboBox.TabIndex = 3;
             // 
-            // label107
-            // 
-            this.label107.AutoSize = true;
-            this.label107.Location = new System.Drawing.Point(8, 56);
-            this.label107.Name = "label107";
-            this.label107.Size = new System.Drawing.Size(97, 15);
-            this.label107.TabIndex = 2;
-            this.label107.Text = "Starter Resources";
-            // 
             // StarterEquipmentComboBox
             // 
             this.StarterEquipmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -4401,15 +4414,6 @@
             this.StarterEquipmentComboBox.Name = "StarterEquipmentComboBox";
             this.StarterEquipmentComboBox.Size = new System.Drawing.Size(184, 23);
             this.StarterEquipmentComboBox.TabIndex = 1;
-            // 
-            // label106
-            // 
-            this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(8, 16);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(102, 15);
-            this.label106.TabIndex = 0;
-            this.label106.Text = "Starter Equipment";
             // 
             // SettingsForm
             // 
