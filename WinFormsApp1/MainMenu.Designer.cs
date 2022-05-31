@@ -50,26 +50,28 @@
             this.StoppedPic = new System.Windows.Forms.PictureBox();
             this.RCONButton = new System.Windows.Forms.Button();
             this.ManageAdminsButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(8, 24);
+            this.SettingsButton.Location = new System.Drawing.Point(8, 16);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(144, 50);
+            this.SettingsButton.Size = new System.Drawing.Size(144, 24);
             this.SettingsButton.TabIndex = 0;
             this.SettingsButton.Text = "Settings Editor";
             this.SettingsButton.UseVisualStyleBackColor = true;
-            this.SettingsButton.Click += new System.EventHandler(this.button1_Click);
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // ServerSettingsButton
             // 
-            this.ServerSettingsButton.Location = new System.Drawing.Point(8, 80);
+            this.ServerSettingsButton.Location = new System.Drawing.Point(8, 48);
             this.ServerSettingsButton.Name = "ServerSettingsButton";
-            this.ServerSettingsButton.Size = new System.Drawing.Size(144, 50);
+            this.ServerSettingsButton.Size = new System.Drawing.Size(144, 24);
             this.ServerSettingsButton.TabIndex = 1;
             this.ServerSettingsButton.Text = "Server Settings Editor";
             this.ServerSettingsButton.UseVisualStyleBackColor = true;
@@ -77,9 +79,9 @@
             // 
             // SteamCMDButton
             // 
-            this.SteamCMDButton.Location = new System.Drawing.Point(8, 192);
+            this.SteamCMDButton.Location = new System.Drawing.Point(8, 88);
             this.SteamCMDButton.Name = "SteamCMDButton";
-            this.SteamCMDButton.Size = new System.Drawing.Size(125, 50);
+            this.SteamCMDButton.Size = new System.Drawing.Size(125, 24);
             this.SteamCMDButton.TabIndex = 2;
             this.SteamCMDButton.Text = "Update Game Server";
             this.SteamCMDButton.UseVisualStyleBackColor = true;
@@ -87,11 +89,11 @@
             // 
             // AppSettingsButton
             // 
-            this.AppSettingsButton.Location = new System.Drawing.Point(656, 56);
+            this.AppSettingsButton.Location = new System.Drawing.Point(640, 152);
             this.AppSettingsButton.Name = "AppSettingsButton";
-            this.AppSettingsButton.Size = new System.Drawing.Size(125, 50);
+            this.AppSettingsButton.Size = new System.Drawing.Size(141, 24);
             this.AppSettingsButton.TabIndex = 3;
-            this.AppSettingsButton.Text = "Settings";
+            this.AppSettingsButton.Text = "Manager Settings";
             this.AppSettingsButton.UseVisualStyleBackColor = true;
             this.AppSettingsButton.Click += new System.EventHandler(this.AppSettingsButton_Click);
             // 
@@ -114,18 +116,18 @@
             // 
             this.groupBox1.Controls.Add(this.SettingsButton);
             this.groupBox1.Controls.Add(this.ServerSettingsButton);
-            this.groupBox1.Location = new System.Drawing.Point(632, 120);
+            this.groupBox1.Location = new System.Drawing.Point(632, 184);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(160, 144);
+            this.groupBox1.Size = new System.Drawing.Size(160, 80);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editors";
             // 
             // StartGameServerButton
             // 
-            this.StartGameServerButton.Location = new System.Drawing.Point(8, 136);
+            this.StartGameServerButton.Location = new System.Drawing.Point(8, 56);
             this.StartGameServerButton.Name = "StartGameServerButton";
-            this.StartGameServerButton.Size = new System.Drawing.Size(125, 50);
+            this.StartGameServerButton.Size = new System.Drawing.Size(125, 24);
             this.StartGameServerButton.TabIndex = 6;
             this.StartGameServerButton.Text = "Start Game Server";
             this.StartGameServerButton.UseVisualStyleBackColor = true;
@@ -134,9 +136,9 @@
             // StopGameServerButton
             // 
             this.StopGameServerButton.Enabled = false;
-            this.StopGameServerButton.Location = new System.Drawing.Point(144, 136);
+            this.StopGameServerButton.Location = new System.Drawing.Point(144, 56);
             this.StopGameServerButton.Name = "StopGameServerButton";
-            this.StopGameServerButton.Size = new System.Drawing.Size(125, 50);
+            this.StopGameServerButton.Size = new System.Drawing.Size(125, 24);
             this.StopGameServerButton.TabIndex = 7;
             this.StopGameServerButton.Text = "Stop Game Server";
             this.StopGameServerButton.UseVisualStyleBackColor = true;
@@ -150,7 +152,7 @@
             // 
             this.AutoRestartCheck.Checked = true;
             this.AutoRestartCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoRestartCheck.Location = new System.Drawing.Point(8, 112);
+            this.AutoRestartCheck.Location = new System.Drawing.Point(8, 24);
             this.AutoRestartCheck.Name = "AutoRestartCheck";
             this.AutoRestartCheck.Size = new System.Drawing.Size(91, 19);
             this.AutoRestartCheck.TabIndex = 9;
@@ -194,9 +196,9 @@
             // 
             // OpenGameFolderButton
             // 
-            this.OpenGameFolderButton.Location = new System.Drawing.Point(144, 192);
+            this.OpenGameFolderButton.Location = new System.Drawing.Point(144, 88);
             this.OpenGameFolderButton.Name = "OpenGameFolderButton";
-            this.OpenGameFolderButton.Size = new System.Drawing.Size(125, 50);
+            this.OpenGameFolderButton.Size = new System.Drawing.Size(125, 24);
             this.OpenGameFolderButton.TabIndex = 15;
             this.OpenGameFolderButton.Text = "Open Game Folder";
             this.OpenGameFolderButton.UseVisualStyleBackColor = true;
@@ -205,7 +207,7 @@
             // RunningPic
             // 
             this.RunningPic.Image = global::ServerManager.Properties.Resources.running;
-            this.RunningPic.Location = new System.Drawing.Point(336, 176);
+            this.RunningPic.Location = new System.Drawing.Point(232, 16);
             this.RunningPic.Name = "RunningPic";
             this.RunningPic.Size = new System.Drawing.Size(32, 32);
             this.RunningPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -216,7 +218,7 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(280, 184);
+            this.StatusLabel.Location = new System.Drawing.Point(144, 24);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(51, 15);
             this.StatusLabel.TabIndex = 17;
@@ -225,7 +227,7 @@
             // StoppedPic
             // 
             this.StoppedPic.Image = global::ServerManager.Properties.Resources.stopped;
-            this.StoppedPic.Location = new System.Drawing.Point(336, 176);
+            this.StoppedPic.Location = new System.Drawing.Point(232, 16);
             this.StoppedPic.Name = "StoppedPic";
             this.StoppedPic.Size = new System.Drawing.Size(32, 32);
             this.StoppedPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -234,9 +236,10 @@
             // 
             // RCONButton
             // 
-            this.RCONButton.Location = new System.Drawing.Point(472, 200);
+            this.RCONButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RCONButton.Location = new System.Drawing.Point(8, 120);
             this.RCONButton.Name = "RCONButton";
-            this.RCONButton.Size = new System.Drawing.Size(149, 50);
+            this.RCONButton.Size = new System.Drawing.Size(125, 24);
             this.RCONButton.TabIndex = 19;
             this.RCONButton.Text = "Open RCON Console";
             this.RCONButton.UseVisualStyleBackColor = true;
@@ -244,36 +247,46 @@
             // 
             // ManageAdminsButton
             // 
-            this.ManageAdminsButton.Location = new System.Drawing.Point(144, 96);
+            this.ManageAdminsButton.Location = new System.Drawing.Point(144, 120);
             this.ManageAdminsButton.Name = "ManageAdminsButton";
-            this.ManageAdminsButton.Size = new System.Drawing.Size(125, 32);
+            this.ManageAdminsButton.Size = new System.Drawing.Size(125, 24);
             this.ManageAdminsButton.TabIndex = 20;
             this.ManageAdminsButton.Text = "Manage Admins";
             this.ManageAdminsButton.UseVisualStyleBackColor = true;
             this.ManageAdminsButton.Click += new System.EventHandler(this.ManageAdminsButton_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.StartGameServerButton);
+            this.groupBox2.Controls.Add(this.StoppedPic);
+            this.groupBox2.Controls.Add(this.RCONButton);
+            this.groupBox2.Controls.Add(this.StatusLabel);
+            this.groupBox2.Controls.Add(this.RunningPic);
+            this.groupBox2.Controls.Add(this.ManageAdminsButton);
+            this.groupBox2.Controls.Add(this.SteamCMDButton);
+            this.groupBox2.Controls.Add(this.StopGameServerButton);
+            this.groupBox2.Controls.Add(this.OpenGameFolderButton);
+            this.groupBox2.Controls.Add(this.AutoRestartCheck);
+            this.groupBox2.Location = new System.Drawing.Point(8, 112);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 152);
+            this.groupBox2.TabIndex = 21;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Server Management";
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ManageAdminsButton);
-            this.Controls.Add(this.RCONButton);
-            this.Controls.Add(this.StoppedPic);
-            this.Controls.Add(this.StatusLabel);
-            this.Controls.Add(this.RunningPic);
-            this.Controls.Add(this.OpenGameFolderButton);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.SaveNameValue);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ServerNameValue);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.AutoRestartCheck);
-            this.Controls.Add(this.StopGameServerButton);
-            this.Controls.Add(this.StartGameServerButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.MainMenuConsole);
             this.Controls.Add(this.AppSettingsButton);
-            this.Controls.Add(this.SteamCMDButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -282,6 +295,8 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,5 +324,6 @@
         private System.Windows.Forms.PictureBox StoppedPic;
         private System.Windows.Forms.Button RCONButton;
         private System.Windows.Forms.Button ManageAdminsButton;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

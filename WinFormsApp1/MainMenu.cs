@@ -11,6 +11,7 @@ using System.Net;
 using System.IO.Compression;
 using System.IO;
 using System.Diagnostics;
+using System.Timers;
 
 namespace ServerManager
 {
@@ -18,6 +19,7 @@ namespace ServerManager
         {
 
         public Process serverProcess = new Process();
+        private static System.Timers.Timer RestartTimer;
 
         public MainMenu()
         {
@@ -58,15 +60,10 @@ namespace ServerManager
                 MainMenuConsole.AppendText(Environment.NewLine + "Server found running.");
             }
         }
-
-        public static class GlobalVars
-        {
-            public static bool userStopped = false;
-            public static bool serverRunning = false;
-            public static string serverName = "V Rising Server";
-            public static string saveName = "world1";
-        }
-
+        public bool userStopped = false;
+        public static string serverName = "V Rising Server";
+        public static string saveName = "world1";
+        public static int restartAttempts = 0;
         public async void StartSteamCMD()
         {
             if (Process.GetProcessesByName("vrisingserver").Length > 0)
@@ -119,12 +116,7 @@ namespace ServerManager
             
         }
 
-        async Task ServerCheck()
-        {
-            await Task.Delay(5000);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void SettingsButton_Click(object sender, EventArgs e)
         {
             SettingsForm SettingsMenu = new SettingsForm();
             SettingsMenu.ShowDialog();
@@ -153,10 +145,22 @@ namespace ServerManager
             {
                 MessageBox.Show("Server is already running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }            
+            if (restartAttempts == 5)
+            {
+                MainMenuConsole.AppendText(Environment.NewLine + "Unable to start server 5 times, disabling auto-restart.");
+                AutoRestartCheck.Checked = false;
+                StartGameServerButton.Enabled = true;
+                StopGameServerButton.Enabled = false;
+                return;
             }
+            if (restartAttempts == 0)
+            {
+                SetTimer();
+            }
+            restartAttempts++;
             if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer.exe") == true)
             {
-                GlobalVars.serverRunning = true;
                 StopGameServerButton.Enabled = true;
                 StartGameServerButton.Enabled = false;
                 string parameters = String.Format("-persistentDataPath {0} -serverName \"{1}\" -saveName \"{2}\" -logFile \"{3}\\VRisingServer.log\"", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path);
@@ -171,13 +175,33 @@ namespace ServerManager
                 StoppedPic.Visible = false;
                 RunningPic.Visible = true;
                 StatusLabel.Text = "Running";
-                MainMenuConsole.AppendText("\nServer starting.\nServer name: " + Properties.Settings.Default.Server_Name + "\nSave Name: " + Properties.Settings.Default.Save_Name);
-                GlobalVars.userStopped = false;
+                MainMenuConsole.AppendText("\nServer starting.\nServer name: " + Properties.Settings.Default.Server_Name + "\nSave name: " + Properties.Settings.Default.Save_Name);
+                userStopped = false;
             }
             else
             {
                 MessageBox.Show("'VRisingServer.exe' not found. Please make sure server is installed correctly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private static void SetTimer()
+        {
+            if (RestartTimer != null)
+            {
+                RestartTimer.Start();
+            }
+            else
+            {
+                RestartTimer = new System.Timers.Timer(10000);
+                RestartTimer.Elapsed += OnTimedEvent;
+                RestartTimer.AutoReset = true;
+                RestartTimer.Enabled = true;
+            }            
+        }
+
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            restartAttempts = 0;
+            RestartTimer.Stop();
         }
 
         public void StartGameServerButton_Click(object sender, EventArgs e)
@@ -196,7 +220,8 @@ namespace ServerManager
 
         public void StopGameServerButton_Click(object sender, EventArgs e)
         {
-            GlobalVars.userStopped = true;
+            userStopped = true;
+            StopGameServerButton.Enabled = false;
             MainMenuConsole.AppendText(Environment.NewLine + "Stopping server.");
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
@@ -227,7 +252,7 @@ namespace ServerManager
 
         private void serverProcessExited(object sender, EventArgs e)
         {
-            if (GlobalVars.userStopped == false && AutoRestartCheck.Checked == true)
+            if (userStopped == false && AutoRestartCheck.Checked == true)
             {
                 Invoke(new Action(() =>
                 {
@@ -248,8 +273,7 @@ namespace ServerManager
                     StopGameServerButton.Enabled = false;
                     StartGameServerButton.Enabled = true;
                     MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
-                    GlobalVars.userStopped = false;
-                    GlobalVars.serverRunning = false;
+                    userStopped = false;
                 }));                   
             }
         }
