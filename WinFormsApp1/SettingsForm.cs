@@ -57,6 +57,43 @@ namespace ServerManager
             UnlockedAchievementsCheckedListBox.Items.Insert(16, new ListBoxItem { Text = "Throne of Command", Value = -2104585843 });
             UnlockedAchievementsCheckedListBox.Items.Insert(17, new ListBoxItem { Text = "Soul Stones", Value = -327597689 });
             UnlockedAchievementsCheckedListBox.Items.Insert(17, new ListBoxItem { Text = "Blood of Liminance", Value = 1762480233 });
+            VBloodUnitSettingsDataGridView.Rows.Add("Alpha Wolf", -1905691330, 16, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Keely the Frost Archer", 1124739990, 20, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Rufus the Foreman", 2122229952, 20, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Errol the Stonebreaker", -2025101517, 20, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Lidia the Chaos Archer", 763273073, 26, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Grayson the Armourer", 1106149033, 27, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Goreswine the Ravager", 577478542, 27, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Putrid Rat", -2039908510, 30, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Clive the Firestarter", 1896428751, 30, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Polora the Feywalker", -484556888, 34, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Ferocious Bear", -1391546313, 36, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Nicholaus the Fallen", 153390636, 37, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Quincey the Bandit King", -1659822956, 37, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Beatrice the Tailor", -1942352521, 38, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Vincent the Frostbringer", -29797003, 40, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Christina the Sun Priestess", -99012450, 44, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Leandra the Shadow Priestess", 939467639, 46, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Tristan the Vampire Hunter", -1449631170, 46, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Terah the Geomancer", -1065970933, 48, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Meredith the Bright Archer", 850622034, 52, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Frostmaw the Mountain Terror", 24378719, 56, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Octavian the Militia Captain", 1688478381, 58, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Raziel the Shepherd", -680831417, 60, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Ungora the Spider Queen", -548489519, 60, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("The Duke of Balaton", -203043163, 62, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Foulrot the Soultaker", -1208888966, 62, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Jade the Vampire Hunter", -1968372384, 62, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Willfred Werewolf Chieftain", -1007062401, 64, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Mairwyn the Elementalist", -2013903325, 64, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Morian the Stormwing Matriach", 685266977, 68, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Azariel the Sunbringer", 114912615, 68, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Terrorclaw the Ogre", -1347412392, 68, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Matka the Curse Weaver", -910296704, 72, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Nightmarshal Styx the Sunderer", 1112948824, 76, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Gorecrusher the Behemoth", -1936575244, 78, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("The Winged Horror", -393555055, 78, false);
+            VBloodUnitSettingsDataGridView.Rows.Add("Solarus the Immaculate", -740796338, 80, false);
         }
 
         private void SaveSettings()
@@ -164,6 +201,21 @@ namespace ServerManager
                 int value = (item).Value;
                 unlockedAchievements.Add(value);
             }
+            List<VBloodUnitSetting> VBloodList = new List<VBloodUnitSetting>();
+            foreach (DataGridViewRow row in VBloodUnitSettingsDataGridView.Rows)
+            {
+                int id = Convert.ToInt32(row.Cells["Id"].Value);
+                int level = Convert.ToInt32(row.Cells["Level"].Value);
+                bool unlocked = Convert.ToBoolean(row.Cells["DefaultUnlocked"].Value);
+                if (level > 100) level = 100;
+                VBloodUnitSetting unit = new VBloodUnitSetting()
+                {
+                    UnitId = id,
+                    UnitLevel = level,
+                    DefaultUnlocked = unlocked
+                };
+                VBloodList.Add(unit);
+            }
 
             GameSettings main = new GameSettings()
             {
@@ -224,7 +276,7 @@ namespace ServerManager
                 Death_DurabilityLossFactorAsResources = decimal.ToDouble(Death_DurabilityLossFactorAsResourcesNumber.Value),
                 StarterEquipmentId = StarterEquipment,
                 StarterResourcesId = StarterResources,
-                VBloodUnitSettings = new List<object>(),
+                VBloodUnitSettings = VBloodList,
                 UnlockedAchievements = unlockedAchievements,
                 UnlockedResearchs = unlockedResearch,
                 GameTimeModifiers = new GameTimeModifiers()
@@ -572,6 +624,17 @@ namespace ServerManager
                         StartMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartMinute);
                         EndHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndHour);
                         EndMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndMinute);
+                        foreach (VBloodUnitSetting unit in LoadedSettings.VBloodUnitSettings)
+                        {
+                            foreach (DataGridViewRow row in VBloodUnitSettingsDataGridView.Rows)
+                            {
+                                if (row.Cells[1].Value.ToString().Contains(unit.UnitId.ToString()))
+                                {
+                                    row.Cells[2].Value = unit.UnitLevel.ToString();
+                                    row.Cells[3].Value = unit.DefaultUnlocked;
+                                }
+                            }
+                        }
                         if (LoadedSettings.UnlockedResearchs.Contains(-495424062))
                         {
                             UnlockedResearchCheckedListBox.SetItemChecked(0, true);
@@ -723,6 +786,24 @@ namespace ServerManager
         private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadSettings();
+        }
+
+        private void VBloodUnitSettingsDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 2) // 1 should be your column index
+            {
+                int i;
+
+                if (!int.TryParse(Convert.ToString(e.FormattedValue), out i))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Please enter a numeric whole value!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+                    
+                }
+            }
         }
     }
 }

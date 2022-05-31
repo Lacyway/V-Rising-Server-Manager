@@ -25,6 +25,13 @@ namespace ServerManager
         public int CastleLimit { get; set; } = 2;
     }
 
+    public class VBloodUnitSetting
+    {
+        public int UnitId { get; set; }
+        public int UnitLevel { get; set; }
+        public bool DefaultUnlocked { get; set; }
+    }
+
     public class EquipmentStatModifiersGlobal
     {
         public double MaxEnergyModifier { get; set; } = 1.0;
@@ -268,7 +275,7 @@ namespace ServerManager
         public double Death_DurabilityLossFactorAsResources { get; set; } = 1.0;
         public int? StarterEquipmentId { get; set; }
         public int? StarterResourcesId { get; set; }
-        public List<object>? VBloodUnitSettings { get; set; }
+        public List<VBloodUnitSetting> VBloodUnitSettings { get; set; }
         public List<int>? UnlockedAchievements { get; set; }
         public List<int>? UnlockedResearchs { get; set; }
         public GameTimeModifiers? GameTimeModifiers { get; set; }
