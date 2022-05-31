@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.SettingsButton = new System.Windows.Forms.Button();
             this.ServerSettingsButton = new System.Windows.Forms.Button();
             this.SteamCMDButton = new System.Windows.Forms.Button();
@@ -48,6 +49,7 @@
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StoppedPic = new System.Windows.Forms.PictureBox();
             this.RCONButton = new System.Windows.Forms.Button();
+            this.ManageAdminsButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).BeginInit();
@@ -240,11 +242,22 @@
             this.RCONButton.UseVisualStyleBackColor = true;
             this.RCONButton.Click += new System.EventHandler(this.RCONButton_Click);
             // 
+            // ManageAdminsButton
+            // 
+            this.ManageAdminsButton.Location = new System.Drawing.Point(144, 96);
+            this.ManageAdminsButton.Name = "ManageAdminsButton";
+            this.ManageAdminsButton.Size = new System.Drawing.Size(125, 32);
+            this.ManageAdminsButton.TabIndex = 20;
+            this.ManageAdminsButton.Text = "Manage Admins";
+            this.ManageAdminsButton.UseVisualStyleBackColor = true;
+            this.ManageAdminsButton.Click += new System.EventHandler(this.ManageAdminsButton_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ManageAdminsButton);
             this.Controls.Add(this.RCONButton);
             this.Controls.Add(this.StoppedPic);
             this.Controls.Add(this.StatusLabel);
@@ -262,6 +275,7 @@
             this.Controls.Add(this.AppSettingsButton);
             this.Controls.Add(this.SteamCMDButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainMenu";
             this.Text = "V Rising Server Manager";
@@ -294,5 +308,6 @@
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.PictureBox StoppedPic;
         private System.Windows.Forms.Button RCONButton;
+        private System.Windows.Forms.Button ManageAdminsButton;
     }
 }

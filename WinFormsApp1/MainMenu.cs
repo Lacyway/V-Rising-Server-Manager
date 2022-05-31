@@ -259,5 +259,18 @@ namespace ServerManager
             RconConsole RconConsoleMenu = new RconConsole();
             RconConsoleMenu.ShowDialog();
         }
+
+        private void ManageAdminsButton_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt"))
+            {
+                MessageBox.Show("Unable to find adminlist.txt\nPlease make sure server path is correctly configured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                AdminManager AdminManagerMenu = new AdminManager();
+                AdminManagerMenu.ShowDialog();
+            }            
+        }
     }
 }
