@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using RCONServerLib.Utils;
 
-namespace RCONServerLib
+namespace ServerManager.RCON
 {
     /// <summary>
     ///     Client connected to the remote console

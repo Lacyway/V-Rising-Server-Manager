@@ -5,7 +5,7 @@ using System.IO;
 using System.Net.Sockets;
 using RCONServerLib.Utils;
 
-namespace RCONServerLib
+namespace ServerManager.RCON
 {
     public class RemoteConClient
     {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using RCONServerLib.Utils;
 
-namespace RCONServerLib
+namespace ServerManager.RCON
 {
     /// <summary>
     ///     Class for Source RCON Packets

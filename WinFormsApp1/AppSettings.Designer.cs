@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppSettings));
             this.label1 = new System.Windows.Forms.Label();
             this.ServerFolderValue = new System.Windows.Forms.TextBox();
             this.OpenFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -166,6 +167,7 @@
             this.Controls.Add(this.SelectServerFolderButton);
             this.Controls.Add(this.ServerFolderValue);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AppSettings";
