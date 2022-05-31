@@ -4442,7 +4442,7 @@
             this.VBloodUnitSettingsDataGridView.MultiSelect = false;
             this.VBloodUnitSettingsDataGridView.Name = "VBloodUnitSettingsDataGridView";
             this.VBloodUnitSettingsDataGridView.RowTemplate.Height = 25;
-            this.VBloodUnitSettingsDataGridView.Size = new System.Drawing.Size(472, 160);
+            this.VBloodUnitSettingsDataGridView.Size = new System.Drawing.Size(472, 152);
             this.VBloodUnitSettingsDataGridView.TabIndex = 119;
             this.VBloodUnitSettingsDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.VBloodUnitSettingsDataGridView_CellValidating);
             // 
@@ -4558,7 +4558,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1020, 1350);
+            this.MaximumSize = new System.Drawing.Size(1020, 1360);
             this.MinimumSize = new System.Drawing.Size(1019, 821);
             this.Name = "SettingsForm";
             this.Text = "Settings Editor";
