@@ -312,6 +312,7 @@
             this.DefaultUnlocked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label110 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label111 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -463,26 +464,28 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.loadFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadFileToolStripMenuItem.Text = "Load File";
             this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.saveFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveFileToolStripMenuItem.Text = "Save File";
             this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(118, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Exit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -4480,6 +4483,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.label111);
             this.panel1.Controls.Add(this.GameTypeComboBox);
             this.panel1.Controls.Add(this.label110);
             this.panel1.Controls.Add(this.label1);
@@ -4530,6 +4534,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1004, 758);
             this.panel1.TabIndex = 121;
+            // 
+            // label111
+            // 
+            this.label111.ForeColor = System.Drawing.Color.Red;
+            this.label111.Location = new System.Drawing.Point(8, 352);
+            this.label111.Name = "label111";
+            this.label111.Size = new System.Drawing.Size(200, 144);
+            this.label111.TabIndex = 121;
+            this.label111.Text = "Settings Editor Info\r\n\r\nHover over any value name, for example \"InventoryStacksMo" +
+    "difier\"\r\nto get information what the value does.\r\n\r\nYou can Load/Save files in t" +
+    "he \"File\" menu.";
             // 
             // SettingsForm
             // 
@@ -4989,5 +5004,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Level;
         private System.Windows.Forms.DataGridViewCheckBoxColumn DefaultUnlocked;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label111;
     }
 }
