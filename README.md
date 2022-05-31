@@ -2,7 +2,6 @@
 
 ## Information
 Tool to install, update and run a V Rising Server on Windows. Also includes a game and server settings editor.
-Not thoroughly tested and might contain a lot of bugs.
 
 Made for Windows.
 
