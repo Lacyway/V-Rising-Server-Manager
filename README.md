@@ -24,6 +24,7 @@ Select a command and write the parameter in the text field at the bottom and cli
 
 ## Requirements
 Needs [.NET Runtime 6.0](https://download.visualstudio.microsoft.com/download/pr/5681bdf9-0a48-45ac-b7bf-21b7b61657aa/bbdc43bc7bf0d15b97c1a98ae2e82ec0/windowsdesktop-runtime-6.0.5-win-x64.exe)
+If you wish to compile it use the [.NET Visual Studio 22 6.0 SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 
 Libraries used:
 - Newtonsoft.Json
