@@ -8,6 +8,7 @@ namespace ServerManager
         public AppSettings()
         {
             InitializeComponent();
+            Icon = Properties.Resources.logo;
             ServerFolderValue.Text = Properties.Settings.Default.Server_Path;
             SaveFolderValue.Text = Properties.Settings.Default.Save_Path;
             LogFolderValue.Text = Properties.Settings.Default.Log_Path;

@@ -11,6 +11,7 @@ namespace ServerManager
         public RconConsole()
         {
             InitializeComponent();
+            Icon = Properties.Resources.logo;
             RconConsoleMain.AppendText("Ready to connect.");
             if (Properties.Settings.Default.Last_RCON_Address != "notset")
             {

@@ -8,7 +8,8 @@ namespace ServerManager
     {
         public AdminManager()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            Icon = Properties.Resources.logo;
             PopulateList(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt");
         }
 

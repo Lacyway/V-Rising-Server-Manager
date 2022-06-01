@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.SettingsButton = new System.Windows.Forms.Button();
             this.ServerSettingsButton = new System.Windows.Forms.Button();
             this.SteamCMDButton = new System.Windows.Forms.Button();
@@ -288,7 +287,6 @@
             this.Controls.Add(this.MainMenuConsole);
             this.Controls.Add(this.AppSettingsButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainMenu";
             this.Text = "V Rising Server Manager";

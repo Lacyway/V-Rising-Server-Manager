@@ -17,6 +17,7 @@ namespace ServerManager
         public MainMenu()
         {
             InitializeComponent();
+            Icon = Properties.Resources.logo;
             if (Properties.Settings.Default.UpgradeRequired)
             {
                 Properties.Settings.Default.Upgrade();

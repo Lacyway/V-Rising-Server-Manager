@@ -10,6 +10,7 @@ namespace ServerManager
         public ServerSettingsForm()
         {
             InitializeComponent();
+            Icon = Properties.Resources.logo;
         }
 
         private void SaveServerSettings()

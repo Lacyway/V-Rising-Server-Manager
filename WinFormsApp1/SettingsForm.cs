@@ -11,6 +11,7 @@ namespace ServerManager
         public SettingsForm()
         {
             InitializeComponent();
+            Icon = Properties.Resources.logo;
             SetupDefaults();
         }
 
