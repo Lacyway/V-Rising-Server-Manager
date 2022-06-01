@@ -11,6 +11,12 @@
     <FileVersion>1.0.0.0</FileVersion>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <Company>Lacyway</Company>
+    <Authors>Lacyway</Authors>
+    <Description>Server manager for V Rising</Description>
+    <PackageProjectUrl>https://github.com/Lacyway/V-Rising-Server-Manager</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Lacyway/V-Rising-Server-Manager</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,6 +26,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>portable</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="logo.ico" />

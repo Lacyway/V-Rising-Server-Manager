@@ -635,6 +635,17 @@ namespace ServerManager
                                 }
                             }
                         }
+                        foreach (int value in LoadedSettings.UnlockedAchievements)
+                        {
+                            for (int i = 0; i < UnlockedAchievementsCheckedListBox.Items.Count; i++)
+                            {
+                                ListBoxItem lbi = UnlockedAchievementsCheckedListBox.Items[i] as ListBoxItem;
+                                if (lbi.Value == value) 
+                                {
+                                    UnlockedAchievementsCheckedListBox.SetItemChecked(i, true);
+                                }
+                            }
+                        }
                         if (LoadedSettings.UnlockedResearchs.Contains(-495424062))
                         {
                             UnlockedResearchCheckedListBox.SetItemChecked(0, true);
@@ -646,82 +657,6 @@ namespace ServerManager
                         if (LoadedSettings.UnlockedResearchs.Contains(-1262194203))
                         {
                             UnlockedResearchCheckedListBox.SetItemChecked(2, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-1770927128))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(0, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(436375429))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(1, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-1400391027))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(2, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-2071097880))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(3, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(1695239324))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(4, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(1502386974))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(5, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(1694767961))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(6, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-1899098914))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(7, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(560247139))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(8, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-1995132640))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(9, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-1434604634))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(10, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(1668809517))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(11, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(334973636))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(12, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(606418711))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(13, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-892747762))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(14, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-437605270))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(15, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-2104585843))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(16, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(-327597689))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(17, true);
-                        }
-                        if (LoadedSettings.UnlockedAchievements.Contains(1762480233))
-                        {
-                            UnlockedAchievementsCheckedListBox.SetItemChecked(18, true);
                         }
                     }
                     catch (NullReferenceException)
