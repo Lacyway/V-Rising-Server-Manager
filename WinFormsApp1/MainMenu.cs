@@ -62,7 +62,7 @@ namespace ServerManager
         private void UpdateTimer()
         {
             ucTimer.Interval = Properties.Settings.Default.AutoUpdateInterval * 60000;
-            ucTimer.Interval = 5000;
+            ucTimer.Start();
         }
 
         private async void AutoUpdateElapsed(object? sender, EventArgs e)
