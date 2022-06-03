@@ -1,4 +1,4 @@
-# V Rising Settings Editor
+# V Rising Server Manager
 
 ## Information
 Tool to install, update and run a V Rising Server on Windows OS. Also includes a game and server settings editor.
