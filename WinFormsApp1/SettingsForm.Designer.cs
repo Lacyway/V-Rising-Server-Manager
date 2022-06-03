@@ -35,6 +35,24 @@
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvEEasyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvEHardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvEDawnLevel30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvENoonLevel50ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvEDuskLevel70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvPEasyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardPvPHardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPDawnLevel30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPNoonLevel50ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPDuskLevel70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPFullLootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPSoloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pvPDuoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.GameTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -443,7 +461,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1004, 24);
@@ -488,6 +507,149 @@
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.quitToolStripMenuItem.Text = "Exit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pvEToolStripMenuItem,
+            this.pvPToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(56, 20);
+            this.toolStripMenuItem1.Text = "Presets";
+            // 
+            // pvEToolStripMenuItem
+            // 
+            this.pvEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.standardPvEToolStripMenuItem,
+            this.standardPvEEasyToolStripMenuItem,
+            this.standardPvEHardToolStripMenuItem,
+            this.pvEDawnLevel30ToolStripMenuItem,
+            this.pvENoonLevel50ToolStripMenuItem,
+            this.pvEDuskLevel70ToolStripMenuItem});
+            this.pvEToolStripMenuItem.Name = "pvEToolStripMenuItem";
+            this.pvEToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.pvEToolStripMenuItem.Text = "PvE";
+            // 
+            // standardPvEToolStripMenuItem
+            // 
+            this.standardPvEToolStripMenuItem.Name = "standardPvEToolStripMenuItem";
+            this.standardPvEToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.standardPvEToolStripMenuItem.Text = "Standard PvE";
+            this.standardPvEToolStripMenuItem.Click += new System.EventHandler(this.standardPvEToolStripMenuItem_Click);
+            // 
+            // standardPvEEasyToolStripMenuItem
+            // 
+            this.standardPvEEasyToolStripMenuItem.Name = "standardPvEEasyToolStripMenuItem";
+            this.standardPvEEasyToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.standardPvEEasyToolStripMenuItem.Text = "Standard PvE Easy";
+            this.standardPvEEasyToolStripMenuItem.Click += new System.EventHandler(this.standardPvEEasyToolStripMenuItem_Click);
+            // 
+            // standardPvEHardToolStripMenuItem
+            // 
+            this.standardPvEHardToolStripMenuItem.Name = "standardPvEHardToolStripMenuItem";
+            this.standardPvEHardToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.standardPvEHardToolStripMenuItem.Text = "Standard PvE Hard";
+            this.standardPvEHardToolStripMenuItem.Click += new System.EventHandler(this.standardPvEHardToolStripMenuItem_Click);
+            // 
+            // pvEDawnLevel30ToolStripMenuItem
+            // 
+            this.pvEDawnLevel30ToolStripMenuItem.Name = "pvEDawnLevel30ToolStripMenuItem";
+            this.pvEDawnLevel30ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.pvEDawnLevel30ToolStripMenuItem.Text = "PvE Dawn Level 30";
+            this.pvEDawnLevel30ToolStripMenuItem.Click += new System.EventHandler(this.pvEDawnLevel30ToolStripMenuItem_Click);
+            // 
+            // pvENoonLevel50ToolStripMenuItem
+            // 
+            this.pvENoonLevel50ToolStripMenuItem.Name = "pvENoonLevel50ToolStripMenuItem";
+            this.pvENoonLevel50ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.pvENoonLevel50ToolStripMenuItem.Text = "PvE Noon Level 50";
+            this.pvENoonLevel50ToolStripMenuItem.Click += new System.EventHandler(this.pvENoonLevel50ToolStripMenuItem_Click);
+            // 
+            // pvEDuskLevel70ToolStripMenuItem
+            // 
+            this.pvEDuskLevel70ToolStripMenuItem.Name = "pvEDuskLevel70ToolStripMenuItem";
+            this.pvEDuskLevel70ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.pvEDuskLevel70ToolStripMenuItem.Text = "PvE Dusk Level 70";
+            this.pvEDuskLevel70ToolStripMenuItem.Click += new System.EventHandler(this.pvEDuskLevel70ToolStripMenuItem_Click);
+            // 
+            // pvPToolStripMenuItem
+            // 
+            this.pvPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.standardPvPToolStripMenuItem,
+            this.standardPvPEasyToolStripMenuItem,
+            this.standardPvPHardToolStripMenuItem,
+            this.pvPDawnLevel30ToolStripMenuItem,
+            this.pvPNoonLevel50ToolStripMenuItem,
+            this.pvPDuskLevel70ToolStripMenuItem,
+            this.pvPFullLootToolStripMenuItem,
+            this.pvPSoloToolStripMenuItem,
+            this.pvPDuoToolStripMenuItem});
+            this.pvPToolStripMenuItem.Name = "pvPToolStripMenuItem";
+            this.pvPToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.pvPToolStripMenuItem.Text = "PvP";
+            // 
+            // standardPvPToolStripMenuItem
+            // 
+            this.standardPvPToolStripMenuItem.Name = "standardPvPToolStripMenuItem";
+            this.standardPvPToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.standardPvPToolStripMenuItem.Text = "Standard PvP";
+            this.standardPvPToolStripMenuItem.Click += new System.EventHandler(this.standardPvPToolStripMenuItem_Click);
+            // 
+            // standardPvPEasyToolStripMenuItem
+            // 
+            this.standardPvPEasyToolStripMenuItem.Name = "standardPvPEasyToolStripMenuItem";
+            this.standardPvPEasyToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.standardPvPEasyToolStripMenuItem.Text = "Standard PvP Easy";
+            this.standardPvPEasyToolStripMenuItem.Click += new System.EventHandler(this.standardPvPEasyToolStripMenuItem_Click);
+            // 
+            // standardPvPHardToolStripMenuItem
+            // 
+            this.standardPvPHardToolStripMenuItem.Name = "standardPvPHardToolStripMenuItem";
+            this.standardPvPHardToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.standardPvPHardToolStripMenuItem.Text = "Standard PvP Hard";
+            this.standardPvPHardToolStripMenuItem.Click += new System.EventHandler(this.standardPvPHardToolStripMenuItem_Click);
+            // 
+            // pvPDawnLevel30ToolStripMenuItem
+            // 
+            this.pvPDawnLevel30ToolStripMenuItem.Name = "pvPDawnLevel30ToolStripMenuItem";
+            this.pvPDawnLevel30ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPDawnLevel30ToolStripMenuItem.Text = "PvP Dawn Level 30";
+            this.pvPDawnLevel30ToolStripMenuItem.Click += new System.EventHandler(this.pvPDawnLevel30ToolStripMenuItem_Click);
+            // 
+            // pvPNoonLevel50ToolStripMenuItem
+            // 
+            this.pvPNoonLevel50ToolStripMenuItem.Name = "pvPNoonLevel50ToolStripMenuItem";
+            this.pvPNoonLevel50ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPNoonLevel50ToolStripMenuItem.Text = "PvP Noon Level 50";
+            this.pvPNoonLevel50ToolStripMenuItem.Click += new System.EventHandler(this.pvPNoonLevel50ToolStripMenuItem_Click);
+            // 
+            // pvPDuskLevel70ToolStripMenuItem
+            // 
+            this.pvPDuskLevel70ToolStripMenuItem.Name = "pvPDuskLevel70ToolStripMenuItem";
+            this.pvPDuskLevel70ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPDuskLevel70ToolStripMenuItem.Text = "PvP Dusk Level 70";
+            this.pvPDuskLevel70ToolStripMenuItem.Click += new System.EventHandler(this.pvPDuskLevel70ToolStripMenuItem_Click);
+            // 
+            // pvPFullLootToolStripMenuItem
+            // 
+            this.pvPFullLootToolStripMenuItem.Name = "pvPFullLootToolStripMenuItem";
+            this.pvPFullLootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPFullLootToolStripMenuItem.Text = "PvP Full Loot";
+            this.pvPFullLootToolStripMenuItem.Click += new System.EventHandler(this.pvPFullLootToolStripMenuItem_Click);
+            // 
+            // pvPSoloToolStripMenuItem
+            // 
+            this.pvPSoloToolStripMenuItem.Name = "pvPSoloToolStripMenuItem";
+            this.pvPSoloToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPSoloToolStripMenuItem.Text = "PvP Solo";
+            this.pvPSoloToolStripMenuItem.Click += new System.EventHandler(this.pvPSoloToolStripMenuItem_Click);
+            // 
+            // pvPDuoToolStripMenuItem
+            // 
+            this.pvPDuoToolStripMenuItem.Name = "pvPDuoToolStripMenuItem";
+            this.pvPDuoToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pvPDuoToolStripMenuItem.Text = "PvP Duo";
+            this.pvPDuoToolStripMenuItem.Click += new System.EventHandler(this.pvPDuoToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -622,7 +784,7 @@
             this.PvPProtectionModeComboBox.FormattingEnabled = true;
             this.PvPProtectionModeComboBox.Items.AddRange(new object[] {
             "Disabled",
-            "Short (15 min)",
+            "Very Short (15 min)",
             "Short (30 min)",
             "Medium (1 hour)",
             "Long (2 hours)"});
@@ -4556,7 +4718,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1020, 1360);
+            this.MaximumSize = new System.Drawing.Size(1020, 1400);
             this.MinimumSize = new System.Drawing.Size(1019, 821);
             this.Name = "SettingsForm";
             this.Text = "Settings Editor";
@@ -5005,5 +5167,23 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn DefaultUnlocked;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label111;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pvEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvEEasyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvEHardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvEDawnLevel30ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvENoonLevel50ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvEDuskLevel70ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvPEasyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardPvPHardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPDawnLevel30ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPNoonLevel50ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPDuskLevel70ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPFullLootToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPSoloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pvPDuoToolStripMenuItem;
     }
 }

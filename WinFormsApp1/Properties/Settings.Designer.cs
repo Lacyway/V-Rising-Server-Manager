@@ -37,7 +37,7 @@ namespace ServerManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\GameServers\\VRising\\Saves")]
+        [global::System.Configuration.DefaultSettingValueAttribute("notset")]
         public string Save_Path {
             get {
                 return ((string)(this["Save_Path"]));
@@ -86,36 +86,36 @@ namespace ServerManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("notset")]
-        public string Last_RCON_Address {
+        public string RCON_Address {
             get {
-                return ((string)(this["Last_RCON_Address"]));
+                return ((string)(this["RCON_Address"]));
             }
             set {
-                this["Last_RCON_Address"] = value;
+                this["RCON_Address"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public int Last_RCON_Port {
+        public int RCON_Port {
             get {
-                return ((int)(this["Last_RCON_Port"]));
+                return ((int)(this["RCON_Port"]));
             }
             set {
-                this["Last_RCON_Port"] = value;
+                this["RCON_Port"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("notset")]
-        public string Last_RCON_Pass {
+        public string RCON_Pass {
             get {
-                return ((string)(this["Last_RCON_Pass"]));
+                return ((string)(this["RCON_Pass"]));
             }
             set {
-                this["Last_RCON_Pass"] = value;
+                this["RCON_Pass"] = value;
             }
         }
         
@@ -128,6 +128,66 @@ namespace ServerManager.Properties {
             }
             set {
                 this["UpgradeRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VerifyUpdate {
+            get {
+                return ((bool)(this["VerifyUpdate"]));
+            }
+            set {
+                this["VerifyUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoUpdate {
+            get {
+                return ((bool)(this["AutoUpdate"]));
+            }
+            set {
+                this["AutoUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int AutoUpdateInterval {
+            get {
+                return ((int)(this["AutoUpdateInterval"]));
+            }
+            set {
+                this["AutoUpdateInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastUpdateUNIXTime {
+            get {
+                return ((string)(this["LastUpdateUNIXTime"]));
+            }
+            set {
+                this["LastUpdateUNIXTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoUpdateRCONMessage {
+            get {
+                return ((bool)(this["AutoUpdateRCONMessage"]));
+            }
+            set {
+                this["AutoUpdateRCONMessage"] = value;
             }
         }
     }

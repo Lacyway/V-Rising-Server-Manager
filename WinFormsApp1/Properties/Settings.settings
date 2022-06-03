@@ -6,7 +6,7 @@
       <Value Profile="(Default)">C:\GameServers\VRising</Value>
     </Setting>
     <Setting Name="Save_Path" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\GameServers\VRising\Saves</Value>
+      <Value Profile="(Default)">notset</Value>
     </Setting>
     <Setting Name="Log_Path" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\GameServers\VRising\Logs</Value>
@@ -17,17 +17,32 @@
     <Setting Name="Save_Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">world1</Value>
     </Setting>
-    <Setting Name="Last_RCON_Address" Type="System.String" Scope="User">
+    <Setting Name="RCON_Address" Type="System.String" Scope="User">
       <Value Profile="(Default)">notset</Value>
     </Setting>
-    <Setting Name="Last_RCON_Port" Type="System.Int32" Scope="User">
+    <Setting Name="RCON_Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
-    <Setting Name="Last_RCON_Pass" Type="System.String" Scope="User">
+    <Setting Name="RCON_Pass" Type="System.String" Scope="User">
       <Value Profile="(Default)">notset</Value>
     </Setting>
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VerifyUpdate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoUpdate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoUpdateInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="LastUpdateUNIXTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AutoUpdateRCONMessage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -135,7 +135,7 @@
             this.Controls.Add(this.AdminList);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.AdminToAddTextBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AdminManager";

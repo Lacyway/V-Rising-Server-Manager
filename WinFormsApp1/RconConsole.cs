@@ -13,17 +13,17 @@ namespace ServerManager
             InitializeComponent();
             Icon = Properties.Resources.logo;
             RconConsoleMain.AppendText("Ready to connect.");
-            if (Properties.Settings.Default.Last_RCON_Address != "notset")
+            if (Properties.Settings.Default.RCON_Address != "notset")
             {
-                AddressValue.Text = Properties.Settings.Default.Last_RCON_Address;
+                AddressValue.Text = Properties.Settings.Default.RCON_Address;
             }
-            if (Properties.Settings.Default.Last_RCON_Port != -1)
+            if (Properties.Settings.Default.RCON_Port != -1)
             {
-                PortNumber.Value = Properties.Settings.Default.Last_RCON_Port;
+                PortNumber.Value = Properties.Settings.Default.RCON_Port;
             }
-            if (Properties.Settings.Default.Last_RCON_Pass != "notset")
+            if (Properties.Settings.Default.RCON_Pass != "notset")
             {
-                PasswordValue.Text = Properties.Settings.Default.Last_RCON_Pass;
+                PasswordValue.Text = Properties.Settings.Default.RCON_Pass;
             }            
         }
 
@@ -44,12 +44,7 @@ namespace ServerManager
         }
 
         private async void ConnectButton_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Last_RCON_Address = AddressValue.Text;
-            Properties.Settings.Default.Last_RCON_Port = Convert.ToInt16(PortNumber.Value);
-            Properties.Settings.Default.Last_RCON_Pass = PasswordValue.Text;
-            Properties.Settings.Default.Save();
-
+        {            
             rClient = new RemoteConClient();
             rClient.UseUtf8 = true;
             ConnectButton.Enabled = false;
@@ -65,7 +60,7 @@ namespace ServerManager
                     DisconnectButton.Enabled = true;
                     ParameterBox.Enabled = true;
                     SendCommandButton.Enabled = true;
-                    RconConsoleMain.AppendText(Environment.NewLine + "Connected. Authenticating...");                    
+                    RconConsoleMain.AppendText(Environment.NewLine + "Connected. Authenticating.");                    
                 }
                 if (state == RemoteConClient.ConnectionStateChange.Disconnected)
                 {
@@ -154,6 +149,15 @@ namespace ServerManager
             {
                 rClient.Disconnect();
             }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RCON_Address = AddressValue.Text;
+            Properties.Settings.Default.RCON_Port = Convert.ToInt16(PortNumber.Value);
+            Properties.Settings.Default.RCON_Pass = PasswordValue.Text;
+            Properties.Settings.Default.Save();
+            RconConsoleMain.AppendText(Environment.NewLine + "Settings saved.");
         }
     }
 }

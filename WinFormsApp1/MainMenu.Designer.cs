@@ -50,10 +50,18 @@
             this.RCONButton = new System.Windows.Forms.Button();
             this.ManageAdminsButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.MainMenuStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.SteamCMDStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SpacerLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LastUpdateLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RunningPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.MainMenuStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // SettingsButton
@@ -74,7 +82,7 @@
             this.ServerSettingsButton.TabIndex = 1;
             this.ServerSettingsButton.Text = "Server Settings Editor";
             this.ServerSettingsButton.UseVisualStyleBackColor = true;
-            this.ServerSettingsButton.Click += new System.EventHandler(this.button2_Click);
+            this.ServerSettingsButton.Click += new System.EventHandler(this.ServerSettingsButton_Click);
             // 
             // SteamCMDButton
             // 
@@ -88,7 +96,7 @@
             // 
             // AppSettingsButton
             // 
-            this.AppSettingsButton.Location = new System.Drawing.Point(640, 152);
+            this.AppSettingsButton.Location = new System.Drawing.Point(640, 168);
             this.AppSettingsButton.Name = "AppSettingsButton";
             this.AppSettingsButton.Size = new System.Drawing.Size(141, 24);
             this.AppSettingsButton.TabIndex = 3;
@@ -102,7 +110,7 @@
             this.MainMenuConsole.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.MainMenuConsole.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MainMenuConsole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.MainMenuConsole.Location = new System.Drawing.Point(8, 272);
+            this.MainMenuConsole.Location = new System.Drawing.Point(8, 288);
             this.MainMenuConsole.Name = "MainMenuConsole";
             this.MainMenuConsole.ReadOnly = true;
             this.MainMenuConsole.ShortcutsEnabled = false;
@@ -115,7 +123,7 @@
             // 
             this.groupBox1.Controls.Add(this.SettingsButton);
             this.groupBox1.Controls.Add(this.ServerSettingsButton);
-            this.groupBox1.Location = new System.Drawing.Point(632, 184);
+            this.groupBox1.Location = new System.Drawing.Point(632, 200);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(160, 80);
             this.groupBox1.TabIndex = 5;
@@ -149,8 +157,6 @@
             // 
             // AutoRestartCheck
             // 
-            this.AutoRestartCheck.Checked = true;
-            this.AutoRestartCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoRestartCheck.Location = new System.Drawing.Point(8, 24);
             this.AutoRestartCheck.Name = "AutoRestartCheck";
             this.AutoRestartCheck.Size = new System.Drawing.Size(91, 19);
@@ -162,7 +168,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Location = new System.Drawing.Point(8, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 10;
@@ -170,24 +176,22 @@
             // 
             // ServerNameValue
             // 
-            this.ServerNameValue.Location = new System.Drawing.Point(88, 12);
+            this.ServerNameValue.Location = new System.Drawing.Point(88, 24);
             this.ServerNameValue.Name = "ServerNameValue";
-            this.ServerNameValue.Size = new System.Drawing.Size(176, 23);
+            this.ServerNameValue.Size = new System.Drawing.Size(184, 23);
             this.ServerNameValue.TabIndex = 12;
-            this.ServerNameValue.Leave += new System.EventHandler(this.ServerNameValue_Leave);
             // 
             // SaveNameValue
             // 
-            this.SaveNameValue.Location = new System.Drawing.Point(88, 44);
+            this.SaveNameValue.Location = new System.Drawing.Point(88, 56);
             this.SaveNameValue.Name = "SaveNameValue";
-            this.SaveNameValue.Size = new System.Drawing.Size(176, 23);
+            this.SaveNameValue.Size = new System.Drawing.Size(184, 23);
             this.SaveNameValue.TabIndex = 14;
-            this.SaveNameValue.Leave += new System.EventHandler(this.SaveNameValue_Leave);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 48);
+            this.label2.Location = new System.Drawing.Point(8, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 13;
@@ -240,7 +244,7 @@
             this.RCONButton.Name = "RCONButton";
             this.RCONButton.Size = new System.Drawing.Size(125, 24);
             this.RCONButton.TabIndex = 19;
-            this.RCONButton.Text = "Open RCON Console";
+            this.RCONButton.Text = "RCON Console";
             this.RCONButton.UseVisualStyleBackColor = true;
             this.RCONButton.Click += new System.EventHandler(this.RCONButton_Click);
             // 
@@ -266,23 +270,75 @@
             this.groupBox2.Controls.Add(this.StopGameServerButton);
             this.groupBox2.Controls.Add(this.OpenGameFolderButton);
             this.groupBox2.Controls.Add(this.AutoRestartCheck);
-            this.groupBox2.Location = new System.Drawing.Point(8, 112);
+            this.groupBox2.Location = new System.Drawing.Point(8, 128);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(280, 152);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Server Management";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(8, 80);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 23;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.SaveButton);
+            this.groupBox3.Controls.Add(this.ServerNameValue);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.SaveNameValue);
+            this.groupBox3.Location = new System.Drawing.Point(8, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(280, 112);
+            this.groupBox3.TabIndex = 24;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Server Info";
+            // 
+            // MainMenuStatusStrip
+            // 
+            this.MainMenuStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SteamCMDStatusLabel,
+            this.SpacerLabel,
+            this.LastUpdateLabel});
+            this.MainMenuStatusStrip.Location = new System.Drawing.Point(0, 458);
+            this.MainMenuStatusStrip.Name = "MainMenuStatusStrip";
+            this.MainMenuStatusStrip.Size = new System.Drawing.Size(800, 22);
+            this.MainMenuStatusStrip.SizingGrip = false;
+            this.MainMenuStatusStrip.TabIndex = 25;
+            this.MainMenuStatusStrip.Text = "statusStrip1";
+            // 
+            // SteamCMDStatusLabel
+            // 
+            this.SteamCMDStatusLabel.Name = "SteamCMDStatusLabel";
+            this.SteamCMDStatusLabel.Size = new System.Drawing.Size(173, 17);
+            this.SteamCMDStatusLabel.Text = "SteamCMD Status: Not running";
+            // 
+            // SpacerLabel
+            // 
+            this.SpacerLabel.Name = "SpacerLabel";
+            this.SpacerLabel.Size = new System.Drawing.Size(581, 17);
+            this.SpacerLabel.Spring = true;
+            // 
+            // LastUpdateLabel
+            // 
+            this.LastUpdateLabel.Name = "LastUpdateLabel";
+            this.LastUpdateLabel.Size = new System.Drawing.Size(0, 17);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 480);
+            this.Controls.Add(this.MainMenuStatusStrip);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.SaveNameValue);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.ServerNameValue);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.MainMenuConsole);
             this.Controls.Add(this.AppSettingsButton);
@@ -295,6 +351,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.StoppedPic)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.MainMenuStatusStrip.ResumeLayout(false);
+            this.MainMenuStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,5 +383,11 @@
         private System.Windows.Forms.Button RCONButton;
         private System.Windows.Forms.Button ManageAdminsButton;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.StatusStrip MainMenuStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel SteamCMDStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel LastUpdateLabel;
+        private System.Windows.Forms.ToolStripStatusLabel SpacerLabel;
     }
 }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace ServerManager
@@ -429,242 +430,324 @@ namespace ServerManager
 
         }
 
-        private void LoadSettings()
+        private void LoadSettings(bool Preset, int PresetToLoad)
         {
-            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            string FileToLoad = "temp";
+            string PresetFile = "temp";
+            switch (Preset)
             {
-                LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                case false:
+                    if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+                    {
+                        LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                    }
+                    else
+                    {
+                        LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
+                    }
+                    if (LoadSettingsDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        FileToLoad = LoadSettingsDialog.FileName;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    break;
+                case true:
+                    switch (PresetToLoad)
+                    {
+                        case 1:
+                            PresetFile = "ServerManager.Resources.Standard_PvE.json";
+                            break;
+                        case 2:
+                            PresetFile = "ServerManager.Resources.Standard_PvE_Easy.json";
+                            break;
+                        case 3:
+                            PresetFile = "ServerManager.Resources.Standard_PvE_Hard.json";
+                            break;
+                        case 4:
+                            PresetFile = "ServerManager.Resources.PvE_Dawn_Lvl30.json";
+                            break;
+                        case 5:
+                            PresetFile = "ServerManager.Resources.PvE_Noon_Lvl50.json";
+                            break;
+                        case 6:
+                            PresetFile = "ServerManager.Resources.PvE_Dusk_Lvl70.json";
+                            break;
+                        case 7:
+                            PresetFile = "ServerManager.Resources.Standard_PvP.json";
+                            break;
+                        case 8:
+                            PresetFile = "ServerManager.Resources.Standard_PvP_Easy.json";
+                            break;
+                        case 9:
+                            PresetFile = "ServerManager.Resources.Standard_PvP_Hard.json";
+                            break;
+                        case 10:
+                            PresetFile = "ServerManager.Resources.PvP_Dawn_Lvl30.json";
+                            break;
+                        case 11:
+                            PresetFile = "ServerManager.Resources.PvP_Noon_Lvl50.json";
+                            break;
+                        case 12:
+                            PresetFile = "ServerManager.Resources.PvP_Dusk_Lvl70.json";
+                            break;
+                        case 13:
+                            PresetFile = "ServerManager.Resources.Full_Loot_PvP.json";
+                            break;
+                        case 14:
+                            PresetFile = "ServerManager.Resources.Solo_PvP.json";
+                            break;
+                        case 15:
+                            PresetFile = "ServerManager.Resources.Duo_PvP.json";
+                            break;
+                    }
+                    break;
+
+            }
+            if (Preset == true)
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream(PresetFile))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string LoadedJSON = reader.ReadToEnd();
+                    LoadHandler(LoadedJSON);
+                }
             }
             else
             {
-                LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
-            }
-            if (LoadSettingsDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (StreamReader reader = new StreamReader(LoadSettingsDialog.FileName))
+                using (StreamReader reader = new StreamReader(FileToLoad))
                 {
-                    try
+                    string LoadedJSON = reader.ReadToEnd();
+                    LoadHandler(LoadedJSON);
+                }
+            }
+            
+        }
+
+        private void LoadHandler(string Loaded)
+        {
+            try
+            {
+                GameSettings LoadedSettings = JsonConvert.DeserializeObject<GameSettings>(Loaded);
+                GameTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.GameModeType);
+                CastleDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleDamageMode);
+                SiegeWeaponHealthComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.SiegeWeaponHealth);
+                PlayerDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerDamageMode);
+                CastleHeartDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleHeartDamageMode);
+                PvPProtectionModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PvPProtectionMode);
+                DeathContainerPermissionComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.DeathContainerPermission);
+                RelicSpawnTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.RelicSpawnType);
+                if (LoadedSettings.CanLootEnemyContainers == true)
+                {
+                    CanLootEnemyContainersRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.BloodBoundEquipment == true)
+                {
+                    BloodBoundEquipmentRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.TeleportBoundItems == true)
+                {
+                    TeleportBoundItemsRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.AllowGlobalChat == true)
+                {
+                    AllowGlobalChatRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.AllWaypointsUnlocked == true)
+                {
+                    AllWaypointsUnlockedRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.FreeCastleClaim == true)
+                {
+                    FreeCastleClaimRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.FreeCastleDestroy == true)
+                {
+                    FreeCastleClaimRadioFalse.Checked = true;
+                }
+                if (LoadedSettings.InactivityKillEnabled == true)
+                {
+                    InactivityKillEnabledRadioTrue.Checked = true;
+                }
+                switch (LoadedSettings.StarterEquipmentId)
+                {
+                    case -376135143:
+                        StarterEquipmentComboBox.SelectedIndex = 1;
+                        break;
+                    case -1613823352:
+                        StarterEquipmentComboBox.SelectedIndex = 2;
+                        break;
+                    case -258598606:
+                        StarterEquipmentComboBox.SelectedIndex = 3;
+                        break;
+                    case 1177675846:
+                        StarterEquipmentComboBox.SelectedIndex = 4;
+                        break;
+                    default:
+                        StarterEquipmentComboBox.SelectedIndex = 0;
+                        break;
+                }
+                switch (LoadedSettings.StarterResourcesId)
+                {
+                    case -696202180:
+                        StarterResourcesComboBox.SelectedIndex = 1;
+                        break;
+                    case 481718792:
+                        StarterResourcesComboBox.SelectedIndex = 2;
+                        break;
+                    case -766909665:
+                        StarterResourcesComboBox.SelectedIndex = 3;
+                        break;
+                    default:
+                        StarterResourcesComboBox.SelectedIndex = 0;
+                        break;
+                }
+                InactivityKillTimeMinNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMin);
+                InactivityKillTimeMaxNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMax);
+                InactivityKillSafeTimeAdditionNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillSafeTimeAddition);
+                InactivityKillTimerMaxItemLevelNumber.Value = Convert.ToInt16(LoadedSettings.InactivityKillTimerMaxItemLevel);
+                if (LoadedSettings.DisableDisconnectedDeadEnabled == true)
+                {
+                    DisableDisconnectedDeadEnabledRadioTrue.Checked = true;
+                }
+                DisableDisconnectedDeadEnabledNumber.Value = Convert.ToInt16(LoadedSettings.DisableDisconnectedDeadTimer);
+                InventoryStacksModifierNumber.Value = Convert.ToDecimal(LoadedSettings.InventoryStacksModifier);
+                DropTableModifier_GeneralNumber.Value = Convert.ToDecimal(LoadedSettings.DropTableModifier_General);
+                DropTableModifier_MissionsNumber.Value = Convert.ToDecimal(LoadedSettings.DropTableModifier_Missions);
+                MaterialYieldModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.MaterialYieldModifier_Global);
+                BloodEssenceYieldModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BloodEssenceYieldModifier);
+                JournalVBloodSourceUnitMaxDistanceNumber.Value = Convert.ToDecimal(LoadedSettings.JournalVBloodSourceUnitMaxDistance);
+                PvPVampireRespawnModifierNumber.Value = Convert.ToDecimal(LoadedSettings.PvPVampireRespawnModifier);
+                CastleMinimumDistanceInFloorsNumber.Value = Convert.ToInt16(LoadedSettings.CastleMinimumDistanceInFloors);
+                ClanSizeNumber.Value = Convert.ToInt16(LoadedSettings.ClanSize);
+                BloodDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BloodDrainModifier);
+                DurabilityDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.DurabilityDrainModifier);
+                GarlicAreaStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.GarlicAreaStrengthModifier);
+                HolyAreaStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.HolyAreaStrengthModifier);
+                SilverStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.SilverStrengthModifier);
+                SunDamageModifierNumber.Value = Convert.ToDecimal(LoadedSettings.SunDamageModifier);
+                CastleDecayRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CastleDecayRateModifier);
+                CastleBloodEssenceDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CastleBloodEssenceDrainModifier);
+                CastleSiegeTimerNumber.Value = Convert.ToDecimal(LoadedSettings.CastleSiegeTimer);
+                CastleUnderAttackTimerNumber.Value = Convert.ToDecimal(LoadedSettings.CastleUnderAttackTimer);
+                if (LoadedSettings.AnnounceSiegeWeaponSpawn == true)
+                {
+                    AnnounceSiegeWeaponSpawnRadioTrue.Checked = true;
+                }
+                if (LoadedSettings.ShowSiegeWeaponMapIcon == true)
+                {
+                    ShowSiegeWeaponMapIconRadioTrue.Checked = true;
+                }
+                BuildCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BuildCostModifier);
+                RecipeCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RecipeCostModifier);
+                CraftRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CraftRateModifier);
+                ResearchCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ResearchCostModifier);
+                RefinementCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RefinementCostModifier);
+                RefinementRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RefinementRateModifier);
+                ResearchTimeModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ResearchTimeModifier);
+                DismantleResourceModifierNumber.Value = Convert.ToDecimal(LoadedSettings.DismantleResourceModifier);
+                ServantConvertRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ServantConvertRateModifier);
+                RepairCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RepairCostModifier);
+                Death_DurabilityFactorLossNumber.Value = Convert.ToDecimal(LoadedSettings.Death_DurabilityFactorLoss);
+                Death_DurabilityLossFactorAsResourcesNumber.Value = Convert.ToDecimal(LoadedSettings.Death_DurabilityLossFactorAsResources);
+                DayDurationInSecondsNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayDurationInSeconds);
+                DayStartHourNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayStartHour);
+                DayStartMinuteNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayStartMinute);
+                DayEndHourNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayEndHour);
+                DayEndMinuteNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayEndMinute);
+                BloodMoonFrequency_MinNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonFrequency_Min);
+                BloodMoonFrequency_MaxNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonFrequency_Max);
+                BloodMoonBuffNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonBuff);
+                VampireMaxHealthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.MaxHealthModifier);
+                VampireMaxEnergyModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.MaxEnergyModifier);
+                VampirePhysicalPowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.PhysicalPowerModifier);
+                VampireSpellPowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.SpellPowerModifier);
+                VampireResourcePowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.ResourcePowerModifier);
+                VampireSiegePowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.SiegePowerModifier);
+                VampireDamageReceivedModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.DamageReceivedModifier);
+                VampireReviveCancelDelayNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.ReviveCancelDelay);
+                MaxHealthModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_Global.MaxHealthModifier);
+                PowerModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_Global.PowerModifier);
+                MaxHealthModifier_VBloodNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_VBlood.MaxHealthModifier);
+                PowerModifier_VBloodNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_VBlood.PowerModifier);
+                MaxEnergyModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MaxEnergyModifier);
+                MaxHealthModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MaxHealthModifier);
+                ResourceYieldModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.ResourceYieldModifier);
+                PhysicalPowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.PhysicalPowerModifier);
+                SpellPowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.SpellPowerModifier);
+                SiegePowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.SiegePowerModifier);
+                MovementSpeedModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MovementSpeedModifier);
+                TickPeriodNumber.Value = Convert.ToDecimal(LoadedSettings.CastleStatModifiers_Global.TickPeriod);
+                DamageResistanceNumber.Value = Convert.ToDecimal(LoadedSettings.CastleStatModifiers_Global.DamageResistance);
+                SafetyBoxLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.SafetyBoxLimit);
+                TombLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.TombLimit);
+                VerminNestLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.VerminNestLimit);
+                FloorLimit1Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit);
+                ServantLimit1Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit);
+                FloorLimit2Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit);
+                ServantLimit2Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit);
+                FloorLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit);
+                ServantLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit);
+                FloorLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit);
+                ServantLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit);
+                TimeZoneComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.TimeZone);
+                StartHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartHour);
+                StartMinuteNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartMinute);
+                EndHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.EndHour);
+                EndMinuteNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.EndMinute);
+                StartHourNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.StartHour);
+                StartMinuteNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.StartMinute);
+                EndHourNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.EndHour);
+                EndMinuteNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.EndMinute);
+                StartHourNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.StartHour);
+                StartMinuteNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.StartMinute);
+                EndHourNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.EndHour);
+                EndMinuteNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.EndMinute);
+                StartHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartHour);
+                StartMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartMinute);
+                EndHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndHour);
+                EndMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndMinute);
+                foreach (VBloodUnitSetting unit in LoadedSettings.VBloodUnitSettings)
+                {
+                    foreach (DataGridViewRow row in VBloodUnitSettingsDataGridView.Rows)
                     {
-                        string LoadedJSON = reader.ReadToEnd();
-                        GameSettings LoadedSettings = JsonConvert.DeserializeObject<GameSettings>(LoadedJSON);
-                        GameTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.GameModeType);
-                        CastleDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleDamageMode);
-                        SiegeWeaponHealthComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.SiegeWeaponHealth);
-                        PlayerDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerDamageMode);
-                        CastleHeartDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleHeartDamageMode);
-                        PvPProtectionModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PvPProtectionMode);
-                        DeathContainerPermissionComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.DeathContainerPermission);
-                        RelicSpawnTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.RelicSpawnType);
-                        if (LoadedSettings.CanLootEnemyContainers == true)
+                        if (row.Cells[1].Value.ToString().Contains(unit.UnitId.ToString()))
                         {
-                            CanLootEnemyContainersRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.BloodBoundEquipment == true)
-                        {
-                            BloodBoundEquipmentRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.TeleportBoundItems == true)
-                        {
-                            TeleportBoundItemsRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.AllowGlobalChat == true)
-                        {
-                            AllowGlobalChatRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.AllWaypointsUnlocked == true)
-                        {
-                            AllWaypointsUnlockedRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.FreeCastleClaim == true)
-                        {
-                            FreeCastleClaimRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.FreeCastleDestroy == true)
-                        {
-                            FreeCastleClaimRadioFalse.Checked = true;
-                        }
-                        if (LoadedSettings.InactivityKillEnabled == true)
-                        {
-                            InactivityKillEnabledRadioTrue.Checked = true;
-                        }
-                        switch (LoadedSettings.StarterEquipmentId)
-                        {
-                            case -376135143:
-                                StarterEquipmentComboBox.SelectedIndex = 1;
-                                break;
-                            case -1613823352:
-                                StarterEquipmentComboBox.SelectedIndex = 2;
-                                break;
-                            case -258598606:
-                                StarterEquipmentComboBox.SelectedIndex = 3;
-                                break;
-                            case 1177675846:
-                                StarterEquipmentComboBox.SelectedIndex = 4;
-                                break;
-                            default:
-                                StarterEquipmentComboBox.SelectedIndex = 0;
-                                break;
-                        }
-                        switch (LoadedSettings.StarterResourcesId)
-                        {
-                            case -696202180:
-                                StarterResourcesComboBox.SelectedIndex = 1;
-                                break;
-                            case 481718792:
-                                StarterResourcesComboBox.SelectedIndex = 2;
-                                break;
-                            case -766909665:
-                                StarterResourcesComboBox.SelectedIndex = 3;
-                                break;
-                            default:
-                                StarterResourcesComboBox.SelectedIndex = 0;
-                                break;
-                        }
-                        InactivityKillTimeMinNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMin);
-                        InactivityKillTimeMaxNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillTimeMax);
-                        InactivityKillSafeTimeAdditionNumber.Value = Convert.ToInt32(LoadedSettings.InactivityKillSafeTimeAddition);
-                        InactivityKillTimerMaxItemLevelNumber.Value = Convert.ToInt16(LoadedSettings.InactivityKillTimerMaxItemLevel);
-                        if (LoadedSettings.DisableDisconnectedDeadEnabled == true)
-                        {
-                            DisableDisconnectedDeadEnabledRadioTrue.Checked = true;
-                        }
-                        DisableDisconnectedDeadEnabledNumber.Value = Convert.ToInt16(LoadedSettings.DisableDisconnectedDeadTimer);
-                        InventoryStacksModifierNumber.Value = Convert.ToDecimal(LoadedSettings.InventoryStacksModifier);
-                        DropTableModifier_GeneralNumber.Value = Convert.ToDecimal(LoadedSettings.DropTableModifier_General);
-                        DropTableModifier_MissionsNumber.Value = Convert.ToDecimal(LoadedSettings.DropTableModifier_Missions);
-                        MaterialYieldModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.MaterialYieldModifier_Global);
-                        BloodEssenceYieldModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BloodEssenceYieldModifier);
-                        JournalVBloodSourceUnitMaxDistanceNumber.Value = Convert.ToDecimal(LoadedSettings.JournalVBloodSourceUnitMaxDistance);
-                        PvPVampireRespawnModifierNumber.Value = Convert.ToDecimal(LoadedSettings.PvPVampireRespawnModifier);
-                        CastleMinimumDistanceInFloorsNumber.Value = Convert.ToInt16(LoadedSettings.CastleMinimumDistanceInFloors);
-                        ClanSizeNumber.Value = Convert.ToInt16(LoadedSettings.ClanSize);
-                        BloodDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BloodDrainModifier);
-                        DurabilityDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.DurabilityDrainModifier);
-                        GarlicAreaStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.GarlicAreaStrengthModifier);
-                        HolyAreaStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.HolyAreaStrengthModifier);
-                        SilverStrengthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.SilverStrengthModifier);
-                        SunDamageModifierNumber.Value = Convert.ToDecimal(LoadedSettings.SunDamageModifier);
-                        CastleDecayRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CastleDecayRateModifier);
-                        CastleBloodEssenceDrainModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CastleBloodEssenceDrainModifier);
-                        CastleSiegeTimerNumber.Value = Convert.ToDecimal(LoadedSettings.CastleSiegeTimer);
-                        CastleUnderAttackTimerNumber.Value = Convert.ToDecimal(LoadedSettings.CastleUnderAttackTimer);
-                        if (LoadedSettings.AnnounceSiegeWeaponSpawn == true)
-                        {
-                            AnnounceSiegeWeaponSpawnRadioTrue.Checked = true;
-                        }
-                        if (LoadedSettings.ShowSiegeWeaponMapIcon == true)
-                        {
-                            ShowSiegeWeaponMapIconRadioTrue.Checked = true;
-                        }
-                        BuildCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BuildCostModifier);
-                        RecipeCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RecipeCostModifier);
-                        CraftRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.CraftRateModifier);
-                        ResearchCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ResearchCostModifier);
-                        RefinementCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RefinementCostModifier);
-                        RefinementRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RefinementRateModifier);
-                        ResearchTimeModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ResearchTimeModifier);
-                        DismantleResourceModifierNumber.Value = Convert.ToDecimal(LoadedSettings.DismantleResourceModifier);
-                        ServantConvertRateModifierNumber.Value = Convert.ToDecimal(LoadedSettings.ServantConvertRateModifier);
-                        RepairCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RepairCostModifier);
-                        Death_DurabilityFactorLossNumber.Value = Convert.ToDecimal(LoadedSettings.Death_DurabilityFactorLoss);
-                        Death_DurabilityLossFactorAsResourcesNumber.Value = Convert.ToDecimal(LoadedSettings.Death_DurabilityLossFactorAsResources);
-                        DayDurationInSecondsNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayDurationInSeconds);
-                        DayStartHourNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayStartHour);
-                        DayStartMinuteNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayStartMinute);
-                        DayEndHourNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayEndHour);
-                        DayEndMinuteNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.DayEndMinute);
-                        BloodMoonFrequency_MinNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonFrequency_Min);
-                        BloodMoonFrequency_MaxNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonFrequency_Max);
-                        BloodMoonBuffNumber.Value = Convert.ToDecimal(LoadedSettings.GameTimeModifiers.BloodMoonBuff);
-                        VampireMaxHealthModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.MaxHealthModifier);
-                        VampireMaxEnergyModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.MaxEnergyModifier);
-                        VampirePhysicalPowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.PhysicalPowerModifier);
-                        VampireSpellPowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.SpellPowerModifier);
-                        VampireResourcePowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.ResourcePowerModifier);
-                        VampireSiegePowerModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.SiegePowerModifier);
-                        VampireDamageReceivedModifierNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.DamageReceivedModifier);
-                        VampireReviveCancelDelayNumber.Value = Convert.ToDecimal(LoadedSettings.VampireStatModifiers.ReviveCancelDelay);
-                        MaxHealthModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_Global.MaxHealthModifier);
-                        PowerModifier_GlobalNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_Global.PowerModifier);
-                        MaxHealthModifier_VBloodNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_VBlood.MaxHealthModifier);
-                        PowerModifier_VBloodNumber.Value = Convert.ToDecimal(LoadedSettings.UnitStatModifiers_VBlood.PowerModifier);
-                        MaxEnergyModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MaxEnergyModifier);
-                        MaxHealthModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MaxHealthModifier);
-                        ResourceYieldModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.ResourceYieldModifier);
-                        PhysicalPowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.PhysicalPowerModifier);
-                        SpellPowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.SpellPowerModifier);
-                        SiegePowerModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.SiegePowerModifier);
-                        MovementSpeedModifier_EquipmentNumber.Value = Convert.ToDecimal(LoadedSettings.EquipmentStatModifiers_Global.MovementSpeedModifier);
-                        TickPeriodNumber.Value = Convert.ToDecimal(LoadedSettings.CastleStatModifiers_Global.TickPeriod);
-                        DamageResistanceNumber.Value = Convert.ToDecimal(LoadedSettings.CastleStatModifiers_Global.DamageResistance);
-                        SafetyBoxLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.SafetyBoxLimit);
-                        TombLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.TombLimit);
-                        VerminNestLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.VerminNestLimit);
-                        FloorLimit1Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit);
-                        ServantLimit1Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit);
-                        FloorLimit2Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit);
-                        ServantLimit2Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit);
-                        FloorLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit);
-                        ServantLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit);
-                        FloorLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit);
-                        ServantLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit);
-                        TimeZoneComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.TimeZone);
-                        StartHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartHour);
-                        StartMinuteNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartMinute);
-                        EndHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.EndHour);
-                        EndMinuteNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.EndMinute);
-                        StartHourNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.StartHour);
-                        StartMinuteNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.StartMinute);
-                        EndHourNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.EndHour);
-                        EndMinuteNumber_VSPlayerWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekendTime.EndMinute);
-                        StartHourNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.StartHour);
-                        StartMinuteNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.StartMinute);
-                        EndHourNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.EndHour);
-                        EndMinuteNumber_VSCastleWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekdayTime.EndMinute);
-                        StartHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartHour);
-                        StartMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.StartMinute);
-                        EndHourNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndHour);
-                        EndMinuteNumber_VSCastleWeekend.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSCastleWeekendTime.EndMinute);
-                        foreach (VBloodUnitSetting unit in LoadedSettings.VBloodUnitSettings)
-                        {
-                            foreach (DataGridViewRow row in VBloodUnitSettingsDataGridView.Rows)
-                            {
-                                if (row.Cells[1].Value.ToString().Contains(unit.UnitId.ToString()))
-                                {
-                                    row.Cells[2].Value = unit.UnitLevel.ToString();
-                                    row.Cells[3].Value = unit.DefaultUnlocked;
-                                }
-                            }
-                        }
-                        foreach (int value in LoadedSettings.UnlockedAchievements)
-                        {
-                            for (int i = 0; i < UnlockedAchievementsCheckedListBox.Items.Count; i++)
-                            {
-                                ListBoxItem lbi = UnlockedAchievementsCheckedListBox.Items[i] as ListBoxItem;
-                                if (lbi.Value == value) 
-                                {
-                                    UnlockedAchievementsCheckedListBox.SetItemChecked(i, true);
-                                }
-                            }
-                        }
-                        if (LoadedSettings.UnlockedResearchs.Contains(-495424062))
-                        {
-                            UnlockedResearchCheckedListBox.SetItemChecked(0, true);
-                        }
-                        if (LoadedSettings.UnlockedResearchs.Contains(-1292809886))
-                        {
-                            UnlockedResearchCheckedListBox.SetItemChecked(1, true);
-                        }
-                        if (LoadedSettings.UnlockedResearchs.Contains(-1262194203))
-                        {
-                            UnlockedResearchCheckedListBox.SetItemChecked(2, true);
+                            row.Cells[2].Value = unit.UnitLevel.ToString();
+                            row.Cells[3].Value = unit.DefaultUnlocked;
                         }
                     }
-                    catch (NullReferenceException)
+                }
+                foreach (int value in LoadedSettings.UnlockedAchievements)
+                {
+                    for (int i = 0; i < UnlockedAchievementsCheckedListBox.Items.Count; i++)
                     {
-                        MessageBox.Show("One or more default values was missing.\nDefault values will be used.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        ListBoxItem lbi = UnlockedAchievementsCheckedListBox.Items[i] as ListBoxItem;
+                        if (lbi.Value == value)
+                        {
+                            UnlockedAchievementsCheckedListBox.SetItemChecked(i, true);
+                        }
                     }
-                }                
+                }
+                if (LoadedSettings.UnlockedResearchs.Contains(-495424062))
+                {
+                    UnlockedResearchCheckedListBox.SetItemChecked(0, true);
+                }
+                if (LoadedSettings.UnlockedResearchs.Contains(-1292809886))
+                {
+                    UnlockedResearchCheckedListBox.SetItemChecked(1, true);
+                }
+                if (LoadedSettings.UnlockedResearchs.Contains(-1262194203))
+                {
+                    UnlockedResearchCheckedListBox.SetItemChecked(2, true);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                //For now this error is ok, we ignore it
             }
         }
 
@@ -721,7 +804,7 @@ namespace ServerManager
 
         private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadSettings();
+            LoadSettings(false, 0);
         }
 
         private void VBloodUnitSettingsDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -739,6 +822,125 @@ namespace ServerManager
                 {
                     
                 }
+            }
+        }
+
+        private void standardPvEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 1);
+            }
+        }
+
+        private void standardPvEEasyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 2);
+            }
+        }
+
+        private void standardPvEHardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 3);
+            }
+        }
+        private void pvEDawnLevel30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 4);
+            }
+        }
+
+        private void pvENoonLevel50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 5);
+            }
+        }
+
+        private void pvEDuskLevel70ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 6);
+            }
+        }
+
+        private void standardPvPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 7);
+            }
+        }
+
+        private void standardPvPEasyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 8);
+            }
+        }
+
+        private void standardPvPHardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 9);
+            }
+        }
+
+        private void pvPDawnLevel30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 10);
+            }
+        }
+
+        private void pvPNoonLevel50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 11);
+            }
+        }
+
+        private void pvPDuskLevel70ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 12);
+            }
+        }
+
+        private void pvPFullLootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 13);
+            }
+        }
+
+        private void pvPSoloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 14);
+            }
+        }
+
+        private void pvPDuoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoadSettings(true, 15);
             }
         }
     }

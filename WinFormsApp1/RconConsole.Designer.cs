@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.PasswordValue = new System.Windows.Forms.TextBox();
             this.PortNumber = new System.Windows.Forms.NumericUpDown();
             this.AddressValue = new System.Windows.Forms.TextBox();
@@ -51,6 +52,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SaveButton);
             this.groupBox1.Controls.Add(this.PasswordValue);
             this.groupBox1.Controls.Add(this.PortNumber);
             this.groupBox1.Controls.Add(this.AddressValue);
@@ -59,10 +61,20 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(8, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(248, 100);
+            this.groupBox1.Size = new System.Drawing.Size(248, 128);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(8, 96);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 6;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // PasswordValue
             // 
@@ -126,7 +138,7 @@
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(8, 120);
+            this.ConnectButton.Location = new System.Drawing.Point(8, 152);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(75, 23);
             this.ConnectButton.TabIndex = 1;
@@ -209,7 +221,7 @@
             // DisconnectButton
             // 
             this.DisconnectButton.Enabled = false;
-            this.DisconnectButton.Location = new System.Drawing.Point(88, 120);
+            this.DisconnectButton.Location = new System.Drawing.Point(88, 152);
             this.DisconnectButton.Name = "DisconnectButton";
             this.DisconnectButton.Size = new System.Drawing.Size(75, 23);
             this.DisconnectButton.TabIndex = 9;
@@ -261,5 +273,6 @@
         private System.Windows.Forms.TextBox ParameterBox;
         private System.Windows.Forms.Button SendCommandButton;
         private System.Windows.Forms.Button DisconnectButton;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

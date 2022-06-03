@@ -12,6 +12,14 @@ namespace ServerManager
             ServerFolderValue.Text = Properties.Settings.Default.Server_Path;
             SaveFolderValue.Text = Properties.Settings.Default.Save_Path;
             LogFolderValue.Text = Properties.Settings.Default.Log_Path;
+            VerifyUpdateCheckbox.Checked = Properties.Settings.Default.VerifyUpdate;
+            if (Properties.Settings.Default.AutoUpdate == true)
+            {
+                AutoUpdateCheckbox.Checked = true;
+                AutoUpdateInterval.Enabled = true;
+            }
+            AutoUpdateInterval.Value = Properties.Settings.Default.AutoUpdateInterval;
+            SendMessageCheckbox.Checked = Properties.Settings.Default.AutoUpdateRCONMessage;
         }
 
         private void SelectServerFolderButton_Click(object sender, EventArgs e)
@@ -41,7 +49,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nUnsaved changes will be lost.", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -50,8 +58,18 @@ namespace ServerManager
             Properties.Settings.Default.Server_Path = ServerFolderValue.Text;
             Properties.Settings.Default.Save_Path = SaveFolderValue.Text;
             Properties.Settings.Default.Log_Path = LogFolderValue.Text;
+            Properties.Settings.Default.AutoUpdateInterval = Convert.ToInt32(AutoUpdateInterval.Value);
+            Properties.Settings.Default.AutoUpdate = AutoUpdateCheckbox.Checked;
+            Properties.Settings.Default.VerifyUpdate = VerifyUpdateCheckbox.Checked;
+            Properties.Settings.Default.AutoUpdateRCONMessage = SendMessageCheckbox.Checked;
             Properties.Settings.Default.Save();
-            this.Close();
+            Close();
+        }
+
+        private void AutoUpdateCheckbox_CheckStateChanged(object sender, EventArgs e)
+        {
+            AutoUpdateInterval.Enabled = AutoUpdateCheckbox.Checked;
+            SendMessageCheckbox.Enabled = AutoUpdateCheckbox.Checked;
         }
     }
 }
