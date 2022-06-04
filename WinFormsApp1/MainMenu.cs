@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Net;
+using System.Net.Http;
 using System.IO.Compression;
 using System.IO;
 using System.Diagnostics;
@@ -11,8 +11,8 @@ using ServerManager.RCON;
 
 namespace ServerManager
 {
-        public partial class MainMenu : Form
-        {
+    public partial class MainMenu : Form
+    {
 
         public Process serverProcess = new Process();
         private static System.Timers.Timer RestartTimer;
@@ -20,6 +20,7 @@ namespace ServerManager
         public static string serverName = "V Rising Server";
         public static string saveName = "world1";
         public static int restartAttempts = 0;
+        HttpClient HttpClient = new HttpClient();
         System.Windows.Forms.Timer ucTimer = new System.Windows.Forms.Timer();
 
         public MainMenu()
@@ -53,14 +54,9 @@ namespace ServerManager
                 }
             };
             if (Properties.Settings.Default.LastUpdateUNIXTime != "")
-            {
                 LastUpdateLabel.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
-            }
-            else
-            {
-                CheckForUpdate();
-            }
-            if (Properties.Settings.Default.AutoUpdate == true) UpdateTimer();
+            if (Properties.Settings.Default.AutoUpdate == true) 
+                UpdateTimer();
             CheckServer();
         }
 
@@ -73,13 +69,15 @@ namespace ServerManager
         private async void AutoUpdateElapsed(object? sender, EventArgs e)
         {
             bool updateFound = await CheckForUpdate();
-            if (updateFound == true) AutoUpdateServer();
+            if (updateFound == true) 
+                AutoUpdateServer();
         }
 
-        public async void AutoUpdateServer()
+        private async void AutoUpdateServer()
         {
             userStopped = true;
-            if (Properties.Settings.Default.AutoUpdateRCONMessage) await SendRestartMessage();
+            if (Properties.Settings.Default.AutoUpdateRCONMessage) 
+                await SendRestartMessage();
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
             {
@@ -95,7 +93,7 @@ namespace ServerManager
             StartServer();
         }
 
-        public async Task SendRestartMessage()
+        private async Task SendRestartMessage()
         {
             RemoteConClient rClient = new RemoteConClient();
             rClient.UseUtf8 = true;
@@ -124,7 +122,7 @@ namespace ServerManager
             rClient.Disconnect();
         }
 
-        public void CheckServer()
+        private void CheckServer()
         {
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             bool foundServer = false;
@@ -149,7 +147,7 @@ namespace ServerManager
             }
         }
         
-        public async Task UpdateGame()
+        private async Task UpdateGame()
         {
             SteamCMDStatusLabel.ForeColor = System.Drawing.Color.Black;
             if (Process.GetProcessesByName("vrisingserver").Length > 0)
@@ -157,27 +155,23 @@ namespace ServerManager
                 MessageBox.Show("Server is already running. Shut down the server before updating.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (File.Exists(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe") == false)
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == false)
             {
+                if (MessageBox.Show("VSM will now download SteamCMD.\nThis is used to update and manage the server.\nIs this ok?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                    return;
                 SteamCMDStatusLabel.Text = "SteamCMD: Downloading...";
                 MainMenuConsole.AppendText(Environment.NewLine + "SteamCMD not found. Downloading...");
-                using (WebClient wc = new WebClient())
+                byte[] fileBytes = await HttpClient.GetByteArrayAsync(@"https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip");
+                await File.WriteAllBytesAsync(Properties.Settings.Default.Server_Path + @"\steamcmd.zip", fileBytes);
+                if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == true)
                 {
-                    Uri SteamCMDLink = new Uri("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip");
-                    Directory.CreateDirectory(Properties.Settings.Default.Server_Path);
-                    MainMenuConsole.AppendText(Environment.NewLine + "Checking if folder exists...");
-                    await wc.DownloadFileTaskAsync(SteamCMDLink, Properties.Settings.Default.Server_Path + "\\steamcmd.zip");
-                }
-                if (File.Exists(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe") == true)
-                {
-                    File.Delete(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe");
+                    File.Delete(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe");
                 }
                 MainMenuConsole.AppendText(Environment.NewLine + "Unzipping...");
-                ZipFile.ExtractToDirectory(Properties.Settings.Default.Server_Path + "\\steamcmd.zip", Properties.Settings.Default.Server_Path + "\\SteamCMD");
-                MainMenuConsole.AppendText(Environment.NewLine + "Done!");
-                if (File.Exists(Properties.Settings.Default.Server_Path + "\\steamcmd.zip"))
+                ZipFile.ExtractToDirectory(Properties.Settings.Default.Server_Path + @"\steamcmd.zip", Properties.Settings.Default.Server_Path + @"\SteamCMD");
+                if (File.Exists(Properties.Settings.Default.Server_Path + @"\steamcmd.zip"))
                 {
-                    File.Delete(Properties.Settings.Default.Server_Path + "\\steamcmd.zip");
+                    File.Delete(Properties.Settings.Default.Server_Path + @"\steamcmd.zip");
                 }
             }
             else
@@ -185,26 +179,14 @@ namespace ServerManager
                 SteamCMDStatusLabel.Text = "SteamCMD: Running...";
                 MainMenuConsole.AppendText(Environment.NewLine + "SteamCMD found. Running...");
             }
-            if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer.exe") == false)
-            {
-                SteamCMDStatusLabel.Text = "SteamCMD: Downloading game...";
-                MainMenuConsole.AppendText(Environment.NewLine + "Server not found. Install required.");
-                string Verify = (Properties.Settings.Default.VerifyUpdate) ? "validate " : "";
-                string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, Verify);
-                var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe", parameters);
-                await steamcmd.WaitForExitAsync();
-                MainMenuConsole.AppendText(Environment.NewLine + "Install completed.");
-            }
-            else
-            {
-                SteamCMDStatusLabel.Text = "SteamCMD: Updating game...";
-                MainMenuConsole.AppendText(Environment.NewLine + "Server found. Updating.");
-                string Verify = (Properties.Settings.Default.VerifyUpdate) ? "validate " : "";
-                string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, Verify);
-                var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe", parameters);
-                await steamcmd.WaitForExitAsync();
-                MainMenuConsole.AppendText(Environment.NewLine + "Update completed.");
-            }
+            SteamCMDStatusLabel.Text = "SteamCMD: Updating game...";
+            MainMenuConsole.AppendText(Environment.NewLine + "Updating game...");
+            string Verify = (Properties.Settings.Default.VerifyUpdate) ? "validate " : "";
+            string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, Verify);
+            var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe", parameters);
+            await steamcmd.WaitForExitAsync();
+            MainMenuConsole.AppendText(Environment.NewLine + "Update completed.");
+            await CheckForUpdate();
             SteamCMDStatusLabel.Text = "SteamCMD Status: Not running";
         }
 
@@ -285,7 +267,7 @@ namespace ServerManager
             UpdateGame();
         }
 
-        public void StartServer()
+        private void StartServer()
         {
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
@@ -304,10 +286,8 @@ namespace ServerManager
                 StopGameServerButton.Enabled = false;
                 return;
             }
-            if (restartAttempts == 0)
-            {
+            if (restartAttempts == 0) 
                 SetTimer();
-            }
             restartAttempts++;
             if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer.exe") == true)
             {
@@ -354,7 +334,7 @@ namespace ServerManager
             RestartTimer.Stop();
         }
 
-        public void StartGameServerButton_Click(object sender, EventArgs e)
+        private void StartGameServerButton_Click(object sender, EventArgs e)
         {            
             StartServer();
         }
@@ -368,7 +348,7 @@ namespace ServerManager
             MainMenuConsole.ScrollToCaret();
         }
 
-        public void StopGameServerButton_Click(object sender, EventArgs e)
+        private void StopGameServerButton_Click(object sender, EventArgs e)
         {
             userStopped = true;
             StopGameServerButton.Enabled = false;
