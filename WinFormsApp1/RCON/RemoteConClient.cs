@@ -298,6 +298,12 @@ namespace ServerManager.RCON
                     OnConnectionStateChange(ConnectionStateChange.ConnectionLost);
                 Disconnect();
             }
+            catch (ObjectDisposedException)
+            {
+                if (OnConnectionStateChange != null)
+                    OnConnectionStateChange(ConnectionStateChange.ConnectionLost);
+                Disconnect();
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e);

@@ -60,7 +60,7 @@ namespace ServerManager
                     DisconnectButton.Enabled = true;
                     ParameterBox.Enabled = true;
                     SendCommandButton.Enabled = true;
-                    RconConsoleMain.AppendText(Environment.NewLine + "Connected. Authenticating.");                    
+                    RconConsoleMain.AppendText(Environment.NewLine + "Authenticating.");                    
                 }
                 if (state == RemoteConClient.ConnectionStateChange.Disconnected)
                 {
@@ -93,7 +93,7 @@ namespace ServerManager
                     ParameterBox.Enabled = false;
                     SendCommandButton.Enabled = false;
                     RconConsoleMain.AppendText(Environment.NewLine + "No connection.");
-                }                
+                }
             };
             await AttemptConnect();
 
@@ -134,7 +134,7 @@ namespace ServerManager
         {
             if (CommandList.SelectedIndex != -1 && rClient.Connected == true)
             {
-                rClient.SendCommand(String.Format("{0} {1}", CommandList.SelectedItem.ToString(), ParameterBox.Text), result => { RconConsoleMain.AppendText(result); });
+                rClient.SendCommand(String.Format("{0} {1}", CommandList.SelectedItem.ToString(), ParameterBox.Text), result => { RconConsoleMain.AppendText(Environment.NewLine + result); });
                 RconConsoleMain.AppendText(String.Format("\nSent command '{0}' with parameter '{1}'.", CommandList.SelectedItem.ToString(), ParameterBox.Text));
             }
             else

@@ -6,6 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Timers;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using ServerManager.RCON;
 
 namespace ServerManager
@@ -54,7 +55,11 @@ namespace ServerManager
             if (Properties.Settings.Default.LastUpdateUNIXTime != "")
             {
                 LastUpdateLabel.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
-            } 
+            }
+            else
+            {
+                CheckForUpdate();
+            }
             if (Properties.Settings.Default.AutoUpdate == true) UpdateTimer();
             CheckServer();
         }
@@ -206,9 +211,9 @@ namespace ServerManager
         private async Task<bool> CheckForUpdate()
         {
             bool foundUpdate = false;
+            bool firstEntry = false;
             await Task.Run(() =>
-            {
-                
+            {                
                 if (File.Exists(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe") == false)
                 {
                     SteamCMDStatusLabel.ForeColor = System.Drawing.Color.Red;
@@ -219,7 +224,7 @@ namespace ServerManager
                 {
                     SteamCMDStatusLabel.ForeColor = System.Drawing.Color.Black;
                     SteamCMDStatusLabel.Text = "SteamCMD AutoUpdate: Fetching information.";
-                    string parameters = @"+login anonymous +app_info_update 1604030 +app_info_print 1604030 +quit";
+                    string parameters = @"+login anonymous +app_info_update 1829350 +app_info_print 1829350 +quit";
                     Process steamCMD = new Process();
                     steamCMD.StartInfo.FileName = Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe";
                     steamCMD.StartInfo.CreateNoWindow = true;
@@ -230,18 +235,24 @@ namespace ServerManager
                     string output = steamCMD.StandardOutput.ReadToEnd();
                     string[] toScan = output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                     steamCMD.WaitForExit();
-                    for (int i = 0; i < toScan.Length; i++)
+                    for (int i = 0; i < toScan.Length && firstEntry == false; i++)
                     {
-                        if (toScan[i].Contains("\"buildid\"		\"8845337\""))
+                        if (toScan[i].Contains("\"buildid\"		\"8842217\""))
                         {
-                            string lastUpdated = toScan[(i + 1)].Replace("\t", "");
-                            lastUpdated = lastUpdated.Replace("\"timeupdated\"		", "").Replace("\"timeupdated\"", "").Replace("\"", "");
+                            firstEntry = true; //dedi has 2 entries for 8842217, have to stop at first...
+                            string lastUpdated = Regex.Match(toScan[(i + 1)], "(?<=\")[0-9]+(?=\")").Value;
                             if (lastUpdated != Properties.Settings.Default.LastUpdateUNIXTime)
                             {
                                 Properties.Settings.Default.LastUpdateUNIXTime = lastUpdated;
                                 Properties.Settings.Default.Save();
                                 foundUpdate = true;
                             }
+                            if (Properties.Settings.Default.LastUpdateUNIXTime == "")
+                            {
+                                Properties.Settings.Default.LastUpdateUNIXTime = lastUpdated;
+                                Properties.Settings.Default.Save();
+                                foundUpdate = false;
+                            }                            
                         }
                     }
                     SteamCMDStatusLabel.Text = "SteamCMD Status: Not running";
