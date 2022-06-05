@@ -210,7 +210,7 @@
             // RunningPic
             // 
             this.RunningPic.Image = global::ServerManager.Properties.Resources.running;
-            this.RunningPic.Location = new System.Drawing.Point(232, 16);
+            this.RunningPic.Location = new System.Drawing.Point(240, 16);
             this.RunningPic.Name = "RunningPic";
             this.RunningPic.Size = new System.Drawing.Size(32, 32);
             this.RunningPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -230,7 +230,7 @@
             // StoppedPic
             // 
             this.StoppedPic.Image = global::ServerManager.Properties.Resources.stopped;
-            this.StoppedPic.Location = new System.Drawing.Point(232, 16);
+            this.StoppedPic.Location = new System.Drawing.Point(240, 16);
             this.StoppedPic.Name = "StoppedPic";
             this.StoppedPic.Size = new System.Drawing.Size(32, 32);
             this.StoppedPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -323,7 +323,7 @@
             // SpacerLabel
             // 
             this.SpacerLabel.Name = "SpacerLabel";
-            this.SpacerLabel.Size = new System.Drawing.Size(581, 17);
+            this.SpacerLabel.Size = new System.Drawing.Size(612, 17);
             this.SpacerLabel.Spring = true;
             // 
             // LastUpdateLabel

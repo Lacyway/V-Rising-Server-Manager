@@ -81,7 +81,7 @@ namespace ServerManager
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
             {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
                 {
                     MainMenuConsole.AppendText(Environment.NewLine + "Terminating server for update.");
                     proc.CloseMainWindow();
@@ -128,7 +128,7 @@ namespace ServerManager
             bool foundServer = false;
             foreach (Process proc in processList)
             {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
                 {
                     Process serverProcess = proc;
                     serverProcess.EnableRaisingEvents = true;
@@ -179,13 +179,25 @@ namespace ServerManager
                 SteamCMDStatusLabel.Text = "SteamCMD: Running...";
                 MainMenuConsole.AppendText(Environment.NewLine + "SteamCMD found. Running...");
             }
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt") && File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt") && Properties.Settings.Default.VerifyUpdate)
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.Server_Path + @"\Backup");
+                File.Copy(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt", true);
+                File.Copy(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt", Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt", true);
+            }
             SteamCMDStatusLabel.Text = "SteamCMD: Updating game...";
             MainMenuConsole.AppendText(Environment.NewLine + "Updating game...");
-            string Verify = (Properties.Settings.Default.VerifyUpdate) ? "validate " : "";
-            string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, Verify);
-            var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe", parameters);
+            string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, (Properties.Settings.Default.VerifyUpdate) ? "validate " : "");
+            var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe", parameters);
             await steamcmd.WaitForExitAsync();
             MainMenuConsole.AppendText(Environment.NewLine + "Update completed.");
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt") && File.Exists(Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt") && Properties.Settings.Default.VerifyUpdate)
+            {
+                MainMenuConsole.AppendText(Environment.NewLine + "Restoring backups of adminlist and banlist.");
+                Directory.CreateDirectory(Properties.Settings.Default.Server_Path + @"\Backup");
+                File.Copy(Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt", Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", true);
+                File.Copy(Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt", Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt", true);
+            }
             await CheckForUpdate();
             SteamCMDStatusLabel.Text = "SteamCMD Status: Not running";
         }
@@ -196,7 +208,7 @@ namespace ServerManager
             bool firstEntry = false;
             await Task.Run(() =>
             {                
-                if (File.Exists(Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe") == false)
+                if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == false)
                 {
                     SteamCMDStatusLabel.ForeColor = System.Drawing.Color.Red;
                     SteamCMDStatusLabel.Text = "SteamCMD AutoUpdate: ERROR, could not find SteamCMD.";
@@ -208,7 +220,7 @@ namespace ServerManager
                     SteamCMDStatusLabel.Text = "SteamCMD AutoUpdate: Fetching information.";
                     string parameters = @"+login anonymous +app_info_update 1829350 +app_info_print 1829350 +quit";
                     Process steamCMD = new Process();
-                    steamCMD.StartInfo.FileName = Properties.Settings.Default.Server_Path + "\\SteamCMD\\steamcmd.exe";
+                    steamCMD.StartInfo.FileName = Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe";
                     steamCMD.StartInfo.CreateNoWindow = true;
                     steamCMD.StartInfo.UseShellExecute = false;
                     steamCMD.StartInfo.Arguments = parameters;
@@ -272,7 +284,7 @@ namespace ServerManager
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
             {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
                 {
                     MessageBox.Show("Server is already running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -289,14 +301,14 @@ namespace ServerManager
             if (restartAttempts == 0) 
                 SetTimer();
             restartAttempts++;
-            if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer.exe") == true)
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer.exe") == true)
             {
                 StopGameServerButton.Enabled = true;
                 StartGameServerButton.Enabled = false;
                 string parameters = String.Format(@"-persistentDataPath ""{0}"" -serverName ""{1}"" -saveName ""{2}"" -logFile ""{3}\VRisingServer.log""", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path);
                 Process serverProcess = new Process();
                 serverProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                serverProcess.StartInfo.FileName = Properties.Settings.Default.Server_Path + "\\VRisingServer.exe";
+                serverProcess.StartInfo.FileName = Properties.Settings.Default.Server_Path + @"\VRisingServer.exe";
                 serverProcess.StartInfo.UseShellExecute = true;
                 serverProcess.StartInfo.Arguments = parameters;
                 serverProcess.EnableRaisingEvents = true;
@@ -356,7 +368,7 @@ namespace ServerManager
             Process[] processList = Process.GetProcessesByName("vrisingserver");
             foreach (Process proc in processList)
             {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + "\\VRisingServer.exe")
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
                 {
                     proc.CloseMainWindow();
                 }
@@ -404,7 +416,7 @@ namespace ServerManager
 
         private void ManageAdminsButton_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt"))
+            if (!File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt"))
             {
                 MessageBox.Show("Unable to find adminlist.txt\nPlease make sure server path is correctly configured and installed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
