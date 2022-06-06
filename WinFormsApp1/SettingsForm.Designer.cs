@@ -198,13 +198,21 @@
             this.label108 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.label106 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label98 = new System.Windows.Forms.Label();
+            this.label100 = new System.Windows.Forms.Label();
+            this.label101 = new System.Windows.Forms.Label();
+            this.label102 = new System.Windows.Forms.Label();
+            this.label103 = new System.Windows.Forms.Label();
+            this.label104 = new System.Windows.Forms.Label();
+            this.label105 = new System.Windows.Forms.Label();
             this.InventoryStacksModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_GeneralNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_MissionsNumber = new System.Windows.Forms.NumericUpDown();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.Death_DurabilityLossFactorAsResourcesNumber = new System.Windows.Forms.NumericUpDown();
             this.Death_DurabilityFactorLossNumber = new System.Windows.Forms.NumericUpDown();
-            this.label43 = new System.Windows.Forms.Label();
             this.RepairCostModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.ServantConvertRateModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DismantleResourceModifierNumber = new System.Windows.Forms.NumericUpDown();
@@ -221,7 +229,6 @@
             this.CastleDecayRateModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.SunDamageModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.SilverStrengthModifierNumber = new System.Windows.Forms.NumericUpDown();
-            this.label27 = new System.Windows.Forms.Label();
             this.HolyAreaStrengthModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.GarlicAreaStrengthModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DurabilityDrainModifierNumber = new System.Windows.Forms.NumericUpDown();
@@ -301,19 +308,12 @@
             this.TimeZoneComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.DayStartMinuteNumber = new System.Windows.Forms.NumericUpDown();
-            this.label98 = new System.Windows.Forms.Label();
             this.DayStartHourNumber = new System.Windows.Forms.NumericUpDown();
             this.BloodMoonBuffNumber = new System.Windows.Forms.NumericUpDown();
-            this.label100 = new System.Windows.Forms.Label();
-            this.label101 = new System.Windows.Forms.Label();
-            this.label102 = new System.Windows.Forms.Label();
             this.BloodMoonFrequency_MaxNumber = new System.Windows.Forms.NumericUpDown();
             this.DayEndHourNumber = new System.Windows.Forms.NumericUpDown();
-            this.label103 = new System.Windows.Forms.Label();
             this.DayDurationInSecondsNumber = new System.Windows.Forms.NumericUpDown();
             this.BloodMoonFrequency_MinNumber = new System.Windows.Forms.NumericUpDown();
-            this.label104 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
             this.DayEndMinuteNumber = new System.Windows.Forms.NumericUpDown();
             this.SaveSettingsDialog = new System.Windows.Forms.SaveFileDialog();
             this.SetFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -1256,7 +1256,7 @@
             this.label23.TabIndex = 54;
             this.label23.Text = "ClanSize";
             this.toolTip1.SetToolTip(this.label23, "The number of players that can join a single clan. Players in a clan can rise tog" +
-        "ether, share progress and build castles together.");
+        "ether, share progress and build castles together.\r\nMin = 1\r\nMax = 10");
             // 
             // label80
             // 
@@ -1276,7 +1276,8 @@
             this.label15.Size = new System.Drawing.Size(135, 15);
             this.label15.TabIndex = 38;
             this.label15.Text = "InventoryStacksModifier";
-            this.toolTip1.SetToolTip(this.label15, "Multiplies the amount of items that can be combined into a single stack.");
+            this.toolTip1.SetToolTip(this.label15, "Multiplies the amount of items that can be combined into a single stack.\r\nMin = 0" +
+        ",25\r\nMax = 5");
             // 
             // label16
             // 
@@ -1286,7 +1287,8 @@
             this.label16.Size = new System.Drawing.Size(150, 15);
             this.label16.TabIndex = 40;
             this.label16.Text = "DropTableModifier_General";
-            this.toolTip1.SetToolTip(this.label16, "Multiplies the amount of loot dropped from enemies, barrels, boxes and chests.");
+            this.toolTip1.SetToolTip(this.label16, "Multiplies the amount of loot dropped from enemies, barrels, boxes and chests.\r\nM" +
+        "in = 0,25\r\nMax = 5");
             // 
             // label17
             // 
@@ -1296,7 +1298,8 @@
             this.label17.Size = new System.Drawing.Size(156, 15);
             this.label17.TabIndex = 42;
             this.label17.Text = "DropTableModifier_Missions";
-            this.toolTip1.SetToolTip(this.label17, "Multiplies the amount of loot received from successful servant hunts.");
+            this.toolTip1.SetToolTip(this.label17, "Multiplies the amount of loot received from successful servant hunts.\r\nMin = 0,25" +
+        "\r\nMax = 5");
             // 
             // label18
             // 
@@ -1307,7 +1310,7 @@
             this.label18.TabIndex = 44;
             this.label18.Text = "MaterialYieldModifier_Global";
             this.toolTip1.SetToolTip(this.label18, "Multiplies the resource yield for harvesting materials such as trees, minerals an" +
-        "d plants.");
+        "d plants.\r\nMin = 0,25\r\nMax = 5");
             // 
             // label44
             // 
@@ -1318,7 +1321,7 @@
             this.label44.TabIndex = 92;
             this.label44.Text = "ServantConvertRateModifier";
             this.toolTip1.SetToolTip(this.label44, "Rate for how quickly humans turn into servants. A higher rate result in more rapi" +
-        "d conversion.");
+        "d conversion.\r\nMin = 0,1\r\nMax = 20");
             // 
             // label38
             // 
@@ -1328,7 +1331,8 @@
             this.label38.Size = new System.Drawing.Size(153, 15);
             this.label38.TabIndex = 90;
             this.label38.Text = "DismantleResourceModifier";
-            this.toolTip1.SetToolTip(this.label38, "The material reimbursement players receive from dismantling a structure.");
+            this.toolTip1.SetToolTip(this.label38, "The material reimbursement players receive from dismantling a structure.\r\nMin = 0" +
+        "\r\nMax = 1");
             // 
             // label40
             // 
@@ -1339,7 +1343,7 @@
             this.label40.TabIndex = 86;
             this.label40.Text = "RefinementRateModifier";
             this.toolTip1.SetToolTip(this.label40, "Rate for how quickly materials are refined. A higher rate result in more rapid re" +
-        "finement.");
+        "finement.\r\nMin = 0,1\r\nMax = 10");
             // 
             // label41
             // 
@@ -1349,7 +1353,7 @@
             this.label41.Size = new System.Drawing.Size(137, 15);
             this.label41.TabIndex = 84;
             this.label41.Text = "RefinementCostModifier";
-            this.toolTip1.SetToolTip(this.label41, "Multiplies the cost of refining items.");
+            this.toolTip1.SetToolTip(this.label41, "Multiplies the cost of refining items.\r\nMin = 0,1\r\nMax = 10");
             // 
             // label36
             // 
@@ -1360,7 +1364,7 @@
             this.label36.TabIndex = 80;
             this.label36.Text = "CraftRateModifier";
             this.toolTip1.SetToolTip(this.label36, "Rate for how quickly items are crafted. A higher rate result in more rapid crafti" +
-        "ng.");
+        "ng.\r\nMin = 0,1\r\nMax = 10");
             // 
             // label35
             // 
@@ -1370,7 +1374,7 @@
             this.label35.Size = new System.Drawing.Size(111, 15);
             this.label35.TabIndex = 78;
             this.label35.Text = "RecipeCostModifier";
-            this.toolTip1.SetToolTip(this.label35, "Multiplies the cost of crafting items.");
+            this.toolTip1.SetToolTip(this.label35, "Multiplies the cost of crafting items.\r\nMin = 0\r\nMax = 10");
             // 
             // label34
             // 
@@ -1380,7 +1384,8 @@
             this.label34.Size = new System.Drawing.Size(103, 15);
             this.label34.TabIndex = 76;
             this.label34.Text = "BuildCostModifier";
-            this.toolTip1.SetToolTip(this.label34, "Multiplies the amount of materials required to build structures.");
+            this.toolTip1.SetToolTip(this.label34, "Multiplies the amount of materials required to build structures.\r\nMin = 0\r\nMax = " +
+        "10");
             // 
             // label31
             // 
@@ -1391,7 +1396,7 @@
             this.label31.TabIndex = 70;
             this.label31.Text = "CastleBloodEssenceDrainModifier";
             this.toolTip1.SetToolTip(this.label31, "Rate for how quickly a castle consumes blood essence. A higher rate results in hi" +
-        "gher blood essence consumption.");
+        "gher blood essence consumption.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label30
             // 
@@ -1402,7 +1407,7 @@
             this.label30.TabIndex = 68;
             this.label30.Text = "CastleDecayRateModifier";
             this.toolTip1.SetToolTip(this.label30, "Rate for how quickly a castle deteriorate when the castle heart has run out of Bl" +
-        "ood Essence.");
+        "ood Essence.\r\nMin = 0\r\nMax = 5");
             // 
             // label29
             // 
@@ -1413,7 +1418,7 @@
             this.label29.TabIndex = 66;
             this.label29.Text = "SunDamageModifier";
             this.toolTip1.SetToolTip(this.label29, "Affects the duration a player may stand in the sun before starting to take damage" +
-        ".");
+        ".\r\nMin = 0\r\nMax = 5");
             // 
             // label28
             // 
@@ -1423,7 +1428,7 @@
             this.label28.Size = new System.Drawing.Size(125, 15);
             this.label28.TabIndex = 64;
             this.label28.Text = "SilverStrengthModifier";
-            this.toolTip1.SetToolTip(this.label28, "Affects the damage received when carrying silver items.");
+            this.toolTip1.SetToolTip(this.label28, "Affects the damage received when carrying silver items.\r\nMin = 0\r\nMax = 5");
             // 
             // label26
             // 
@@ -1433,7 +1438,7 @@
             this.label26.Size = new System.Drawing.Size(151, 15);
             this.label26.TabIndex = 60;
             this.label26.Text = "GarlicAreaStrengthModifier";
-            this.toolTip1.SetToolTip(this.label26, "Affects the rate of how quickly garlic stack when exposed.");
+            this.toolTip1.SetToolTip(this.label26, "Affects the rate of how quickly garlic stack when exposed.\r\nMin = 0\r\nMax = 5");
             // 
             // label25
             // 
@@ -1443,7 +1448,8 @@
             this.label25.Size = new System.Drawing.Size(131, 15);
             this.label25.TabIndex = 58;
             this.label25.Text = "DurabilityDrainModifier";
-            this.toolTip1.SetToolTip(this.label25, "Multiplies the amount of durability suffered from dealing or receiving damage.");
+            this.toolTip1.SetToolTip(this.label25, "Multiplies the amount of durability suffered from dealing or receiving damage.\r\nM" +
+        "in = 0\r\nMax = 5");
             // 
             // label24
             // 
@@ -1454,7 +1460,7 @@
             this.label24.TabIndex = 56;
             this.label24.Text = "BloodDrainModifier";
             this.toolTip1.SetToolTip(this.label24, "Rate for how quickly players loose blood. A higher rate results in higher blood c" +
-        "onsumption.");
+        "onsumption.\r\nMin = 0\r\nMax = 5");
             // 
             // label22
             // 
@@ -1464,7 +1470,8 @@
             this.label22.Size = new System.Drawing.Size(179, 15);
             this.label22.TabIndex = 52;
             this.label22.Text = "CastleMinimumDistanceInFloors";
-            this.toolTip1.SetToolTip(this.label22, "The minimum distance allowed when placing floors next to an enemy player castle.");
+            this.toolTip1.SetToolTip(this.label22, "The minimum distance allowed when placing floors next to an enemy player castle.\r" +
+        "\nMin = 1\r\nMax = 10");
             // 
             // label21
             // 
@@ -1475,7 +1482,7 @@
             this.label21.TabIndex = 50;
             this.label21.Text = "PvPVampireRespawnModifier";
             this.toolTip1.SetToolTip(this.label21, "Multiplies the additional respawn duration players suffer from being slain in PvP" +
-        ".");
+        ".\r\nMin = 0\r\nMax = 5");
             // 
             // label20
             // 
@@ -1495,7 +1502,8 @@
             this.label19.Size = new System.Drawing.Size(150, 15);
             this.label19.TabIndex = 46;
             this.label19.Text = "BloodEssenceYieldModifier";
-            this.toolTip1.SetToolTip(this.label19, "Multiplies the amount of blood essence received from defeating enemies.");
+            this.toolTip1.SetToolTip(this.label19, "Multiplies the amount of blood essence received from defeating enemies.\r\nMin = 0," +
+        "25\r\nMax = 5");
             // 
             // label97
             // 
@@ -1507,7 +1515,7 @@
             this.label97.TabIndex = 114;
             this.label97.Text = "PhysicalPowerModifier";
             this.toolTip1.SetToolTip(this.label97, "Multiplies players physical power, this value affects the amount of damage player" +
-        "s deal using weapon attacks and weapon skills.");
+        "s deal using weapon attacks and weapon skills.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label50
             // 
@@ -1518,7 +1526,7 @@
             this.label50.Size = new System.Drawing.Size(110, 15);
             this.label50.TabIndex = 100;
             this.label50.Text = "MaxHealthModifier";
-            this.toolTip1.SetToolTip(this.label50, "Multiplies the maximum amount of health.");
+            this.toolTip1.SetToolTip(this.label50, "Multiplies the maximum amount of health.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label53
             // 
@@ -1530,7 +1538,7 @@
             this.label53.TabIndex = 104;
             this.label53.Text = "SpellPowerModifier";
             this.toolTip1.SetToolTip(this.label53, "Multiplies players spell power, this value affects the amount of damage and heali" +
-        "ng players deal using spells.");
+        "ng players deal using spells.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label47
             // 
@@ -1563,7 +1571,7 @@
             this.label48.Size = new System.Drawing.Size(143, 15);
             this.label48.TabIndex = 110;
             this.label48.Text = "DamageReceivedModifier";
-            this.toolTip1.SetToolTip(this.label48, "Multiplies any damage received.");
+            this.toolTip1.SetToolTip(this.label48, "Multiplies any damage received.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label51
             // 
@@ -1574,7 +1582,8 @@
             this.label51.Size = new System.Drawing.Size(133, 15);
             this.label51.TabIndex = 106;
             this.label51.Text = "ResourcePowerModifier";
-            this.toolTip1.SetToolTip(this.label51, "Multiplies the amount of damage players deal to resource objects.");
+            this.toolTip1.SetToolTip(this.label51, "Multiplies the amount of damage players deal to resource objects.\r\nMin = 0,1\r\nMax" +
+        " = 5");
             // 
             // label49
             // 
@@ -1596,7 +1605,7 @@
             this.label46.Size = new System.Drawing.Size(149, 15);
             this.label46.TabIndex = 100;
             this.label46.Text = "MaxHealthModifier_Global";
-            this.toolTip1.SetToolTip(this.label46, "Multiplies the maximum amount of health.");
+            this.toolTip1.SetToolTip(this.label46, "Multiplies the maximum amount of health.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label54
             // 
@@ -1607,7 +1616,7 @@
             this.label54.Size = new System.Drawing.Size(153, 15);
             this.label54.TabIndex = 104;
             this.label54.Text = "MaxHealthModifier_VBlood";
-            this.toolTip1.SetToolTip(this.label54, "Multiplies the maximum amount of health.");
+            this.toolTip1.SetToolTip(this.label54, "Multiplies the maximum amount of health.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label56
             // 
@@ -1618,7 +1627,7 @@
             this.label56.Size = new System.Drawing.Size(124, 15);
             this.label56.TabIndex = 102;
             this.label56.Text = "PowerModifier_Global";
-            this.toolTip1.SetToolTip(this.label56, "Multiplies the damage output of enemy units.");
+            this.toolTip1.SetToolTip(this.label56, "Multiplies the damage output of enemy units.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label58
             // 
@@ -1629,7 +1638,7 @@
             this.label58.Size = new System.Drawing.Size(128, 15);
             this.label58.TabIndex = 106;
             this.label58.Text = "PowerModifier_VBlood";
-            this.toolTip1.SetToolTip(this.label58, "Multiplies the damage output of enemy units.");
+            this.toolTip1.SetToolTip(this.label58, "Multiplies the damage output of enemy units.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label55
             // 
@@ -1651,7 +1660,8 @@
             this.label57.Size = new System.Drawing.Size(126, 15);
             this.label57.TabIndex = 104;
             this.label57.Text = "ResourceYieldModifier";
-            this.toolTip1.SetToolTip(this.label57, "Multiplies the amount of materials obtained from harvesting resources.");
+            this.toolTip1.SetToolTip(this.label57, "Multiplies the amount of materials obtained from harvesting resources.\r\nMin = 0,1" +
+        "\r\nMax = 5");
             // 
             // label59
             // 
@@ -1662,7 +1672,8 @@
             this.label59.Size = new System.Drawing.Size(142, 15);
             this.label59.TabIndex = 112;
             this.label59.Text = "MovementSpeedModifier";
-            this.toolTip1.SetToolTip(this.label59, "Unknown what this does. Change at own risk.");
+            this.toolTip1.SetToolTip(this.label59, "Multiplies the amount of movement speed players gain from equipment that affects " +
+        "movement speed\r\nMin = 0,1\r\nMax = 5");
             // 
             // label60
             // 
@@ -1673,7 +1684,7 @@
             this.label60.Size = new System.Drawing.Size(110, 15);
             this.label60.TabIndex = 102;
             this.label60.Text = "MaxHealthModifier";
-            this.toolTip1.SetToolTip(this.label60, "Multiplies the maximum amount of health.");
+            this.toolTip1.SetToolTip(this.label60, "Multiplies the maximum amount of health.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label61
             // 
@@ -1696,7 +1707,7 @@
             this.label62.TabIndex = 106;
             this.label62.Text = "PhysicalPowerModifier";
             this.toolTip1.SetToolTip(this.label62, "Multiplies players physical power, this value affects the amount of damage player" +
-        "s deal using weapon attacks and weapon skills.");
+        "s deal using weapon attacks and weapon skills.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label63
             // 
@@ -1708,7 +1719,7 @@
             this.label63.TabIndex = 108;
             this.label63.Text = "SpellPowerModifier";
             this.toolTip1.SetToolTip(this.label63, "Multiplies players spell power, this value affects the amount of damage and heali" +
-        "ng players deal using spells.");
+        "ng players deal using spells.\r\nMin = 0,1\r\nMax = 5");
             // 
             // label79
             // 
@@ -1719,7 +1730,7 @@
             this.label79.Size = new System.Drawing.Size(66, 15);
             this.label79.TabIndex = 114;
             this.label79.Text = "CastleLimit";
-            this.toolTip1.SetToolTip(this.label79, "The number of castles a single player may build.");
+            this.toolTip1.SetToolTip(this.label79, "The number of castles a single player may build.\r\nMin = 1\r\nMax = 5");
             // 
             // label71
             // 
@@ -1731,7 +1742,7 @@
             this.label71.TabIndex = 114;
             this.label71.Text = "FloorLimit";
             this.toolTip1.SetToolTip(this.label71, "Defines the number of borders and castle floors that players may build in each ca" +
-        "stle.");
+        "stle.\r\nMin = 9\r\nMax = 250");
             // 
             // label73
             // 
@@ -1742,7 +1753,8 @@
             this.label73.Size = new System.Drawing.Size(73, 15);
             this.label73.TabIndex = 116;
             this.label73.Text = "ServantLimit";
-            this.toolTip1.SetToolTip(this.label73, "The number of servant coffins players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label73, "The number of servant coffins players may build in a single castle.\r\nMin = 1\r\nMax" +
+        " = 20");
             // 
             // label72
             // 
@@ -1754,7 +1766,7 @@
             this.label72.TabIndex = 118;
             this.label72.Text = "FloorLimit";
             this.toolTip1.SetToolTip(this.label72, "Defines the number of borders and castle floors that players may build in each ca" +
-        "stle.");
+        "stle.\r\nMin = 9\r\nMax = 250");
             // 
             // label74
             // 
@@ -1765,7 +1777,8 @@
             this.label74.Size = new System.Drawing.Size(73, 15);
             this.label74.TabIndex = 120;
             this.label74.Text = "ServantLimit";
-            this.toolTip1.SetToolTip(this.label74, "The number of servant coffins players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label74, "The number of servant coffins players may build in a single castle.\r\nMin = 1\r\nMax" +
+        " = 20");
             // 
             // label75
             // 
@@ -1777,7 +1790,7 @@
             this.label75.TabIndex = 122;
             this.label75.Text = "FloorLimit";
             this.toolTip1.SetToolTip(this.label75, "Defines the number of borders and castle floors that players may build in each ca" +
-        "stle.");
+        "stle.\r\nMin = 9\r\nMax = 250");
             // 
             // label76
             // 
@@ -1788,7 +1801,8 @@
             this.label76.Size = new System.Drawing.Size(73, 15);
             this.label76.TabIndex = 124;
             this.label76.Text = "ServantLimit";
-            this.toolTip1.SetToolTip(this.label76, "The number of servant coffins players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label76, "The number of servant coffins players may build in a single castle.\r\nMin = 1\r\nMax" +
+        " = 20");
             // 
             // label77
             // 
@@ -1800,7 +1814,7 @@
             this.label77.TabIndex = 126;
             this.label77.Text = "FloorLimit";
             this.toolTip1.SetToolTip(this.label77, "Defines the number of borders and castle floors that players may build in each ca" +
-        "stle.");
+        "stle.\r\nMin = 9\r\nMax = 250");
             // 
             // label78
             // 
@@ -1811,7 +1825,8 @@
             this.label78.Size = new System.Drawing.Size(73, 15);
             this.label78.TabIndex = 128;
             this.label78.Text = "ServantLimit";
-            this.toolTip1.SetToolTip(this.label78, "The number of servant coffins players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label78, "The number of servant coffins players may build in a single castle.\r\nMin = 1\r\nMax" +
+        " = 20");
             // 
             // label65
             // 
@@ -1822,7 +1837,8 @@
             this.label65.Size = new System.Drawing.Size(86, 15);
             this.label65.TabIndex = 104;
             this.label65.Text = "SafetyBoxLimit";
-            this.toolTip1.SetToolTip(this.label65, "The number of vampire lockboxes players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label65, "The number of vampire lockboxes players may build in a single castle.\r\nMin = 0\r\nM" +
+        "ax = 20");
             // 
             // label69
             // 
@@ -1833,7 +1849,7 @@
             this.label69.Size = new System.Drawing.Size(64, 15);
             this.label69.TabIndex = 106;
             this.label69.Text = "TombLimit";
-            this.toolTip1.SetToolTip(this.label69, "The number of tombs players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label69, "The number of tombs players may build in a single castle.\r\nMin = 1\r\nMax = 20");
             // 
             // label70
             // 
@@ -1844,7 +1860,8 @@
             this.label70.Size = new System.Drawing.Size(95, 15);
             this.label70.TabIndex = 108;
             this.label70.Text = "VerminNestLimit";
-            this.toolTip1.SetToolTip(this.label70, "The number of vermin nests players may build in a single castle.");
+            this.toolTip1.SetToolTip(this.label70, "The number of vermin nests players may build in a single castle.\r\nMin = 1\r\nMax = " +
+        "20");
             // 
             // label99
             // 
@@ -1856,7 +1873,7 @@
             this.label99.TabIndex = 100;
             this.label99.Text = "DayDurationInSeconds";
             this.toolTip1.SetToolTip(this.label99, "The duration of a full day - night cycle in seconds.\r\n600 is short\r\n3600 is very " +
-        "long\r\n1080 is standard");
+        "long\r\n1080 is standard\r\nMin = 60\r\nMax = 86400");
             // 
             // label33
             // 
@@ -1867,7 +1884,7 @@
             this.label33.TabIndex = 74;
             this.label33.Text = "CastleUnderAttackTimer";
             this.toolTip1.SetToolTip(this.label33, "The amount of time where players are blocked from building structures or walls wh" +
-        "ile being under attack.");
+        "ile being under attack.\r\nMin = 1\r\nMax = 180");
             // 
             // label32
             // 
@@ -1878,7 +1895,7 @@
             this.label32.TabIndex = 72;
             this.label32.Text = "CastleSiegeTimer";
             this.toolTip1.SetToolTip(this.label32, "The amount of time a castle is deemed as breached when enemy players breaks throu" +
-        "gh the outer defenses.");
+        "gh the outer defenses.\r\nMin = 1\r\nMax = 1800");
             // 
             // groupBox12
             // 
@@ -1958,7 +1975,8 @@
             this.label45.TabIndex = 98;
             this.label45.Text = "Death_DurabilityLossFactorAsResources";
             this.toolTip1.SetToolTip(this.label45, "Durability loss suffered upon death in PvP is dropped as materials. \r\nThis value " +
-        "defines the amount of materials that are either lost or dropped.");
+        "defines the amount of materials that are either lost or dropped.\r\nMin = 0\r\nMax =" +
+        " 1");
             // 
             // label42
             // 
@@ -1969,7 +1987,7 @@
             this.label42.TabIndex = 96;
             this.label42.Text = "Death_DurabilityFactorLoss";
             this.toolTip1.SetToolTip(this.label42, "The amount of durability loss that equipment suffer upon death when defeated in P" +
-        "vP.");
+        "vP.\r\nMin = 0\r\nMax = 1");
             // 
             // groupBox9
             // 
@@ -2087,7 +2105,8 @@
             this.label93.Size = new System.Drawing.Size(58, 15);
             this.label93.TabIndex = 116;
             this.label93.Text = "StartHour";
-            this.toolTip1.SetToolTip(this.label93, "The real time starting hour for activating Castle PvP during weekends");
+            this.toolTip1.SetToolTip(this.label93, "The real time starting hour for activating Castle PvP during weekends\r\nMin = 0\r\nM" +
+        "ax = 24");
             // 
             // label94
             // 
@@ -2098,7 +2117,8 @@
             this.label94.Size = new System.Drawing.Size(54, 15);
             this.label94.TabIndex = 120;
             this.label94.Text = "EndHour";
-            this.toolTip1.SetToolTip(this.label94, "The real time ending hour for deactivating Castle PvP during weekends");
+            this.toolTip1.SetToolTip(this.label94, "The real time ending hour for deactivating Castle PvP during weekends\r\nMin = 0\r\nM" +
+        "ax = 24");
             // 
             // label95
             // 
@@ -2109,7 +2129,8 @@
             this.label95.Size = new System.Drawing.Size(65, 15);
             this.label95.TabIndex = 122;
             this.label95.Text = "EndMinute";
-            this.toolTip1.SetToolTip(this.label95, "The real time end minute for deactivating Castle PvP during weekends");
+            this.toolTip1.SetToolTip(this.label95, "The real time end minute for deactivating Castle PvP during weekends\r\nMin = 0\r\nMa" +
+        "x = 60");
             // 
             // label96
             // 
@@ -2120,7 +2141,8 @@
             this.label96.Size = new System.Drawing.Size(69, 15);
             this.label96.TabIndex = 118;
             this.label96.Text = "StartMinute";
-            this.toolTip1.SetToolTip(this.label96, "The real time starting minute for activating Castle PvP during weekends");
+            this.toolTip1.SetToolTip(this.label96, "The real time starting minute for activating Castle PvP during weekends\r\nMin = 0\r" +
+        "\nMax = 60");
             // 
             // label89
             // 
@@ -2131,7 +2153,8 @@
             this.label89.Size = new System.Drawing.Size(58, 15);
             this.label89.TabIndex = 116;
             this.label89.Text = "StartHour";
-            this.toolTip1.SetToolTip(this.label89, "The real time starting hour for activating Castle PvP during standard weekdays");
+            this.toolTip1.SetToolTip(this.label89, "The real time starting hour for activating Castle PvP during standard weekdays\r\nM" +
+        "in = 0\r\nMax = 24");
             // 
             // label90
             // 
@@ -2142,7 +2165,8 @@
             this.label90.Size = new System.Drawing.Size(54, 15);
             this.label90.TabIndex = 120;
             this.label90.Text = "EndHour";
-            this.toolTip1.SetToolTip(this.label90, "The real time ending hour for deactivating Castle PvP during standard weekdays");
+            this.toolTip1.SetToolTip(this.label90, "The real time ending hour for deactivating Castle PvP during standard weekdays\r\nM" +
+        "in = 0\r\nMax = 24");
             // 
             // label91
             // 
@@ -2153,7 +2177,8 @@
             this.label91.Size = new System.Drawing.Size(65, 15);
             this.label91.TabIndex = 122;
             this.label91.Text = "EndMinute";
-            this.toolTip1.SetToolTip(this.label91, "The real time end minute for deactivating Castle PvP during weekdays");
+            this.toolTip1.SetToolTip(this.label91, "The real time end minute for deactivating Castle PvP during weekdays\r\nMin = 0\r\nMa" +
+        "x = 60");
             // 
             // label92
             // 
@@ -2164,7 +2189,8 @@
             this.label92.Size = new System.Drawing.Size(69, 15);
             this.label92.TabIndex = 118;
             this.label92.Text = "StartMinute";
-            this.toolTip1.SetToolTip(this.label92, "The real time starting minute for activating Castle PvP during standard weekdays");
+            this.toolTip1.SetToolTip(this.label92, "The real time starting minute for activating Castle PvP during standard weekdays\r" +
+        "\nMin = 0\r\nMax = 60");
             // 
             // label85
             // 
@@ -2175,7 +2201,8 @@
             this.label85.Size = new System.Drawing.Size(58, 15);
             this.label85.TabIndex = 116;
             this.label85.Text = "StartHour";
-            this.toolTip1.SetToolTip(this.label85, "The real time starting hour for activating Player vs Player PvP during weekends");
+            this.toolTip1.SetToolTip(this.label85, "The real time starting hour for activating Player vs Player PvP during weekends\r\n" +
+        "Min = 0\r\nMax = 24");
             // 
             // label86
             // 
@@ -2186,7 +2213,8 @@
             this.label86.Size = new System.Drawing.Size(54, 15);
             this.label86.TabIndex = 120;
             this.label86.Text = "EndHour";
-            this.toolTip1.SetToolTip(this.label86, "The real time ending hour for deactivating Player vs Player PvP during weekends");
+            this.toolTip1.SetToolTip(this.label86, "The real time ending hour for deactivating Player vs Player PvP during weekends\r\n" +
+        "Min = 0\r\nMax = 24");
             // 
             // label87
             // 
@@ -2197,7 +2225,8 @@
             this.label87.Size = new System.Drawing.Size(65, 15);
             this.label87.TabIndex = 122;
             this.label87.Text = "EndMinute";
-            this.toolTip1.SetToolTip(this.label87, "The real time end minute for deactivating Player vs Player PvP during weekends");
+            this.toolTip1.SetToolTip(this.label87, "The real time end minute for deactivating Player vs Player PvP during weekends\r\nM" +
+        "in = 0\r\nMax = 60");
             // 
             // label88
             // 
@@ -2209,7 +2238,7 @@
             this.label88.TabIndex = 118;
             this.label88.Text = "StartMinute";
             this.toolTip1.SetToolTip(this.label88, "The real time starting minute for activating Player vs Player PvP during weekends" +
-        "");
+        "\r\nMin = 0\r\nMax = 60");
             // 
             // label81
             // 
@@ -2221,7 +2250,7 @@
             this.label81.TabIndex = 116;
             this.label81.Text = "StartHour";
             this.toolTip1.SetToolTip(this.label81, "The real time starting hour for activating Player vs Player PvP during standard w" +
-        "eekdays");
+        "eekdays.\r\nMin = 0\r\nMax = 24");
             // 
             // label82
             // 
@@ -2233,7 +2262,7 @@
             this.label82.TabIndex = 120;
             this.label82.Text = "EndHour";
             this.toolTip1.SetToolTip(this.label82, "The real time ending hour for deactivating Player vs Player PvP during standard w" +
-        "eekdays");
+        "eekdays\r\nMin = 0\r\nMax = 24");
             // 
             // label84
             // 
@@ -2244,7 +2273,8 @@
             this.label84.Size = new System.Drawing.Size(65, 15);
             this.label84.TabIndex = 122;
             this.label84.Text = "EndMinute";
-            this.toolTip1.SetToolTip(this.label84, "The real time end minute for deactivating Player vs Player PvP during weekdays");
+            this.toolTip1.SetToolTip(this.label84, "The real time end minute for deactivating Player vs Player PvP during weekdays\r\nM" +
+        "in = 0\r\nMax = 60");
             // 
             // label83
             // 
@@ -2256,7 +2286,7 @@
             this.label83.TabIndex = 118;
             this.label83.Text = "StartMinute";
             this.toolTip1.SetToolTip(this.label83, "The real time starting minute for activating Player vs Player PvP during standard" +
-        " weekdays");
+        " weekdays\r\nMin = 0\r\nMax = 60");
             // 
             // label109
             // 
@@ -2298,6 +2328,104 @@
             this.label106.Text = "Starter Equipment";
             this.toolTip1.SetToolTip(this.label106, "A set of items the player starts with.");
             // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(283, 331);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(109, 15);
+            this.label43.TabIndex = 94;
+            this.label43.Text = "RepairCostModifier";
+            this.toolTip1.SetToolTip(this.label43, "Modifies the cost for repairing an item\r\nMin = 0\r\nMax = 10");
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(6, 307);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(146, 15);
+            this.label27.TabIndex = 62;
+            this.label27.Text = "HolyAreaStrengthModifier";
+            this.toolTip1.SetToolTip(this.label27, "Multiplies the effect of the Holy element.\r\nMin = 0\r\nMax = 5");
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label98.Location = new System.Drawing.Point(6, 67);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(89, 15);
+            this.label98.TabIndex = 114;
+            this.label98.Text = "DayStartMinute";
+            this.toolTip1.SetToolTip(this.label98, "The starting minute of the ingame day.\r\nMin = 0\r\nMax = 60");
+            // 
+            // label100
+            // 
+            this.label100.AutoSize = true;
+            this.label100.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label100.Location = new System.Drawing.Point(6, 91);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(74, 15);
+            this.label100.TabIndex = 104;
+            this.label100.Text = "DayEndHour";
+            this.toolTip1.SetToolTip(this.label100, "The end hour of the ingame day.\r\nMin = 0\r\nMax = 24");
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label101.Location = new System.Drawing.Point(227, 93);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(92, 15);
+            this.label101.TabIndex = 112;
+            this.label101.Text = "BloodMoonBuff";
+            this.toolTip1.SetToolTip(this.label101, "The amount of additional movement speed in % that a player gain during blood moon" +
+        ".\r\nMin = 0,1\r\nMax = 1");
+            // 
+            // label102
+            // 
+            this.label102.AutoSize = true;
+            this.label102.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label102.Location = new System.Drawing.Point(6, 43);
+            this.label102.Name = "label102";
+            this.label102.Size = new System.Drawing.Size(78, 15);
+            this.label102.TabIndex = 102;
+            this.label102.Text = "DayStartHour";
+            this.toolTip1.SetToolTip(this.label102, "The starting hour of the ingame day.\r\nMin = 0\r\nMax = 25");
+            // 
+            // label103
+            // 
+            this.label103.AutoSize = true;
+            this.label103.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label103.Location = new System.Drawing.Point(227, 69);
+            this.label103.Name = "label103";
+            this.label103.Size = new System.Drawing.Size(153, 15);
+            this.label103.TabIndex = 110;
+            this.label103.Text = "BloodMoonFrequency_Max";
+            this.toolTip1.SetToolTip(this.label103, "The maximum frequence for how often a blood moon may occur.\r\nMin = 1\r\nMax = 255");
+            // 
+            // label104
+            // 
+            this.label104.AutoSize = true;
+            this.label104.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label104.Location = new System.Drawing.Point(227, 21);
+            this.label104.Name = "label104";
+            this.label104.Size = new System.Drawing.Size(85, 15);
+            this.label104.TabIndex = 106;
+            this.label104.Text = "DayEndMinute";
+            this.toolTip1.SetToolTip(this.label104, "The end minute of the ingame day.\r\nMin = 0\r\nMax = 60");
+            // 
+            // label105
+            // 
+            this.label105.AutoSize = true;
+            this.label105.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label105.Location = new System.Drawing.Point(227, 45);
+            this.label105.Name = "label105";
+            this.label105.Size = new System.Drawing.Size(151, 15);
+            this.label105.TabIndex = 108;
+            this.label105.Text = "BloodMoonFrequency_Min";
+            this.toolTip1.SetToolTip(this.label105, "The minimum frequence for how often a blood moon may occur.\r\nMin = 1\r\nMax = 255");
+            // 
             // InventoryStacksModifierNumber
             // 
             this.InventoryStacksModifierNumber.DecimalPlaces = 2;
@@ -2312,6 +2440,11 @@
             0,
             0,
             0});
+            this.InventoryStacksModifierNumber.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.InventoryStacksModifierNumber.Name = "InventoryStacksModifierNumber";
             this.InventoryStacksModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.InventoryStacksModifierNumber.TabIndex = 39;
@@ -2335,6 +2468,11 @@
             0,
             0,
             0});
+            this.DropTableModifier_GeneralNumber.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.DropTableModifier_GeneralNumber.Name = "DropTableModifier_GeneralNumber";
             this.DropTableModifier_GeneralNumber.Size = new System.Drawing.Size(60, 23);
             this.DropTableModifier_GeneralNumber.TabIndex = 41;
@@ -2358,6 +2496,11 @@
             0,
             0,
             0});
+            this.DropTableModifier_MissionsNumber.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.DropTableModifier_MissionsNumber.Name = "DropTableModifier_MissionsNumber";
             this.DropTableModifier_MissionsNumber.Size = new System.Drawing.Size(60, 23);
             this.DropTableModifier_MissionsNumber.TabIndex = 43;
@@ -2484,15 +2627,6 @@
             0,
             131072});
             // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(283, 331);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(109, 15);
-            this.label43.TabIndex = 94;
-            this.label43.Text = "RepairCostModifier";
-            // 
             // RepairCostModifierNumber
             // 
             this.RepairCostModifierNumber.DecimalPlaces = 2;
@@ -2503,7 +2637,7 @@
             131072});
             this.RepairCostModifierNumber.Location = new System.Drawing.Point(497, 329);
             this.RepairCostModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -2526,10 +2660,15 @@
             131072});
             this.ServantConvertRateModifierNumber.Location = new System.Drawing.Point(497, 305);
             this.ServantConvertRateModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
+            this.ServantConvertRateModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.ServantConvertRateModifierNumber.Name = "ServantConvertRateModifierNumber";
             this.ServantConvertRateModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.ServantConvertRateModifierNumber.TabIndex = 93;
@@ -2596,10 +2735,15 @@
             131072});
             this.RefinementRateModifierNumber.Location = new System.Drawing.Point(497, 233);
             this.RefinementRateModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
+            this.RefinementRateModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.RefinementRateModifierNumber.Name = "RefinementRateModifierNumber";
             this.RefinementRateModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.RefinementRateModifierNumber.TabIndex = 87;
@@ -2619,10 +2763,15 @@
             131072});
             this.RefinementCostModifierNumber.Location = new System.Drawing.Point(497, 209);
             this.RefinementCostModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
+            this.RefinementCostModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.RefinementCostModifierNumber.Name = "RefinementCostModifierNumber";
             this.RefinementCostModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.RefinementCostModifierNumber.TabIndex = 85;
@@ -2666,10 +2815,15 @@
             131072});
             this.CraftRateModifierNumber.Location = new System.Drawing.Point(497, 161);
             this.CraftRateModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
+            this.CraftRateModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.CraftRateModifierNumber.Name = "CraftRateModifierNumber";
             this.CraftRateModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.CraftRateModifierNumber.TabIndex = 81;
@@ -2689,7 +2843,7 @@
             131072});
             this.RecipeCostModifierNumber.Location = new System.Drawing.Point(497, 137);
             this.RecipeCostModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -2712,7 +2866,7 @@
             131072});
             this.BuildCostModifierNumber.Location = new System.Drawing.Point(497, 113);
             this.BuildCostModifierNumber.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -2734,6 +2888,11 @@
             0,
             0,
             0});
+            this.CastleUnderAttackTimerNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.CastleUnderAttackTimerNumber.Name = "CastleUnderAttackTimerNumber";
             this.CastleUnderAttackTimerNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleUnderAttackTimerNumber.TabIndex = 75;
@@ -2749,6 +2908,11 @@
             this.CastleSiegeTimerNumber.Location = new System.Drawing.Point(497, 65);
             this.CastleSiegeTimerNumber.Maximum = new decimal(new int[] {
             1800,
+            0,
+            0,
+            0});
+            this.CastleSiegeTimerNumber.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -2775,6 +2939,11 @@
             0,
             0,
             0});
+            this.CastleBloodEssenceDrainModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.CastleBloodEssenceDrainModifierNumber.Name = "CastleBloodEssenceDrainModifierNumber";
             this.CastleBloodEssenceDrainModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.CastleBloodEssenceDrainModifierNumber.TabIndex = 71;
@@ -2852,15 +3021,6 @@
             0,
             0,
             0});
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(6, 307);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(146, 15);
-            this.label27.TabIndex = 62;
-            this.label27.Text = "HolyAreaStrengthModifier";
             // 
             // HolyAreaStrengthModifierNumber
             // 
@@ -2962,6 +3122,11 @@
             0,
             0,
             0});
+            this.ClanSizeNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ClanSizeNumber.Name = "ClanSizeNumber";
             this.ClanSizeNumber.Size = new System.Drawing.Size(60, 23);
             this.ClanSizeNumber.TabIndex = 55;
@@ -2976,6 +3141,11 @@
             this.CastleMinimumDistanceInFloorsNumber.Location = new System.Drawing.Point(217, 185);
             this.CastleMinimumDistanceInFloorsNumber.Maximum = new decimal(new int[] {
             10,
+            0,
+            0,
+            0});
+            this.CastleMinimumDistanceInFloorsNumber.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -3039,6 +3209,11 @@
             0,
             0,
             0});
+            this.BloodEssenceYieldModifierNumber.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.BloodEssenceYieldModifierNumber.Name = "BloodEssenceYieldModifierNumber";
             this.BloodEssenceYieldModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.BloodEssenceYieldModifierNumber.TabIndex = 47;
@@ -3062,6 +3237,11 @@
             0,
             0,
             0});
+            this.MaterialYieldModifier_GlobalNumber.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.MaterialYieldModifier_GlobalNumber.Name = "MaterialYieldModifier_GlobalNumber";
             this.MaterialYieldModifier_GlobalNumber.Size = new System.Drawing.Size(60, 23);
             this.MaterialYieldModifier_GlobalNumber.TabIndex = 45;
@@ -3110,6 +3290,11 @@
             0,
             0,
             0});
+            this.VampirePhysicalPowerModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampirePhysicalPowerModifierNumber.Name = "VampirePhysicalPowerModifierNumber";
             this.VampirePhysicalPowerModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampirePhysicalPowerModifierNumber.TabIndex = 115;
@@ -3134,6 +3319,11 @@
             0,
             0,
             0});
+            this.VampireMaxEnergyModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireMaxEnergyModifierNumber.Name = "VampireMaxEnergyModifierNumber";
             this.VampireMaxEnergyModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireMaxEnergyModifierNumber.TabIndex = 103;
@@ -3176,6 +3366,11 @@
             0,
             0,
             0});
+            this.VampireDamageReceivedModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireDamageReceivedModifierNumber.Name = "VampireDamageReceivedModifierNumber";
             this.VampireDamageReceivedModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireDamageReceivedModifierNumber.TabIndex = 111;
@@ -3199,6 +3394,11 @@
             0,
             0,
             0});
+            this.VampireSpellPowerModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireSpellPowerModifierNumber.Name = "VampireSpellPowerModifierNumber";
             this.VampireSpellPowerModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireSpellPowerModifierNumber.TabIndex = 105;
@@ -3222,6 +3422,11 @@
             0,
             0,
             0});
+            this.VampireMaxHealthModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireMaxHealthModifierNumber.Name = "VampireMaxHealthModifierNumber";
             this.VampireMaxHealthModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireMaxHealthModifierNumber.TabIndex = 101;
@@ -3246,6 +3451,11 @@
             0,
             0,
             0});
+            this.VampireSiegePowerModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireSiegePowerModifierNumber.Name = "VampireSiegePowerModifierNumber";
             this.VampireSiegePowerModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireSiegePowerModifierNumber.TabIndex = 109;
@@ -3269,6 +3479,11 @@
             0,
             0,
             0});
+            this.VampireResourcePowerModifierNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.VampireResourcePowerModifierNumber.Name = "VampireResourcePowerModifierNumber";
             this.VampireResourcePowerModifierNumber.Size = new System.Drawing.Size(60, 23);
             this.VampireResourcePowerModifierNumber.TabIndex = 107;
@@ -3309,6 +3524,11 @@
             0,
             0,
             0});
+            this.PowerModifier_GlobalNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.PowerModifier_GlobalNumber.Name = "PowerModifier_GlobalNumber";
             this.PowerModifier_GlobalNumber.Size = new System.Drawing.Size(60, 23);
             this.PowerModifier_GlobalNumber.TabIndex = 103;
@@ -3332,6 +3552,11 @@
             0,
             0,
             0});
+            this.MaxHealthModifier_VBloodNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.MaxHealthModifier_VBloodNumber.Name = "MaxHealthModifier_VBloodNumber";
             this.MaxHealthModifier_VBloodNumber.Size = new System.Drawing.Size(60, 23);
             this.MaxHealthModifier_VBloodNumber.TabIndex = 105;
@@ -3355,6 +3580,11 @@
             0,
             0,
             0});
+            this.MaxHealthModifier_GlobalNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.MaxHealthModifier_GlobalNumber.Name = "MaxHealthModifier_GlobalNumber";
             this.MaxHealthModifier_GlobalNumber.Size = new System.Drawing.Size(60, 23);
             this.MaxHealthModifier_GlobalNumber.TabIndex = 101;
@@ -3378,6 +3608,11 @@
             0,
             0,
             0});
+            this.PowerModifier_VBloodNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.PowerModifier_VBloodNumber.Name = "PowerModifier_VBloodNumber";
             this.PowerModifier_VBloodNumber.Size = new System.Drawing.Size(60, 23);
             this.PowerModifier_VBloodNumber.TabIndex = 107;
@@ -3424,6 +3659,11 @@
             0,
             0,
             0});
+            this.MaxHealthModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.MaxHealthModifier_EquipmentNumber.Name = "MaxHealthModifier_EquipmentNumber";
             this.MaxHealthModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.MaxHealthModifier_EquipmentNumber.TabIndex = 103;
@@ -3447,6 +3687,11 @@
             0,
             0,
             0});
+            this.MovementSpeedModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.MovementSpeedModifier_EquipmentNumber.Name = "MovementSpeedModifier_EquipmentNumber";
             this.MovementSpeedModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.MovementSpeedModifier_EquipmentNumber.TabIndex = 113;
@@ -3466,6 +3711,11 @@
             0,
             0,
             0});
+            this.SiegePowerModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.SiegePowerModifier_EquipmentNumber.Name = "SiegePowerModifier_EquipmentNumber";
             this.SiegePowerModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.SiegePowerModifier_EquipmentNumber.TabIndex = 111;
@@ -3489,6 +3739,11 @@
             0,
             0,
             0});
+            this.ResourceYieldModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.ResourceYieldModifier_EquipmentNumber.Name = "ResourceYieldModifier_EquipmentNumber";
             this.ResourceYieldModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.ResourceYieldModifier_EquipmentNumber.TabIndex = 105;
@@ -3513,6 +3768,11 @@
             0,
             0,
             0});
+            this.MaxEnergyModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.MaxEnergyModifier_EquipmentNumber.Name = "MaxEnergyModifier_EquipmentNumber";
             this.MaxEnergyModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.MaxEnergyModifier_EquipmentNumber.TabIndex = 101;
@@ -3536,6 +3796,11 @@
             0,
             0,
             0});
+            this.SpellPowerModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.SpellPowerModifier_EquipmentNumber.Name = "SpellPowerModifier_EquipmentNumber";
             this.SpellPowerModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.SpellPowerModifier_EquipmentNumber.TabIndex = 109;
@@ -3559,6 +3824,11 @@
             0,
             0,
             0});
+            this.PhysicalPowerModifier_EquipmentNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.PhysicalPowerModifier_EquipmentNumber.Name = "PhysicalPowerModifier_EquipmentNumber";
             this.PhysicalPowerModifier_EquipmentNumber.Size = new System.Drawing.Size(60, 23);
             this.PhysicalPowerModifier_EquipmentNumber.TabIndex = 107;
@@ -3598,6 +3868,11 @@
             this.CastleLimitNumber.Location = new System.Drawing.Point(301, 137);
             this.CastleLimitNumber.Maximum = new decimal(new int[] {
             5,
+            0,
+            0,
+            0});
+            this.CastleLimitNumber.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -3653,6 +3928,11 @@
             0,
             0,
             0});
+            this.ServantLimit1Number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ServantLimit1Number.Name = "ServantLimit1Number";
             this.ServantLimit1Number.Size = new System.Drawing.Size(60, 23);
             this.ServantLimit1Number.TabIndex = 117;
@@ -3667,6 +3947,11 @@
             this.FloorLimit1Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit1Number.Maximum = new decimal(new int[] {
             250,
+            0,
+            0,
+            0});
+            this.FloorLimit1Number.Minimum = new decimal(new int[] {
+            9,
             0,
             0,
             0});
@@ -3701,6 +3986,11 @@
             0,
             0,
             0});
+            this.ServantLimit2Number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ServantLimit2Number.Name = "ServantLimit2Number";
             this.ServantLimit2Number.Size = new System.Drawing.Size(60, 23);
             this.ServantLimit2Number.TabIndex = 121;
@@ -3715,6 +4005,11 @@
             this.FloorLimit2Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit2Number.Maximum = new decimal(new int[] {
             250,
+            0,
+            0,
+            0});
+            this.FloorLimit2Number.Minimum = new decimal(new int[] {
+            9,
             0,
             0,
             0});
@@ -3749,6 +4044,11 @@
             0,
             0,
             0});
+            this.ServantLimit3Number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ServantLimit3Number.Name = "ServantLimit3Number";
             this.ServantLimit3Number.Size = new System.Drawing.Size(60, 23);
             this.ServantLimit3Number.TabIndex = 125;
@@ -3763,6 +4063,11 @@
             this.FloorLimit3Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit3Number.Maximum = new decimal(new int[] {
             250,
+            0,
+            0,
+            0});
+            this.FloorLimit3Number.Minimum = new decimal(new int[] {
+            9,
             0,
             0,
             0});
@@ -3797,6 +4102,11 @@
             0,
             0,
             0});
+            this.ServantLimit4Number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ServantLimit4Number.Name = "ServantLimit4Number";
             this.ServantLimit4Number.Size = new System.Drawing.Size(60, 23);
             this.ServantLimit4Number.TabIndex = 129;
@@ -3811,6 +4121,11 @@
             this.FloorLimit4Number.Location = new System.Drawing.Point(133, 7);
             this.FloorLimit4Number.Maximum = new decimal(new int[] {
             250,
+            0,
+            0,
+            0});
+            this.FloorLimit4Number.Minimum = new decimal(new int[] {
+            9,
             0,
             0,
             0});
@@ -3845,6 +4160,7 @@
             // numericUpDown6
             // 
             this.numericUpDown6.DecimalPlaces = 2;
+            this.numericUpDown6.Enabled = false;
             this.numericUpDown6.Location = new System.Drawing.Point(163, 137);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             5,
@@ -3886,6 +4202,7 @@
             this.label68.Size = new System.Drawing.Size(143, 15);
             this.label68.TabIndex = 110;
             this.label68.Text = "DamageReceivedModifier";
+            this.toolTip1.SetToolTip(this.label68, "Not used.");
             // 
             // TickPeriodNumber
             // 
@@ -3897,7 +4214,7 @@
             131072});
             this.TickPeriodNumber.Location = new System.Drawing.Point(163, 17);
             this.TickPeriodNumber.Maximum = new decimal(new int[] {
-            10,
+            10000,
             0,
             0,
             0});
@@ -3918,6 +4235,11 @@
             0,
             0,
             0});
+            this.VerminNestLimitNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.VerminNestLimitNumber.Name = "VerminNestLimitNumber";
             this.VerminNestLimitNumber.Size = new System.Drawing.Size(60, 23);
             this.VerminNestLimitNumber.TabIndex = 109;
@@ -3932,6 +4254,11 @@
             this.TombLimitNumber.Location = new System.Drawing.Point(163, 89);
             this.TombLimitNumber.Maximum = new decimal(new int[] {
             20,
+            0,
+            0,
+            0});
+            this.TombLimitNumber.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -4313,21 +4640,11 @@
             this.DayStartMinuteNumber.Size = new System.Drawing.Size(60, 23);
             this.DayStartMinuteNumber.TabIndex = 115;
             // 
-            // label98
-            // 
-            this.label98.AutoSize = true;
-            this.label98.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label98.Location = new System.Drawing.Point(6, 67);
-            this.label98.Name = "label98";
-            this.label98.Size = new System.Drawing.Size(89, 15);
-            this.label98.TabIndex = 114;
-            this.label98.Text = "DayStartMinute";
-            // 
             // DayStartHourNumber
             // 
             this.DayStartHourNumber.Location = new System.Drawing.Point(162, 41);
             this.DayStartHourNumber.Maximum = new decimal(new int[] {
-            24,
+            25,
             0,
             0,
             0});
@@ -4368,41 +4685,16 @@
             0,
             65536});
             // 
-            // label100
-            // 
-            this.label100.AutoSize = true;
-            this.label100.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label100.Location = new System.Drawing.Point(6, 91);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(74, 15);
-            this.label100.TabIndex = 104;
-            this.label100.Text = "DayEndHour";
-            // 
-            // label101
-            // 
-            this.label101.AutoSize = true;
-            this.label101.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label101.Location = new System.Drawing.Point(227, 93);
-            this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(92, 15);
-            this.label101.TabIndex = 112;
-            this.label101.Text = "BloodMoonBuff";
-            // 
-            // label102
-            // 
-            this.label102.AutoSize = true;
-            this.label102.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label102.Location = new System.Drawing.Point(6, 43);
-            this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(78, 15);
-            this.label102.TabIndex = 102;
-            this.label102.Text = "DayStartHour";
-            // 
             // BloodMoonFrequency_MaxNumber
             // 
             this.BloodMoonFrequency_MaxNumber.Location = new System.Drawing.Point(383, 67);
             this.BloodMoonFrequency_MaxNumber.Maximum = new decimal(new int[] {
             255,
+            0,
+            0,
+            0});
+            this.BloodMoonFrequency_MaxNumber.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -4432,22 +4724,17 @@
             0,
             0});
             // 
-            // label103
-            // 
-            this.label103.AutoSize = true;
-            this.label103.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label103.Location = new System.Drawing.Point(227, 69);
-            this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(153, 15);
-            this.label103.TabIndex = 110;
-            this.label103.Text = "BloodMoonFrequency_Max";
-            // 
             // DayDurationInSecondsNumber
             // 
             this.DayDurationInSecondsNumber.DecimalPlaces = 2;
             this.DayDurationInSecondsNumber.Location = new System.Drawing.Point(162, 17);
             this.DayDurationInSecondsNumber.Maximum = new decimal(new int[] {
-            3600,
+            86400,
+            0,
+            0,
+            0});
+            this.DayDurationInSecondsNumber.Minimum = new decimal(new int[] {
+            60,
             0,
             0,
             0});
@@ -4468,6 +4755,11 @@
             0,
             0,
             0});
+            this.BloodMoonFrequency_MinNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.BloodMoonFrequency_MinNumber.Name = "BloodMoonFrequency_MinNumber";
             this.BloodMoonFrequency_MinNumber.Size = new System.Drawing.Size(60, 23);
             this.BloodMoonFrequency_MinNumber.TabIndex = 109;
@@ -4476,26 +4768,6 @@
             0,
             0,
             0});
-            // 
-            // label104
-            // 
-            this.label104.AutoSize = true;
-            this.label104.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label104.Location = new System.Drawing.Point(227, 21);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(85, 15);
-            this.label104.TabIndex = 106;
-            this.label104.Text = "DayEndMinute";
-            // 
-            // label105
-            // 
-            this.label105.AutoSize = true;
-            this.label105.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label105.Location = new System.Drawing.Point(227, 45);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(151, 15);
-            this.label105.TabIndex = 108;
-            this.label105.Text = "BloodMoonFrequency_Min";
             // 
             // DayEndMinuteNumber
             // 
@@ -4641,6 +4913,8 @@
             this.label110.Size = new System.Drawing.Size(109, 15);
             this.label110.TabIndex = 120;
             this.label110.Text = "VBloodUnitSettings";
+            this.toolTip1.SetToolTip(this.label110, "Changes whether specific VBlood should be unlocked by default and its level.\r\nMin" +
+        " Level = 1\r\nMax Level = 100");
             // 
             // panel1
             // 
@@ -4694,7 +4968,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1004, 758);
+            this.panel1.Size = new System.Drawing.Size(1004, 1337);
             this.panel1.TabIndex = 121;
             // 
             // label111
@@ -4713,7 +4987,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1004, 782);
+            this.ClientSize = new System.Drawing.Size(1004, 1361);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

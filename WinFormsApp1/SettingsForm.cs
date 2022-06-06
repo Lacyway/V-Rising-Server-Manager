@@ -209,7 +209,10 @@ namespace ServerManager
                 int id = Convert.ToInt32(row.Cells["Id"].Value);
                 int level = Convert.ToInt32(row.Cells["Level"].Value);
                 bool unlocked = Convert.ToBoolean(row.Cells["DefaultUnlocked"].Value);
-                if (level > 100) level = 100;
+                if (level > 100)
+                    level = 100;
+                if (level < 1)
+                    level = 1;
                 VBloodUnitSetting unit = new VBloodUnitSetting()
                 {
                     UnitId = id,
@@ -921,7 +924,11 @@ namespace ServerManager
             }
             catch (NullReferenceException)
             {
-                //For now this error is ok, we ignore it
+                //For now this error is ok, we ignore it. Means one or more entries were missing.
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                MessageBox.Show("One or more values are set too high/low in the loaded file. Unable to load the file.\n\n" + e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
