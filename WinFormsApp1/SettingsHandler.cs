@@ -102,7 +102,7 @@ namespace ServerManager
 
     public class PlayerInteractionSettings
     {
-        public int TimeZone { get; set; } = 0;
+        public dynamic TimeZone { get; set; } = 0;
         public VSPlayerWeekdayTime? VSPlayerWeekdayTime { get; set; }
         public VSPlayerWeekendTime? VSPlayerWeekendTime { get; set; }
         public VSCastleWeekdayTime? VSCastleWeekdayTime { get; set; }
@@ -218,14 +218,14 @@ namespace ServerManager
 
     public class GameSettings
     {
-        public int GameModeType { get; set; } = 0;
-        public int CastleDamageMode { get; set; } = 0;
-        public int SiegeWeaponHealth { get; set; } = 2;
-        public int PlayerDamageMode { get; set; } = 0;
-        public int CastleHeartDamageMode { get; set; } = 0;
-        public int PvPProtectionMode { get; set; } = 2;
-        public int DeathContainerPermission { get; set; } = 0;
-        public int RelicSpawnType { get; set; } = 0;
+        public dynamic GameModeType { get; set; } = 0;
+        public dynamic CastleDamageMode { get; set; } = 0;
+        public dynamic SiegeWeaponHealth { get; set; } = 2;
+        public dynamic PlayerDamageMode { get; set; } = 0;
+        public dynamic CastleHeartDamageMode { get; set; } = 0;
+        public dynamic PvPProtectionMode { get; set; } = 2;
+        public dynamic DeathContainerPermission { get; set; } = 0;
+        public dynamic RelicSpawnType { get; set; } = 0;
         public bool CanLootEnemyContainers { get; set; } = true;
         public bool BloodBoundEquipment { get; set; } = true;
         public bool TeleportBoundItems { get; set; } = true;

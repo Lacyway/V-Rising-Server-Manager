@@ -532,14 +532,161 @@ namespace ServerManager
             try
             {
                 GameSettings LoadedSettings = JsonConvert.DeserializeObject<GameSettings>(Loaded);
-                GameTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.GameModeType);
-                CastleDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleDamageMode);
-                SiegeWeaponHealthComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.SiegeWeaponHealth);
-                PlayerDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerDamageMode);
-                CastleHeartDamageModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.CastleHeartDamageMode);
-                PvPProtectionModeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PvPProtectionMode);
-                DeathContainerPermissionComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.DeathContainerPermission);
-                RelicSpawnTypeComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.RelicSpawnType);
+                if (int.TryParse(LoadedSettings.GameModeType.ToString(), out int GameModeTypeValue))
+                {
+                    GameTypeComboBox.SelectedIndex = GameModeTypeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.GameModeType)
+                    {
+                        case "PvE":
+                            GameTypeComboBox.SelectedIndex = 0;
+                            break;
+                        case "PvP":
+                            GameTypeComboBox.SelectedIndex = 1;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.CastleDamageMode.ToString(), out int CastleDamageModeValue))
+                {
+                    CastleDamageModeComboBox.SelectedIndex = CastleDamageModeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.CastleDamageMode)
+                    {
+                        case "Never":
+                            CastleDamageModeComboBox.SelectedIndex = 0;
+                            break;
+                        case "Always":
+                            CastleDamageModeComboBox.SelectedIndex = 1;
+                            break;
+                        case "TimeRestricted":
+                            CastleDamageModeComboBox.SelectedIndex = 2;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.SiegeWeaponHealth.ToString(), out int SiegeWeaponHealthValue))
+                {
+                    SiegeWeaponHealthComboBox.SelectedIndex = SiegeWeaponHealthValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.SiegeWeaponHealth)
+                    {
+                        case "VeryLow":
+                            SiegeWeaponHealthComboBox.SelectedIndex = 0;
+                            break;
+                        case "Low":
+                            SiegeWeaponHealthComboBox.SelectedIndex = 1;
+                            break;
+                        case "Normal":
+                            SiegeWeaponHealthComboBox.SelectedIndex = 2;
+                            break;
+                        case "High":
+                            SiegeWeaponHealthComboBox.SelectedIndex = 3;
+                            break;
+                        case "VeryHigh":
+                            SiegeWeaponHealthComboBox.SelectedIndex = 4;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.PlayerDamageMode.ToString(), out int PlayerDamageModeValue))
+                {
+                    PlayerDamageModeComboBox.SelectedIndex = PlayerDamageModeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.PlayerDamageMode)
+                    {
+                        case "Always":
+                            PlayerDamageModeComboBox.SelectedIndex = 0;
+                            break;
+                        case "Restricted":
+                            PlayerDamageModeComboBox.SelectedIndex = 1;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.CastleHeartDamageMode.ToString(), out int CastleHeartDamageModeValue))
+                {
+                    CastleHeartDamageModeComboBox.SelectedIndex = CastleHeartDamageModeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.CastleHeartDamageMode)
+                    {
+                        case "CanBeDestroyedOnlyWhenDecaying":
+                            CastleHeartDamageModeComboBox.SelectedIndex = 0;
+                            break;
+                        case "CanBeDestroyedByPlayers":
+                            CastleHeartDamageModeComboBox.SelectedIndex = 1;
+                            break;
+                        case "CanBeSeizedOrDestroyedByPlayers":
+                            CastleHeartDamageModeComboBox.SelectedIndex = 2;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.PvPProtectionMode.ToString(), out int PvPProtectionModeValue))
+                {
+                    PvPProtectionModeComboBox.SelectedIndex = PvPProtectionModeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.PvPProtectionMode)
+                    {
+                        case "Disabled":
+                            PvPProtectionModeComboBox.SelectedIndex = 0;
+                            break;
+                        case "VeryShort":
+                            PvPProtectionModeComboBox.SelectedIndex = 1;
+                            break;
+                        case "Short":
+                            PvPProtectionModeComboBox.SelectedIndex = 2;
+                            break;
+                        case "Medium":
+                            PvPProtectionModeComboBox.SelectedIndex = 3;
+                            break;
+                        case "Long":
+                            PvPProtectionModeComboBox.SelectedIndex = 4;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.DeathContainerPermission.ToString(), out int DeathContainerPermissionValue))
+                {
+                    DeathContainerPermissionComboBox.SelectedIndex = DeathContainerPermissionValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.DeathContainerPermission)
+                    {
+                        case "Anyone":
+                            DeathContainerPermissionComboBox.SelectedIndex = 0;
+                            break;
+                        case "ClanMembers":
+                            DeathContainerPermissionComboBox.SelectedIndex = 1;
+                            break;
+                        case "OnlySelf":
+                            DeathContainerPermissionComboBox.SelectedIndex = 2;
+                            break;
+                    }
+                }
+                if (int.TryParse(LoadedSettings.RelicSpawnType.ToString(), out int RelicSpawnTypeValue))
+                {
+                    RelicSpawnTypeComboBox.SelectedIndex = RelicSpawnTypeValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.RelicSpawnType)
+                    {
+                        case "Unique":
+                            RelicSpawnTypeComboBox.SelectedIndex = 0;
+                            break;
+                        case "Plentiful":
+                            RelicSpawnTypeComboBox.SelectedIndex = 1;
+                            break;
+                    }
+                }
                 if (LoadedSettings.CanLootEnemyContainers == true)
                 {
                     CanLootEnemyContainersRadioTrue.Checked = true;
@@ -693,7 +840,34 @@ namespace ServerManager
                 ServantLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit);
                 FloorLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit);
                 ServantLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit);
-                TimeZoneComboBox.SelectedIndex = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.TimeZone);
+                if (int.TryParse(LoadedSettings.PlayerInteractionSettings.TimeZone.ToString(), out int TimeZoneValue))
+                {
+                    TimeZoneComboBox.SelectedIndex = TimeZoneValue;
+                }
+                else
+                {
+                    switch (LoadedSettings.PlayerInteractionSettings.TimeZone)
+                    {
+                        case "Local":
+                            TimeZoneComboBox.SelectedIndex = 0;
+                            break;
+                        case "UTC":
+                            TimeZoneComboBox.SelectedIndex = 1;
+                            break;
+                        case "PST":
+                            TimeZoneComboBox.SelectedIndex = 2;
+                            break;
+                        case "EST":
+                            TimeZoneComboBox.SelectedIndex = 3;
+                            break;
+                        case "CET":
+                            TimeZoneComboBox.SelectedIndex = 4;
+                            break;
+                        case "CST":
+                            TimeZoneComboBox.SelectedIndex = 5;
+                            break;
+                    }
+                }
                 StartHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartHour);
                 StartMinuteNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.StartMinute);
                 EndHourNumber_VSPlayerWeekday.Value = Convert.ToInt16(LoadedSettings.PlayerInteractionSettings.VSPlayerWeekdayTime.EndHour);
