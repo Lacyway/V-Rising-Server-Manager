@@ -52,6 +52,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BindIPTextbox = new System.Windows.Forms.TextBox();
+            this.BindToIPCheckbox = new System.Windows.Forms.CheckBox();
             this.MainMenuStatusStrip = new System.Windows.Forms.StatusStrip();
             this.SteamCMDStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.SpacerLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -289,17 +291,38 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.BindIPTextbox);
             this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.BindToIPCheckbox);
             this.groupBox3.Controls.Add(this.SaveButton);
             this.groupBox3.Controls.Add(this.ServerNameValue);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.SaveNameValue);
             this.groupBox3.Location = new System.Drawing.Point(8, 16);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(280, 112);
+            this.groupBox3.Size = new System.Drawing.Size(416, 112);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Server Info";
+            this.groupBox3.Text = "Server Launch Settings";
+            // 
+            // BindIPTextbox
+            // 
+            this.BindIPTextbox.Location = new System.Drawing.Point(280, 56);
+            this.BindIPTextbox.Name = "BindIPTextbox";
+            this.BindIPTextbox.ReadOnly = true;
+            this.BindIPTextbox.Size = new System.Drawing.Size(128, 23);
+            this.BindIPTextbox.TabIndex = 1;
+            // 
+            // BindToIPCheckbox
+            // 
+            this.BindToIPCheckbox.AutoSize = true;
+            this.BindToIPCheckbox.Location = new System.Drawing.Point(280, 24);
+            this.BindToIPCheckbox.Name = "BindToIPCheckbox";
+            this.BindToIPCheckbox.Size = new System.Drawing.Size(77, 19);
+            this.BindToIPCheckbox.TabIndex = 0;
+            this.BindToIPCheckbox.Text = "Bind to IP";
+            this.BindToIPCheckbox.UseVisualStyleBackColor = true;
+            this.BindToIPCheckbox.CheckStateChanged += new System.EventHandler(this.BindToIPCheckbox_CheckStateChanged);
             // 
             // MainMenuStatusStrip
             // 
@@ -389,5 +412,7 @@
         private System.Windows.Forms.ToolStripStatusLabel SteamCMDStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel LastUpdateLabel;
         private System.Windows.Forms.ToolStripStatusLabel SpacerLabel;
+        private System.Windows.Forms.TextBox BindIPTextbox;
+        private System.Windows.Forms.CheckBox BindToIPCheckbox;
     }
 }

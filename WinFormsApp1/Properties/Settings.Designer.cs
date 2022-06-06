@@ -190,5 +190,29 @@ namespace ServerManager.Properties {
                 this["AutoUpdateRCONMessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BindToIP {
+            get {
+                return ((bool)(this["BindToIP"]));
+            }
+            set {
+                this["BindToIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string BindingIP {
+            get {
+                return ((string)(this["BindingIP"]));
+            }
+            set {
+                this["BindingIP"] = value;
+            }
+        }
     }
 }

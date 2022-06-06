@@ -57,6 +57,12 @@ namespace ServerManager
                 LastUpdateLabel.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
             if (Properties.Settings.Default.AutoUpdate == true) 
                 UpdateTimer();
+            BindIPTextbox.Text = Properties.Settings.Default.BindingIP;
+            if (Properties.Settings.Default.BindToIP == true)
+            {
+                BindToIPCheckbox.Checked = true;
+                BindIPTextbox.ReadOnly = false;
+            }
             CheckServer();
         }
 
@@ -305,7 +311,7 @@ namespace ServerManager
             {
                 StopGameServerButton.Enabled = true;
                 StartGameServerButton.Enabled = false;
-                string parameters = String.Format(@"-persistentDataPath ""{0}"" -serverName ""{1}"" -saveName ""{2}"" -logFile ""{3}\VRisingServer.log""", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path);
+                string parameters = String.Format(@"-persistentDataPath ""{0}"" -serverName ""{1}"" -saveName ""{2}"" -logFile ""{3}\VRisingServer.log""{4}", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path, (Properties.Settings.Default.BindToIP) ? String.Format(@" -address ""{0}""", BindIPTextbox.Text) : "");
                 Process serverProcess = new Process();
                 serverProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 serverProcess.StartInfo.FileName = Properties.Settings.Default.Server_Path + @"\VRisingServer.exe";
@@ -431,8 +437,15 @@ namespace ServerManager
         {
             Properties.Settings.Default.Server_Name = ServerNameValue.Text;
             Properties.Settings.Default.Save_Name = SaveNameValue.Text;
+            Properties.Settings.Default.BindToIP = BindToIPCheckbox.Checked;
+            Properties.Settings.Default.BindingIP = BindIPTextbox.Text;
             Properties.Settings.Default.Save();
-            MainMenuConsole.AppendText(Environment.NewLine + "Name and world name saved.");
+            MainMenuConsole.AppendText(Environment.NewLine + "Launch info saved.");
+        }
+
+        private void BindToIPCheckbox_CheckStateChanged(object sender, EventArgs e)
+        {
+            BindIPTextbox.ReadOnly = !BindToIPCheckbox.Checked;
         }
     }
 }
