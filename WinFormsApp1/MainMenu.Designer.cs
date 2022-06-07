@@ -321,6 +321,7 @@
             this.BindToIPCheckbox.Size = new System.Drawing.Size(77, 19);
             this.BindToIPCheckbox.TabIndex = 0;
             this.BindToIPCheckbox.Text = "Bind to IP";
+            this.toolTip1.SetToolTip(this.BindToIPCheckbox, "Starts the server with the -address parameter using the chosen IP below.");
             this.BindToIPCheckbox.UseVisualStyleBackColor = true;
             this.BindToIPCheckbox.CheckStateChanged += new System.EventHandler(this.BindToIPCheckbox_CheckStateChanged);
             // 

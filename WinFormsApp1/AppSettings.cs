@@ -20,6 +20,10 @@ namespace ServerManager
             }
             AutoUpdateInterval.Value = Properties.Settings.Default.AutoUpdateInterval;
             SendMessageCheckbox.Checked = Properties.Settings.Default.AutoUpdateRCONMessage;
+            AutoLoadGameSettingsCheckbox.Checked = Properties.Settings.Default.AutoLoadGameSettings;
+            AutoLoadHostSettingsCheckbox.Checked = Properties.Settings.Default.AutoLoadHostSettings;
+            AutoLoadGameSettingsTextbox.Text = Properties.Settings.Default.GameSettingsFile;
+            AutoLoadHostSettingsTextbox.Text = Properties.Settings.Default.HostSettingsFile;
         }
 
         private void SelectServerFolderButton_Click(object sender, EventArgs e)
@@ -47,7 +51,7 @@ namespace ServerManager
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure?\nUnsaved changes will be lost.", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure? Unsaved changes will be lost.", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Close();
             }
@@ -62,6 +66,10 @@ namespace ServerManager
             Properties.Settings.Default.AutoUpdate = AutoUpdateCheckbox.Checked;
             Properties.Settings.Default.VerifyUpdate = VerifyUpdateCheckbox.Checked;
             Properties.Settings.Default.AutoUpdateRCONMessage = SendMessageCheckbox.Checked;
+            Properties.Settings.Default.AutoLoadGameSettings = AutoLoadGameSettingsCheckbox.Checked;
+            Properties.Settings.Default.AutoLoadHostSettings = AutoLoadHostSettingsCheckbox.Checked;
+            Properties.Settings.Default.GameSettingsFile = AutoLoadGameSettingsTextbox.Text;
+            Properties.Settings.Default.HostSettingsFile = AutoLoadHostSettingsTextbox.Text;
             Properties.Settings.Default.Save();
             Close();
         }
@@ -70,6 +78,20 @@ namespace ServerManager
         {
             AutoUpdateInterval.Enabled = AutoUpdateCheckbox.Checked;
             SendMessageCheckbox.Enabled = AutoUpdateCheckbox.Checked;
+        }
+
+        private void SelectAutoLoadGameSettingsFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog.FileName = "ServerGameSettings.json";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+                AutoLoadGameSettingsTextbox.Text = OpenFileDialog.FileName;
+        }
+
+        private void SelectAutoLoadHostSettingsFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog.FileName = "ServerHostSettings.json";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+                AutoLoadHostSettingsTextbox.Text = OpenFileDialog.FileName;
         }
     }
 }

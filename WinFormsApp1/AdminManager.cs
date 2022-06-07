@@ -10,12 +10,12 @@ namespace ServerManager
         {
             InitializeComponent();
             Icon = Properties.Resources.logo;
-            PopulateList(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt");
+            PopulateList(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt");
         }
 
         private void PopulateList(string filePath)
         {
-            if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt"))
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt"))
             {
                 AdminList.Items.Clear();
                 using (StreamReader sr = new StreamReader(filePath))
@@ -60,9 +60,9 @@ namespace ServerManager
 
         private void SaveButton_Click(object sender, System.EventArgs e)
         {
-            if (File.Exists(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt"))
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt"))
             {
-                string sPath = string.Format("{0}\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt", Properties.Settings.Default.Server_Path);
+                string sPath = string.Format(@"{0}\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", Properties.Settings.Default.Server_Path);
                 StreamWriter SaveFile = new StreamWriter(sPath);
                 foreach (var item in AdminList.Items)
                 {
@@ -78,7 +78,7 @@ namespace ServerManager
 
         private void ReloadButton_Click(object sender, System.EventArgs e)
         {
-            PopulateList(Properties.Settings.Default.Server_Path + "\\VRisingServer_Data\\StreamingAssets\\Settings\\adminlist.txt");
+            PopulateList(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt");
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

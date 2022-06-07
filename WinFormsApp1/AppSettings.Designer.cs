@@ -45,9 +45,18 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.AutoUpdateCheckbox = new System.Windows.Forms.CheckBox();
             this.SendMessageCheckbox = new System.Windows.Forms.CheckBox();
+            this.AutoLoadGameSettingsCheckbox = new System.Windows.Forms.CheckBox();
+            this.AutoLoadHostSettingsCheckbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.AutoUpdateInterval = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
+            this.AutoLoadGameSettingsTextbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.SelectAutoLoadGameSettingsFileButton = new System.Windows.Forms.Button();
+            this.SelectAutoLoadHostSettingsFileButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.AutoLoadHostSettingsTextbox = new System.Windows.Forms.TextBox();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.AutoUpdateInterval)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,7 +153,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(352, 160);
+            this.SaveButton.Location = new System.Drawing.Point(352, 320);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 9;
@@ -154,7 +163,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(432, 160);
+            this.CancelButton.Location = new System.Drawing.Point(432, 320);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 10;
@@ -198,6 +207,29 @@
         "e updating.\r\nWARNING: Requires RCON enabled and set up in the RCON Console.");
             this.SendMessageCheckbox.UseVisualStyleBackColor = true;
             // 
+            // AutoLoadGameSettingsCheckbox
+            // 
+            this.AutoLoadGameSettingsCheckbox.AutoSize = true;
+            this.AutoLoadGameSettingsCheckbox.Location = new System.Drawing.Point(8, 208);
+            this.AutoLoadGameSettingsCheckbox.Name = "AutoLoadGameSettingsCheckbox";
+            this.AutoLoadGameSettingsCheckbox.Size = new System.Drawing.Size(157, 19);
+            this.AutoLoadGameSettingsCheckbox.TabIndex = 17;
+            this.AutoLoadGameSettingsCheckbox.Text = "Auto Load GameSettings";
+            this.toolTip1.SetToolTip(this.AutoLoadGameSettingsCheckbox, "If enabled the Settings editor will automatically load this file when opened.");
+            this.AutoLoadGameSettingsCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // AutoLoadHostSettingsCheckbox
+            // 
+            this.AutoLoadHostSettingsCheckbox.AutoSize = true;
+            this.AutoLoadHostSettingsCheckbox.Location = new System.Drawing.Point(8, 256);
+            this.AutoLoadHostSettingsCheckbox.Name = "AutoLoadHostSettingsCheckbox";
+            this.AutoLoadHostSettingsCheckbox.Size = new System.Drawing.Size(151, 19);
+            this.AutoLoadHostSettingsCheckbox.TabIndex = 21;
+            this.AutoLoadHostSettingsCheckbox.Text = "Auto Load HostSettings";
+            this.toolTip1.SetToolTip(this.AutoLoadHostSettingsCheckbox, "If enabled the Server Settings editor will automatically load this file when open" +
+        "ed.");
+            this.AutoLoadHostSettingsCheckbox.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -239,11 +271,78 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Minutes";
             // 
+            // AutoLoadGameSettingsTextbox
+            // 
+            this.AutoLoadGameSettingsTextbox.Location = new System.Drawing.Point(40, 228);
+            this.AutoLoadGameSettingsTextbox.Name = "AutoLoadGameSettingsTextbox";
+            this.AutoLoadGameSettingsTextbox.ReadOnly = true;
+            this.AutoLoadGameSettingsTextbox.Size = new System.Drawing.Size(384, 23);
+            this.AutoLoadGameSettingsTextbox.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 232);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 15);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "File:";
+            // 
+            // SelectAutoLoadGameSettingsFileButton
+            // 
+            this.SelectAutoLoadGameSettingsFileButton.Location = new System.Drawing.Point(432, 228);
+            this.SelectAutoLoadGameSettingsFileButton.Name = "SelectAutoLoadGameSettingsFileButton";
+            this.SelectAutoLoadGameSettingsFileButton.Size = new System.Drawing.Size(75, 23);
+            this.SelectAutoLoadGameSettingsFileButton.TabIndex = 20;
+            this.SelectAutoLoadGameSettingsFileButton.Text = "Select";
+            this.SelectAutoLoadGameSettingsFileButton.UseVisualStyleBackColor = true;
+            this.SelectAutoLoadGameSettingsFileButton.Click += new System.EventHandler(this.SelectAutoLoadGameSettingsFileButton_Click);
+            // 
+            // SelectAutoLoadHostSettingsFileButton
+            // 
+            this.SelectAutoLoadHostSettingsFileButton.Location = new System.Drawing.Point(432, 276);
+            this.SelectAutoLoadHostSettingsFileButton.Name = "SelectAutoLoadHostSettingsFileButton";
+            this.SelectAutoLoadHostSettingsFileButton.Size = new System.Drawing.Size(75, 23);
+            this.SelectAutoLoadHostSettingsFileButton.TabIndex = 24;
+            this.SelectAutoLoadHostSettingsFileButton.Text = "Select";
+            this.SelectAutoLoadHostSettingsFileButton.UseVisualStyleBackColor = true;
+            this.SelectAutoLoadHostSettingsFileButton.Click += new System.EventHandler(this.SelectAutoLoadHostSettingsFileButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 280);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 15);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "File:";
+            // 
+            // AutoLoadHostSettingsTextbox
+            // 
+            this.AutoLoadHostSettingsTextbox.Location = new System.Drawing.Point(40, 276);
+            this.AutoLoadHostSettingsTextbox.Name = "AutoLoadHostSettingsTextbox";
+            this.AutoLoadHostSettingsTextbox.ReadOnly = true;
+            this.AutoLoadHostSettingsTextbox.Size = new System.Drawing.Size(384, 23);
+            this.AutoLoadHostSettingsTextbox.TabIndex = 22;
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.DefaultExt = "json";
+            this.OpenFileDialog.Filter = "\"JSON files\"|*.json";
+            // 
             // AppSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 187);
+            this.ClientSize = new System.Drawing.Size(516, 351);
+            this.Controls.Add(this.SelectAutoLoadHostSettingsFileButton);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.AutoLoadHostSettingsTextbox);
+            this.Controls.Add(this.AutoLoadHostSettingsCheckbox);
+            this.Controls.Add(this.SelectAutoLoadGameSettingsFileButton);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.AutoLoadGameSettingsTextbox);
+            this.Controls.Add(this.AutoLoadGameSettingsCheckbox);
             this.Controls.Add(this.SendMessageCheckbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.AutoUpdateInterval);
@@ -264,7 +363,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AppSettings";
-            this.Text = "AppSettings";
+            this.Text = "Manager Settings";
             ((System.ComponentModel.ISupportInitialize)(this.AutoUpdateInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -292,5 +391,14 @@
         private System.Windows.Forms.NumericUpDown AutoUpdateInterval;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox SendMessageCheckbox;
+        private System.Windows.Forms.CheckBox AutoLoadGameSettingsCheckbox;
+        private System.Windows.Forms.TextBox AutoLoadGameSettingsTextbox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button SelectAutoLoadGameSettingsFileButton;
+        private System.Windows.Forms.CheckBox AutoLoadHostSettingsCheckbox;
+        private System.Windows.Forms.Button SelectAutoLoadHostSettingsFileButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox AutoLoadHostSettingsTextbox;
+        private System.Windows.Forms.OpenFileDialog OpenFileDialog;
     }
 }

@@ -11,6 +11,8 @@ namespace ServerManager
         {
             InitializeComponent();
             Icon = Properties.Resources.logo;
+            if (Properties.Settings.Default.AutoLoadHostSettings == true && File.Exists(Properties.Settings.Default.GameSettingsFile))
+                LoadServerSettings(true);
         }
 
         private void SaveServerSettings()
@@ -68,15 +70,24 @@ namespace ServerManager
                 }
             };
             string ServerSettingsJSON = JsonConvert.SerializeObject(mainServer, Formatting.Indented);
-            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
             {
-                SaveServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                SaveServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
             }
             else
             {
                 SaveServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
             }
-            if (SaveServerSettingsDialog.ShowDialog() == DialogResult.OK)
+            if (Properties.Settings.Default.AutoLoadHostSettings == true && MessageBox.Show("Save to auto-loaded file?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (File.Exists(Properties.Settings.Default.HostSettingsFile))
+                {
+                    File.Copy(Properties.Settings.Default.HostSettingsFile, Properties.Settings.Default.HostSettingsFile + ".bak", true);
+                }
+                File.WriteAllText(Properties.Settings.Default.HostSettingsFile, ServerSettingsJSON);
+                MessageBox.Show("File successfully saved to: \n" + Properties.Settings.Default.HostSettingsFile);
+            }
+            else if (SaveServerSettingsDialog.ShowDialog() == DialogResult.OK)
             {
                 if (File.Exists(SaveServerSettingsDialog.FileName))
                 {
@@ -87,64 +98,80 @@ namespace ServerManager
             }
         }
 
-        private void LoadServerSettings()
+        private void LoadServerSettings(bool AutoLoad)
         {
-            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
             {
-                LoadServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                LoadServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
             }
             else
             {
                 LoadServerSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
             }
-            if (LoadServerSettingsDialog.ShowDialog() == DialogResult.OK)
+            if (AutoLoad == true)
             {
-                using (StreamReader reader = new StreamReader(LoadServerSettingsDialog.FileName))
+                using (StreamReader reader = new StreamReader(Properties.Settings.Default.HostSettingsFile))
                 {
-                    try
+                    string LoadedServerJSON = reader.ReadToEnd();
+                    LoadHandler(LoadedServerJSON);
+                }
+            }
+            else
+            {
+                if (LoadServerSettingsDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamReader reader = new StreamReader(LoadServerSettingsDialog.FileName))
                     {
                         string LoadedServerJSON = reader.ReadToEnd();
-                        ServerSettings LoadedServerSettings = JsonConvert.DeserializeObject<ServerSettings>(LoadedServerJSON);
-                        NameValue.Text = LoadedServerSettings.Name;
-                        DescriptionValue.Text = LoadedServerSettings.Description;
-                        PortNumber.Value = LoadedServerSettings.Port;
-                        QueryPortNumber.Value = LoadedServerSettings.QueryPort;
-                        MaxConnectedUsersNumber.Value = LoadedServerSettings.MaxConnectedUsers;
-                        MaxConnectedAdminsNumber.Value = LoadedServerSettings.MaxConnectedAdmins;
-                        ServerFpsNumber.Value = LoadedServerSettings.ServerFps;
-                        SaveNameValue.Text = LoadedServerSettings.SaveName;
-                        PasswordValue.Text = LoadedServerSettings.Password;
-                        if (LoadedServerSettings.Secure == true)
-                        {
-                            SecureRadioTrue.Checked = true;
-                        }
-                        if (LoadedServerSettings.ListOnMasterServer == false)
-                        {
-                            ListOnMasterServerRadioFalse.Checked = true;
-                        }
-                        AutoSaveCountNumber.Value = LoadedServerSettings.AutoSaveCount;
-                        AutoSaveIntervalNumber.Value = LoadedServerSettings.AutoSaveInterval;
-                        if (LoadedServerSettings.AdminOnlyDebugEvents == false)
-                        {
-                            AdminOnlyDebugEventsRadioFalse.Checked = true;
-                        }
-                        if (LoadedServerSettings.DisableDebugEvents == true)
-                        {
-                            DisableDebugEventsRadioTrue.Checked = true;
-                        }
-                        if (LoadedServerSettings.Rcon.Enabled == true)
-                        {
-                            RCONRadioTrue.Checked = true;
-                        }
-                        RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
-                        RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
+                        LoadHandler(LoadedServerJSON);
                     }
-                    catch (NullReferenceException)
-                    {
-                        MessageBox.Show("One or more default values was missing.\nDefault values will be used.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
                 }
+            }
+            
+        }
+
+        private void LoadHandler(string Loaded)
+        {
+            try 
+            {
+                ServerSettings LoadedServerSettings = JsonConvert.DeserializeObject<ServerSettings>(Loaded);
+                NameValue.Text = LoadedServerSettings.Name;
+                DescriptionValue.Text = LoadedServerSettings.Description;
+                PortNumber.Value = LoadedServerSettings.Port;
+                QueryPortNumber.Value = LoadedServerSettings.QueryPort;
+                MaxConnectedUsersNumber.Value = LoadedServerSettings.MaxConnectedUsers;
+                MaxConnectedAdminsNumber.Value = LoadedServerSettings.MaxConnectedAdmins;
+                ServerFpsNumber.Value = LoadedServerSettings.ServerFps;
+                SaveNameValue.Text = LoadedServerSettings.SaveName;
+                PasswordValue.Text = LoadedServerSettings.Password;
+                if (LoadedServerSettings.Secure == true)
+                {
+                    SecureRadioTrue.Checked = true;
+                }
+                if (LoadedServerSettings.ListOnMasterServer == false)
+                {
+                    ListOnMasterServerRadioFalse.Checked = true;
+                }
+                AutoSaveCountNumber.Value = LoadedServerSettings.AutoSaveCount;
+                AutoSaveIntervalNumber.Value = LoadedServerSettings.AutoSaveInterval;
+                if (LoadedServerSettings.AdminOnlyDebugEvents == false)
+                {
+                    AdminOnlyDebugEventsRadioFalse.Checked = true;
+                }
+                if (LoadedServerSettings.DisableDebugEvents == true)
+                {
+                    DisableDebugEventsRadioTrue.Checked = true;
+                }
+                if (LoadedServerSettings.Rcon.Enabled == true)
+                {
+                    RCONRadioTrue.Checked = true;
+                }
+                RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
+                RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
+                }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("One or more default values was missing.\nDefault values will be used.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -155,7 +182,7 @@ namespace ServerManager
 
         private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadServerSettings();
+            LoadServerSettings(false);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

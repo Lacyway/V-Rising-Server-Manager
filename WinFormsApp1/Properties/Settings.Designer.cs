@@ -214,5 +214,53 @@ namespace ServerManager.Properties {
                 this["BindingIP"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoLoadGameSettings {
+            get {
+                return ((bool)(this["AutoLoadGameSettings"]));
+            }
+            set {
+                this["AutoLoadGameSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoLoadHostSettings {
+            get {
+                return ((bool)(this["AutoLoadHostSettings"]));
+            }
+            set {
+                this["AutoLoadHostSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameSettingsFile {
+            get {
+                return ((string)(this["GameSettingsFile"]));
+            }
+            set {
+                this["GameSettingsFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HostSettingsFile {
+            get {
+                return ((string)(this["HostSettingsFile"]));
+            }
+            set {
+                this["HostSettingsFile"] = value;
+            }
+        }
     }
 }

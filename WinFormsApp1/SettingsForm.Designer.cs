@@ -207,6 +207,8 @@
             this.label103 = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.label105 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label110 = new System.Windows.Forms.Label();
             this.InventoryStacksModifierNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_GeneralNumber = new System.Windows.Forms.NumericUpDown();
             this.DropTableModifier_MissionsNumber = new System.Windows.Forms.NumericUpDown();
@@ -280,7 +282,6 @@
             this.DamageResistanceNumber = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.SafetyBoxLimitNumber = new System.Windows.Forms.NumericUpDown();
-            this.label68 = new System.Windows.Forms.Label();
             this.TickPeriodNumber = new System.Windows.Forms.NumericUpDown();
             this.VerminNestLimitNumber = new System.Windows.Forms.NumericUpDown();
             this.TombLimitNumber = new System.Windows.Forms.NumericUpDown();
@@ -328,7 +329,6 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DefaultUnlocked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.label110 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label111 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -2426,6 +2426,28 @@
             this.label105.Text = "BloodMoonFrequency_Min";
             this.toolTip1.SetToolTip(this.label105, "The minimum frequence for how often a blood moon may occur.\r\nMin = 1\r\nMax = 255");
             // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label68.Location = new System.Drawing.Point(6, 139);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(143, 15);
+            this.label68.TabIndex = 110;
+            this.label68.Text = "DamageReceivedModifier";
+            this.toolTip1.SetToolTip(this.label68, "Not used.");
+            // 
+            // label110
+            // 
+            this.label110.AutoSize = true;
+            this.label110.Location = new System.Drawing.Point(200, 1112);
+            this.label110.Name = "label110";
+            this.label110.Size = new System.Drawing.Size(109, 15);
+            this.label110.TabIndex = 120;
+            this.label110.Text = "VBloodUnitSettings";
+            this.toolTip1.SetToolTip(this.label110, "Changes whether specific VBlood should be unlocked by default and its level.\r\nMin" +
+        " Level = 1\r\nMax Level = 100");
+            // 
             // InventoryStacksModifierNumber
             // 
             this.InventoryStacksModifierNumber.DecimalPlaces = 2;
@@ -4193,17 +4215,6 @@
             0,
             0});
             // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label68.Location = new System.Drawing.Point(6, 139);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(143, 15);
-            this.label68.TabIndex = 110;
-            this.label68.Text = "DamageReceivedModifier";
-            this.toolTip1.SetToolTip(this.label68, "Not used.");
-            // 
             // TickPeriodNumber
             // 
             this.TickPeriodNumber.DecimalPlaces = 2;
@@ -4905,17 +4916,6 @@
             this.DefaultUnlocked.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DefaultUnlocked.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // label110
-            // 
-            this.label110.AutoSize = true;
-            this.label110.Location = new System.Drawing.Point(200, 1112);
-            this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(109, 15);
-            this.label110.TabIndex = 120;
-            this.label110.Text = "VBloodUnitSettings";
-            this.toolTip1.SetToolTip(this.label110, "Changes whether specific VBlood should be unlocked by default and its level.\r\nMin" +
-        " Level = 1\r\nMax Level = 100");
-            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
@@ -4968,7 +4968,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1004, 1337);
+            this.panel1.Size = new System.Drawing.Size(1004, 758);
             this.panel1.TabIndex = 121;
             // 
             // label111
@@ -4987,7 +4987,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1004, 1361);
+            this.ClientSize = new System.Drawing.Size(1004, 782);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

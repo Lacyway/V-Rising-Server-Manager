@@ -13,6 +13,8 @@ namespace ServerManager
         {
             InitializeComponent();
             Icon = Properties.Resources.logo;
+            if (Properties.Settings.Default.AutoLoadGameSettings == true && File.Exists(Properties.Settings.Default.GameSettingsFile))
+                LoadSettings(true, false, 0);
             SetupDefaults();
         }
 
@@ -413,15 +415,24 @@ namespace ServerManager
 
             };
             string SettingsJSON = JsonConvert.SerializeObject(main, Formatting.Indented);
-            if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
             {
-                SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
             }
             else
             {
                 SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
             }
-            if (SaveSettingsDialog.ShowDialog() == DialogResult.OK)
+            if (Properties.Settings.Default.AutoLoadGameSettings == true && MessageBox.Show("Save to auto-loaded file?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (File.Exists(Properties.Settings.Default.GameSettingsFile))
+                {
+                    File.Copy(Properties.Settings.Default.GameSettingsFile, Properties.Settings.Default.GameSettingsFile + ".bak", true);
+                }
+                File.WriteAllText(Properties.Settings.Default.GameSettingsFile, SettingsJSON);
+                MessageBox.Show("File successfully saved to: \n" + Properties.Settings.Default.GameSettingsFile);
+            }
+            else if (SaveSettingsDialog.ShowDialog() == DialogResult.OK)
             {
                 if (File.Exists(SaveSettingsDialog.FileName))
                 {
@@ -433,25 +444,29 @@ namespace ServerManager
 
         }
 
-        private void LoadSettings(bool Preset, int PresetToLoad)
+        private void LoadSettings(bool AutoLoad, bool Preset, int PresetToLoad)
         {
             string FileToLoad = "temp";
             string PresetFile = "temp";
             switch (Preset)
             {
                 case false:
-                    if (Directory.Exists(Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name))
+                    if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
                     {
-                        LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + "\\Saves\\v1\\" + Properties.Settings.Default.Save_Name;
+                        LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
                     }
                     else
                     {
                         LoadSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
                     }
-                    if (LoadSettingsDialog.ShowDialog() == DialogResult.OK)
+                    if (AutoLoad == true)
+                    {
+                        FileToLoad = Properties.Settings.Default.GameSettingsFile;
+                    }
+                    else if (LoadSettingsDialog.ShowDialog() == DialogResult.OK)
                     {
                         FileToLoad = LoadSettingsDialog.FileName;
-                    }
+                    }                    
                     else
                     {
                         return;
@@ -985,7 +1000,7 @@ namespace ServerManager
 
         private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadSettings(false, 0);
+            LoadSettings(false, false, 0);
         }
 
         private void VBloodUnitSettingsDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -1010,7 +1025,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 1);
+                LoadSettings(false, true, 1);
             }
         }
 
@@ -1018,7 +1033,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 2);
+                LoadSettings(false, true, 2);
             }
         }
 
@@ -1026,14 +1041,14 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 3);
+                LoadSettings(false, true, 3);
             }
         }
         private void pvEDawnLevel30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 4);
+                LoadSettings(false, true, 4);
             }
         }
 
@@ -1041,7 +1056,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 5);
+                LoadSettings(false, true, 5);
             }
         }
 
@@ -1049,7 +1064,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 6);
+                LoadSettings(false, true, 6);
             }
         }
 
@@ -1057,7 +1072,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 7);
+                LoadSettings(false, true, 7);
             }
         }
 
@@ -1065,7 +1080,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 8);
+                LoadSettings(false, true, 8);
             }
         }
 
@@ -1073,7 +1088,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 9);
+                LoadSettings(false, true, 9);
             }
         }
 
@@ -1081,7 +1096,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 10);
+                LoadSettings(false, true, 10);
             }
         }
 
@@ -1089,7 +1104,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 11);
+                LoadSettings(false, true, 11);
             }
         }
 
@@ -1097,7 +1112,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 12);
+                LoadSettings(false, true, 12);
             }
         }
 
@@ -1105,7 +1120,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 13);
+                LoadSettings(false, true, 13);
             }
         }
 
@@ -1113,7 +1128,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 14);
+                LoadSettings(false, true, 14);
             }
         }
 
@@ -1121,7 +1136,7 @@ namespace ServerManager
         {
             if (MessageBox.Show("Are you sure?\nAll unsaved changes are lost.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                LoadSettings(true, 15);
+                LoadSettings(false, true, 15);
             }
         }
     }
