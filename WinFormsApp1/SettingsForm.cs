@@ -924,6 +924,7 @@ namespace ServerManager
                 ServantLimit3Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit);
                 FloorLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit);
                 ServantLimit4Number.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit);
+                CastleLimitNumber.Value = Convert.ToInt16(LoadedSettings.CastleStatModifiers_Global.CastleLimit);
                 if (int.TryParse(LoadedSettings.PlayerInteractionSettings.TimeZone.ToString(), out int TimeZoneValue))
                 {
                     TimeZoneComboBox.SelectedIndex = TimeZoneValue;
