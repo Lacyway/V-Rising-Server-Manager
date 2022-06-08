@@ -708,34 +708,82 @@ namespace ServerManager
                 if (LoadedSettings.CanLootEnemyContainers == true)
                 {
                     CanLootEnemyContainersRadioTrue.Checked = true;
+                    CanLootEnemyContainersRadioFalse.Checked = false;
+                }
+                else
+                {
+                    CanLootEnemyContainersRadioTrue.Checked = false;
+                    CanLootEnemyContainersRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.BloodBoundEquipment == true)
                 {
                     BloodBoundEquipmentRadioTrue.Checked = true;
+                    BloodBoundEquipmentRadioFalse.Checked = false;
+                }
+                else
+                {
+                    BloodBoundEquipmentRadioTrue.Checked = false;
+                    BloodBoundEquipmentRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.TeleportBoundItems == true)
                 {
                     TeleportBoundItemsRadioTrue.Checked = true;
+                    TeleportBoundItemsRadioFalse.Checked = false;
+                }
+                else
+                {
+                    TeleportBoundItemsRadioTrue.Checked = false;
+                    TeleportBoundItemsRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.AllowGlobalChat == true)
                 {
                     AllowGlobalChatRadioTrue.Checked = true;
+                    AllowGlobalChatRadioFalse.Checked = false;
+                }
+                else
+                {
+                    AllowGlobalChatRadioTrue.Checked = false;
+                    AllowGlobalChatRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.AllWaypointsUnlocked == true)
                 {
                     AllWaypointsUnlockedRadioTrue.Checked = true;
+                    AllWaypointsUnlockedRadioFalse.Checked = false;
+                }
+                else
+                {
+                    AllWaypointsUnlockedRadioTrue.Checked = false;
+                    AllWaypointsUnlockedRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.FreeCastleClaim == true)
                 {
                     FreeCastleClaimRadioTrue.Checked = true;
+                    FreeCastleClaimRadioFalse.Checked = false;
+                }
+                else
+                {
+                    FreeCastleClaimRadioTrue.Checked = false;
+                    FreeCastleClaimRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.FreeCastleDestroy == true)
                 {
-                    FreeCastleClaimRadioFalse.Checked = true;
+                    FreeCastleDestroyRadioTrue.Checked = true;
+                    FreeCastleDestroyRadioFalse.Checked = false;
+                }
+                else
+                {
+                    FreeCastleDestroyRadioTrue.Checked = false;
+                    FreeCastleDestroyRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.InactivityKillEnabled == true)
                 {
                     InactivityKillEnabledRadioTrue.Checked = true;
+                    InactivityKillEnabledRadioFalse.Checked = false;
+                }
+                else
+                {
+                    InactivityKillEnabledRadioTrue.Checked = false;
+                    InactivityKillEnabledRadioFalse.Checked = true;
                 }
                 switch (LoadedSettings.StarterEquipmentId)
                 {
@@ -777,6 +825,12 @@ namespace ServerManager
                 if (LoadedSettings.DisableDisconnectedDeadEnabled == true)
                 {
                     DisableDisconnectedDeadEnabledRadioTrue.Checked = true;
+                    DisableDisconnectedDeadEnabledRadioFalse.Checked = false;
+                }
+                else
+                {
+                    DisableDisconnectedDeadEnabledRadioTrue.Checked = false;
+                    DisableDisconnectedDeadEnabledRadioFalse.Checked = true;
                 }
                 DisableDisconnectedDeadEnabledNumber.Value = Convert.ToInt16(LoadedSettings.DisableDisconnectedDeadTimer);
                 InventoryStacksModifierNumber.Value = Convert.ToDecimal(LoadedSettings.InventoryStacksModifier);
@@ -801,10 +855,22 @@ namespace ServerManager
                 if (LoadedSettings.AnnounceSiegeWeaponSpawn == true)
                 {
                     AnnounceSiegeWeaponSpawnRadioTrue.Checked = true;
+                    AnnounceSiegeWeaponSpawnRadioFalse.Checked = false;
+                }
+                else
+                {
+                    AnnounceSiegeWeaponSpawnRadioTrue.Checked = false;
+                    AnnounceSiegeWeaponSpawnRadioFalse.Checked = true;
                 }
                 if (LoadedSettings.ShowSiegeWeaponMapIcon == true)
                 {
                     ShowSiegeWeaponMapIconRadioTrue.Checked = true;
+                    ShowSiegeWeaponMapIconRadioFalse.Checked = false;
+                }
+                else
+                {
+                    ShowSiegeWeaponMapIconRadioTrue.Checked = false;
+                    ShowSiegeWeaponMapIconRadioFalse.Checked = true;
                 }
                 BuildCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.BuildCostModifier);
                 RecipeCostModifierNumber.Value = Convert.ToDecimal(LoadedSettings.RecipeCostModifier);

@@ -147,24 +147,54 @@ namespace ServerManager
                 if (LoadedServerSettings.Secure == true)
                 {
                     SecureRadioTrue.Checked = true;
+                    SecureRadioFalse.Checked = false;
                 }
-                if (LoadedServerSettings.ListOnMasterServer == false)
+                else
                 {
+                    SecureRadioTrue.Checked = false;
+                    SecureRadioFalse.Checked = true;
+                }
+                if (LoadedServerSettings.ListOnMasterServer == true)
+                {
+                    ListOnMasterServerRadioTrue.Checked = true;
+                    ListOnMasterServerRadioFalse.Checked = false;
+                }
+                else
+                {
+                    ListOnMasterServerRadioTrue.Checked = false;
                     ListOnMasterServerRadioFalse.Checked = true;
                 }
                 AutoSaveCountNumber.Value = LoadedServerSettings.AutoSaveCount;
                 AutoSaveIntervalNumber.Value = LoadedServerSettings.AutoSaveInterval;
-                if (LoadedServerSettings.AdminOnlyDebugEvents == false)
+                if (LoadedServerSettings.AdminOnlyDebugEvents == true)
                 {
+                    AdminOnlyDebugEventsRadioTrue.Checked = true;
+                    AdminOnlyDebugEventsRadioFalse.Checked = false;
+                }
+                else
+                {
+                    AdminOnlyDebugEventsRadioTrue.Checked = false;
                     AdminOnlyDebugEventsRadioFalse.Checked = true;
                 }
                 if (LoadedServerSettings.DisableDebugEvents == true)
                 {
                     DisableDebugEventsRadioTrue.Checked = true;
+                    DisableDebugEventsRadioFalse.Checked = false;
+                }
+                else
+                {
+                    DisableDebugEventsRadioTrue.Checked = false;
+                    DisableDebugEventsRadioFalse.Checked = true;
                 }
                 if (LoadedServerSettings.Rcon.Enabled == true)
                 {
                     RCONRadioTrue.Checked = true;
+                    RCONRadioFalse.Checked = false;
+                }
+                else
+                {
+                    RCONRadioTrue.Checked = false;
+                    RCONRadioFalse.Checked = true;
                 }
                 RCONPasswordValue.Text = LoadedServerSettings.Rcon.Password;
                 RCONPortNumber.Value = LoadedServerSettings.Rcon.Port;
