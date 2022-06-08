@@ -12,10 +12,10 @@ namespace ServerManager
         public SettingsForm()
         {
             InitializeComponent();
-            Icon = Properties.Resources.logo;
+            Icon = Properties.Resources.logo;            
+            SetupDefaults();
             if (Properties.Settings.Default.AutoLoadGameSettings == true && File.Exists(Properties.Settings.Default.GameSettingsFile))
                 LoadSettings(true, false, 0);
-            SetupDefaults();
         }
 
         public class ListBoxItem
