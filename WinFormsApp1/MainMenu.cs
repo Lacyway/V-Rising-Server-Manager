@@ -221,7 +221,6 @@ namespace ServerManager
         private async Task<bool> CheckForUpdate()
         {
             bool foundUpdate = false;
-            bool firstEntry = false;
             await Task.Run(() =>
             {                
                 if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == false)
@@ -245,12 +244,11 @@ namespace ServerManager
                     string output = steamCMD.StandardOutput.ReadToEnd();
                     string[] toScan = output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                     steamCMD.WaitForExit();
-                    for (int i = 0; i < toScan.Length && firstEntry == false; i++)
+                    for (int i = 0; i < toScan.Length; i++)
                     {
-                        if (toScan[i].Contains("\"buildid\"		\"8842217\""))
+                        if (toScan[i].Contains("\"branches\"") && toScan[i + 2].Contains("\"public\""))
                         {
-                            firstEntry = true; //dedi has 2 entries for 8842217, have to stop at first...
-                            string lastUpdated = Regex.Match(toScan[(i + 1)], "(?<=\")[0-9]+(?=\")").Value;
+                            string lastUpdated = Regex.Match(toScan[i + 5], "(?<=\")[0-9]+(?=\")").Value;
                             if (lastUpdated != Properties.Settings.Default.LastUpdateUNIXTime)
                             {
                                 Properties.Settings.Default.LastUpdateUNIXTime = lastUpdated;

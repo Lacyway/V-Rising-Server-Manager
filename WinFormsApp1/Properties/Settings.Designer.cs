@@ -295,7 +295,7 @@ namespace ServerManager.Properties {
   <string>Server stopped.</string>
   <string>Server stopped unexpectedly. Restarting.</string>
   <string>Server was unable to start 5 times. Please check the logs.</string>
-  <string>Found an update.</string>
+  <string>Found an update. Updating.</string>
   <string>Waiting 5 minutes to update.</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection WebhookMessages {
