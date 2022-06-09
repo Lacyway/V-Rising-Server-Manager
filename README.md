@@ -6,6 +6,8 @@ Tool to install, update and run a V Rising Server on Windows OS. Also includes a
 
 ## Usage
 ### Installation
+Read the [Wiki](https://github.com/Lacyway/V-Rising-Server-Manager/wiki/Initial-Setup) for more info.
+
 Download the latest [release](https://github.com/Lacyway/V-Rising-Server-Manager/releases).
 
 Extract the files to any folder. Run the program and go to 'Settings' and set up each entry.
