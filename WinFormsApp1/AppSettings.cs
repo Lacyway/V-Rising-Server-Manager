@@ -24,6 +24,15 @@ namespace ServerManager
             AutoLoadHostSettingsCheckbox.Checked = Properties.Settings.Default.AutoLoadHostSettings;
             AutoLoadGameSettingsTextbox.Text = Properties.Settings.Default.GameSettingsFile;
             AutoLoadHostSettingsTextbox.Text = Properties.Settings.Default.HostSettingsFile;
+            DiscordWebhookCheckbox.Checked = Properties.Settings.Default.EnableWebhook;
+            WebhookURLText.Text = Properties.Settings.Default.WebhookURL;
+            WebhookMessagesGroup.Enabled = Properties.Settings.Default.EnableWebhook;
+            StartMessageTextbox.Text = Properties.Settings.Default.WebhookMessages[0];
+            StopMessageTextbox.Text = Properties.Settings.Default.WebhookMessages[1];
+            StoppedCrashTextbox.Text = Properties.Settings.Default.WebhookMessages[2];
+            UnableStartTextbox.Text = Properties.Settings.Default.WebhookMessages[3];
+            UpdateFoundTextbox.Text = Properties.Settings.Default.WebhookMessages[4];
+            UpdateWaitTextbox.Text = Properties.Settings.Default.WebhookMessages[5];
         }
 
         private void SelectServerFolderButton_Click(object sender, EventArgs e)
@@ -70,6 +79,14 @@ namespace ServerManager
             Properties.Settings.Default.AutoLoadHostSettings = AutoLoadHostSettingsCheckbox.Checked;
             Properties.Settings.Default.GameSettingsFile = AutoLoadGameSettingsTextbox.Text;
             Properties.Settings.Default.HostSettingsFile = AutoLoadHostSettingsTextbox.Text;
+            Properties.Settings.Default.EnableWebhook = DiscordWebhookCheckbox.Checked;
+            Properties.Settings.Default.WebhookURL = WebhookURLText.Text;
+            Properties.Settings.Default.WebhookMessages[0] = StartMessageTextbox.Text;
+            Properties.Settings.Default.WebhookMessages[1] = StopMessageTextbox.Text;
+            Properties.Settings.Default.WebhookMessages[2] = StoppedCrashTextbox.Text;
+            Properties.Settings.Default.WebhookMessages[3] = UnableStartTextbox.Text;
+            Properties.Settings.Default.WebhookMessages[4] = UpdateFoundTextbox.Text;
+            Properties.Settings.Default.WebhookMessages[5] = UpdateWaitTextbox.Text;
             Properties.Settings.Default.Save();
             Close();
         }
@@ -92,6 +109,12 @@ namespace ServerManager
             OpenFileDialog.FileName = "ServerHostSettings.json";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
                 AutoLoadHostSettingsTextbox.Text = OpenFileDialog.FileName;
+        }
+
+        private void DiscordWebhookCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            WebhookURLText.ReadOnly = (DiscordWebhookCheckbox.Checked) ? false : true;
+            WebhookMessagesGroup.Enabled = DiscordWebhookCheckbox.Checked;
         }
     }
 }

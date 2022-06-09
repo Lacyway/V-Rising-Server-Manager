@@ -262,5 +262,49 @@ namespace ServerManager.Properties {
                 this["HostSettingsFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableWebhook {
+            get {
+                return ((bool)(this["EnableWebhook"]));
+            }
+            set {
+                this["EnableWebhook"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WebhookURL {
+            get {
+                return ((string)(this["WebhookURL"]));
+            }
+            set {
+                this["WebhookURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>Server starting.</string>
+  <string>Server stopped.</string>
+  <string>Server stopped unexpectedly. Restarting.</string>
+  <string>Server was unable to start 5 times. Please check the logs.</string>
+  <string>Found an update.</string>
+  <string>Waiting 5 minutes to update.</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection WebhookMessages {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["WebhookMessages"]));
+            }
+            set {
+                this["WebhookMessages"] = value;
+            }
+        }
     }
 }

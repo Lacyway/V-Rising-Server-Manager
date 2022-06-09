@@ -62,5 +62,22 @@
     <Setting Name="HostSettingsFile" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="EnableWebhook" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WebhookURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="WebhookMessages" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;Server starting.&lt;/string&gt;
+  &lt;string&gt;Server stopped.&lt;/string&gt;
+  &lt;string&gt;Server stopped unexpectedly. Restarting.&lt;/string&gt;
+  &lt;string&gt;Server was unable to start 5 times. Please check the logs.&lt;/string&gt;
+  &lt;string&gt;Found an update.&lt;/string&gt;
+  &lt;string&gt;Waiting 5 minutes to update.&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

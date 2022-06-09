@@ -22,6 +22,7 @@ namespace ServerManager
         public static int restartAttempts = 0;
         HttpClient HttpClient = new HttpClient();
         System.Windows.Forms.Timer ucTimer = new System.Windows.Forms.Timer();
+        public dWebHook discordSender = new dWebHook();
 
         public MainMenu()
         {
@@ -52,6 +53,10 @@ namespace ServerManager
                     }
                     else if (ucTimer.Enabled) ucTimer.Stop();
                 }
+                if (e.SettingName == "WebhookURL")
+                {
+                    discordSender.WebHook = e.NewValue.ToString();
+                }
             };
             if (Properties.Settings.Default.LastUpdateUNIXTime != "")
                 LastUpdateLabel.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
@@ -63,6 +68,7 @@ namespace ServerManager
                 BindToIPCheckbox.Checked = true;
                 BindIPTextbox.ReadOnly = false;
             }
+            discordSender.WebHook = Properties.Settings.Default.WebhookURL;
             CheckServer();
         }
 
@@ -81,6 +87,8 @@ namespace ServerManager
 
         private async void AutoUpdateServer()
         {
+            if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[4] != "")
+                discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[4]);
             userStopped = true;
             if (Properties.Settings.Default.AutoUpdateRCONMessage) 
                 await SendRestartMessage();
@@ -123,7 +131,9 @@ namespace ServerManager
                 }
             };
             rClient.Connect(Properties.Settings.Default.RCON_Address, Properties.Settings.Default.RCON_Port);
-            MainMenuConsole.AppendText(Environment.NewLine + "Waiting 5 minutes before quitting...");     
+            MainMenuConsole.AppendText(Environment.NewLine + "Waiting 5 minutes to update.");
+            if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[5] != "")
+                discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[5]);
             await Task.Delay(300000);
             rClient.Disconnect();
         }
@@ -302,6 +312,8 @@ namespace ServerManager
                 AutoRestartCheck.Checked = false;
                 StartGameServerButton.Enabled = true;
                 StopGameServerButton.Enabled = false;
+                if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[3] != "")
+                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[3]);
                 return;
             }
             if (restartAttempts == 0) 
@@ -325,6 +337,8 @@ namespace ServerManager
                 StatusLabel.Text = "Running";
                 MainMenuConsole.AppendText("\nServer starting.\nServer name: " + Properties.Settings.Default.Server_Name + "\nSave name: " + Properties.Settings.Default.Save_Name);
                 userStopped = false;
+                if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[0]!= "")
+                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[0]);
             }
             else
             {
@@ -392,10 +406,12 @@ namespace ServerManager
             {
                 Invoke(new Action(() =>
                 {
+                    if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[2] != "")
+                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[2]);
                     StoppedPic.Visible = true;
                     RunningPic.Visible = false;
                     StatusLabel.Text = "Stopped";
-                    MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");
+                    MainMenuConsole.AppendText(Environment.NewLine + "Server closed unexpectedly. Restarting.");                    
                     StartServer();
                 }));                            
             }
@@ -403,12 +419,14 @@ namespace ServerManager
             {
                 Invoke(new Action(() =>
                 {
+                    if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[1] != "")
+                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[1]);
                     StoppedPic.Visible = true;
                     RunningPic.Visible = false;
                     StatusLabel.Text = "Stopped";
                     StopGameServerButton.Enabled = false;
                     StartGameServerButton.Enabled = true;
-                    MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");
+                    MainMenuConsole.AppendText(Environment.NewLine + "Server stopped.");                    
                     userStopped = false;
                 }));                   
             }
