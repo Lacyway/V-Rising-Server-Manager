@@ -39,6 +39,7 @@
             this.StopGameServerButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.AutoRestartCheck = new System.Windows.Forms.CheckBox();
+            this.BindToIPCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ServerNameValue = new System.Windows.Forms.TextBox();
             this.SaveNameValue = new System.Windows.Forms.TextBox();
@@ -53,7 +54,6 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.BindIPTextbox = new System.Windows.Forms.TextBox();
-            this.BindToIPCheckbox = new System.Windows.Forms.CheckBox();
             this.MainMenuStatusStrip = new System.Windows.Forms.StatusStrip();
             this.SteamCMDStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.SpacerLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -166,6 +166,18 @@
             this.AutoRestartCheck.Text = "Auto Restart";
             this.toolTip1.SetToolTip(this.AutoRestartCheck, "Automatically restarts the server unless manually stopped.");
             this.AutoRestartCheck.UseVisualStyleBackColor = true;
+            // 
+            // BindToIPCheckbox
+            // 
+            this.BindToIPCheckbox.AutoSize = true;
+            this.BindToIPCheckbox.Location = new System.Drawing.Point(280, 24);
+            this.BindToIPCheckbox.Name = "BindToIPCheckbox";
+            this.BindToIPCheckbox.Size = new System.Drawing.Size(77, 19);
+            this.BindToIPCheckbox.TabIndex = 0;
+            this.BindToIPCheckbox.Text = "Bind to IP";
+            this.toolTip1.SetToolTip(this.BindToIPCheckbox, "Starts the server with the -address parameter using the chosen IP below.");
+            this.BindToIPCheckbox.UseVisualStyleBackColor = true;
+            this.BindToIPCheckbox.CheckStateChanged += new System.EventHandler(this.BindToIPCheckbox_CheckStateChanged);
             // 
             // label1
             // 
@@ -313,18 +325,6 @@
             this.BindIPTextbox.Size = new System.Drawing.Size(128, 23);
             this.BindIPTextbox.TabIndex = 1;
             // 
-            // BindToIPCheckbox
-            // 
-            this.BindToIPCheckbox.AutoSize = true;
-            this.BindToIPCheckbox.Location = new System.Drawing.Point(280, 24);
-            this.BindToIPCheckbox.Name = "BindToIPCheckbox";
-            this.BindToIPCheckbox.Size = new System.Drawing.Size(77, 19);
-            this.BindToIPCheckbox.TabIndex = 0;
-            this.BindToIPCheckbox.Text = "Bind to IP";
-            this.toolTip1.SetToolTip(this.BindToIPCheckbox, "Starts the server with the -address parameter using the chosen IP below.");
-            this.BindToIPCheckbox.UseVisualStyleBackColor = true;
-            this.BindToIPCheckbox.CheckStateChanged += new System.EventHandler(this.BindToIPCheckbox_CheckStateChanged);
-            // 
             // MainMenuStatusStrip
             // 
             this.MainMenuStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -390,7 +390,6 @@
         private System.Windows.Forms.Button ServerSettingsButton;
         private System.Windows.Forms.Button SteamCMDButton;
         private System.Windows.Forms.Button AppSettingsButton;
-        private System.Windows.Forms.RichTextBox MainMenuConsole;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button StartGameServerButton;
         private System.Windows.Forms.Button StopGameServerButton;
@@ -415,5 +414,6 @@
         private System.Windows.Forms.ToolStripStatusLabel SpacerLabel;
         private System.Windows.Forms.TextBox BindIPTextbox;
         private System.Windows.Forms.CheckBox BindToIPCheckbox;
+        private System.Windows.Forms.RichTextBox MainMenuConsole;
     }
 }

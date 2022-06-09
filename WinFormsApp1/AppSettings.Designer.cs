@@ -77,6 +77,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TestWebhookButton = new System.Windows.Forms.Button();
             this.WebhookMessagesGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoUpdateInterval)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -502,7 +503,7 @@
             this.WebhookURLText.Location = new System.Drawing.Point(36, 28);
             this.WebhookURLText.Name = "WebhookURLText";
             this.WebhookURLText.ReadOnly = true;
-            this.WebhookURLText.Size = new System.Drawing.Size(468, 23);
+            this.WebhookURLText.Size = new System.Drawing.Size(404, 23);
             this.WebhookURLText.TabIndex = 26;
             // 
             // tabControl1
@@ -563,6 +564,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage3.Controls.Add(this.TestWebhookButton);
             this.tabPage3.Controls.Add(this.WebhookMessagesGroup);
             this.tabPage3.Controls.Add(this.DiscordWebhookCheckbox);
             this.tabPage3.Controls.Add(this.label8);
@@ -573,6 +575,18 @@
             this.tabPage3.Size = new System.Drawing.Size(512, 348);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Webhook";
+            // 
+            // TestWebhookButton
+            // 
+            this.TestWebhookButton.Enabled = false;
+            this.TestWebhookButton.Location = new System.Drawing.Point(448, 28);
+            this.TestWebhookButton.Name = "TestWebhookButton";
+            this.TestWebhookButton.Size = new System.Drawing.Size(59, 23);
+            this.TestWebhookButton.TabIndex = 31;
+            this.TestWebhookButton.Text = "Test";
+            this.toolTip1.SetToolTip(this.TestWebhookButton, "Tests the webhook.");
+            this.TestWebhookButton.UseVisualStyleBackColor = true;
+            this.TestWebhookButton.Click += new System.EventHandler(this.TestWebhookButton_Click);
             // 
             // AppSettings
             // 
@@ -650,5 +664,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox StartMessageTextbox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button TestWebhookButton;
     }
 }

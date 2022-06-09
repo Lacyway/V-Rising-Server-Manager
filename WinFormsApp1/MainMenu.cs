@@ -17,12 +17,10 @@ namespace ServerManager
         public Process serverProcess = new Process();
         private static System.Timers.Timer RestartTimer;
         public bool userStopped = false;
-        public static string serverName = "V Rising Server";
-        public static string saveName = "world1";
         public static int restartAttempts = 0;
         HttpClient HttpClient = new HttpClient();
         System.Windows.Forms.Timer ucTimer = new System.Windows.Forms.Timer();
-        public dWebHook discordSender = new dWebHook();
+        public static dWebHook discordSender = new dWebHook();
 
         public MainMenu()
         {

@@ -115,6 +115,14 @@ namespace ServerManager
         {
             WebhookURLText.ReadOnly = (DiscordWebhookCheckbox.Checked) ? false : true;
             WebhookMessagesGroup.Enabled = DiscordWebhookCheckbox.Checked;
+            TestWebhookButton.Enabled = DiscordWebhookCheckbox.Checked;
+        }
+
+        private void TestWebhookButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.WebhookURL = WebhookURLText.Text;
+            Properties.Settings.Default.Save();
+            MainMenu.discordSender.SendMessage("Webhook success.");
         }
     }
 }
