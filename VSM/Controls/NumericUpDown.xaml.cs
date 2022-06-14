@@ -78,7 +78,7 @@ namespace VRisingServerManager
             "Step",
             typeof(decimal),
             typeof(NumericSpinner),
-            new PropertyMetadata(new decimal(0.1)));
+            new PropertyMetadata(new decimal(1.0)));
 
         public decimal Step
         {
@@ -202,6 +202,17 @@ namespace VRisingServerManager
         private void tb_main_LostFocus(object sender, RoutedEventArgs e)
         {
             validate();
+        }
+
+        private void tb_main_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (tb_main.IsFocused == true)
+            {
+                if (e.Delta > 0)
+                    Value = Value + Step;
+                else if (e.Delta < 0)
+                    Value = Value - Step;
+            }
         }
     }
 }

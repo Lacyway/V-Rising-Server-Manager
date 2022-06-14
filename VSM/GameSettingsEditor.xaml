@@ -53,7 +53,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -149,7 +149,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -235,7 +235,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
                     <StackPanel Orientation="Horizontal">
                         <GroupBox Header="Vampire Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                             <Grid>
@@ -408,7 +408,7 @@
                         </GroupBox>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <GroupBox Header="Game Time Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
@@ -537,7 +537,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>

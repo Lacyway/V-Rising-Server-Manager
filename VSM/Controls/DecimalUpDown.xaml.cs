@@ -185,5 +185,16 @@ namespace VRisingServerManager
         {
             validate();
         }
+
+        private void tb_main_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (tb_main.IsFocused == true)
+            {
+                if (e.Delta > 0)
+                    Value = Value + Step;
+                else if (e.Delta < 0)
+                    Value = Value - Step;
+            }            
+        }
     }
 }

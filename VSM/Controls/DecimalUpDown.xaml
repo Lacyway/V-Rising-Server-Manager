@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="22" />
             </Grid.ColumnDefinitions>
             <TextBox x:Name="tb_main" x:FieldModifier="private" FontSize="12" VerticalContentAlignment="Center" Padding="5,1" 
-                     Grid.Column="0" Grid.RowSpan="2" Text="0" HorizontalContentAlignment="Right" LostFocus="tb_main_LostFocus" />
+                     Grid.Column="0" Grid.RowSpan="2" Text="0" HorizontalContentAlignment="Right" LostFocus="tb_main_LostFocus" MouseWheel="tb_main_MouseWheel" />
             <Button x:Name="cmdUp" x:FieldModifier="private" Grid.Column="1" Grid.Row="0" Width="auto" Height="auto" Click="cmdUp_Click">
                 <Button.Content>
                     <Path HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Black" Data="M4,0 L0,4 L8,4 z"/>

@@ -467,7 +467,7 @@ namespace VRisingServerManager
 
         private void UpdateServerButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateGame();
+            _ = UpdateGame();
         }
 
         private void OpenServerFolderButton_Click(object sender, RoutedEventArgs e)
