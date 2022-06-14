@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:VRisingServerManager"
              StartupUri="MainWindow.xaml" ShutdownMode="OnMainWindowClose">
     <Application.Resources>
-
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
     </Application.Resources>
 </Application>

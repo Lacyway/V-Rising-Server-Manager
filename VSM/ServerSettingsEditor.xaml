@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.ColumnSpan="3">
+        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.ColumnSpan="3" Height="20">
             <MenuItem Header="_File">
                 <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
                 <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
@@ -46,15 +46,15 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Name, Mode=TwoWay}" IsEnabled="False"/>
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Description, Mode=TwoWay}"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding Port, Mode=TwoWay}" Step="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding QueryPort, Mode=TwoWay}" Step="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedUsers, Mode=TwoWay}" Step="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedAdmins, Mode=TwoWay}" Step="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ServerFps, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding Port, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding QueryPort, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedUsers, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedAdmins, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ServerFps, Mode=TwoWay}" Step="1" MaxValue="120" MinValue="15"/>
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding SaveName, Mode=TwoWay}" IsEnabled="False"/>
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Password, Mode=TwoWay}"/>
-            <local:NumericSpinner Margin="10,44,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,44,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1" MaxValue="200" MinValue="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1" MaxValue="3600" MinValue="5"/>
             <TextBox Height="20" Margin="10,70,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
             <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" Margin="10,2,5,5"/>
         </StackPanel>

@@ -14,6 +14,7 @@
 	<RepositoryUrl>https://github.com/Lacyway/V-Rising-Server-Manager</RepositoryUrl>
 	<FileVersion>2.0.0.0</FileVersion>
 	<AssemblyVersion>2.0.0.0</AssemblyVersion>
+	<ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -27,6 +28,10 @@
     <WarningLevel>5</WarningLevel>
     <DebugType>none</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Resources\Duo_PvP.json" />
@@ -45,6 +50,10 @@
     <None Remove="Resources\Standard_PvP.json" />
     <None Remove="Resources\Standard_PvP_Easy.json" />
     <None Remove="Resources\Standard_PvP_Hard.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>

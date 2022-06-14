@@ -402,32 +402,47 @@ namespace VRisingServerManager
 
         private void ManageAdminsButton_Click(object sender, RoutedEventArgs e)
         {
-            AdminManager adminManager = new AdminManager();
-            adminManager.Show();
+            if (!System.Windows.Application.Current.Windows.OfType<AdminManager>().Any())
+            {
+                AdminManager aManager = new AdminManager();
+                aManager.Show();
+            }
         }
 
         private void GameSettingsEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            GameSettingsEditor gameSettingsEditor = new GameSettingsEditor();
-            gameSettingsEditor.Show();
+            if (!System.Windows.Application.Current.Windows.OfType<GameSettingsEditor>().Any())
+            {
+                GameSettingsEditor gSettingsEditor = new GameSettingsEditor();
+                gSettingsEditor.Show();
+            }
         }
 
         private void ServerSettingsEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerSettingsEditor serverSettingsEditor = new ServerSettingsEditor();
-            serverSettingsEditor.Show();
+            if (!System.Windows.Application.Current.Windows.OfType<ServerSettingsEditor>().Any())
+            {
+                ServerSettingsEditor sSettingsEditor = new ServerSettingsEditor();
+                sSettingsEditor.Show();
+            }
         }
 
         private void ManagerSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            ManagerSettings managerSettings = new ManagerSettings();
-            managerSettings.Show();
+            if (!System.Windows.Application.Current.Windows.OfType<ManagerSettings>().Any())
+            {
+                ManagerSettings mSettings = new ManagerSettings();
+                mSettings.Show();
+            }
         }
 
         private void RCONConsoleButton_Click(object sender, RoutedEventArgs e)
         {
-            RconConsole console = new RconConsole();
-            console.Show();
+            if (!System.Windows.Application.Current.Windows.OfType<RconConsole>().Any())
+            {
+                RconConsole rConsole = new RconConsole();
+                rConsole.Show();
+            }
         }
 
         private void StartServerButton_Click(object sender, RoutedEventArgs e)

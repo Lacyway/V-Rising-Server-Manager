@@ -36,7 +36,7 @@
                 <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Save_Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2"/>
                 <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Grid.Row="2" Margin="0,5,5,5" FontWeight="Bold" TextBlock.FontWeight="Normal" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=BindToIP, Mode=TwoWay}"/>
                 <TextBox x:Name="BindToIPTextbox" Text="{Binding Source={x:Static p:Settings.Default}, Path=BindingIP, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}"/>
-                <Button x:Name="SaveSettingsButton" Content="Save Settings" Grid.Column="2" Grid.Row="3" Click="SaveSettingsButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5,5,5,5" Padding="3,3,3,3"/>
+                <Button x:Name="SaveSettingsButton" Content="Save Settings" Grid.Column="2" Grid.Row="3" Click="SaveSettingsButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5,5,5,5" Padding="5,1,5,1"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Server Management" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,3" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
@@ -47,15 +47,15 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <CheckBox x:Name="AutoRestartCheckbox" Content="Auto Restart" Margin="5" Height="15.96"/>
-                    <Button x:Name="StartServerButton" Content="Start Server" Margin="5" Click="StartServerButton_Click"/>
-                    <Button x:Name="UpdateServerButton" Content="Update Server" Margin="5" Click="UpdateServerButton_Click"/>
-                    <Button x:Name="RCONConsoleButton" Content="RCON Console" Margin="5" Click="RCONConsoleButton_Click"/>
+                    <Button x:Name="StartServerButton" Content="Start Server" Margin="5" Click="StartServerButton_Click" Padding="5,1,5,1"/>
+                    <Button x:Name="UpdateServerButton" Content="Update Server" Margin="5" Click="UpdateServerButton_Click" Padding="5,1,5,1"/>
+                    <Button x:Name="RCONConsoleButton" Content="RCON Console" Margin="5" Click="RCONConsoleButton_Click" Padding="5,1,5,1"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock x:Name="StatusText" Text="Status: Stopped" Margin="5"/>
-                    <Button x:Name="StopServerButton" Content="Stop Server" Margin="5" Click="StopServerButton_Click" IsEnabled="False"/>
-                    <Button x:Name="OpenServerFolderButton" Content="Open Server Folder" Margin="5" Click="OpenServerFolderButton_Click"/>
-                    <Button x:Name="ManageAdminsButton" Content="Manage Admins" Margin="5" Click="ManageAdminsButton_Click"/>
+                    <Button x:Name="StopServerButton" Content="Stop Server" Margin="5" Click="StopServerButton_Click" IsEnabled="False" Padding="5,1,5,1"/>
+                    <Button x:Name="OpenServerFolderButton" Content="Open Server Folder" Margin="5" Click="OpenServerFolderButton_Click" Padding="5,1,5,1"/>
+                    <Button x:Name="ManageAdminsButton" Content="Manage Admins" Margin="5" Click="ManageAdminsButton_Click" Padding="5,1,5,1"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -66,10 +66,10 @@
         </DockPanel>
         <GroupBox Header="Editors"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
             <StackPanel>
-                <Button x:Name="GameSettingsEditorButton" Content="Game Settings Editor" Margin="5,5,5,5" Click="GameSettingsEditorButton_Click"/>
-                <Button x:Name="ServerSettingsEditorButton" Content="Server Settings Editor" Margin="5,5,5,5" Click="ServerSettingsEditorButton_Click"/>
+                <Button x:Name="GameSettingsEditorButton" Content="Game Settings Editor" Margin="5,5,5,5" Click="GameSettingsEditorButton_Click" Padding="5,1,5,1"/>
+                <Button x:Name="ServerSettingsEditorButton" Content="Server Settings Editor" Margin="5,5,5,5" Click="ServerSettingsEditorButton_Click" Padding="5,1,5,1"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="ManagerSettingsButton" Grid.Column="1" Grid.Row="1" Content="Manager Settings" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,25,90" Click="ManagerSettingsButton_Click"/>
+        <Button x:Name="ManagerSettingsButton" Grid.Column="1" Grid.Row="1" Content="Manager Settings" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,25,90" Click="ManagerSettingsButton_Click" Padding="5,1,5,1"/>
     </Grid>
 </Window>

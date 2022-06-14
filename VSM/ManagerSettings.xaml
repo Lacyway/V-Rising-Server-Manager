@@ -6,7 +6,7 @@
         xmlns:p="clr-namespace:VRisingServerManager.Properties"
         xmlns:local="clr-namespace:VRisingServerManager"
         mc:Ignorable="d"
-        Title="ManagerSettings" Height="380" MaxHeight="500" Width="600" MaxWidth="600" MinWidth="600" MinHeight="300" Icon="/Resources/logo.ico">
+        Title="ManagerSettings" Height="380" MaxHeight="500" Width="600" MaxWidth="600" MinWidth="600" MinHeight="380" Icon="/Resources/logo.ico" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -100,8 +100,8 @@
             </TabItem>
         </TabControl>
         <DockPanel Grid.Row="1">
-            <Button x:Name="OpenSettingsFolder" Content="Open Settings Folder" Margin="2,2,2,2" Padding="5,1,5,1" Click="OpenSettingsFolder_Click"/>
-            <Button x:Name="SaveButton" DockPanel.Dock="Right" Content="Save" HorizontalAlignment="Right" Margin="2,2,2,2" Padding="15,1,15,1" Click="SaveButton_Click"/>
+            <Button x:Name="OpenSettingsFolder" Content="Open Settings Folder" Margin="5,5,5,5" Padding="5,1,5,1" Click="OpenSettingsFolder_Click"/>
+            <Button x:Name="SaveButton" DockPanel.Dock="Right" Content="Save" HorizontalAlignment="Right" Margin="5,5,5,5" Padding="15,1,15,1" Click="SaveButton_Click"/>
         </DockPanel>        
     </Grid>
 </Window>

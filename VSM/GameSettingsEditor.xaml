@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Height="20">
             <MenuItem Header="_File">
                 <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
                 <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
@@ -64,7 +64,7 @@
                         <StackPanel>
                             <TextBlock Text="Game Mode" Margin="5,5,5,5"/>
                             <ComboBox SelectedIndex="{Binding GameModeType, Mode=TwoWay}" Margin="5,5,5,5">
-                                <ComboBoxItem Content="PvE" ToolTip="Defines basics for PvP Gamemode"/>
+                                <ComboBoxItem Content="PvE" ToolTip="Defines basics for PvE Gamemode"/>
                                 <ComboBoxItem Content="PvP" ToolTip="Defines basics for PvP Gamemode"/>
                             </ComboBox>
                             <TextBlock Text="Castle Damage Mode" Margin="5,5,5,5"/>
@@ -237,7 +237,7 @@
                 </Expander>
                 <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
                     <StackPanel Orientation="Horizontal">
-                        <GroupBox Header="Vampire Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                        <GroupBox Header="Vampire Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -265,7 +265,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Equipment Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                        <GroupBox Header="Equipment Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -291,7 +291,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Unit Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                        <GroupBox Header="Unit Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -311,7 +311,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Castle Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                        <GroupBox Header="Castle Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -335,7 +335,7 @@
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.CastleLimit, Mode=TwoWay}" Step="1" ToolTip="The number of castle hearts a single player is allowed to construct" MaxValue="5" MinValue="1"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
-                                    <GroupBox Header="Heart Limits" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                    <GroupBox Header="Heart Limits" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
                                         <TabControl Margin="5,0,5,0">
                                             <TabItem Header="Level 1">
                                                 <Grid>
@@ -411,7 +411,7 @@
                 <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Game Time Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <GroupBox Header="Game Time Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -439,10 +439,10 @@
                                     </StackPanel>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Player Interaction Settings" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <GroupBox Header="Player Interaction Settings" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <GroupBox Header="VS Player Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                        <GroupBox Header="VS Player Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -462,7 +462,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Player Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                        <GroupBox Header="VS Player Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -482,7 +482,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                        <GroupBox Header="VS Castle Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -502,7 +502,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                        <GroupBox Header="VS Castle Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
