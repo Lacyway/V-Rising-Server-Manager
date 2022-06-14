@@ -28,6 +28,7 @@ namespace ServerManager
         }
 
         public RemoteConClient rClient = new RemoteConClient();
+        private bool isConnected = false;
         private async Task AttemptConnect()
         {
             await Task.Run(() =>

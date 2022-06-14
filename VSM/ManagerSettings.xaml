@@ -1,0 +1,107 @@
+﻿<Window x:Class="VRisingServerManager.ManagerSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:VRisingServerManager.Properties"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        mc:Ignorable="d"
+        Title="ManagerSettings" Height="380" MaxHeight="500" Width="600" MaxWidth="600" MinWidth="600" MinHeight="300" Icon="/Resources/logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="Manager">
+                <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.ColumnSpan="2" Height="84">
+                        <DockPanel>
+                            <TextBlock Text="Server Folder:" Margin="5,5,5,5" DockPanel.Dock="Left"/>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Server_Path, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Right" Margin="0,5,10,5" HorizontalAlignment="Right" Width="415"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Save Folder:" Margin="5,5,5,5" DockPanel.Dock="Left"/>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Save_Path, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Right" Margin="0,5,10,5" HorizontalAlignment="Right" Width="415"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Log Folder:" Margin="5,5,5,5" DockPanel.Dock="Left"/>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Log_Path, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Right" Margin="0,5,10,5" HorizontalAlignment="Right" Width="415"/>
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <Button x:Name="SelectServerFolderButton" Content="Select" Margin="5,5,5,2" Click="SelectServerFolderButton_Click" Padding="5,1,5,1"/>
+                        <Button x:Name="SelectSaveFolderButton" Content="Select" Margin="5,5,5,2" Click="SelectSaveFolderButton_Click" Padding="5,1,5,1"/>
+                        <Button x:Name="SelectLogFolderButton" Content="Select" Margin="5,5,5,2" Click="SelectLogFolderButton_Click" Padding="5,1,5,1"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <CheckBox Content="Verify Updates" Margin="5,5,5,5" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=VerifyUpdate, Mode=TwoWay}"/>
+                        <CheckBox Content="Automatically look for updates" Margin="5,5,5,5" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdate, Mode=TwoWay}"/>
+                        <CheckBox Content="Send Message" Margin="5,5,5,5" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdateRCONMessage, Mode=TwoWay}" IsEnabled="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdate, Mode=TwoWay}"/>
+                        <DockPanel Width="200" Margin="5,5,5,5">
+                            <TextBlock Text="Every" DockPanel.Dock="Left" Margin="5,0,5,0"/>
+                            <local:NumericSpinner Step="1" Width="75" Value="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdateInterval, Mode=TwoWay}" IsEnabled="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdate, Mode=TwoWay}"/>
+                            <TextBlock Text="minutes" DockPanel.Dock="Right" Margin="5,0,5,0"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Editors">
+                <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <StackPanel>
+                        <CheckBox x:Name="AutoLoadGameCheckbox" Content="Autoload GameSettings" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoLoadGameSettings, Mode=TwoWay}" Margin="5,5,5,5"/>
+                        <DockPanel>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=GameSettingsFile, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Left" Width="500" Margin="5,5,5,5" IsEnabled="{Binding IsChecked, ElementName=AutoLoadGameCheckbox}"/>
+                            <Button x:Name="SelectGameSettingsButton" Content="Select" DockPanel.Dock="Right" Margin="5,5,5,5" Click="SelectGameSettingsButton_Click" IsEnabled="{Binding IsChecked, ElementName=AutoLoadGameCheckbox}"/>
+                        </DockPanel>
+                        <CheckBox x:Name="AutoLoadServerCheckbox" Content="Autoload ServerSettings" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoLoadHostSettings, Mode=TwoWay}" Margin="5,5,5,5"/>
+                        <DockPanel>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=HostSettingsFile, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Left" Width="500" Margin="5,5,5,5" IsEnabled="{Binding IsChecked, ElementName=AutoLoadServerCheckbox}"/>
+                            <Button x:Name="SelectHostSettingsButton" Content="Select" DockPanel.Dock="Right" Margin="5,5,5,5" Click="SelectHostSettingsButton_Click" IsEnabled="{Binding IsChecked, ElementName=AutoLoadServerCheckbox}"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Webhook">
+                <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <StackPanel>
+                        <CheckBox x:Name="EnableWebhookCheckbox" Content="Enable Discord Webhook" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=EnableWebhook, Mode=TwoWay}" Margin="5,5,5,5"/>
+                        <DockPanel>
+                            <TextBlock Text="URL:" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookURL, Mode=TwoWay}" DockPanel.Dock="Right" Margin="5,5,5,5" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                        </DockPanel>
+                        <GroupBox Header="Customize Messages" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <StackPanel>
+                                <TextBlock Text="Start server:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[0], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                                <TextBlock Text="Stop server:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[1], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                                <TextBlock Text="Stopped unexpectedly:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[2], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                                <TextBlock Text="Unable to start 5 times:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[3], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                                <TextBlock Text="Auto-Upade found:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[4], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                                <TextBlock Text="Auto-Update wait 5 minutes:"/>
+                                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=WebhookMessages[5], Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=EnableWebhookCheckbox}"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <DockPanel Grid.Row="1">
+            <Button x:Name="OpenSettingsFolder" Content="Open Settings Folder" Margin="2,2,2,2" Padding="5,1,5,1" Click="OpenSettingsFolder_Click"/>
+            <Button x:Name="SaveButton" DockPanel.Dock="Right" Content="Save" HorizontalAlignment="Right" Margin="2,2,2,2" Padding="15,1,15,1" Click="SaveButton_Click"/>
+        </DockPanel>        
+    </Grid>
+</Window>

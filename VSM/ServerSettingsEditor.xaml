@@ -1,0 +1,62 @@
+﻿<Window x:Class="VRisingServerManager.ServerSettingsEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        mc:Ignorable="d"
+        Title="Server Settings Editor" Height="475" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.ColumnSpan="3">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
+                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
+                <Separator/>
+                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Name" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="Description" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="Port" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="QueryPort" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="MaxConnectedUsers" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="MaxConnectedAdmins" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="ServerFps" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="SaveName" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="Password" Height="20" Margin="5,1,5,1"/>
+            <CheckBox Content="Secure" Height="20" Margin="5,1,5,1" IsChecked="{Binding Secure, Mode=TwoWay}"/>
+            <CheckBox Content="ListOnMasterServer" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnMasterServer, Mode=TwoWay}"/>
+            <TextBlock Text="AutoSaveCount" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="AutoSaveInterval" Height="20" Margin="5,1,5,1"/>
+            <CheckBox Content="AdminOnlyDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}"/>
+            <CheckBox Content="DisableDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding DisableDebugEvents, Mode=TwoWay}"/>
+            <CheckBox Content="RCON Enabled" Height="20" Margin="5,1,5,1" IsChecked="{Binding Rcon.Enabled, Mode=TwoWay}"/>
+            <TextBlock Text="RCON Password" Height="20" Margin="5,1,5,1"/>
+            <TextBlock Text="RCON Port" Height="20" Margin="5,1,5,1"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Name, Mode=TwoWay}" IsEnabled="False"/>
+            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Description, Mode=TwoWay}"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding Port, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding QueryPort, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedUsers, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedAdmins, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ServerFps, Mode=TwoWay}" Step="1"/>
+            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding SaveName, Mode=TwoWay}" IsEnabled="False"/>
+            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Password, Mode=TwoWay}"/>
+            <local:NumericSpinner Margin="10,44,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1"/>
+            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1"/>
+            <TextBox Height="20" Margin="10,70,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
+            <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" Margin="10,2,5,5"/>
+        </StackPanel>
+    </Grid>
+</Window>

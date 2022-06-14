@@ -1,0 +1,61 @@
+﻿<Window x:Class="VRisingServerManager.RconConsole"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:VRisingServerManager.Properties"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        mc:Ignorable="d"
+        Title="RCON Console" Height="500" Width="800" Icon="/Resources/logo.ico" ResizeMode="CanMinimize">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="RCON Settings" Margin="5,5,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <StackPanel>
+                <DockPanel Margin="5,5,5,0">
+                    <TextBlock Text="IP Address:" Margin="0,0,10,0"/>
+                    <TextBox DockPanel.Dock="Right" Text="{Binding Source={x:Static p:Settings.Default}, Path=RCON_Address, Mode=TwoWay}" Width="150" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <DockPanel Margin="5,5,5,0">
+                    <TextBlock Text="Port:" Margin="0,0,10,0"/>
+                    <local:NumericSpinner Step="1" Value="{Binding Source={x:Static p:Settings.Default}, Path=RCON_Port, Mode=TwoWay}" HorizontalAlignment="Right" Width="75"/>
+                </DockPanel>
+                <DockPanel Margin="5,5,5,0">
+                    <TextBlock Text="Password:" Margin="0,0,10,0"/>
+                    <TextBox DockPanel.Dock="Right" Text="{Binding Source={x:Static p:Settings.Default}, Path=RCON_Pass, Mode=TwoWay}" Width="150" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <Button x:Name="SaveButton" Content="Save" Margin="5,5,0,0" HorizontalAlignment="Left" Padding="10,1,10,1" Click="SaveButton_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <DockPanel Grid.Row="1" Margin="0,5,0,0">
+            <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Left" Margin="5,0,5,0" Padding="5,0,5,0" Height="18" VerticalAlignment="Top" Click="ConnectButton_Click"/>
+            <Button x:Name="DisconnectButton" Content="Disconnect" HorizontalAlignment="Left" Margin="5,0,5,0" Padding="5,0,5,0" Height="18" VerticalAlignment="Top" Click="DisconnectButton_Click" IsEnabled="False"/>
+        </DockPanel>
+        <GroupBox Header="Command Info" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Height="150" Margin="5,5,5,5">
+            <TextBlock x:Name="CommandInfoTextbox" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" TextWrapping="Wrap"/>
+        </GroupBox>
+        <GroupBox Header="Command" Grid.Column="2" Margin="5,0,5,0" Width="150" Height="100" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <ListBox x:Name="CommandList" SelectionChanged="CommandList_SelectionChanged">
+                <ListBoxItem Content="announce"/>
+                <ListBoxItem Content="announcerestart"/>
+            </ListBox>
+        </GroupBox>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+            <DockPanel>
+                <TextBlock Text="Parameter:" Margin="5,0,5,0"/>
+                <TextBox x:Name="ParamaterTextbox" Width="650" IsEnabled="False"/>
+                <Button x:Name="SendCommandButton" Content="Send" Margin="5,0,5,0" DockPanel.Dock="Right" Click="SendCommandButton_Click" IsEnabled="False"/>
+            </DockPanel>
+        </StackPanel>
+        <RichTextBox x:Name="RconConsoleOutput" Grid.Row="3" Grid.ColumnSpan="3" Margin="5,5,5,5" Foreground="Lime" Background="Black" IsReadOnly="True"/>
+    </Grid>
+</Window>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="VRisingServerManager.AdminManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        Title="Admin Manager" Height="320" Width="320" WindowStyle="ToolWindow" ResizeMode="NoResize" Icon="/Resources/logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="AdminList" Grid.ColumnSpan="2" SelectionMode="Single" Margin="5,5,5,5"/>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="AdminToAdd" Grid.Row="2" Margin="5,5,5,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="2">
+            <Button x:Name="AddAdminButton" Content="Add" Margin="5,5,5,5" Click="AddAdminButton_Click" Padding="2,1,2,1"/>
+            <Button x:Name="RemoveAdminButton" Content="Remove" Margin="5,5,5,5" Click="RemoveAdminButton_Click" Padding="2,1,2,1"/>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextLink" VerticalAlignment="Center" Margin="5,0,0,0" ToolTip="Opens steamID.io to find your steam64.">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                </TextBlock.Foreground>
+                <Hyperlink NavigateUri="https://steamid.io/lookup" RequestNavigate="Hyperlink_RequestNavigate">
+                    steamID.io
+                </Hyperlink>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="SaveButton" Content="Save" Margin="5,5,0,5" Grid.Column="1" Padding="5,1,5,1" Click="SaveButton_Click"/>
+                <Button x:Name="ReloadButton" Content="Reload" Margin="5,5,5,5" Grid.Column="1" Padding="5,1,5,1" Click="ReloadButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

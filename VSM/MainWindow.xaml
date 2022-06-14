@@ -1,0 +1,75 @@
+﻿<Window x:Class="VRisingServerManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:VRisingServerManager.Properties"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        mc:Ignorable="d"
+        Title="V Rising Server Manager" Height="520" Width="800" ResizeMode="CanMinimize" Icon="/Resources/logo.ico" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" Header="Launch Settings" Margin="5,3,0,3" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Server Name:" Margin="0,5,5,5" FontWeight="Normal"/>
+                <TextBlock Text="World Name:" Grid.Row="1" Margin="0,5,5,5" FontWeight="Normal"/>
+                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Server_Name, Mode=TwoWay}" Grid.Column="1" Margin="2,2,2,2"/>
+                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Save_Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2"/>
+                <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Grid.Row="2" Margin="0,5,5,5" FontWeight="Bold" TextBlock.FontWeight="Normal" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=BindToIP, Mode=TwoWay}"/>
+                <TextBox x:Name="BindToIPTextbox" Text="{Binding Source={x:Static p:Settings.Default}, Path=BindingIP, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}"/>
+                <Button x:Name="SaveSettingsButton" Content="Save Settings" Grid.Column="2" Grid.Row="3" Click="SaveSettingsButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5,5,5,5" Padding="3,3,3,3"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Server Management" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,3" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <CheckBox x:Name="AutoRestartCheckbox" Content="Auto Restart" Margin="5" Height="15.96"/>
+                    <Button x:Name="StartServerButton" Content="Start Server" Margin="5" Click="StartServerButton_Click"/>
+                    <Button x:Name="UpdateServerButton" Content="Update Server" Margin="5" Click="UpdateServerButton_Click"/>
+                    <Button x:Name="RCONConsoleButton" Content="RCON Console" Margin="5" Click="RCONConsoleButton_Click"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="StatusText" Text="Status: Stopped" Margin="5"/>
+                    <Button x:Name="StopServerButton" Content="Stop Server" Margin="5" Click="StopServerButton_Click" IsEnabled="False"/>
+                    <Button x:Name="OpenServerFolderButton" Content="Open Server Folder" Margin="5" Click="OpenServerFolderButton_Click"/>
+                    <Button x:Name="ManageAdminsButton" Content="Manage Admins" Margin="5" Click="ManageAdminsButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <RichTextBox x:Name="MainMenuConsole" Grid.Row="2" Background="Black" Foreground="Lime" Grid.ColumnSpan="2" Margin="5" IsReadOnly="True"/>
+        <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBlock x:Name="SteamCMDStatusText" Text="SteamCMD Status: Not running" Padding="5,1,5,1"/>
+            <TextBlock x:Name="LastUpdateText" Text="Last Update: Unknown" HorizontalAlignment="Right" Padding="5,1,5,1"/>
+        </DockPanel>
+        <GroupBox Header="Editors"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <StackPanel>
+                <Button x:Name="GameSettingsEditorButton" Content="Game Settings Editor" Margin="5,5,5,5" Click="GameSettingsEditorButton_Click"/>
+                <Button x:Name="ServerSettingsEditorButton" Content="Server Settings Editor" Margin="5,5,5,5" Click="ServerSettingsEditorButton_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="ManagerSettingsButton" Grid.Column="1" Grid.Row="1" Content="Manager Settings" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,25,90" Click="ManagerSettingsButton_Click"/>
+    </Grid>
+</Window>

@@ -4,36 +4,34 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <Copyright>Lacyway 2022</Copyright>
-    <AssemblyName>VRisingServerManager</AssemblyName>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
-    <Company>Lacyway</Company>
-    <Authors>Lacyway</Authors>
-    <Description>Server manager for V Rising</Description>
-    <PackageProjectUrl>https://github.com/Lacyway/V-Rising-Server-Manager</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Lacyway/V-Rising-Server-Manager</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+	<UseWindowsForms>true</UseWindowsForms>
+	<SignAssembly>False</SignAssembly>
+	<Company>Lacyway</Company>
+	<Copyright>Lacyway 2022</Copyright>
+	<PackageProjectUrl>https://github.com/Lacyway/V-Rising-Server-Manager</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Lacyway/V-Rising-Server-Manager</RepositoryUrl>
+	<FileVersion>2.0.0.0</FileVersion>
+	<AssemblyVersion>2.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
+    <NoWarn>1701;1702</NoWarn>
+    <WarningLevel>5</WarningLevel>
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>portable</DebugType>
+    <NoWarn>1701;1702</NoWarn>
+    <WarningLevel>5</WarningLevel>
+    <DebugType>none</DebugType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Remove="app.manifest" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Resources\Duo_PvP.json" />
     <None Remove="Resources\Full_Loot_PvP.json" />
+    <None Remove="Resources\logo.ico" />
     <None Remove="Resources\PvE_Dawn_Lvl30.json" />
     <None Remove="Resources\PvE_Dusk_Lvl70.json" />
     <None Remove="Resources\PvE_Noon_Lvl50.json" />
@@ -47,10 +45,6 @@
     <None Remove="Resources\Standard_PvP.json" />
     <None Remove="Resources\Standard_PvP_Easy.json" />
     <None Remove="Resources\Standard_PvP_Hard.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,19 +66,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <Resource Include="Resources\logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

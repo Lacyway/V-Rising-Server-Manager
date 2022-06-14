@@ -1,0 +1,601 @@
+﻿<Window x:Class="VRisingServerManager.GameSettingsEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        mc:Ignorable="d"
+        Title="Game Settings Editor" Height="800" Width="1200" MaxWidth="1300" Icon="/Resources/logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
+                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
+                <Separator/>
+                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Presets">
+                <MenuItem Header="PvE">
+                    <MenuItem Header="Standard PvE" Click="LoadPresetButton" Tag="Standard_PvE.json"/>
+                    <MenuItem Header="Standard PvE Easy" Click="LoadPresetButton" Tag="Standard_PvE_Easy.json"/>
+                    <MenuItem Header="Standard PvE Hard" Click="LoadPresetButton" Tag="Standard_PvE_Hard.json"/>
+                    <MenuItem Header="PvE Dawn Level 30" Click="LoadPresetButton" Tag="PvE_Dawn_Lvl30.json"/>
+                    <MenuItem Header="PvE Noon Level 50" Click="LoadPresetButton" Tag="PvE_Noon_Lvl50.json"/>
+                    <MenuItem Header="PvE Dusk level 70" Click="LoadPresetButton" Tag="PvE_Dusk_Lvl70.json"/>
+                </MenuItem>
+                <MenuItem Header="PvP">
+                    <MenuItem Header="Standard PvP" Click="LoadPresetButton" Tag="Standard_PvP.json"/>
+                    <MenuItem Header="Standard PvP Easy" Click="LoadPresetButton" Tag="Standard_PvP_Easy.json"/>
+                    <MenuItem Header="Standard PvP Hard" Click="LoadPresetButton" Tag="Standard_PvP_Hard.json"/>
+                    <MenuItem Header="PvP Dawn Level 30" Click="LoadPresetButton" Tag="PvP_Dawn_Lvl30.json"/>
+                    <MenuItem Header="PvP Noon Level 50" Click="LoadPresetButton" Tag="PvP_Noon_Lvl50.json"/>
+                    <MenuItem Header="PvP Dusk Level 70" Click="LoadPresetButton" Tag="PvP_Dusk_Lvl70.json"/>
+                    <MenuItem Header="Solo PvP" Click="LoadPresetButton" Tag="Solo_PvP.json"/>
+                    <MenuItem Header="Duo PvP" Click="LoadPresetButton" Tag="Duo_PvP.json"/>
+                    <MenuItem Header="Full Loot PvP" Click="LoadPresetButton" Tag="Full_Loot_PvP.json"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Game Mode" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding GameModeType, Mode=TwoWay}" Margin="5,5,5,5">
+                                <ComboBoxItem Content="PvE" ToolTip="Defines basics for PvP Gamemode"/>
+                                <ComboBoxItem Content="PvP" ToolTip="Defines basics for PvP Gamemode"/>
+                            </ComboBox>
+                            <TextBlock Text="Castle Damage Mode" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding CastleDamageMode, Mode=TwoWay}" Margin="5,5,5,5">
+                                <ComboBoxItem Content="Never" ToolTip="Players may never deal damage to enemy castle structures"/>
+                                <ComboBoxItem Content="Always" ToolTip="Players may always deal damage to enemy castle structures"/>
+                                <ComboBoxItem Content="Time Restricted" ToolTip="Players may only damage enemy castle structures during certain real-time frames"/>
+                            </ComboBox>
+                            <TextBlock Text="Siege Weapon Health" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding SiegeWeaponHealth, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Setting for Siege Golem Health">
+                                <ComboBoxItem Content="500 Health"/>
+                                <ComboBoxItem Content="1000 Health"/>
+                                <ComboBoxItem Content="1500 Health"/>
+                                <ComboBoxItem Content="2000 Health"/>
+                                <ComboBoxItem Content="2500 Health"/>
+                            </ComboBox>
+                            <TextBlock Text="Player Damage Mode" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding PlayerDamageMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Setting for when players can damage other players (Disabled in PvE)">
+                                <ComboBoxItem Content="Always" ToolTip="Players can always deal damage to other players"/>
+                                <ComboBoxItem Content="Time Restricted" ToolTip="Players may only damage other players during certain real-time frames"/>
+                            </ComboBox>
+                            <TextBlock Text="Castle Heart Damage Mode" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding CastleHeartDamageMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines interactions with enemy Castle Hearts">
+                                <ComboBoxItem Content="Can be destroyed when decaying" ToolTip="Players may only destroy enemy castle hearts when the Castle Heart is in Decay"/>
+                                <ComboBoxItem Content="Can be destroyed by players" ToolTip="Players may destroy enemy castle hearts using &quot;key&quot; items in the game"/>
+                                <ComboBoxItem Content="Can be seized or destroyed by players" ToolTip="Players may destroy and seize control of enemy castle hearts using &quot;key&quot; items in the game"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="PvP Protection Mode" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding PvPProtectionMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="The duration where players cannot be damage by other players when joining a PvP server in seconds">
+                                <ComboBoxItem Content="Disabled"/>
+                                <ComboBoxItem Content="Very Short (15 min)"/>
+                                <ComboBoxItem Content="Short (30 min)"/>
+                                <ComboBoxItem Content="Medium (1 hour)"/>
+                                <ComboBoxItem Content="Long (2 hours)"/>
+                            </ComboBox>
+                            <TextBlock Text="Death Container Permission" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding DeathContainerPermission, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines who may loot the body when a player dies">
+                                <ComboBoxItem Content="Anyone" ToolTip="Everyone can loot the body"/>
+                                <ComboBoxItem Content="Clan Members" ToolTip="Only self and Clan members may loot the body"/>
+                                <ComboBoxItem Content="Only Self" ToolTip="Only self may loot the body"/>
+                            </ComboBox>
+                            <TextBlock Text="Relic Spawn Type" Margin="5,5,5,5"/>
+                            <ComboBox SelectedIndex="{Binding RelicSpawnType, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines who may loot the body when a player dies">
+                                <ComboBoxItem Content="Unique" ToolTip="Soul shards are unique - only one of each type may exist at a time on the server"/>
+                                <ComboBoxItem Content="Plentiful" ToolTip="Soul shards are plentiful - a new one is dropped everytime a soul shard boss is slain"/>
+                            </ComboBox>
+                            <CheckBox Content="Announce Siege Weapon Spawn" IsChecked="{Binding AnnounceSiegeWeaponSpawn, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Shows a system message in the chat when a Siege Golem is being summoned"/>
+                            <CheckBox Content="Show Siege Weapon Map Icon" IsChecked="{Binding ShowSiegeWeaponMapIcon, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Show Siege Golems on the big map"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <CheckBox Content="Can Loot Enemy Containers" IsChecked="{Binding CanLootEnemyContainers, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="If players may loot enemy stashes, containers, and crafting stations"/>
+                            <CheckBox Content="Blood Bound Equipment" IsChecked="{Binding BloodBoundEquipment, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="When enabled, most equipment will not be dropped upon death"/>
+                            <CheckBox Content="Teleport Bound Items" IsChecked="{Binding TeleportBoundItems, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="When enabled, some items will prevent you from using waygates"/>
+                            <CheckBox Content="Allow Global Chat" IsChecked="{Binding AllowGlobalChat, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Allow players to write messages that all players on the server can read"/>
+                            <CheckBox Content="All Waypoints Unlocked" IsChecked="{Binding AllWaypointsUnlocked, Mode=TwoWay}" IsEnabled="False" Margin="5,5,5,5" ToolTip="Currently not used"/>
+                            <CheckBox Content="Free Castle Claim" IsChecked="{Binding FreeCastleClaim, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Seizing an enemy player castle heart requires no materials"/>
+                            <CheckBox Content="Free Castle Destroy" IsChecked="{Binding FreeCastleDestroy, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Destroying an enemy player castle heart requires no materials"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3">
+                            <GroupBox Header="Inactivity Kill" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                <StackPanel>
+                                    <CheckBox Content="Enabled" IsChecked="{Binding InactivityKillEnabled, Mode=TwoWay}" ToolTip="Inactive players are automatically killed after a set duration"/>
+                                    <TextBlock Text="Minimum Time"/>
+                                    <local:NumericSpinner Value="{Binding InactivityKillTimeMin, Mode=TwoWay}" ToolTip="Minimum timer before inactive player is killed in seconds based on gear level"/>
+                                    <TextBlock Text="Max Time"/>
+                                    <local:NumericSpinner Value="{Binding InactivityKillTimeMax, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Maximum timer before inactive player is killed in seconds based on gear level"/>
+                                    <TextBlock Text="Safe Time Addition"/>
+                                    <local:NumericSpinner Value="{Binding InactivityKillSafeTimeAddition, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Additional time before an inactive player is killed in seconds when standing in a castle territory"/>
+                                    <TextBlock Text="Max Item Level"/>
+                                    <local:NumericSpinner Value="{Binding InactivityKillTimerMaxItemLevel, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: The maximum gear level that the inactivity min and max timers are based on from 1 - this value"/>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Header="Disable Disconnected Dead" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                <StackPanel>
+                                    <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
+                                    <TextBlock Text="Timer"/>
+                                    <local:NumericSpinner Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Inventory Stacks Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Drop Table Modifier - General" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Drop Table Modifier - Missions" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Material Yield Modifier - General" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Blood Essence Yield Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Journal V Blood Source Unit Max Distance" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="PvP Vampire Respawn Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Minimum Distance In Floors" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Clan Size" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Blood Drain Modifier" Height="20" Margin="5,1,5,1"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <local:DecimalSpinner Value="{Binding InventoryStacksModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the amount of items that can be combined into a single stack" MaxValue="5" MinValue="0.25"/>
+                            <local:DecimalSpinner Value="{Binding DropTableModifier_General, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies all droptables with this factor granting more or less drops from kills and chests" MaxValue="5" MinValue="0.25"/>
+                            <local:DecimalSpinner Value="{Binding DropTableModifier_Missions, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the amount of loot received from successful servant hunts" MaxValue="5" MinValue="0.25"/>
+                            <local:DecimalSpinner Value="{Binding MaterialYieldModifier_Global, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Mulitiplies the amount of materials received from harvesting resource nodes" MaxValue="5" MinValue="0.25"/>
+                            <local:DecimalSpinner Value="{Binding BloodEssenceYieldModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the amount of blood essence received from defeating enemies" MaxValue="5" MinValue="0.25"/>
+                            <local:DecimalSpinner Value="{Binding JournalVBloodSourceUnitMaxDistance, Mode=TwoWay}" IsEnabled="False" Step="0.25" Margin="5,1,5,1" ToolTip="Not used"/>
+                            <local:DecimalSpinner Value="{Binding PvPVampireRespawnModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the additional respawn duration players suffer from being slain in PvP" MaxValue="5" MinValue="0"/>
+                            <local:NumericSpinner Value="{Binding CastleMinimumDistanceInFloors, Mode=TwoWay}" Step="1" Margin="5,1,5,1" ToolTip="The number of minimum tiles where placers can place a castle heart and/or floors next to another heart" MaxValue="10" MinValue="1"/>
+                            <local:NumericSpinner Value="{Binding ClanSize, Mode=TwoWay}" Step="1" Margin="5,1,5,1" ToolTip="The number of players that can join a single clan. Players in a clan can rise together, share progress and build castles together" MaxValue="50" MinValue="1"/>
+                            <local:DecimalSpinner Value="{Binding BloodDrainModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Rate for how quickly players loose blood. A higher rate results in higher blood consumption" MaxValue="5" MinValue="0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Durability Drain Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Garlic Area Strength Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Holy Area Strength Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Silver Strength Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Sun Damage Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Decary Rate Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Blood Essence Drain Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Sieger Timer" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Under Attack Timer" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Build Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Recipe Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3">
+                            <local:DecimalSpinner Value="{Binding DurabilityDrainModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the amount of durability suffered from dealing or receiving damage" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding GarlicAreaStrengthModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Affects the rate of how quickly garlic stack when exposed" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding HolyAreaStrengthModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the effect of the Holy element" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding SilverStrengthModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Affects the damage received when carrying silver items" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding SunDamageModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Affects the duration a player may stand in the sun before starting to take damage" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding CastleDecayRateModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Rate for how quickly a castle deteriorate when the castle heart has run out of Blood Essence" MaxValue="5" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding CastleBloodEssenceDrainModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Rate for how quickly a castle consumes blood essence. A higher rate results in higher blood essence consumption" MaxValue="5" MinValue="0.1"/>
+                            <local:DecimalSpinner Value="{Binding CastleSiegeTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The amount of time a castle is deemed as breached when enemy players breaks through the outer defenses. Time is defined in seconds" MaxValue="1800" MinValue="1"/>
+                            <local:DecimalSpinner Value="{Binding CastleUnderAttackTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The amount of time where players are blocked from building structures or walls while being under attack. A castle is deemed under attack whenever enemy players manages to deal damage to any wall or door using explosives or siege golems" MaxValue="180" MinValue="1"/>
+                            <local:DecimalSpinner Value="{Binding BuildCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the amount of materials required to build structures" MaxValue="10" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding RecipeCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the cost of crafting items" MaxValue="10" MinValue="0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Craft Rate Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Research Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Refinement Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Refinement Rate Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Research Time Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Dismantle Resource Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Servant Convert Rate Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Repair Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Death Durability Factor Loss" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Death Durability Loss Factor As Resources" Height="20" Margin="5,1,5,1"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="5">
+                            <local:DecimalSpinner Value="{Binding CraftRateModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="The rate for crafting items and equipment in crafting stations, a higher rate results in more rapid crafting (not refinement stations)" MaxValue="10" MinValue="0.1"/>
+                            <local:DecimalSpinner Value="{Binding ResearchCostModifier, Mode=TwoWay}" Step="0.25" IsEnabled="False" Margin="5,1,5,1" ToolTip="Not used"/>
+                            <local:DecimalSpinner Value="{Binding RefinementCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the cost of refining items" MaxValue="10" MinValue="0.1"/>
+                            <local:DecimalSpinner Value="{Binding RefinementRateModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Rate for how quickly materials are refined. A higher rate result in more rapid refinement" MaxValue="10" MinValue="0.1"/>
+                            <local:DecimalSpinner Value="{Binding ResearchTimeModifier, Mode=TwoWay}" Step="0.25" IsEnabled="False" Margin="5,1,5,1" ToolTip="Not used"/>
+                            <local:DecimalSpinner Value="{Binding DismantleResourceModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="The material reimbursement players receive from dismantling a structure" MaxValue="1" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding ServantConvertRateModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Rate for how quickly humans turn into servants. A higher rate result in more rapid conversion" MaxValue="20" MinValue="0.1"/>
+                            <local:DecimalSpinner Value="{Binding RepairCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Modifies the cost for repairing an item" MaxValue="10" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding Death_DurabilityFactorLoss, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="The amount of durability loss that equipment suffer upon death when defeated in PvP. Players are deemed as in PvP for a duration after dealing damage to another player or receiving damage from another player" MaxValue="1" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding Death_DurabilityLossFactorAsResources, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Durability loss suffered upon death is dropped as materials. A value of 0 results in all materials being lost while a value of 1 results in all materials being dropped" MaxValue="1" MinValue="0"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                    <StackPanel Orientation="Horizontal">
+                        <GroupBox Header="Vampire Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Max Health Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Max Energy Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Physical Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Spell Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Resource Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Siege Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Damage Received Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Revive Cancel Delay" Height="20" Margin="5,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.MaxHealthModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the maximum amount of health" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.PhysicalPowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies players physical power, this value affects the amount of damage players deal using weapon attacks and weapon skills" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.SpellPowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies players spell power, this value affects the amount of damage and healing players deal using spells" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.ResourcePowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the amount of damage players deal to resource objects" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.DamageReceivedModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies any damage received" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding VampireStatModifiers.ReviveCancelDelay, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Equipment Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Max Energy Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Max Health Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Resource Yield Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Physical Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Spell Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Siege Power Modifier" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Movement Speed Modifier" Height="20" Margin="5,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.MaxHealthModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the amount of health received from equipment" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.ResourceYieldModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the resource yield modifiers from equipment" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.PhysicalPowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the physical power gained from equipment, this value affects the amount of damage players deal using weapon attacks and weapon skills" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.SpellPowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the amount of spell power gained from equipment, this value affects the amount of damage and healing players deal using spells" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                    <local:DecimalSpinner Value="{Binding EquipmentStatModifiers_Global.MovementSpeedModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the amount of movement speed players gain from equipment that affects movement speed" MaxValue="5" MinValue="0.1"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Unit Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Max Health Modifier - Global" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Power Modifier - Global" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Max Health Modifier - VBlood" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Power Modifier - VBlood" Height="20" Margin="5,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <local:DecimalSpinner Value="{Binding UnitStatModifiers_Global.MaxHealthModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the maximum amount of health of standard units" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding UnitStatModifiers_Global.PowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the damage output of standard units" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding UnitStatModifiers_VBlood.MaxHealthModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the maximum amount of health of V Blood units" MaxValue="5" MinValue="0.1"/>
+                                    <local:DecimalSpinner Value="{Binding UnitStatModifiers_VBlood.PowerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the damage output of V Blood units" MaxValue="5" MinValue="0.1"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Castle Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Tick Period" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Damage Resistance" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Safety Box Limit" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Tomb Limit" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Vermin Nest Limit" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Castle Limit" Height="20" Margin="5,0,5,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <local:DecimalSpinner Value="{Binding CastleStatModifiers_Global.TickPeriod, Mode=TwoWay}" Step="0.25" ToolTip="How often the castle decay damage should tick"/>
+                                    <local:DecimalSpinner Value="{Binding CastleStatModifiers_Global.DamageResistance, Mode=TwoWay}" IsEnabled="False" Step="0.25" ToolTip="Not used"/>
+                                    <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.SafetyBoxLimit, Mode=TwoWay}" Step="1" ToolTip="The number of vampire lockboxes players may build in a single castle" MaxValue="20" MinValue="0"/>
+                                    <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.TombLimit, Mode=TwoWay}" Step="1" ToolTip="The number of tombs players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                    <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.VerminNestLimit, Mode=TwoWay}" Step="1" ToolTip="The number of vermin nests players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                    <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.CastleLimit, Mode=TwoWay}" Step="1" ToolTip="The number of castle hearts a single player is allowed to construct" MaxValue="5" MinValue="1"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <GroupBox Header="Heart Limits" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                        <TabControl Margin="5,0,5,0">
+                                            <TabItem Header="Level 1">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Floor Limit" Height="20"/>
+                                                        <TextBlock Text="Servant Limit" Height="20"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Level 2">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Floor Limit" Height="20"/>
+                                                        <TextBlock Text="Servant Limit" Height="20"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Level 3">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Floor Limit" Height="20"/>
+                                                        <TextBlock Text="Servant Limit" Height="20"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Level 4">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Floor Limit" Height="20"/>
+                                                        <TextBlock Text="Servant Limit" Height="20"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </TabItem>
+                                        </TabControl>
+                                    </GroupBox>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </Expander>
+                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <GroupBox Header="Game Time Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Day Duration In Seconds" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Day Start Hour" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Day Start Minute" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Day End Hour" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Day End Minute" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Blood Moon Frequency - Min" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Blood Moon Frequency - Max" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Blood Moon Buff" Height="20" Margin="5,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <local:DecimalSpinner Value="{Binding GameTimeModifiers.DayDurationInSeconds, Mode=TwoWay}" Step="0.25" ToolTip="The duration of an ingame day in seconds" MaxValue="86400" MinValue="60"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.DayStartHour, Mode=TwoWay}" Step="1" ToolTip="The starting hour of the ingame day" MaxValue="25" MinValue="0"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.DayStartMinute, Mode=TwoWay}" Step="1" ToolTip="The starting minute of the ingame day" MaxValue="60" MinValue="0"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.DayEndHour, Mode=TwoWay}" Step="1" ToolTip="The end hour of the ingame day" MaxValue="24" MinValue="0"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.DayEndMinute, Mode=TwoWay}" Step="1" ToolTip="The end minute of the ingame day" MaxValue="60" MinValue="0"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.BloodMoonFrequency_Min, Mode=TwoWay}" Step="1" ToolTip="The minimum frequence for how often a blood mon may occur" MaxValue="255" MinValue="1"/>
+                                        <local:NumericSpinner Value="{Binding GameTimeModifiers.BloodMoonFrequency_Max, Mode=TwoWay}" Step="1" ToolTip="The maximum frequence for how often a blood moon may occur" MaxValue="255" MinValue="1"/>
+                                        <local:DecimalSpinner Value="{Binding GameTimeModifiers.BloodMoonBuff, Mode=TwoWay}" Step="0.25" ToolTip="The amount of additional movement speed in % that a player gain during blood moon" MaxValue="1" MinValue="0.1"/>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="Player Interaction Settings" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <GroupBox Header="VS Player Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Start Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="Start Minute" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Minute" Height="20" Margin="5,0,5,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekdayTime.StartHour, Mode=TwoWay}" Step="1" ToolTip="The real time starting hour for activating Player vs Player PvP during standard weekdays" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekdayTime.StartMinute, Mode=TwoWay}" Step="1" ToolTip="The real time starting minute for activating Player vs Player PvP during standard weekdays" MaxValue="60" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekdayTime.EndHour, Mode=TwoWay}" Step="1" ToolTip="The real time ending hour for deactivating Player vs Player PvP during standard weekdays" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekdayTime.EndMinute, Mode=TwoWay}" Step="1" ToolTip="The real time end minute for deactivating Player vs Player PvP during weekdays" MaxValue="60" MinValue="0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </GroupBox>
+                                        <GroupBox Header="VS Player Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Start Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="Start Minute" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Minute" Height="20" Margin="5,0,5,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekendTime.StartHour, Mode=TwoWay}" Step="1" ToolTip="The real time starting hour for activating Player vs Player PvP during weekends" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekendTime.StartMinute, Mode=TwoWay}" Step="1" ToolTip="The real time starting minute for activating Player vs Player PvP during weekends" MaxValue="60" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekendTime.EndHour, Mode=TwoWay}" Step="1" ToolTip="The real time ending hour for deactivating Player vs Player PvP during weekends" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSPlayerWeekendTime.EndMinute, Mode=TwoWay}" Step="1" ToolTip="The real time end minute for deactivating Player vs Player PvP during weekends" MaxValue="60" MinValue="0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </GroupBox>
+                                        <GroupBox Header="VS Castle Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Start Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="Start Minute" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Minute" Height="20" Margin="5,0,5,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekdayTime.StartHour, Mode=TwoWay}" Step="1" ToolTip="The real time starting hour for activating Castle PvP during standard weekdays" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekdayTime.StartMinute, Mode=TwoWay}" Step="1" ToolTip="The real time starting minute for activating Castle PvP during standard weekdays" MaxValue="60" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekdayTime.EndHour, Mode=TwoWay}" Step="1" ToolTip="The real time ending hour for deactivating Castle PvP during standard weekdays" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekdayTime.EndMinute, Mode=TwoWay}" Step="1" ToolTip="The real time end minute for deactivating Castle PvP during weekdays" MaxValue="60" MinValue="0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </GroupBox>
+                                        <GroupBox Header="VS Castle Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Start Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="Start Minute" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Hour" Height="20" Margin="5,0,5,0"/>
+                                                    <TextBlock Text="End Minute" Height="20" Margin="5,0,5,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekendTime.StartHour, Mode=TwoWay}" Step="1" ToolTip="The real time starting hour for activating Castle PvP during weekends" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekendTime.StartMinute, Mode=TwoWay}" Step="1" ToolTip="The real time starting minute for activating Castle PvP during weekends" MaxValue="60" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekendTime.EndHour, Mode=TwoWay}" Step="1" ToolTip="The real time ending hour for deactivating Castle PvP during weekends" MaxValue="24" MinValue="0"/>
+                                                    <local:NumericSpinner Value="{Binding PlayerInteractionSettings.VSCastleWeekendTime.EndMinute, Mode=TwoWay}" Step="1" ToolTip="The real time end minute for deactivating Castle PvP during weekends" MaxValue="60" MinValue="0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </GroupBox>
+                                        <TextBlock Text="Time Zone" Margin="5,0,5,0"/>
+                                        <ComboBox x:Name="TimeZoneCombo" SelectedIndex="{Binding PlayerInteractionSettings.TimeZone, Mode=TwoWay}" Height="21.96" VerticalAlignment="Top" Width="75" ToolTip="Time Zone used for various other settings">
+                                            <ComboBoxItem Content="Local" ToolTip="Local System Time"/>
+                                            <ComboBoxItem Content="UTC" ToolTip="UTC"/>
+                                            <ComboBoxItem Content="PST" ToolTip="PST (Pacific Standard Time, UTC -8)"/>
+                                            <ComboBoxItem Content="EST" ToolTip="EST (Eastern Standard Time, UTC -5)"/>
+                                            <ComboBoxItem Content="CET" ToolTip="CET (Central European Time, UTC +1)"/>
+                                            <ComboBoxItem Content="CST" ToolTip="CST (China Standard Time, UTC +8)"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="2,5,2,5">
+                            <TextBlock Text="Starter Equipment" Margin="5,0,0,0"/>
+                            <ComboBox x:Name="StarterEquipmentCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter equipment">
+                                <ComboBoxItem Content=""/>
+                                <ComboBoxItem Content="Copper Equipment (Lvl 30)"/>
+                                <ComboBoxItem Content="Iron Equipment (Lvl 50)"/>
+                                <ComboBoxItem Content="Darksilver Equipment (Lvl 70)"/>
+                                <ComboBoxItem Content="Sanguine Equipment (Lvl 80)"/>
+                            </ComboBox>
+                            <TextBlock Text="Starter Resources" Margin="5,0,0,0"/>
+                            <ComboBox x:Name="StarterResourcesCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter resources">
+                                <ComboBoxItem Content=""/>
+                                <ComboBoxItem Content="Copper Material (Lvl 30)"/>
+                                <ComboBoxItem Content="Iron Material (Lvl 50)"/>
+                                <ComboBoxItem Content="Darksilver Material (Lvl 70)"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="2,5,2,5">
+                            <TextBlock Text="Unlocked Achievements"/>
+                            <DataGrid x:Name="AchievementsData" AutoGenerateColumns="False" CanUserAddRows="False" Height="200" CanUserDeleteRows="False" Margin="5,5,2,5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=TwoWay}" Visibility="Hidden"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay}" IsReadOnly="True" Width="225"/>
+                                    <DataGridCheckBoxColumn Header="Unlocked" Binding="{Binding Unlocked, Mode=TwoWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="2,5,2,5">
+                            <TextBlock Text="V Blood Unit Settings"/>
+                            <DataGrid x:Name="VBloodData" AutoGenerateColumns="False" CanUserAddRows="False" Height="200" CanUserDeleteRows="False" Margin="5,5,5,5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding UnitId, Mode=TwoWay}" Visibility="Hidden"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay}" IsReadOnly="True" Width="225"/>
+                                    <DataGridTextColumn Header="Level" Binding="{Binding UnitLevel, Mode=TwoWay}"/>
+                                    <DataGridCheckBoxColumn Header="Unlocked" Binding="{Binding DefaultUnlocked, Mode=TwoWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Margin="2,5,2,5">
+                            <TextBlock Text="Unlocked Research"/>
+                            <DataGrid x:Name="ResearchData" AutoGenerateColumns="False" CanUserAddRows="False" Height="Auto" CanUserDeleteRows="False" Margin="5,5,9,5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=TwoWay}" Visibility="Hidden"/>
+                                    <DataGridTextColumn Header="Tier" Binding="{Binding Name, Mode=TwoWay}" IsReadOnly="True" Width="100"/>
+                                    <DataGridCheckBoxColumn Header="Unlocked" Binding="{Binding Unlocked, Mode=TwoWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
