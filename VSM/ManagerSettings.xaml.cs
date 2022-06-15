@@ -25,6 +25,15 @@ namespace VRisingServerManager
         public ManagerSettings()
         {
             InitializeComponent();
+            // String collection doesn't add new values, only way as of now...
+            if (Properties.Settings.Default.WebhookMessages.Count < 8)
+            {
+                for (int i = Properties.Settings.Default.WebhookMessages.Count; i <8; i++)
+                {
+                    Properties.Settings.Default.WebhookMessages.Add("Message to send.");
+                }
+                Properties.Settings.Default.Save();
+            }            
         }
 
         private void SelectServerFolderButton_Click(object sender, RoutedEventArgs e)

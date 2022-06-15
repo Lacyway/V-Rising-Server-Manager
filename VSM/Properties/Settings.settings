@@ -77,7 +77,18 @@
   &lt;string&gt;Server was unable to start 5 times. Please check the logs.&lt;/string&gt;
   &lt;string&gt;Found an update. Updating.&lt;/string&gt;
   &lt;string&gt;Waiting 5 minutes to update.&lt;/string&gt;
+  &lt;string&gt;Public IP: &lt;/string&gt;
+  &lt;string&gt;SteamID: &lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="AutoRestart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoRestartInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="AutoRestartRCONMessage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

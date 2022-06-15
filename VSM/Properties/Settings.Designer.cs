@@ -297,6 +297,8 @@ namespace VRisingServerManager.Properties {
   <string>Server was unable to start 5 times. Please check the logs.</string>
   <string>Found an update. Updating.</string>
   <string>Waiting 5 minutes to update.</string>
+  <string>Public IP: </string>
+  <string>SteamID: </string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection WebhookMessages {
             get {
@@ -304,6 +306,42 @@ namespace VRisingServerManager.Properties {
             }
             set {
                 this["WebhookMessages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoRestart {
+            get {
+                return ((bool)(this["AutoRestart"]));
+            }
+            set {
+                this["AutoRestart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int AutoRestartInterval {
+            get {
+                return ((int)(this["AutoRestartInterval"]));
+            }
+            set {
+                this["AutoRestartInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoRestartRCONMessage {
+            get {
+                return ((bool)(this["AutoRestartRCONMessage"]));
+            }
+            set {
+                this["AutoRestartRCONMessage"] = value;
             }
         }
     }

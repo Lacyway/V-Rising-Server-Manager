@@ -29,13 +29,15 @@ namespace VRisingServerManager
     public partial class MainWindow : Window
     {
 
-        public Process serverProcess = new Process();
-        private static System.Timers.Timer RestartTimer;
-        public bool userStopped = false;
+        private Process serverProcess = new Process();
+        private static System.Timers.Timer RestartTimer = new System.Timers.Timer(10000);
+        private static System.Timers.Timer AutoRestartTimer = new System.Timers.Timer();
+        private bool userStopped = false;
+        private bool restartInProgress = false;
         public static int restartAttempts = 0;
         HttpClient HttpClient = new HttpClient();
         System.Windows.Forms.Timer ucTimer = new System.Windows.Forms.Timer();
-        public static dWebHook discordSender = new dWebHook();
+        private static dWebHook discordSender = new dWebHook();
 
         public MainWindow()
         {
@@ -43,7 +45,7 @@ namespace VRisingServerManager
             MainMenuConsole.AppendText("VSM started.");
             if (Properties.Settings.Default.UpgradeRequired)
             {
-                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Upgrade();                
                 Properties.Settings.Default.UpgradeRequired = false;
                 Properties.Settings.Default.Save();
             }
@@ -52,16 +54,25 @@ namespace VRisingServerManager
                 Properties.Settings.Default.Save_Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"AppData\LocalLow\Stunlock Studios\VRisingServer");
                 Properties.Settings.Default.Save();
             }
+            RestartTimer.Elapsed += OnTimedEvent;
+            RestartTimer.AutoReset = true;
             ucTimer.Tick += AutoUpdateElapsed;
+            AutoRestartTimer.Elapsed += AutoRestartElapsed;
             Properties.Settings.Default.SettingChanging += (sender, e) =>
             {
                 if (e.SettingName == "AutoUpdate")
                 {
                     if (e.NewValue.ToString() == "True")
-                    {
-                        UpdateTimer();
-                    }
-                    else if (ucTimer.Enabled) ucTimer.Stop();
+                        UpdateTimer(0);
+                    else if (ucTimer.Enabled) 
+                        ucTimer.Stop();
+                }
+                if (e.SettingName == "AutoRestart")
+                {
+                    if (e.NewValue.ToString() == "True")
+                        UpdateTimer(1);
+                    else if (AutoRestartTimer.Enabled) 
+                        AutoRestartTimer.Stop();
                 }
                 if (e.SettingName == "WebhookURL")
                 {
@@ -71,7 +82,9 @@ namespace VRisingServerManager
             if (Properties.Settings.Default.LastUpdateUNIXTime != "")
                 LastUpdateText.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
             if (Properties.Settings.Default.AutoUpdate == true)
-                UpdateTimer();            
+                UpdateTimer(0);
+            if (Properties.Settings.Default.AutoRestart == true)
+                UpdateTimer(1);
             discordSender.WebHook = Properties.Settings.Default.WebhookURL;
             CheckServer();
         }
@@ -113,13 +126,11 @@ namespace VRisingServerManager
                 serverProcess.EnableRaisingEvents = true;
                 serverProcess.Exited += new EventHandler(serverProcessExited);
                 serverProcess.Start();
-                //StoppedPic.Visible = false;
-                //RunningPic.Visible = true;
                 StatusText.Text = "Status: Running";
                 LogToConsole("Server starting.\rServer name: " + Properties.Settings.Default.Server_Name + "\rSave name: " + Properties.Settings.Default.Save_Name);
                 userStopped = false;
                 if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[0] != "")
-                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[0]);
+                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[0]);                
             }
             else
             {
@@ -142,10 +153,19 @@ namespace VRisingServerManager
             }));
         }
 
-        private void UpdateTimer()
+        private void UpdateTimer(int timer)
         {
-            ucTimer.Interval = Properties.Settings.Default.AutoUpdateInterval * 60000;
-            ucTimer.Start();
+            switch (timer)
+            {
+                case 0:
+                    ucTimer.Interval = Properties.Settings.Default.AutoUpdateInterval * (60 * 1000);
+                    ucTimer.Start();
+                    break;
+                case 1:
+                    AutoRestartTimer.Interval = Properties.Settings.Default.AutoRestartInterval * (60 * 60 * 1000);
+                    AutoRestartTimer.Start();
+                    break;
+            }
         }
 
         private async Task UpdateGame()
@@ -187,7 +207,11 @@ namespace VRisingServerManager
             }
             UpdateSteamCMDStatus("SteamCMD: Updating game...");
             LogToConsole("Updating game...");
-            string parameters = String.Format("+force_install_dir {0} +login anonymous +app_update 1829350 {1}+quit", Properties.Settings.Default.Server_Path, (Properties.Settings.Default.VerifyUpdate) ? "validate " : "");
+            string[] installScript = { "force_install_dir \"" + Properties.Settings.Default.Server_Path + "\"", "login anonymous", (Properties.Settings.Default.VerifyUpdate) ? "app_update 1829350 validate" : "app_update 1829350", "quit" };
+            if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt"))
+                File.Delete(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt");
+            File.WriteAllLines(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt", installScript);
+            string parameters = "+runscript " + "steamcmd.txt";
             var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe", parameters);
             await steamcmd.WaitForExitAsync();
             LogToConsole("Update completed.");
@@ -203,6 +227,8 @@ namespace VRisingServerManager
 
         private async Task<bool> CheckForUpdate()
         {
+            if (restartInProgress == true)
+                await Task.Delay(30000);
             bool foundUpdate = false;
             await Task.Run(() =>
             {
@@ -253,6 +279,8 @@ namespace VRisingServerManager
 
         private async void AutoUpdateServer()
         {
+            if (restartInProgress == true)
+                await Task.Delay(30000);
             if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[4] != "")
                 discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[4]);
             userStopped = true;
@@ -265,7 +293,7 @@ namespace VRisingServerManager
                 {
                     LogToConsole("Terminating server for update.");
                     proc.CloseMainWindow();
-                    proc.WaitForExit();
+                    await proc.WaitForExitAsync();
                     LogToConsole("Server terminated.");
                 }
             }
@@ -297,11 +325,11 @@ namespace VRisingServerManager
                 }
             };
             rClient.Connect(Properties.Settings.Default.RCON_Address, Properties.Settings.Default.RCON_Port);
-            LogToConsole("Waiting 5 minutes to update.");
+            LogToConsole("Waiting 5 minutes to restart.");
             if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[5] != "")
                 discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[5]);
-            await Task.Delay(300000);
             rClient.Disconnect();
+            await Task.Delay(300000);            
         }
 
         private void CheckServer()
@@ -322,26 +350,38 @@ namespace VRisingServerManager
             {
                 StartServerButton.IsEnabled = false;
                 StopServerButton.IsEnabled = true;
-                //StoppedPic.Visible = false;
-                //RunningPic.Visible = true;
                 StatusText.Text = "Status: Running";
                 LogToConsole("Server found running.");
             }
         }
 
+        private async Task<bool> StopServer()
+        {
+            restartInProgress = true;
+            bool foundProcess = false;
+            userStopped = true;
+            Dispatcher.Invoke(new Action(() =>
+            {
+                StopServerButton.IsEnabled = false;
+            }));            
+            LogToConsole("Stopping server.");
+            Process[] processList = Process.GetProcessesByName("vrisingserver");
+            foreach (Process proc in processList)
+            {
+                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
+                {
+                    proc.CloseMainWindow();
+                    await proc.WaitForExitAsync();
+                    foundProcess = true;
+                }
+            }
+            restartInProgress = false;
+            return foundProcess;
+        }
+
         private static void SetTimer()
         {
-            if (RestartTimer != null)
-            {
-                RestartTimer.Start();
-            }
-            else
-            {
-                RestartTimer = new System.Timers.Timer(10000);
-                RestartTimer.Elapsed += OnTimedEvent;
-                RestartTimer.AutoReset = true;
-                RestartTimer.Enabled = true;
-            }
+            RestartTimer.Start();
         }
 
         private async void AutoUpdateElapsed(object? sender, EventArgs e)
@@ -351,10 +391,51 @@ namespace VRisingServerManager
                 AutoUpdateServer();
         }
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private async void AutoRestartElapsed(Object source, ElapsedEventArgs e)
+        {
+            if (Properties.Settings.Default.AutoRestartRCONMessage == true)
+                await SendRestartMessage();
+            bool stoppedServer = await StopServer();
+            if (stoppedServer == true)
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    StartServer();
+                }));
+            else
+                LogToConsole("Could not find server process.");
+        }
+
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             restartAttempts = 0;
             RestartTimer.Stop();
+            if (Properties.Settings.Default.EnableWebhook == true && Properties.Settings.Default.WebhookURL != "")
+                ReadLog();
+        }
+
+        private void ReadLog()
+        {
+            using (FileStream fs = new FileStream(Properties.Settings.Default.Log_Path + @"\VRisingServer.log", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                string[] toSend;
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line.Contains("SteamPlatformSystem - OnPolicyResponse - Public IP: ") && Properties.Settings.Default.WebhookMessages[6] != "")
+                    {
+                        toSend = line.Split("SteamPlatformSystem - OnPolicyResponse - Public IP: ");
+                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[6] + toSend[1]);
+                    }
+                    if (line.Contains("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: ") && Properties.Settings.Default.WebhookMessages[7] != "")
+                    {
+                        toSend = line.Split("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: ");
+                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[7] + toSend[1]);
+                    }
+                }
+                sr.Close();
+                fs.Close();
+            }
         }
 
         private void serverProcessExited(object sender, EventArgs e)
@@ -365,8 +446,6 @@ namespace VRisingServerManager
                 {
                     if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[2] != "")
                         discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[2]);
-                    //StoppedPic.Visible = true;
-                    //RunningPic.Visible = false;
                     StatusText.Text = "Status: Stopped";
                     LogToConsole("Server closed unexpectedly. Restarting.");
                     StartServer();
@@ -375,8 +454,6 @@ namespace VRisingServerManager
                 {
                     if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[1] != "")
                         discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[1]);
-                    //StoppedPic.Visible = true;
-                    //RunningPic.Visible = false;
                     StatusText.Text = "Status: Stopped";
                     StopServerButton.IsEnabled = false;
                     StartServerButton.IsEnabled = true;
@@ -450,19 +527,11 @@ namespace VRisingServerManager
             StartServer();
         }
 
-        private void StopServerButton_Click(object sender, RoutedEventArgs e)
+        private async void StopServerButton_Click(object sender, RoutedEventArgs e)
         {
-            userStopped = true;
-            StopServerButton.IsEnabled = false;
-            LogToConsole("Stopping server.");
-            Process[] processList = Process.GetProcessesByName("vrisingserver");
-            foreach (Process proc in processList)
-            {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
-                {
-                    proc.CloseMainWindow();
-                }
-            }
+            bool stoppedServer = await StopServer();
+            if (stoppedServer == false)
+                LogToConsole("Could not find server process.");
         }
 
         private void UpdateServerButton_Click(object sender, RoutedEventArgs e)
