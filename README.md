@@ -29,17 +29,17 @@ Needs [.NET Runtime 6.0](https://download.visualstudio.microsoft.com/download/pr
 
 If you wish to compile it use the [.NET 6.0 SDK, Visual Studio 22](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 
-Libraries used:
+Libraries used (both are no longer used in >v2.0
 - Newtonsoft.Json
 - source-rcon-server
 
 ## Pictures
 
-<img src="https://i.imgur.com/RSkccw8.png" width="400">
-<img src="https://i.imgur.com/P4uZFoR.png" width="200">
-<img src="https://i.imgur.com/hAOgfxd.png" width="400">
-<img src="https://i.imgur.com/vNB86zM.png" width="400">
-<img src="https://i.imgur.com/JqRlHP0.png" width="200">
+<img src="https://raw.githubusercontent.com/Lacyway/V-Rising-Server-Manager/master/Resources/mainwindow.png" width="400">
+<img src="https://raw.githubusercontent.com/Lacyway/V-Rising-Server-Manager/master/Resources/adminmanager.png" width="200">
+<img src="https://raw.githubusercontent.com/Lacyway/V-Rising-Server-Manager/master/Resources/rconconsole.png" width="400">
+<img src="https://raw.githubusercontent.com/Lacyway/V-Rising-Server-Manager/master/Resources/gamesettingseditor.png" width="400">
+<img src="https://raw.githubusercontent.com/Lacyway/V-Rising-Server-Manager/master/Resources/serversettingseditor.png" width="200">
 
 ## Note
 This is my first C# project. It's probably not made in the best way, please be constructive.
