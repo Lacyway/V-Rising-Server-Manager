@@ -29,8 +29,7 @@ Needs [.NET Runtime 6.0](https://download.visualstudio.microsoft.com/download/pr
 
 If you wish to compile it use the [.NET 6.0 SDK, Visual Studio 22](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 
-Libraries used (both are no longer used in >v2.0
-- Newtonsoft.Json
+Libraries used
 - source-rcon-server
 
 ## Pictures
