@@ -310,6 +310,8 @@ namespace VRisingServerManager
         public bool ListOnMasterServer { get; set; } = true;
         public int AutoSaveCount { get; set; } = 25;
         public int AutoSaveInterval { get; set; } = 600;
+        public int ResetDaysInterval { get; set; } = 0;
+        public int DayOfReset { get; set; } = -1;
         public string GameSettingsPreset { get; set; } = "";
         public bool AdminOnlyDebugEvents { get; set; } = true;
         public bool DisableDebugEvents { get; set; } = false;

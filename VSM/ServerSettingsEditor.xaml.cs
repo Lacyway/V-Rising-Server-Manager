@@ -29,7 +29,7 @@ namespace VRisingServerManager
         {
             serverSettings = new ServerSettings();
             DataContext = serverSettings;
-            InitializeComponent();
+            InitializeComponent();            
             if (Properties.Settings.Default.AutoLoadHostSettings == true && File.Exists(Properties.Settings.Default.HostSettingsFile))
                 AutoLoad();
         }
