@@ -34,22 +34,37 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DuoPvP_DailySiege.json" />
+    <None Remove="Resources\DuoPvP_NoSiege.json" />
+    <None Remove="Resources\DuoPvP_WeekendSiege.json" />
     <None Remove="Resources\Duo_PvP.json" />
-    <None Remove="Resources\Full_Loot_PvP.json" />
+    <None Remove="Resources\HardcoreDuoPvP.json" />
+    <None Remove="Resources\HardcorePvP.json" />
+    <None Remove="Resources\Level30PvE.json" />
+    <None Remove="Resources\Level30PvP.json" />
+    <None Remove="Resources\Level40PvE.json" />
+    <None Remove="Resources\Level40PvP.json" />
+    <None Remove="Resources\Level50PvE.json" />
+    <None Remove="Resources\Level50PvP.json" />
+    <None Remove="Resources\Level60PvE.json" />
+    <None Remove="Resources\Level60PvP.json" />
+    <None Remove="Resources\Level70PvE.json" />
+    <None Remove="Resources\Level70PvP.json" />
+    <None Remove="Resources\Level80PvE.json" />
+    <None Remove="Resources\Level80PvP.json" />
     <None Remove="Resources\logo.ico" />
-    <None Remove="Resources\PvE_Dawn_Lvl30.json" />
-    <None Remove="Resources\PvE_Dusk_Lvl70.json" />
-    <None Remove="Resources\PvE_Noon_Lvl50.json" />
-    <None Remove="Resources\PvP_Dawn_Lvl30.json" />
-    <None Remove="Resources\PvP_Dusk_Lvl70.json" />
-    <None Remove="Resources\PvP_Noon_Lvl50.json" />
-    <None Remove="Resources\Solo_PvP.json" />
-    <None Remove="Resources\Standard_PvE.json" />
-    <None Remove="Resources\Standard_PvE_Easy.json" />
-    <None Remove="Resources\Standard_PvE_Hard.json" />
-    <None Remove="Resources\Standard_PvP.json" />
-    <None Remove="Resources\Standard_PvP_Easy.json" />
-    <None Remove="Resources\Standard_PvP_Hard.json" />
+    <None Remove="Resources\SoloPvP.json" />
+    <None Remove="Resources\StandardPvE.json" />
+    <None Remove="Resources\StandardPvE_Easy.json" />
+    <None Remove="Resources\StandardPvE_Hard.json" />
+    <None Remove="Resources\StandardPvE_Shuffle.json" />
+    <None Remove="Resources\StandardPvP.json" />
+    <None Remove="Resources\StandardPvP_DailySiege.json" />
+    <None Remove="Resources\StandardPvP_Easy.json" />
+    <None Remove="Resources\StandardPvP_Hard.json" />
+    <None Remove="Resources\StandardPvP_NoSiege.json" />
+    <None Remove="Resources\StandardPvP_Shuffle.json" />
+    <None Remove="Resources\StandardPvP_WeekendSiege.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,21 +72,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\DuoPvP_DailySiege.json" />
+    <EmbeddedResource Include="Resources\DuoPvP_NoSiege.json" />
+    <EmbeddedResource Include="Resources\DuoPvP_WeekendSiege.json" />
     <EmbeddedResource Include="Resources\Duo_PvP.json" />
-    <EmbeddedResource Include="Resources\Full_Loot_PvP.json" />
-    <EmbeddedResource Include="Resources\PvE_Dawn_Lvl30.json" />
-    <EmbeddedResource Include="Resources\PvE_Dusk_Lvl70.json" />
-    <EmbeddedResource Include="Resources\PvE_Noon_Lvl50.json" />
-    <EmbeddedResource Include="Resources\PvP_Dawn_Lvl30.json" />
-    <EmbeddedResource Include="Resources\PvP_Dusk_Lvl70.json" />
-    <EmbeddedResource Include="Resources\PvP_Noon_Lvl50.json" />
-    <EmbeddedResource Include="Resources\Solo_PvP.json" />
-    <EmbeddedResource Include="Resources\Standard_PvE.json" />
-    <EmbeddedResource Include="Resources\Standard_PvE_Easy.json" />
-    <EmbeddedResource Include="Resources\Standard_PvE_Hard.json" />
-    <EmbeddedResource Include="Resources\Standard_PvP.json" />
-    <EmbeddedResource Include="Resources\Standard_PvP_Easy.json" />
-    <EmbeddedResource Include="Resources\Standard_PvP_Hard.json" />
+    <EmbeddedResource Include="Resources\HardcoreDuoPvP.json" />
+    <EmbeddedResource Include="Resources\HardcorePvP.json" />
+    <EmbeddedResource Include="Resources\Level30PvE.json" />
+    <EmbeddedResource Include="Resources\Level30PvP.json" />
+    <EmbeddedResource Include="Resources\Level40PvE.json" />
+    <EmbeddedResource Include="Resources\Level40PvP.json" />
+    <EmbeddedResource Include="Resources\Level50PvE.json" />
+    <EmbeddedResource Include="Resources\Level50PvP.json" />
+    <EmbeddedResource Include="Resources\Level60PvE.json" />
+    <EmbeddedResource Include="Resources\Level60PvP.json" />
+    <EmbeddedResource Include="Resources\Level70PvE.json" />
+    <EmbeddedResource Include="Resources\Level70PvP.json" />
+    <EmbeddedResource Include="Resources\Level80PvE.json" />
+    <EmbeddedResource Include="Resources\Level80PvP.json" />
+    <EmbeddedResource Include="Resources\SoloPvP.json" />
+    <EmbeddedResource Include="Resources\StandardPvE.json" />
+    <EmbeddedResource Include="Resources\StandardPvE_Easy.json" />
+    <EmbeddedResource Include="Resources\StandardPvE_Hard.json" />
+    <EmbeddedResource Include="Resources\StandardPvE_Shuffle.json" />
+    <EmbeddedResource Include="Resources\StandardPvP.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_DailySiege.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_Easy.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_Hard.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_NoSiege.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_Shuffle.json" />
+    <EmbeddedResource Include="Resources\StandardPvP_WeekendSiege.json" />
   </ItemGroup>
 
   <ItemGroup>

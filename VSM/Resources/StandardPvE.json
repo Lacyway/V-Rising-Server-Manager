@@ -1,0 +1,12 @@
+﻿{
+  "GameModeType": "PvE",
+  "DeathContainerPermission": "ClanMembers",
+  "RelicSpawnType": "Plentiful",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "CastleDamageMode": "Never",
+  "BloodBoundEquipment": true,
+  "CanLootEnemyContainers": false,
+  "Death_DurabilityFactorLoss": 0.0,
+  "Death_DurabilityLossFactorAsResources": 0.0,
+  "AnnounceSiegeWeaponSpawn":  false
+}

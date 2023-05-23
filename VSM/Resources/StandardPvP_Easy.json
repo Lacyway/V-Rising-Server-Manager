@@ -1,0 +1,29 @@
+﻿{
+  "GameModeType": "PvP",
+  "CastleDamageMode": "TimeRestricted",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "DeathContainerPermission": "Anyone",
+  "RelicSpawnType": "Unique",
+  "BloodBoundEquipment": true,
+  "PlayerDamageMode": "Always",
+  "PvPProtectionMode": "Short",
+
+  "CastleStatModifiers_Global": {
+    "CastleLimit": 1
+  },
+
+  "DropTableModifier_General": 1.5,
+  "DropTableModifier_Missions": 1.5,
+  "MaterialYieldModifier_Global": 1.5,
+  "BloodEssenceYieldModifier": 1.5,
+  "BloodDrainModifier": 1.25,
+
+  "UnitStatModifiers_Global": {
+    "MaxHealthModifier": 0.75,
+    "PowerModifier": 0.75
+  },
+  "UnitStatModifiers_VBlood": {
+    "MaxHealthModifier": 0.75,
+    "PowerModifier": 0.75
+  }
+}

@@ -1,0 +1,227 @@
+﻿{
+  "GameModeType": "PvP",
+  "CastleDamageMode": "TimeRestricted",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "DeathContainerPermission": "Anyone",
+  "RelicSpawnType": "Unique",
+  "BloodBoundEquipment": true,
+  "PlayerDamageMode": "Always",
+  "PvPProtectionMode": "Short",
+  "BloodDrainModifier": 1.25,
+  "StarterEquipmentId": -258598606,
+  "StarterResourcesId": -766909665,
+  "VBloodUnitSettings": [
+    {
+      "UnitId": -1905691330,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1124739990,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 2122229952,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -2025101517,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 763273073,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1106149033,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 577478542,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -2039908510,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1896428751,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -484556888,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1391546313,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 153390636,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1659822956,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1942352521,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -29797003,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -99012450,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 939467639,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1449631170,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1065970933,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 850622034,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 24378719,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1688478381,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -680831417,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -548489519,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -203043163,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1208888966,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1968372384,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1007062401,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -2013903325,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1365931036,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 910988233,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1945956671,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 613251918,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1101874342,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 172235178,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 106480588,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 109969450,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 326378955,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -26105228,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 192051202,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 685266977,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 114912615,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 192051202,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -1347412392,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 814083983,
+      "DefaultUnlocked": true
+    }
+  ],
+  "UnlockedAchievements": [
+    -1770927128,
+    436375429,
+    -1400391027,
+    -2071097880,
+    1695239324,
+    1502386974,
+    1694767961,
+    -1899098914,
+    560247139,
+    -1995132640,
+    -1434604634,
+    1668809517,
+    334973636,
+    606418711,
+    -892747762,
+    -437605270,
+    134993992,
+    1805684941,
+    -699165894,
+    -2104585843,
+    -327597689,
+    1861267375
+  ],
+  "UnlockedResearchs": [
+    -495424062,
+    -1292809886,
+    -1262194203
+  ],
+  "CastleStatModifiers_Global": {
+    "CastleLimit": 1
+  }
+}

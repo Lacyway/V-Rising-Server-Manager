@@ -1,0 +1,39 @@
+﻿{
+  "GameModeType": "PvP",
+  "CastleDamageMode": "TimeRestricted",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "DeathContainerPermission": "Anyone",
+  "RelicSpawnType": "Plentiful",
+  "BloodBoundEquipment": true,
+  "PlayerDamageMode": "Always",
+  "CastleDamageMode": "Never",
+  "PvPProtectionMode": "Short",
+  "ClanSize": 2,
+
+  "DropTableModifier_General": 1.25,
+  "DropTableModifier_Missions": 1.75,
+  "MaterialYieldModifier_Global": 1.25,
+  "BloodEssenceYieldModifier": 1.25,
+  "BloodDrainModifier": 1.25,
+
+  "CastleStatModifiers_Global": {
+      "HeartLimits": {
+      "Level1": {
+        "ServantLimit": 2
+      },
+      "Level2": {
+        "ServantLimit": 3
+      },
+      "Level3": {
+        "ServantLimit": 4
+      },
+      "Level4": {
+        "ServantLimit": 5
+      },
+      "Level5": {
+        "ServantLimit": 5
+      }
+    },
+    "CastleLimit": 2
+  }
+}

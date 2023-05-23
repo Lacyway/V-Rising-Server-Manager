@@ -1,0 +1,65 @@
+﻿{
+  "GameModeType": "PvE",
+  "DeathContainerPermission": "ClanMembers",
+  "RelicSpawnType": "Plentiful",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "CastleDamageMode": "Never",
+  "BloodBoundEquipment": true,
+  "CanLootEnemyContainers": false,
+  "Death_DurabilityFactorLoss": 0.0,
+  "Death_DurabilityLossFactorAsResources": 0.0,
+  "AnnounceSiegeWeaponSpawn": false,
+  "StarterEquipmentId": -387090868,
+  "StarterResourcesId": -696202180,
+  "VBloodUnitSettings": [
+    {
+      "UnitId": -1905691330,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1124739990,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 2122229952,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -2025101517,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 763273073,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": -2039908510,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1106149033,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 1896428751,
+      "DefaultUnlocked": true
+    },
+    {
+      "UnitId": 577478542,
+      "DefaultUnlocked": true
+    }
+  ],
+  "UnlockedAchievements": [
+    -1770927128,
+    436375429,
+    -1400391027,
+    -2071097880,
+    1695239324,
+    1502386974,
+    1694767961,
+    -1899098914,
+    560247139,
+    -1995132640,
+    -1434604634
+  ]
+}

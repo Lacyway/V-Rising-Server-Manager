@@ -1,0 +1,26 @@
+﻿{
+  "GameModeType": "PvE",
+  "DeathContainerPermission": "ClanMembers",
+  "RelicSpawnType": "Plentiful",
+  "CastleHeartDamageMode": "CanBeDestroyedOnlyWhenDecaying",
+  "CastleDamageMode": "Never",
+  "BloodBoundEquipment": true,
+  "CanLootEnemyContainers": false,
+  "Death_DurabilityFactorLoss": 0.0,
+  "Death_DurabilityLossFactorAsResources": 0.0,
+  "AnnounceSiegeWeaponSpawn": false,
+
+  "DropTableModifier_General": 1.5,
+  "DropTableModifier_Missions": 1.5,
+  "MaterialYieldModifier_Global": 1.5,
+  "BloodEssenceYieldModifier": 1.5,
+
+  "UnitStatModifiers_Global": {
+    "MaxHealthModifier": 0.75,
+    "PowerModifier": 0.75
+  },
+  "UnitStatModifiers_VBlood": {
+    "MaxHealthModifier": 0.75,
+    "PowerModifier": 0.75
+  }
+}

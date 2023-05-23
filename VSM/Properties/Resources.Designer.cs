@@ -73,9 +73,169 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Full_Loot_PvP {
+        internal static byte[] DuoPvP_DailySiege {
             get {
-                object obj = ResourceManager.GetObject("Full_Loot_PvP", resourceCulture);
+                object obj = ResourceManager.GetObject("DuoPvP_DailySiege", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] DuoPvP_NoSiege {
+            get {
+                object obj = ResourceManager.GetObject("DuoPvP_NoSiege", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] DuoPvP_WeekendSiege {
+            get {
+                object obj = ResourceManager.GetObject("DuoPvP_WeekendSiege", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] HardcoreDuoPvP {
+            get {
+                object obj = ResourceManager.GetObject("HardcoreDuoPvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] HardcorePvP {
+            get {
+                object obj = ResourceManager.GetObject("HardcorePvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level30PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level30PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level30PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level30PvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level40PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level40PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level40PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level40PvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level50PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level50PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level50PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level50PvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level60PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level60PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level60PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level60PvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level70PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level70PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level70PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level70PvP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level80PvE {
+            get {
+                object obj = ResourceManager.GetObject("Level80PvE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Level80PvP {
+            get {
+                object obj = ResourceManager.GetObject("Level80PvP", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -93,9 +253,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvE_Dawn_Lvl30 {
+        internal static byte[] SoloPvP {
             get {
-                object obj = ResourceManager.GetObject("PvE_Dawn_Lvl30", resourceCulture);
+                object obj = ResourceManager.GetObject("SoloPvP", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +263,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvE_Dusk_Lvl70 {
+        internal static byte[] StandardPvE {
             get {
-                object obj = ResourceManager.GetObject("PvE_Dusk_Lvl70", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvE", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -113,9 +273,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvE_Noon_Lvl50 {
+        internal static byte[] StandardPvE_Easy {
             get {
-                object obj = ResourceManager.GetObject("PvE_Noon_Lvl50", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvE_Easy", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -123,9 +283,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvP_Dawn_Lvl30 {
+        internal static byte[] StandardPvE_Hard {
             get {
-                object obj = ResourceManager.GetObject("PvP_Dawn_Lvl30", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvE_Hard", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -133,9 +293,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvP_Dusk_Lvl70 {
+        internal static byte[] StandardPvE_Shuffle {
             get {
-                object obj = ResourceManager.GetObject("PvP_Dusk_Lvl70", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvE_Shuffle", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -143,9 +303,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] PvP_Noon_Lvl50 {
+        internal static byte[] StandardPvP {
             get {
-                object obj = ResourceManager.GetObject("PvP_Noon_Lvl50", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -153,9 +313,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Solo_PvP {
+        internal static byte[] StandardPvP_DailySiege {
             get {
-                object obj = ResourceManager.GetObject("Solo_PvP", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_DailySiege", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -163,9 +323,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Standard_PvE {
+        internal static byte[] StandardPvP_Easy {
             get {
-                object obj = ResourceManager.GetObject("Standard_PvE", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_Easy", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -173,9 +333,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Standard_PvE_Easy {
+        internal static byte[] StandardPvP_Hard {
             get {
-                object obj = ResourceManager.GetObject("Standard_PvE_Easy", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_Hard", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -183,9 +343,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Standard_PvE_Hard {
+        internal static byte[] StandardPvP_NoSiege {
             get {
-                object obj = ResourceManager.GetObject("Standard_PvE_Hard", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_NoSiege", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -193,9 +353,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Standard_PvP {
+        internal static byte[] StandardPvP_Shuffle {
             get {
-                object obj = ResourceManager.GetObject("Standard_PvP", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_Shuffle", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -203,19 +363,9 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] Standard_PvP_Easy {
+        internal static byte[] StandardPvP_WeekendSiege {
             get {
-                object obj = ResourceManager.GetObject("Standard_PvP_Easy", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Standard_PvP_Hard {
-            get {
-                object obj = ResourceManager.GetObject("Standard_PvP_Hard", resourceCulture);
+                object obj = ResourceManager.GetObject("StandardPvP_WeekendSiege", resourceCulture);
                 return ((byte[])(obj));
             }
         }

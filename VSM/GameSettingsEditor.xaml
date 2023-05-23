@@ -20,23 +20,37 @@
             </MenuItem>
             <MenuItem Header="_Presets">
                 <MenuItem Header="PvE">
-                    <MenuItem Header="Standard PvE" Click="LoadPresetButton" Tag="Standard_PvE.json"/>
-                    <MenuItem Header="Standard PvE Easy" Click="LoadPresetButton" Tag="Standard_PvE_Easy.json"/>
-                    <MenuItem Header="Standard PvE Hard" Click="LoadPresetButton" Tag="Standard_PvE_Hard.json"/>
-                    <MenuItem Header="PvE Dawn Level 30" Click="LoadPresetButton" Tag="PvE_Dawn_Lvl30.json"/>
-                    <MenuItem Header="PvE Noon Level 50" Click="LoadPresetButton" Tag="PvE_Noon_Lvl50.json"/>
-                    <MenuItem Header="PvE Dusk level 70" Click="LoadPresetButton" Tag="PvE_Dusk_Lvl70.json"/>
+                    <MenuItem Header="Standard PvE" Click="LoadPresetButton" Tag="StandardPvE.json"/>
+                    <MenuItem Header="Standard PvE - Easy" Click="LoadPresetButton" Tag="StandardPvE_Easy.json"/>
+                    <MenuItem Header="Standard PvE - Hard" Click="LoadPresetButton" Tag="StandardPvE_Hard.json"/>
+                    <MenuItem Header="Standard PvE - Shuffle" Click="LoadPresetButton" Tag="StandardPvE_Shuffle.json"/>
+                    <MenuItem Header="PvE Level 30" Click="LoadPresetButton" Tag="Level30PvE.json"/>
+                    <MenuItem Header="PvE Level 40" Click="LoadPresetButton" Tag="Level40PvE.json"/>
+                    <MenuItem Header="PvE level 50" Click="LoadPresetButton" Tag="Level50PvE.json"/>
+                    <MenuItem Header="PvE level 60" Click="LoadPresetButton" Tag="Level60PvE.json"/>
+                    <MenuItem Header="PvE level 70" Click="LoadPresetButton" Tag="Level70PvE.json"/>
+                    <MenuItem Header="PvE level 80" Click="LoadPresetButton" Tag="Level80PvE.json"/>
                 </MenuItem>
                 <MenuItem Header="PvP">
-                    <MenuItem Header="Standard PvP" Click="LoadPresetButton" Tag="Standard_PvP.json"/>
-                    <MenuItem Header="Standard PvP Easy" Click="LoadPresetButton" Tag="Standard_PvP_Easy.json"/>
-                    <MenuItem Header="Standard PvP Hard" Click="LoadPresetButton" Tag="Standard_PvP_Hard.json"/>
-                    <MenuItem Header="PvP Dawn Level 30" Click="LoadPresetButton" Tag="PvP_Dawn_Lvl30.json"/>
-                    <MenuItem Header="PvP Noon Level 50" Click="LoadPresetButton" Tag="PvP_Noon_Lvl50.json"/>
-                    <MenuItem Header="PvP Dusk Level 70" Click="LoadPresetButton" Tag="PvP_Dusk_Lvl70.json"/>
-                    <MenuItem Header="Solo PvP" Click="LoadPresetButton" Tag="Solo_PvP.json"/>
+                    <MenuItem Header="Standard PvP" Click="LoadPresetButton" Tag="StandardPvP.json"/>
+                    <MenuItem Header="Standard PvP - Easy" Click="LoadPresetButton" Tag="StandardPvP_Easy.json"/>
+                    <MenuItem Header="Standard PvP - Hard" Click="LoadPresetButton" Tag="StandardPvP_Hard.json"/>
+                    <MenuItem Header="Standard PvP - Shuffle" Click="LoadPresetButton" Tag="StandardPvP_Shuffle.json"/>
+                    <MenuItem Header="Standard PvP - Daily Siege" Click="LoadPresetButton" Tag="StandardPvP_DailySiege.json"/>
+                    <MenuItem Header="Standard PvP - Weekend Siege" Click="LoadPresetButton" Tag="StandardPvP_WeekendSiege.json"/>
+                    <MenuItem Header="Standard PvP - No Siege" Click="LoadPresetButton" Tag="StandardPvP_NoSiege.json"/>
+                    <MenuItem Header="PvP Level 30" Click="LoadPresetButton" Tag="Level30PvP.json"/>
+                    <MenuItem Header="PvP Level 40" Click="LoadPresetButton" Tag="Level40PvP.json"/>
+                    <MenuItem Header="PvP level 50" Click="LoadPresetButton" Tag="Level50PvP.json"/>
+                    <MenuItem Header="PvP level 60" Click="LoadPresetButton" Tag="Level60PvP.json"/>
+                    <MenuItem Header="PvP level 70" Click="LoadPresetButton" Tag="Level70PvP.json"/>
+                    <MenuItem Header="PvP level 80" Click="LoadPresetButton" Tag="Level80PvP.json"/>
                     <MenuItem Header="Duo PvP" Click="LoadPresetButton" Tag="Duo_PvP.json"/>
-                    <MenuItem Header="Full Loot PvP" Click="LoadPresetButton" Tag="Full_Loot_PvP.json"/>
+                    <MenuItem Header="Duo PvP - Daily Siege" Click="LoadPresetButton" Tag="DuoPvP_DailySiege.json"/>
+                    <MenuItem Header="Duo PvP - Weekend Siege" Click="LoadPresetButton" Tag="DuoPvP_WeekendSiege.json"/>
+                    <MenuItem Header="Duo PvP - No Siege" Click="LoadPresetButton" Tag="DuoPvP_NoSiege.json"/>
+                    <MenuItem Header="Duo PvP - Hardcore" Click="LoadPresetButton" Tag="HardcoreDuoPvP.json"/>
+                    <MenuItem Header="Hardcore PvP" Click="LoadPresetButton" Tag="HardcorePvP.json"/>
                 </MenuItem>
             </MenuItem>
         </Menu>

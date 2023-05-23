@@ -283,8 +283,9 @@ namespace VRisingServerManager
 
         private void LoadPreset(string Preset)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream("VRisingServerManager.Resources." + Preset))
+            //var assembly = Assembly.GetExecutingAssembly();
+            //Stream stream = assembly.GetManifestResourceStream("VRisingServerManager.Resources." + Preset);
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("VRisingServerManager.Resources." + Preset);
             using (StreamReader reader = new StreamReader(stream))
             {
                 string LoadedJSON = reader.ReadToEnd();
