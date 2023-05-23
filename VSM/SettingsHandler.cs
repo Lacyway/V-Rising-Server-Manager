@@ -87,6 +87,7 @@ namespace VRisingServerManager
         public Level2 Level2 { get; set; } = new Level2();
         public Level3 Level3 { get; set; } = new Level3();
         public Level4 Level4 { get; set; } = new Level4();
+        public Level5 Level5 { get; set; } = new Level5();
     }
 
     public class Level1
@@ -94,6 +95,8 @@ namespace VRisingServerManager
         public int Level { get; set; } = 1;
         public int FloorLimit { get; set; } = 30;
         public int ServantLimit { get; set; } = 3;
+        public int BuildLimits { get; set; } = 2;
+        public int HeightLimit { get; set; } = 3;
     }
 
     public class Level2
@@ -101,6 +104,8 @@ namespace VRisingServerManager
         public int Level { get; set; } = 2;
         public int FloorLimit { get; set; } = 80;
         public int ServantLimit { get; set; } = 5;
+        public int BuildLimits { get; set; } = 2;
+        public int HeightLimit { get; set; } = 3;
     }
 
     public class Level3
@@ -108,6 +113,8 @@ namespace VRisingServerManager
         public int Level { get; set; } = 3;
         public int FloorLimit { get; set; } = 150;
         public int ServantLimit { get; set; } = 7;
+        public int BuildLimits { get; set; } = 2;
+        public int HeightLimit { get; set; } = 3;
     }
 
     public class Level4
@@ -115,6 +122,17 @@ namespace VRisingServerManager
         public int Level { get; set; } = 4;
         public int FloorLimit { get; set; } = 250;
         public int ServantLimit { get; set; } = 9;
+        public int BuildLimits { get; set; } = 2;
+        public int HeightLimit { get; set; } = 3;
+    }
+
+    public class Level5
+    {
+        public int Level { get; set; } = 5;
+        public int FloorLimit { get; set; } = 420;
+        public int ServantLimit { get; set; } = 9;
+        public int BuildLimits { get; set; } = 2;
+        public int HeightLimit { get; set; } = 3;
     }
 
     public class PlayerInteractionSettings
@@ -217,6 +235,13 @@ namespace VRisingServerManager
         public int EndMinute { get; set; } = 0;
     }
 
+    public class TraderModifiers
+    {
+        public double StockModifier { get; set; } = 1.00;
+        public double PriceModifier { get; set; } = 1.00;
+        public double RestockTimerModifier { get; set; } = 1.00;
+    }
+
     public class Rcon
     {
         public bool Enabled { get; set; } = false;
@@ -293,6 +318,7 @@ namespace VRisingServerManager
         public EquipmentStatModifiersGlobal EquipmentStatModifiers_Global { get; set; } = new EquipmentStatModifiersGlobal();
         public CastleStatModifiersGlobal CastleStatModifiers_Global { get; set; } = new CastleStatModifiersGlobal();
         public PlayerInteractionSettings PlayerInteractionSettings { get; set; } = new PlayerInteractionSettings();
+        public TraderModifiers TraderModifiers { get; set; } = new TraderModifiers();
     }
 
     public class ServerSettings

@@ -60,6 +60,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
                             <TextBlock Text="Game Mode" Margin="5,5,5,5"/>
@@ -145,6 +146,26 @@
                                     <TextBlock Text="Timer"/>
                                     <local:NumericSpinner Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
                                 </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="4">
+                            <GroupBox Header="Trader Settings" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Stock Modifier" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Price Modifier" Height="20" Margin="5,0,5,0"/>
+                                        <TextBlock Text="Restock Timer Modifier" Height="20" Margin="5,0,5,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.StockModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.PriceModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.RestockTimerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
+                                    </StackPanel>
+                                </Grid>                                
                             </GroupBox>
                         </StackPanel>
                     </Grid>
@@ -348,7 +369,7 @@
                                                         <TextBlock Text="Servant Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -364,7 +385,7 @@
                                                         <TextBlock Text="Servant Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -380,7 +401,7 @@
                                                         <TextBlock Text="Servant Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -396,8 +417,24 @@
                                                         <TextBlock Text="Servant Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="250" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Level 5">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Floor Limit" Height="20"/>
+                                                        <TextBlock Text="Servant Limit" Height="20"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -549,17 +586,22 @@
                             <TextBlock Text="Starter Equipment" Margin="5,0,0,0"/>
                             <ComboBox x:Name="StarterEquipmentCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter equipment">
                                 <ComboBoxItem Content=""/>
-                                <ComboBoxItem Content="Copper Equipment (Lvl 30)"/>
-                                <ComboBoxItem Content="Iron Equipment (Lvl 50)"/>
-                                <ComboBoxItem Content="Darksilver Equipment (Lvl 70)"/>
-                                <ComboBoxItem Content="Sanguine Equipment (Lvl 80)"/>
+                                <ComboBoxItem Content="Gear Level 30 - Copper Equipment"/>
+                                <ComboBoxItem Content="Gear Level 40 - Merciless Copper Equipment"/>
+                                <ComboBoxItem Content="Gear Level 50 - Iron Equipment"/>
+                                <ComboBoxItem Content="Gear Level 60 - Merciless Iron Equipment"/>
+                                <ComboBoxItem Content="Gear Level 70 - Dark Silver Equipment"/>
+                                <ComboBoxItem Content="Gear Level 80 - Sanguine Equipment"/>
                             </ComboBox>
                             <TextBlock Text="Starter Resources" Margin="5,0,0,0"/>
                             <ComboBox x:Name="StarterResourcesCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter resources">
                                 <ComboBoxItem Content=""/>
-                                <ComboBoxItem Content="Copper Material (Lvl 30)"/>
-                                <ComboBoxItem Content="Iron Material (Lvl 50)"/>
-                                <ComboBoxItem Content="Darksilver Material (Lvl 70)"/>
+                                <ComboBoxItem Content="Gear Level 30 Supplies"/>
+                                <ComboBoxItem Content="Gear Level 40 Supplies"/>
+                                <ComboBoxItem Content="Gear Level 50 Supplies"/>
+                                <ComboBoxItem Content="Gear Level 60 Supplies"/>
+                                <ComboBoxItem Content="Gear Level 70 Supplies"/>
+                                <ComboBoxItem Content="Gear Level 80 Supplies"/>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="2,5,2,5">
