@@ -265,8 +265,9 @@ namespace VRisingServerManager
         public bool TeleportBoundItems { get; set; } = true;
         public bool AllowGlobalChat { get; set; } = true;
         public bool AllWaypointsUnlocked { get; set; } = false;
+        public bool FreeCastleRaid { get; set; } = false;
         public bool FreeCastleClaim { get; set; } = false;
-        public bool FreeCastleDestroy { get; set; } = false;
+        public bool FreeCastleDestroy { get; set; } = false;        
         public bool InactivityKillEnabled { get; set; } = true;
         public int InactivityKillTimeMin { get; set; } = 3600;
         public int InactivityKillTimeMax { get; set; } = 604800;
@@ -293,6 +294,10 @@ namespace VRisingServerManager
         public double CastleBloodEssenceDrainModifier { get; set; } = 1.0;
         public double CastleSiegeTimer { get; set; } = 420.0;
         public double CastleUnderAttackTimer { get; set; } = 60.0;
+        public double CastleRaidTimer { get; set; } = 600.0;
+        public double CastleRaidProtectionTime { get; set; } = 1800.0;
+        public double CastleExposedFreeClaimTimer { get; set; } = 300.0;
+
         public bool AnnounceSiegeWeaponSpawn { get; set; } = true;
         public bool ShowSiegeWeaponMapIcon { get; set; } = true;
         public double BuildCostModifier { get; set; } = 1.0;

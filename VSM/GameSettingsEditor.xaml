@@ -124,7 +124,7 @@
                                 <ComboBoxItem Content="Only Self" ToolTip="Only self may loot the body"/>
                             </ComboBox>
                             <TextBlock Text="Relic Spawn Type" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding RelicSpawnType, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines who may loot the body when a player dies">
+                            <ComboBox SelectedIndex="{Binding RelicSpawnType, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines if the End Game Soul Shard items should be unique or plentiful">
                                 <ComboBoxItem Content="Unique" ToolTip="Soul shards are unique - only one of each type may exist at a time on the server"/>
                                 <ComboBoxItem Content="Plentiful" ToolTip="Soul shards are plentiful - a new one is dropped everytime a soul shard boss is slain"/>
                             </ComboBox>
@@ -137,6 +137,7 @@
                             <CheckBox Content="Teleport Bound Items" IsChecked="{Binding TeleportBoundItems, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="When enabled, some items will prevent you from using waygates"/>
                             <CheckBox Content="Allow Global Chat" IsChecked="{Binding AllowGlobalChat, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Allow players to write messages that all players on the server can read"/>
                             <CheckBox Content="All Waypoints Unlocked" IsChecked="{Binding AllWaypointsUnlocked, Mode=TwoWay}" IsEnabled="False" Margin="5,5,5,5" ToolTip="Currently not used"/>
+                            <CheckBox Content="Free Castle Raid" IsChecked="{Binding FreeCastleRaid, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Raiding an enemy players castle heart requires no materials"/>
                             <CheckBox Content="Free Castle Claim" IsChecked="{Binding FreeCastleClaim, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Seizing an enemy player castle heart requires no materials"/>
                             <CheckBox Content="Free Castle Destroy" IsChecked="{Binding FreeCastleDestroy, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Destroying an enemy player castle heart requires no materials"/>
                         </StackPanel>
@@ -228,8 +229,9 @@
                             <TextBlock Text="Castle Blood Essence Drain Modifier" Height="20" Margin="5,1,5,1"/>
                             <TextBlock Text="Castle Sieger Timer" Height="20" Margin="5,1,5,1"/>
                             <TextBlock Text="Castle Under Attack Timer" Height="20" Margin="5,1,5,1"/>
-                            <TextBlock Text="Build Cost Modifier" Height="20" Margin="5,1,5,1"/>
-                            <TextBlock Text="Recipe Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Raid Timer" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Raid Cooldown" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Castle Exposed Free Claim Timer" Height="20" Margin="5,1,5,1"/>                            
                         </StackPanel>
                         <StackPanel Grid.Column="3">
                             <local:DecimalSpinner Value="{Binding DurabilityDrainModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the amount of durability suffered from dealing or receiving damage" MaxValue="5" MinValue="0"/>
@@ -241,10 +243,13 @@
                             <local:DecimalSpinner Value="{Binding CastleBloodEssenceDrainModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Rate for how quickly a castle consumes blood essence. A higher rate results in higher blood essence consumption" MaxValue="5" MinValue="0.1"/>
                             <local:DecimalSpinner Value="{Binding CastleSiegeTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The amount of time a castle is deemed as breached when enemy players breaks through the outer defenses. Time is defined in seconds" MaxValue="1800" MinValue="1"/>
                             <local:DecimalSpinner Value="{Binding CastleUnderAttackTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The amount of time where players are blocked from building structures or walls while being under attack. A castle is deemed under attack whenever enemy players manages to deal damage to any wall or door using explosives or siege golems" MaxValue="180" MinValue="1"/>
-                            <local:DecimalSpinner Value="{Binding BuildCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the amount of materials required to build structures" MaxValue="10" MinValue="0"/>
-                            <local:DecimalSpinner Value="{Binding RecipeCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,2,1" ToolTip="Multiplies the cost of crafting items" MaxValue="10" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding CastleRaidTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The duration of a castle raid in seconds" MaxValue="3600" MinValue="1"/>
+                            <local:DecimalSpinner Value="{Binding CastleRaidProtectionTime, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="The cooldown for castle raids in seconds" MaxValue="86400" MinValue="1"/>
+                            <local:DecimalSpinner Value="{Binding CastleExposedFreeClaimTimer, Mode=TwoWay}" Step="1" Margin="5,1,2,1" ToolTip="Untested. Change at own risk." MaxValue="3600" MinValue="1"/>                            
                         </StackPanel>
                         <StackPanel Grid.Column="4">
+                            <TextBlock Text="Build Cost Modifier" Height="20" Margin="5,1,5,1"/>
+                            <TextBlock Text="Recipe Cost Modifier" Height="20" Margin="5,1,5,1"/>
                             <TextBlock Text="Craft Rate Modifier" Height="20" Margin="5,1,5,1"/>
                             <TextBlock Text="Research Cost Modifier" Height="20" Margin="5,1,5,1"/>
                             <TextBlock Text="Refinement Cost Modifier" Height="20" Margin="5,1,5,1"/>
@@ -257,6 +262,8 @@
                             <TextBlock Text="Death Durability Loss Factor As Resources" Height="20" Margin="5,1,5,1"/>
                         </StackPanel>
                         <StackPanel Grid.Column="5">
+                            <local:DecimalSpinner Value="{Binding BuildCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the amount of materials required to build structures" MaxValue="10" MinValue="0"/>
+                            <local:DecimalSpinner Value="{Binding RecipeCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the cost of crafting items" MaxValue="10" MinValue="0"/>
                             <local:DecimalSpinner Value="{Binding CraftRateModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="The rate for crafting items and equipment in crafting stations, a higher rate results in more rapid crafting (not refinement stations)" MaxValue="10" MinValue="0.1"/>
                             <local:DecimalSpinner Value="{Binding ResearchCostModifier, Mode=TwoWay}" Step="0.25" IsEnabled="False" Margin="5,1,5,1" ToolTip="Not used"/>
                             <local:DecimalSpinner Value="{Binding RefinementCostModifier, Mode=TwoWay}" Step="0.25" Margin="5,1,5,1" ToolTip="Multiplies the cost of refining items" MaxValue="10" MinValue="0.1"/>
