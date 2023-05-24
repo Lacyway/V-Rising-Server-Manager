@@ -19,7 +19,7 @@ namespace VRisingServerManager
         public int SafetyBoxLimit { get; set; } = 1;
         public int TombLimit { get; set; } = 12;
         public int VerminNestLimit { get; set; } = 4;
-        public int PrisonCellLimit { get; set; } = 4;
+        public int PrisonCellLimit { get; set; } = 16;
         public PylonPenalties PylonPenalties { get; set; } = new PylonPenalties();
         public FloorPenalties FloorPenalties { get; set; } = new FloorPenalties();
         public HeartLimits HeartLimits { get; set; } = new HeartLimits();
@@ -29,15 +29,15 @@ namespace VRisingServerManager
     public class VBloodUnitSetting
     {
         public int UnitId { get; set; } = 1;
-        public int UnitLevel { get; set; } = 1;
+        public int? UnitLevel { get; set; }
         public bool DefaultUnlocked { get; set; } = false;
     }
 
     public class FakeVBloodUnitSetting
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int UnitId { get; set; } = 1;
-        public int UnitLevel { get; set; } = 1;
+        public int? UnitLevel { get; set; }
         public bool DefaultUnlocked { get; set; } = false;
     }
 
@@ -349,14 +349,14 @@ namespace VRisingServerManager
 
     public class FakeAchievement
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int ID { get; set; }
         public bool Unlocked { get; set; }
     }
 
     public class FakeResearch
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int ID { get; set; }
         public bool Unlocked { get; set; }
     }

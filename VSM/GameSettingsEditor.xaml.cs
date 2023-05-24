@@ -536,7 +536,10 @@ namespace VRisingServerManager
                     {
                         if (unit.UnitId == fakeUnit.UnitId)
                         {
-                            fakeUnit.UnitLevel = unit.UnitLevel;
+                            if (unit.UnitLevel > 0)
+                            {
+                                fakeUnit.UnitLevel = unit.UnitLevel;
+                            }
                             fakeUnit.DefaultUnlocked = unit.DefaultUnlocked;
                         }
                     }
