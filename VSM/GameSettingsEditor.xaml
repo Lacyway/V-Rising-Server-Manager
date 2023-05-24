@@ -175,9 +175,9 @@
                                         <TextBlock Text="Restock Timer Modifier" Height="20" Margin="5,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="2">
-                                        <local:DecimalSpinner Value="{Binding TraderModifiers.StockModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
-                                        <local:DecimalSpinner Value="{Binding TraderModifiers.PriceModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
-                                        <local:DecimalSpinner Value="{Binding TraderModifiers.RestockTimerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Todo" MaxValue="10" MinValue="0.25"/>
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.StockModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the trader stock amount with this value." MaxValue="10" MinValue="0.25"/>
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.PriceModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the trader item costs by this value." MaxValue="10" MinValue="0.25"/>
+                                        <local:DecimalSpinner Value="{Binding TraderModifiers.RestockTimerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the trader restock timer with this value." MaxValue="10" MinValue="0.25"/>
                                     </StackPanel>
                                 </Grid>                                
                             </GroupBox>
@@ -381,10 +381,14 @@
                                                     <StackPanel>
                                                         <TextBlock Text="Floor Limit" Height="20"/>
                                                         <TextBlock Text="Servant Limit" Height="20"/>
+                                                        <TextBlock Text="Build Limits" Height="20"/>
+                                                        <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -397,10 +401,14 @@
                                                     <StackPanel>
                                                         <TextBlock Text="Floor Limit" Height="20"/>
                                                         <TextBlock Text="Servant Limit" Height="20"/>
+                                                        <TextBlock Text="Build Limits" Height="20"/>
+                                                        <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -413,10 +421,14 @@
                                                     <StackPanel>
                                                         <TextBlock Text="Floor Limit" Height="20"/>
                                                         <TextBlock Text="Servant Limit" Height="20"/>
+                                                        <TextBlock Text="Build Limits" Height="20"/>
+                                                        <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -429,10 +441,14 @@
                                                     <StackPanel>
                                                         <TextBlock Text="Floor Limit" Height="20"/>
                                                         <TextBlock Text="Servant Limit" Height="20"/>
+                                                        <TextBlock Text="Build Limits" Height="20"/>
+                                                        <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -445,10 +461,14 @@
                                                     <StackPanel>
                                                         <TextBlock Text="Floor Limit" Height="20"/>
                                                         <TextBlock Text="Servant Limit" Height="20"/>
+                                                        <TextBlock Text="Build Limits" Height="20"/>
+                                                        <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
