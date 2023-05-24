@@ -19,6 +19,7 @@ namespace VRisingServerManager
         public int SafetyBoxLimit { get; set; } = 1;
         public int TombLimit { get; set; } = 12;
         public int VerminNestLimit { get; set; } = 4;
+        public int PrisonCellLimit { get; set; } = 4;
         public PylonPenalties PylonPenalties { get; set; } = new PylonPenalties();
         public FloorPenalties FloorPenalties { get; set; } = new FloorPenalties();
         public HeartLimits HeartLimits { get; set; } = new HeartLimits();

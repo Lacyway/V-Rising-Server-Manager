@@ -359,6 +359,7 @@
                                     <TextBlock Text="Safety Box Limit" Height="20" Margin="5,0,5,0"/>
                                     <TextBlock Text="Tomb Limit" Height="20" Margin="5,0,5,0"/>
                                     <TextBlock Text="Vermin Nest Limit" Height="20" Margin="5,0,5,0"/>
+                                    <TextBlock Text="Prison Cell Limit" Height="20" Margin="5,0,5,0"/>
                                     <TextBlock Text="Castle Limit" Height="20" Margin="5,0,5,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
@@ -367,6 +368,7 @@
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.SafetyBoxLimit, Mode=TwoWay}" Step="1" ToolTip="The number of vampire lockboxes players may build in a single castle" MaxValue="20" MinValue="0"/>
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.TombLimit, Mode=TwoWay}" Step="1" ToolTip="The number of tombs players may build in a single castle" MaxValue="20" MinValue="1"/>
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.VerminNestLimit, Mode=TwoWay}" Step="1" ToolTip="The number of vermin nests players may build in a single castle" MaxValue="20" MinValue="1"/>
+                                    <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.PrisonCellLimit, Mode=TwoWay}" Step="1" ToolTip="The number of prison cells players may build in a single castle" MaxValue="50" MinValue="1"/>
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.CastleLimit, Mode=TwoWay}" Step="1" ToolTip="The number of castle hearts a single player is allowed to construct" MaxValue="5" MinValue="1"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
@@ -385,10 +387,10 @@
                                                         <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="600" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="10" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level1.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="6" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -405,10 +407,10 @@
                                                         <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="600" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="10" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level2.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="6" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -425,10 +427,10 @@
                                                         <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="600" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="10" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level3.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="6" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -445,10 +447,10 @@
                                                         <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="600" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="10" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level4.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="6" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
@@ -465,10 +467,10 @@
                                                         <TextBlock Text="Height Limit" Height="20"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="420" MinValue="9"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.FloorLimit, Mode=TwoWay}" Step="1" ToolTip="Defines the number of borders and castle floors that players may build in each castle" MaxValue="600" MinValue="9"/>
                                                         <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.ServantLimit, Mode=TwoWay}" Step="1" ToolTip="The number of servant coffins players may build in a single castle" MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="20" MinValue="1"/>
-                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="20" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.BuildLimits, Mode=TwoWay}" Step="1" ToolTip="The minimum distance allowed when placing floors next to an enemy player castle." MaxValue="10" MinValue="1"/>
+                                                        <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.HeartLimits.Level5.HeightLimit, Mode=TwoWay}" Step="1" ToolTip="How many floors (including ground level) can be built. &#x0a;&#x0a;High values may affect performance negatively." MaxValue="6" MinValue="1"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </TabItem>
