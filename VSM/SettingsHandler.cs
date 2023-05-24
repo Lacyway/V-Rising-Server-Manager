@@ -333,9 +333,11 @@ namespace VRisingServerManager
         public string SaveName { get; set; } = "world1";
         public string Password { get; set; } = "";
         public bool Secure { get; set; } = true;
-        public bool ListOnMasterServer { get; set; } = true;
-        public int AutoSaveCount { get; set; } = 25;
-        public int AutoSaveInterval { get; set; } = 600;
+        public bool ListOnSteam { get; set; } = false;
+        public bool ListOnEOS { get; set; } = false;
+        public int AutoSaveCount { get; set; } = 10;
+        public int AutoSaveInterval { get; set; } = 120;
+        public bool CompressSaveFiles { get; set; } = true;
         public int ResetDaysInterval { get; set; } = 0;
         public int DayOfReset { get; set; } = -1;
         public string GameSettingsPreset { get; set; } = "";

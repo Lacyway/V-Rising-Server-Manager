@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="500" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
+        Title="Server Settings Editor" Height="550" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -34,9 +34,11 @@
             <TextBlock Text="SaveName" Height="20" Margin="5,1,5,1"/>
             <TextBlock Text="Password" Height="20" Margin="5,1,5,1" ToolTip="Set a password or leave empty."/>
             <CheckBox Content="Secure" Height="20" Margin="5,1,5,1" IsChecked="{Binding Secure, Mode=TwoWay}" ToolTip="Enable VAC protection on server. VAC banned clients will not be able to connect."/>
-            <CheckBox Content="ListOnMasterServer" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnMasterServer, Mode=TwoWay}" ToolTip="Register on list server or not."/>
+            <CheckBox Content="ListOnSteam" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnSteam, Mode=TwoWay}" ToolTip="Register on Steam server or not."/>
+            <CheckBox Content="ListOnEOS" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnEOS, Mode=TwoWay}" ToolTip="Register on EOS server or not."/>
             <TextBlock Text="AutoSaveCount" Height="20" Margin="5,1,5,1" ToolTip="Number of autosaves to keep."/>
             <TextBlock Text="AutoSaveInterval" Height="20" Margin="5,1,5,1" ToolTip="Interval in seconds between each auto save."/>
+            <CheckBox Content="CompressSaveFiles" Height="20" Margin="5,1,5,1" IsChecked="{Binding CompressSaveFiles, Mode=TwoWay}" ToolTip="Whether to compress save files or not."/>
             <TextBlock Text="ResetDaysInterval" Height="20" Margin="5,1,5,1" ToolTip="Days between scheduled resets/wipes. When the server starts, and is about to load a save file, it checks if it is time to reset and start a new save file.&#x0a;The previous save file is backed up. Defaults to 0, which means the feature is disabled."/>
             <TextBlock Text="DayOfReset" Height="20" Margin="5,1,5,1" ToolTip="If you want the server to reset on Saturdays, every two weeks, but it is not Saturday when you initially set up you server then you can set ResetDaysInterval to 14 and then set this to Saturday.&#x0a;It will check that at least ResetDaysInterval days has passed and that it is the day of DayOfReset. If you do not want to restrict reset to a specific day, but just rely on the value of ResetDaysInterval, then set this to Any, which is also the default.&#x0a;-1 = disabled, 0 = Monday, 6 = Sunday"/>
             <CheckBox Content="AdminOnlyDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}"/>
@@ -55,11 +57,11 @@
             <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ServerFps, Mode=TwoWay}" Step="1" MaxValue="120" MinValue="15"/>
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding SaveName, Mode=TwoWay}" IsEnabled="False"/>
             <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Password, Mode=TwoWay}"/>
-            <local:NumericSpinner Margin="10,44,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1" MaxValue="200" MinValue="1"/>
+            <local:NumericSpinner Margin="10,65,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1" MaxValue="200" MinValue="1"/>
             <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1" MaxValue="3600" MinValue="5"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ResetDaysInterval, Mode=TwoWay}" Step="1" MaxValue="280" MinValue="0"/>
+            <local:NumericSpinner Margin="10,26,5,0" Value="{Binding ResetDaysInterval, Mode=TwoWay}" Step="1" MaxValue="280" MinValue="0"/>
             <local:NumericSpinner Margin="10,2,5,0" Value="{Binding DayOfReset, Mode=TwoWay}" Step="1" MaxValue="6" MinValue="-1"/>
-            <TextBox Height="20" Margin="10,65,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
+            <TextBox Height="20" Margin="10,67,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
             <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" Margin="10,2,5,5"/>
         </StackPanel>
     </Grid>
