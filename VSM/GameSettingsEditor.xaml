@@ -160,6 +160,8 @@
                                     <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
                                     <TextBlock Text="Timer"/>
                                     <local:NumericSpinner Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
+                                    <TextBlock Text="Disconnected Sun Immunity Timer"/>
+                                    <local:DecimalSpinner Value="{Binding DisconnectedSunImmunityTime, Mode=TwoWay}" Step="0.25" ToolTip="Untested, change at own risk." MaxValue="3600" MinValue="0.25"/>
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>

@@ -275,6 +275,7 @@ namespace VRisingServerManager
         public int InactivityKillTimerMaxItemLevel { get; set; } = 84;
         public bool DisableDisconnectedDeadEnabled { get; set; } = true;
         public int DisableDisconnectedDeadTimer { get; set; } = 60;
+        public double DisconnectedSunImmunityTime { get; set; } = 300.0;
         public double InventoryStacksModifier { get; set; } = 1.0;
         public double DropTableModifier_General { get; set; } = 1.0;
         public double DropTableModifier_Missions { get; set; } = 1.0;
@@ -297,7 +298,6 @@ namespace VRisingServerManager
         public double CastleRaidTimer { get; set; } = 600.0;
         public double CastleRaidProtectionTime { get; set; } = 1800.0;
         public double CastleExposedFreeClaimTimer { get; set; } = 300.0;
-
         public bool AnnounceSiegeWeaponSpawn { get; set; } = true;
         public bool ShowSiegeWeaponMapIcon { get; set; } = true;
         public double BuildCostModifier { get; set; } = 1.0;
