@@ -25,12 +25,12 @@ namespace VRisingServerManager
         public AdminManager()
         {
             InitializeComponent();
-            ReloadList(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt");
+            ReloadList(Properties.Settings.Default.Save_Path + @"\Settings\adminlist.txt");
         }
 
         public void ReloadList(string filePath)
         {
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt"))
+            if (File.Exists(Properties.Settings.Default.Save_Path + @"\Settings\adminlist.txt"))
             {
                 AdminList.Items.Clear();
                 using (StreamReader sr = new StreamReader(filePath))

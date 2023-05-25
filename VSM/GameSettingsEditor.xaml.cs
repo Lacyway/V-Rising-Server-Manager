@@ -216,9 +216,9 @@ namespace VRisingServerManager
                     DefaultExt = "json",
                     FileName = "ServerGameSettings.json"
                 };
-                if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
+                if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name))
                 {
-                    SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
+                    SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name;
                 }
                 else
                 {
@@ -249,9 +249,9 @@ namespace VRisingServerManager
                 DefaultExt = "json",
                 FileName = "ServerGameSettings.json"
             };
-            if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name))
+            if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name))
             {
-                OpenSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v1\" + Properties.Settings.Default.Save_Name;
+                OpenSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name;
             }
             else
             {
