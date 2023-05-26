@@ -250,6 +250,11 @@ namespace VRisingServerManager
         public int Port { get; set; } = 25575;
     }
 
+    public class API
+    {
+        public bool Enabled { get; set; } = false;
+    }
+
     public class GameSettings
     {
         public dynamic GameModeType { get; set; } = 0;
@@ -349,6 +354,7 @@ namespace VRisingServerManager
         public string GameSettingsPreset { get; set; } = "";
         public bool AdminOnlyDebugEvents { get; set; } = true;
         public bool DisableDebugEvents { get; set; } = false;
+        public API API { get; set; } = new API();
         public Rcon Rcon { get; set; } = new Rcon();
     }
 

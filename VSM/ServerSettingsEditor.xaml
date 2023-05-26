@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="550" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
+        Title="Server Settings Editor" Height="600" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -43,6 +43,7 @@
             <TextBlock Text="DayOfReset" Height="20" Margin="5,1,5,1" ToolTip="If you want the server to reset on Saturdays, every two weeks, but it is not Saturday when you initially set up you server then you can set ResetDaysInterval to 14 and then set this to Saturday.&#x0a;It will check that at least ResetDaysInterval days has passed and that it is the day of DayOfReset. If you do not want to restrict reset to a specific day, but just rely on the value of ResetDaysInterval, then set this to Any, which is also the default.&#x0a;-1 = disabled, 0 = Monday, 6 = Sunday"/>
             <CheckBox Content="AdminOnlyDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}"/>
             <CheckBox Content="DisableDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding DisableDebugEvents, Mode=TwoWay}"/>
+            <CheckBox Content="API Enabled" Height="20" Margin="5,1,5,1" IsChecked="{Binding API.Enabled, Mode=TwoWay}" ToolTip="Enable or disable API functionality."/>
             <CheckBox Content="RCON Enabled" Height="20" Margin="5,1,5,1" IsChecked="{Binding Rcon.Enabled, Mode=TwoWay}" ToolTip="Enable or disable Rcon functionality."/>
             <TextBlock Text="RCON Password" Height="20" Margin="5,1,5,1" ToolTip="Password to access RCON."/>
             <TextBlock Text="RCON Port" Height="20" Margin="5,1,5,1" ToolTip="Rcon TCP port."/>
@@ -61,7 +62,7 @@
             <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1" MaxValue="3600" MinValue="5"/>
             <local:NumericSpinner Margin="10,26,5,0" Value="{Binding ResetDaysInterval, Mode=TwoWay}" Step="1" MaxValue="280" MinValue="0"/>
             <local:NumericSpinner Margin="10,2,5,0" Value="{Binding DayOfReset, Mode=TwoWay}" Step="1" MaxValue="6" MinValue="-1"/>
-            <TextBox Height="20" Margin="10,67,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
+            <TextBox Height="20" Margin="10,90,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
             <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" Margin="10,2,5,5"/>
         </StackPanel>
     </Grid>
