@@ -17,6 +17,19 @@ namespace VRisingServerManager
             InitializeComponent();
             serverToManage = server;
             ReloadList(serverToManage.Path + @"\SaveData\Settings\adminlist.txt");
+            AdminList.SelectionChanged += AdminList_SelectionChanged;
+        }
+
+        private void AdminList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (AdminList.SelectedIndex != -1)
+            {
+                RemoveAdminButton.IsEnabled = true;
+            }
+            else
+            {
+                RemoveAdminButton.IsEnabled = false;
+            }
         }
 
         public void ReloadList(string filePath)
@@ -32,7 +45,7 @@ namespace VRisingServerManager
                 sr.Close();
             }
             if (AdminList.Items.Count > 0)
-                AdminList.SelectedIndex = 0;
+                AdminList.SelectedIndex = AdminList.Items.Count - 1;
         }
 
         private void AddAdminButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +53,8 @@ namespace VRisingServerManager
             if (AdminToAdd.Text != "")
             {
                 AdminList.Items.Add(AdminToAdd.Text);
+                if (AdminList.Items.Count > 0)
+                    AdminList.SelectedIndex = AdminList.Items.Count - 1;
             }
             else
             {
@@ -53,7 +68,7 @@ namespace VRisingServerManager
             {
                 AdminList.Items.RemoveAt(AdminList.SelectedIndex);
                 if (AdminList.Items.Count > 0)
-                    AdminList.SelectedIndex = 0;
+                    AdminList.SelectedIndex = AdminList.Items.Count - 1;
             }
             else
             {

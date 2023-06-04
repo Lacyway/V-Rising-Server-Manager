@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Forms;
@@ -44,6 +45,15 @@ namespace VRisingServerManager
                     System.Windows.MessageBox.Show("Another server with this name already exists. Please choose another name!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }                    
+            }
+
+            if (!Directory.Exists(newServer.Path))
+                Directory.CreateDirectory(newServer.Path);
+
+            if (File.Exists(newServer.Path + @"\VRisingServer.exe"))
+            {
+                if (System.Windows.MessageBox.Show("There seems to be another server located in this folder. It's recommended to choose another directory to avoid problems.\r\rContinue anyway?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                    return;
             }
 
             settings.Servers.Add(newServer);

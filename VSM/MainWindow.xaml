@@ -8,10 +8,6 @@
         ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
         Title="V Rising Server Manager" Height="650" Width="800">
-    <Window.Resources>
-        
-    </Window.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,7 +37,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Server Name: " Grid.Column="0" Margin="10,0,0,0"/>
-                                    <TextBox Text="{Binding LaunchSettings.DisplayName, Mode=TwoWay}" Grid.Column="1" Width="300"/>
+                                    <TextBox Text="{Binding LaunchSettings.DisplayName, Mode=TwoWay}" Grid.Column="1" Width="300" ToolTip="The name of the server displayed in the server list."/>
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -49,7 +45,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="World Name: " Grid.Column="0" Margin="10,5,0,0"/>
-                                    <TextBox Text="{Binding LaunchSettings.WorldName, Mode=TwoWay}" Grid.Column="1" Width="300" Margin="0,5,0,0"/>
+                                    <TextBox Text="{Binding LaunchSettings.WorldName, Mode=TwoWay}" Grid.Column="1" Width="300" Margin="0,5,0,0" ToolTip="The name of the directory where the world will be saved. Does not have to be changed unless you know what you are doing."/>
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -57,8 +53,8 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Margin="10,0,0,0" IsChecked="{Binding LaunchSettings.BindToIP}"/>
-                                    <TextBox Text="{Binding LaunchSettings.BindingIP, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}"/>
+                                    <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Margin="10,0,0,0" IsChecked="{Binding LaunchSettings.BindToIP}" ToolTip="If the server should bind to a specific IP address."/>
+                                    <TextBox Text="{Binding LaunchSettings.BindingIP, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}" ToolTip="The IP address to bind the server to."/>
                                 </Grid>
                             </StackPanel>
                         </GroupBox>
@@ -76,7 +72,7 @@
                                 <ui:ToggleSwitch Header="Status" OnContent="Running" OffContent="Off" Grid.Row="0" Margin="5" Width="110" Grid.Column="1" HorizontalAlignment="Center" IsOn="{Binding Runtime.IsRunning}" IsHitTestVisible="False"/>
                                 <StackPanel Grid.Column="0" Grid.Row="1">
 
-                                    <Button Margin="2" Click="StartServerButton_Click">
+                                    <Button Margin="2" Click="StartServerButton_Click" ToolTip="Starts the game server.">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
@@ -95,7 +91,7 @@
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Margin="2" Click="UpdateServerButton_Click">
+                                    <Button Margin="2" Click="UpdateServerButton_Click" ToolTip="Updates the game server.">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
@@ -114,13 +110,13 @@
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Content="RCON Console" Margin="2" IsEnabled="False"/>
+                                    <Button Content="RCON Console" Margin="2" IsEnabled="False" ToolTip="Temporarily disabled."/>
 
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
 
-                                    <Button Margin="2" Click="StopServerButton_Click">
+                                    <Button Margin="2" Click="StopServerButton_Click" ToolTip="Stops the game server.">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
@@ -139,7 +135,7 @@
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Margin="2" Click="ServerFolderButton_Click">
+                                    <Button Margin="2" Click="ServerFolderButton_Click" ToolTip="Opens the game server folder.">
                                         <Button.Content>
                                             <DockPanel>
                                                 <Image Source="Resources\FolderOpened.png" Margin="5,0,0,0"/>
@@ -148,7 +144,7 @@
                                         </Button.Content>
                                     </Button>
 
-                                    <Button Margin="2" Click="ManageAdminsButton_Click">
+                                    <Button Margin="2" Click="ManageAdminsButton_Click" ToolTip="Manage the administrators of the game server.">
                                         <Button.Content>
                                             <DockPanel>
                                                 <Image Source="Resources\User.png" Margin="5,0,0,0"/>
@@ -167,21 +163,21 @@
         <Separator Grid.Row="1"/>
         <GroupBox Header="Editors and Settings" Margin="5,0,5,0" Grid.Row="2">
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button Content="Game Settings Editor" Margin="5,0,5,0" Click="GameSettingsEditor_Click"/>
-                <Button Content="Server Settings Editor" Margin="5,0,5,0" Click="ServerSettingsEditorButton_Click"/>
-                <Button Margin="5,0,5,0" Click="ManagerSettingsButton_Click" Padding="5">
+                <Button Content="Game Settings Editor" Margin="5,0,5,0" Click="GameSettingsEditor_Click" ToolTip="Opens the Game Settings Editor."/>
+                <Button Content="Server Settings Editor" Margin="5,0,5,0" Click="ServerSettingsEditorButton_Click" ToolTip="Opens the Server Settings Editor."/>
+                <Button Margin="5,0,5,0" Click="ManagerSettingsButton_Click" Padding="5" ToolTip="Opens the VSM settings.">
                     <DockPanel>
                         <Image Source="Resources\Settings.png" Margin="0,0,5,0"/>
-                        <TextBlock Text="Manager Settings"/>
+                        <TextBlock Text="VSM Settings"/>
                     </DockPanel>
                 </Button>
-                    <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5">
+                    <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5" ToolTip="Add a new game server.">
                     <DockPanel>
                         <Image Source="Resources\Add.png" Margin="0,0,5,0"/>
                         <TextBlock Text="Add Server"/>
                     </DockPanel>
                 </Button>
-                <Button Margin="5,0,5,0" Click="RemoveServerButton_Click" Padding="5">
+                <Button Margin="5,0,5,0" Click="RemoveServerButton_Click" Padding="5" ToolTip="Remove selected game server. &#x0a;WARNING: This also deletes the directory.">
                     <DockPanel>
                         <Image Source="Resources\Remove.png" Margin="0,0,5,0"/>
                         <TextBlock Text="Remove Server"/>

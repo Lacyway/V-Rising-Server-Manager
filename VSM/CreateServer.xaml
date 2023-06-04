@@ -12,12 +12,12 @@
         <StackPanel>
             <DockPanel>
                 <TextBlock Text="Server Name:" Margin="5" Width="80"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5" Width="250" MaxLength="30" HorizontalAlignment="Left"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5" Width="250" MaxLength="30" HorizontalAlignment="Left" ToolTip="The name of the server used in the server manager."/>
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Server Path:" Margin="5" Width="80"/>
-                <TextBox x:Name="ServerPathText" Text="{Binding Path, Mode=TwoWay}" Margin="5" IsEnabled="False" Width="625"/>
-                <Button x:Name="ServerPathButton" DockPanel.Dock="Right" Content="Choose" Margin="5" Click="ServerPathButton_Click"/>
+                <TextBox x:Name="ServerPathText" Text="{Binding Path, Mode=TwoWay}" Margin="5" IsReadOnly="True" Width="625" ToolTip="The path where the server will be installed."/>
+                <Button x:Name="ServerPathButton" DockPanel.Dock="Right" Content="Choose" Margin="5" Click="ServerPathButton_Click" ToolTip="Choose a directory path."/>
             </DockPanel>
             <Button Content="Create" HorizontalAlignment="Center" Width="80" Click="CreateButton_Click"/>
         </StackPanel>

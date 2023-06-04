@@ -12,21 +12,21 @@
         <StackPanel Margin="5,0,0,0">
             <GroupBox Header="Main Settings">
                 <StackPanel>
-                    <CheckBox Content="Verify Updates" IsChecked="{Binding AppSettings.VerifyUpdates, Mode=TwoWay}"/>
-                    <CheckBox Content="Automatically Update Servers" IsChecked="{Binding AppSettings.AutoUpdate, Mode=TwoWay}"/>
+                    <CheckBox Content="Verify Updates" IsChecked="{Binding AppSettings.VerifyUpdates, Mode=TwoWay}" ToolTip="If SteamCMD should verify updates after updating a game server. Recommended to be enabled."/>
+                    <CheckBox Content="Automatically Update Servers" IsChecked="{Binding AppSettings.AutoUpdate, Mode=TwoWay}" ToolTip="If VSM should look for updates for game servers automatically."/>
                     <DockPanel Width="140" HorizontalAlignment="Left">
                         <TextBlock Text="Interval:" FontSize="14"/>
-                        <ui:NumberBox Value="{Binding AppSettings.AutoUpdateInterval}" Maximum="1440" Minimum="10" SpinButtonPlacementMode="Hidden" Margin="10,0,0,0" IsEnabled="{Binding AppSettings.AutoUpdate}"/>
+                        <ui:NumberBox Value="{Binding AppSettings.AutoUpdateInterval}" Maximum="1440" Minimum="10" SpinButtonPlacementMode="Hidden" Margin="10,0,0,0" IsEnabled="{Binding AppSettings.AutoUpdate}" ToolTip="How often (in minutes) it should search for updates."/>
                     </DockPanel>
-                    <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="Toggle whether the SteamCMD window should be shown or not during updates."/>
+                    <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="If the SteamCMD window should be shown or not during updates. Useful when troubleshooting."/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Webhook Settings">
                 <StackPanel>
-                    <CheckBox Content="Enabled" IsChecked="{Binding WebhookSettings.Enabled, Mode=TwoWay}"/>
+                    <CheckBox Content="Enabled" IsChecked="{Binding WebhookSettings.Enabled, Mode=TwoWay}" ToolTip="If VSM should use a webhook to send discord messages."/>
                     <DockPanel>
                         <TextBlock Text="URL:"/>
-                        <TextBox Margin="10,0,10,0" IsEnabled="{Binding WebhookSettings.Enabled}" Text="{Binding WebhookSettings.URL, Mode=TwoWay}"/>
+                        <TextBox Margin="10,0,10,0" IsEnabled="{Binding WebhookSettings.Enabled}" Text="{Binding WebhookSettings.URL, Mode=TwoWay}" ToolTip="The URL of your discord webhook."/>
                     </DockPanel>
                 </StackPanel>
             </GroupBox>

@@ -50,7 +50,11 @@ namespace VRisingServerManager
         {
             if (vsmSettings.AppSettings.AutoUpdate == true)
             {
+#if DEBUG
+                autoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+#else
                 autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+#endif
                 AutoUpdateLoop();
             }
         }
@@ -59,7 +63,6 @@ namespace VRisingServerManager
         {
             while (await autoUpdateTimer.WaitForNextTickAsync())
             {
-                LogToConsole("HELLO");
                 bool foundUpdate = await CheckForUpdate();
                 if (foundUpdate == true && vsmSettings.Servers.Count > 0)
                 {
@@ -439,7 +442,11 @@ namespace VRisingServerManager
                 case "AutoUpdate":
                     if (vsmSettings.AppSettings.AutoUpdate == true)
                     {
+#if DEBUG
+                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+#else
                         autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+#endif
                         AutoUpdateLoop();
                     }
                     else
@@ -454,7 +461,11 @@ namespace VRisingServerManager
                     if (vsmSettings.AppSettings.AutoUpdate == true && autoUpdateTimer != null)
                     {
                         autoUpdateTimer.Dispose();
+#if DEBUG
+                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+#else
                         autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+#endif                        
                         AutoUpdateLoop();
                     }
                     break;
@@ -469,7 +480,7 @@ namespace VRisingServerManager
                 ServerTabControl.SelectedIndex = serversLength - 1;
             }
         }
-        #endregion
+#endregion
 
         #region Buttons
         private async void StartServerButton_Click(object sender, RoutedEventArgs e)
@@ -491,6 +502,7 @@ namespace VRisingServerManager
         {
             Button button = sender as Button;
             Server server = button.DataContext as Server;
+
             await UpdateGame(server);
         }
 
@@ -498,7 +510,9 @@ namespace VRisingServerManager
         {
             Button button = sender as Button;
             Server server = button.DataContext as Server;
-            server.Runtime.userStopped = true;            
+
+            server.Runtime.userStopped = true;
+
             bool success = await StopServer(server);
             if (success)
             {

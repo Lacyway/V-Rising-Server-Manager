@@ -22,8 +22,8 @@
             <TextBox x:Name="AdminToAdd" Grid.Row="2" Margin="5,5,5,0"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="2">
-            <Button x:Name="AddAdminButton" Content="Add" Margin="5" Click="AddAdminButton_Click" Padding="2,1,2,1"/>
-            <Button x:Name="RemoveAdminButton" Content="Remove" Margin="5" Click="RemoveAdminButton_Click" Padding="2,1,2,1"/>
+            <Button x:Name="AddAdminButton" Content="Add" Margin="5" Click="AddAdminButton_Click" Padding="2,1,2,1" ToolTip="Add new admin from SteamID."/>
+            <Button x:Name="RemoveAdminButton" Content="Remove" Margin="5" Click="RemoveAdminButton_Click" Padding="2,1,2,1" ToolTip="Remove selected SteamID." IsEnabled="False"/>
         </StackPanel>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -39,8 +39,8 @@
                 </Hyperlink>
             </TextBlock>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <Button x:Name="SaveButton" Content="Save" Margin="5,5,0,5" Grid.Column="1" Padding="5,1,5,1" Click="SaveButton_Click"/>
-                <Button x:Name="ReloadButton" Content="Reload" Margin="5" Grid.Column="1" Padding="5,1,5,1" Click="ReloadButton_Click"/>
+                <Button x:Name="SaveButton" Content="Save" Margin="5,5,0,5" Grid.Column="1" Padding="5,1,5,1" Click="SaveButton_Click" ToolTip="Save the adminlist."/>
+                <Button x:Name="ReloadButton" Content="Reload" Margin="5" Grid.Column="1" Padding="5,1,5,1" Click="ReloadButton_Click" ToolTip="Reloads the adminlist."/>
             </StackPanel>
         </Grid>
     </Grid>
