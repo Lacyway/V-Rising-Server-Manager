@@ -30,8 +30,6 @@ namespace VRisingServerManager
             serverSettings = new ServerSettings();
             DataContext = serverSettings;
             InitializeComponent();            
-            if (Properties.Settings.Default.AutoLoadHostSettings == true && File.Exists(Properties.Settings.Default.HostSettingsFile))
-                AutoLoad();
         }
 
         private void FileMenuLoad_Click(object sender, RoutedEventArgs e)
@@ -43,16 +41,9 @@ namespace VRisingServerManager
                 {
                     Filter = "\"JSON files\"|*.json",
                     DefaultExt = "json",
-                    FileName = "ServerHostSettings.json"
+                    FileName = "ServerHostSettings.json",
+                    InitialDirectory = Directory.GetCurrentDirectory()
                 };
-                if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name))
-                {
-                    OpenSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name;
-                }
-                else
-                {
-                    OpenSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
-                }
                 if (OpenSettingsDialog.ShowDialog() == true && FileToLoad != null)
                 {
                     FileToLoad = OpenSettingsDialog.FileName;
@@ -79,34 +70,14 @@ namespace VRisingServerManager
         {
             try
             {
-                string SettingsJSON = JsonSerializer.Serialize(serverSettings, serializerOptions);
-                if (Properties.Settings.Default.AutoLoadHostSettings == true)
-                {
-                    if (MessageBox.Show("Save to auto-loaded file?", "Save", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                    {
-                        if (File.Exists(Properties.Settings.Default.HostSettingsFile))
-                        {
-                            File.Copy(Properties.Settings.Default.HostSettingsFile, Properties.Settings.Default.HostSettingsFile + ".bak", true);
-                        }
-                        File.WriteAllText(Properties.Settings.Default.HostSettingsFile, SettingsJSON);
-                        MessageBox.Show("File successfully saved to: \n" + Properties.Settings.Default.HostSettingsFile);
-                        return;
-                    }
-                }
+                string SettingsJSON = JsonSerializer.Serialize(serverSettings, serializerOptions);                
                 SaveFileDialog SaveSettingsDialog = new SaveFileDialog
                 {
                     Filter = "\"JSON files\"|*.json",
                     DefaultExt = "json",
-                    FileName = "ServerHostSettings.json"
+                    FileName = "ServerHostSettings.json",
+                    InitialDirectory = Directory.GetCurrentDirectory()
                 };
-                if (Directory.Exists(Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name))
-                {
-                    SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path + @"\Saves\v2\" + Properties.Settings.Default.Save_Name;
-                }
-                else
-                {
-                    SaveSettingsDialog.InitialDirectory = Properties.Settings.Default.Save_Path;
-                }
                 if (SaveSettingsDialog.ShowDialog() == true)
                 {
                     if (File.Exists(SaveSettingsDialog.FileName))
@@ -120,17 +91,6 @@ namespace VRisingServerManager
             catch (Exception)
             {
                 throw;
-            }
-        }
-
-        private void AutoLoad()
-        {
-            using (StreamReader reader = new StreamReader(Properties.Settings.Default.HostSettingsFile))
-            {
-                string LoadedJSON = reader.ReadToEnd();
-                ServerSettings LoadedSettings = JsonSerializer.Deserialize<ServerSettings>(LoadedJSON);
-                serverSettings = LoadedSettings;
-                DataContext = serverSettings;
             }
         }
 

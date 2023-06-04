@@ -4,66 +4,90 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="600" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
+        Title="Server Settings Editor" Height="650" Width="380" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Grid.ColumnSpan="3" Height="20">
-            <MenuItem Header="_File">
-                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
-                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
-                <Separator/>
-                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
-            </MenuItem>
-        </Menu>
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Name" Height="20" Margin="5,1,5,1"/>
-            <TextBlock Text="Description" Height="20" Margin="5,1,5,1" ToolTip="Short server description. Shows up in details panel of server list when entry is selected. Also printed in chat when connecting to server."/>
-            <TextBlock Text="Port" Height="20" Margin="5,1,5,1" ToolTip="UDP port for game traffic."/>
-            <TextBlock Text="QueryPort" Height="20" Margin="5,1,5,1" ToolTip="UDP port for Steam server list features."/>
-            <TextBlock Text="MaxConnectedUsers" Height="20" Margin="5,1,5,1" ToolTip="Max number of concurrent players on server."/>
-            <TextBlock Text="MaxConnectedAdmins" Height="20" Margin="5,1,5,1" ToolTip="Max number of admins to allow connect even when server is full."/>
-            <TextBlock Text="ServerFps" Height="20" Margin="5,1,5,1" ToolTip="Target FPS for server."/>
-            <TextBlock Text="SaveName" Height="20" Margin="5,1,5,1"/>
-            <TextBlock Text="Password" Height="20" Margin="5,1,5,1" ToolTip="Set a password or leave empty."/>
-            <CheckBox Content="Secure" Height="20" Margin="5,1,5,1" IsChecked="{Binding Secure, Mode=TwoWay}" ToolTip="Enable VAC protection on server. VAC banned clients will not be able to connect."/>
-            <CheckBox Content="ListOnSteam" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnSteam, Mode=TwoWay}" ToolTip="Register on Steam server or not."/>
-            <CheckBox Content="ListOnEOS" Height="20" Margin="5,1,5,1" IsChecked="{Binding ListOnEOS, Mode=TwoWay}" ToolTip="Register on EOS server or not."/>
-            <TextBlock Text="AutoSaveCount" Height="20" Margin="5,1,5,1" ToolTip="Number of autosaves to keep."/>
-            <TextBlock Text="AutoSaveInterval" Height="20" Margin="5,1,5,1" ToolTip="Interval in seconds between each auto save."/>
-            <CheckBox Content="CompressSaveFiles" Height="20" Margin="5,1,5,1" IsChecked="{Binding CompressSaveFiles, Mode=TwoWay}" ToolTip="Whether to compress save files or not."/>
-            <TextBlock Text="ResetDaysInterval" Height="20" Margin="5,1,5,1" ToolTip="Days between scheduled resets/wipes. When the server starts, and is about to load a save file, it checks if it is time to reset and start a new save file.&#x0a;The previous save file is backed up. Defaults to 0, which means the feature is disabled."/>
-            <TextBlock Text="DayOfReset" Height="20" Margin="5,1,5,1" ToolTip="If you want the server to reset on Saturdays, every two weeks, but it is not Saturday when you initially set up you server then you can set ResetDaysInterval to 14 and then set this to Saturday.&#x0a;It will check that at least ResetDaysInterval days has passed and that it is the day of DayOfReset. If you do not want to restrict reset to a specific day, but just rely on the value of ResetDaysInterval, then set this to Any, which is also the default.&#x0a;-1 = disabled, 0 = Monday, 6 = Sunday"/>
-            <CheckBox Content="AdminOnlyDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}"/>
-            <CheckBox Content="DisableDebugEvents" Height="20" Margin="5,1,5,1" IsChecked="{Binding DisableDebugEvents, Mode=TwoWay}"/>
-            <CheckBox Content="API Enabled" Height="20" Margin="5,1,5,1" IsChecked="{Binding API.Enabled, Mode=TwoWay}" ToolTip="Enable or disable API functionality."/>
-            <CheckBox Content="RCON Enabled" Height="20" Margin="5,1,5,1" IsChecked="{Binding Rcon.Enabled, Mode=TwoWay}" ToolTip="Enable or disable Rcon functionality."/>
-            <TextBlock Text="RCON Password" Height="20" Margin="5,1,5,1" ToolTip="Password to access RCON."/>
-            <TextBlock Text="RCON Port" Height="20" Margin="5,1,5,1" ToolTip="Rcon TCP port."/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Name, Mode=TwoWay}" IsEnabled="False"/>
-            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Description, Mode=TwoWay}"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding Port, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding QueryPort, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedUsers, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding MaxConnectedAdmins, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding ServerFps, Mode=TwoWay}" Step="1" MaxValue="120" MinValue="15"/>
-            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding SaveName, Mode=TwoWay}" IsEnabled="False"/>
-            <TextBox Height="20" Margin="10,2,5,0" Text="{Binding Password, Mode=TwoWay}"/>
-            <local:NumericSpinner Margin="10,65,5,0" Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1" MaxValue="200" MinValue="1"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1" MaxValue="3600" MinValue="5"/>
-            <local:NumericSpinner Margin="10,26,5,0" Value="{Binding ResetDaysInterval, Mode=TwoWay}" Step="1" MaxValue="280" MinValue="0"/>
-            <local:NumericSpinner Margin="10,2,5,0" Value="{Binding DayOfReset, Mode=TwoWay}" Step="1" MaxValue="6" MinValue="-1"/>
-            <TextBox Height="20" Margin="10,90,5,0" Text="{Binding Rcon.Password, Mode=TwoWay}"/>
-            <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" Margin="10,2,5,5"/>
+        <StackPanel Margin="5,0,5,0">
+            
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
+                    <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <DockPanel>
+                <TextBlock Text="Name" Height="20" />
+                <TextBox Height="20" Text="{Binding Name, Mode=TwoWay}" IsEnabled="False" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Description" Height="20" ToolTip="Short server description. Shows up in details panel of server list when entry is selected. Also printed in chat when connecting to server." DockPanel.Dock="Left"/>
+                <TextBox Height="20" Text="{Binding Description, Mode=TwoWay}" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Port" Height="20" ToolTip="UDP port for game traffic."/>
+                <local:NumericSpinner Value="{Binding Port, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="QueryPort" Height="20" ToolTip="UDP port for Steam server list features."/>
+                <local:NumericSpinner Value="{Binding QueryPort, Mode=TwoWay}" Step="1" MaxValue="65535" MinValue="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="MaxConnectedUsers" Height="20" ToolTip="Max number of concurrent players on server."/>
+                <local:NumericSpinner Value="{Binding MaxConnectedUsers, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="MaxConnectedAdmins" Height="20" ToolTip="Max number of admins to allow connect even when server is full."/>
+                <local:NumericSpinner Value="{Binding MaxConnectedAdmins, Mode=TwoWay}" Step="1" MaxValue="80" MinValue="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="ServerFps" Height="20" ToolTip="Target FPS for server."/>
+                <local:NumericSpinner Value="{Binding ServerFps, Mode=TwoWay}" Step="1" MaxValue="120" MinValue="15" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="SaveName" Height="20" />
+                <TextBox Height="20" Text="{Binding SaveName, Mode=TwoWay}" IsEnabled="False" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Password" Height="20" ToolTip="Set a password or leave empty."/>
+                <TextBox Height="20" Text="{Binding Password, Mode=TwoWay}" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <CheckBox Content="Secure" Height="20" IsChecked="{Binding Secure, Mode=TwoWay}" ToolTip="Enable VAC protection on server. VAC banned clients will not be able to connect." FontSize="12"/>
+            <CheckBox Content="ListOnSteam" Height="20" IsChecked="{Binding ListOnSteam, Mode=TwoWay}" ToolTip="Register on Steam server or not." FontSize="12"/>
+            <CheckBox Content="ListOnEOS" Height="20" IsChecked="{Binding ListOnEOS, Mode=TwoWay}" ToolTip="Register on EOS server or not." FontSize="12"/>
+            <DockPanel>
+                <TextBlock Text="AutoSaveCount" Height="20" ToolTip="Number of autosaves to keep."/>
+                <local:NumericSpinner Value="{Binding AutoSaveCount, Mode=TwoWay}" Step="1" MaxValue="200" MinValue="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="AutoSaveInterval" Height="20" ToolTip="Interval in seconds between each auto save."/>
+                <local:NumericSpinner Value="{Binding AutoSaveInterval, Mode=TwoWay}" Step="1" MaxValue="3600" MinValue="5" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <CheckBox Content="CompressSaveFiles" Height="20" IsChecked="{Binding CompressSaveFiles, Mode=TwoWay}" ToolTip="Whether to compress save files or not." FontSize="12"/>
+            <DockPanel>
+                <TextBlock Text="ResetDaysInterval" Height="20" ToolTip="Days between scheduled resets/wipes. When the server starts, and is about to load a save file, it checks if it is time to reset and start a new save file.&#x0a;The previous save file is backed up. Defaults to 0, which means the feature is disabled."/>
+                <local:NumericSpinner Value="{Binding ResetDaysInterval, Mode=TwoWay}" Step="1" MaxValue="280" MinValue="0" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="DayOfReset" Height="20" ToolTip="If you want the server to reset on Saturdays, every two weeks, but it is not Saturday when you initially set up you server then you can set ResetDaysInterval to 14 and then set this to Saturday.&#x0a;It will check that at least ResetDaysInterval days has passed and that it is the day of DayOfReset. If you do not want to restrict reset to a specific day, but just rely on the value of ResetDaysInterval, then set this to Any, which is also the default.&#x0a;-1 = disabled, 0 = Monday, 6 = Sunday"/>
+                <local:NumericSpinner Value="{Binding DayOfReset, Mode=TwoWay}" Step="1" MaxValue="6" MinValue="-1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <CheckBox Content="AdminOnlyDebugEvents" Height="20" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}" FontSize="12"/>
+            <CheckBox Content="DisableDebugEvents" Height="20" IsChecked="{Binding DisableDebugEvents, Mode=TwoWay}" FontSize="12"/>
+            <CheckBox Content="API Enabled" Height="20" IsChecked="{Binding API.Enabled, Mode=TwoWay}" ToolTip="Enable or disable API functionality." FontSize="12"/>
+            <CheckBox Content="RCON Enabled" Height="20" IsChecked="{Binding Rcon.Enabled, Mode=TwoWay}" ToolTip="Enable or disable Rcon functionality." FontSize="12"/>
+            <DockPanel>
+                <TextBlock Text="RCON Password" Height="20" ToolTip="Password to access RCON."/>
+                <TextBox Height="20" Text="{Binding Rcon.Password, Mode=TwoWay}" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="RCON Port" Height="20" ToolTip="Rcon TCP port."/>
+                <local:NumericSpinner Value="{Binding Rcon.Port, Mode=TwoWay}" Step="1" HorizontalAlignment="Right" Width="200"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>

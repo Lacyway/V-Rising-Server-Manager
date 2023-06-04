@@ -3,73 +3,205 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:p="clr-namespace:VRisingServerManager.Properties"
         xmlns:local="clr-namespace:VRisingServerManager"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
-        Title="V Rising Server Manager" Height="520" Width="800" ResizeMode="CanMinimize" Icon="/Resources/logo.ico" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        Title="V Rising Server Manager" Height="650" Width="800">
+    <Window.Resources>
+        
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Launch Settings" Margin="5,3,0,3" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Server Name:" Margin="0,5,5,5" FontWeight="Normal"/>
-                <TextBlock Text="World Name:" Grid.Row="1" Margin="0,5,5,5" FontWeight="Normal"/>
-                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Server_Name, Mode=TwoWay}" Grid.Column="1" Margin="2,2,2,2"/>
-                <TextBox Text="{Binding Source={x:Static p:Settings.Default}, Path=Save_Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2"/>
-                <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Grid.Row="2" Margin="0,5,5,5" FontWeight="Bold" TextBlock.FontWeight="Normal" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=BindToIP, Mode=TwoWay}"/>
-                <TextBox x:Name="BindToIPTextbox" Text="{Binding Source={x:Static p:Settings.Default}, Path=BindingIP, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}"/>
-                <Button x:Name="SaveSettingsButton" Content="Save Settings" Grid.Column="2" Grid.Row="3" Click="SaveSettingsButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5,5,5,5" Padding="5,1,5,1"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Server Management" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,3" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <CheckBox x:Name="AutoRestartCheckbox" Content="Auto Restart" Margin="5" Height="15.96"/>
-                    <Button x:Name="StartServerButton" Content="Start Server" Margin="5" Click="StartServerButton_Click" Padding="5,1,5,1"/>
-                    <Button x:Name="UpdateServerButton" Content="Update Server" Margin="5" Click="UpdateServerButton_Click" Padding="5,1,5,1"/>
-                    <Button x:Name="RCONConsoleButton" Content="RCON Console" Margin="5" Click="RCONConsoleButton_Click" Padding="5,1,5,1"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <TextBlock x:Name="StatusText" Text="Status: Stopped" Margin="5"/>
-                    <Button x:Name="StopServerButton" Content="Stop Server" Margin="5" Click="StopServerButton_Click" IsEnabled="False" Padding="5,1,5,1"/>
-                    <Button x:Name="OpenServerFolderButton" Content="Open Server Folder" Margin="5" Click="OpenServerFolderButton_Click" Padding="5,1,5,1"/>
-                    <Button x:Name="ManageAdminsButton" Content="Manage Admins" Margin="5" Click="ManageAdminsButton_Click" Padding="5,1,5,1"/>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-        <RichTextBox x:Name="MainMenuConsole" Grid.Row="2" Background="Black" Foreground="Lime" Grid.ColumnSpan="2" Margin="5" IsReadOnly="True"/>
-        <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
-            <TextBlock x:Name="SteamCMDStatusText" Text="SteamCMD Status: Not running" Padding="5,1,5,1"/>
-            <TextBlock x:Name="LastUpdateText" Text="Last Update: Unknown" HorizontalAlignment="Right" Padding="5,1,5,1"/>
-        </DockPanel>
-        <GroupBox Header="Editors"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
-            <StackPanel>
-                <Button x:Name="GameSettingsEditorButton" Content="Game Settings Editor" Margin="5,5,5,5" Click="GameSettingsEditorButton_Click" Padding="5,1,5,1"/>
-                <Button x:Name="ServerSettingsEditorButton" Content="Server Settings Editor" Margin="5,5,5,5" Click="ServerSettingsEditorButton_Click" Padding="5,1,5,1"/>
+        <TabControl x:Name="ServerTabControl" Grid.Row="0" ItemsSource="{Binding Servers}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Header="Launch Settings" Margin="5" Grid.Column="0">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Server Name: " Grid.Column="0" Margin="10,0,0,0"/>
+                                    <TextBox Text="{Binding LaunchSettings.DisplayName, Mode=TwoWay}" Grid.Column="1" Width="300"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="World Name: " Grid.Column="0" Margin="10,5,0,0"/>
+                                    <TextBox Text="{Binding LaunchSettings.WorldName, Mode=TwoWay}" Grid.Column="1" Width="300" Margin="0,5,0,0"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Margin="10,0,0,0" IsChecked="{Binding LaunchSettings.BindToIP}"/>
+                                    <TextBox Text="{Binding LaunchSettings.BindingIP, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Server Management" Grid.Column="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ui:ToggleSwitch Header="Auto Restart" Grid.Row="0" Margin="5" Width="100" Grid.Column="0" HorizontalAlignment="Center" IsOn="{Binding AutoRestart, Mode=TwoWay}"/>
+                                <ui:ToggleSwitch Header="Status" OnContent="Running" OffContent="Off" Grid.Row="0" Margin="5" Width="110" Grid.Column="1" HorizontalAlignment="Center" IsOn="{Binding Runtime.IsRunning}" IsHitTestVisible="False"/>
+                                <StackPanel Grid.Column="0" Grid.Row="1">
+
+                                    <Button Margin="2" Click="StartServerButton_Click">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <DockPanel>
+                                            <Image Source="Resources\Play.png" Margin="5,0,0,0"/>
+                                            <TextBlock Text="Start Server" Margin="5,0,5,0"/>
+                                        </DockPanel>
+                                    </Button>
+
+                                    <Button Margin="2" Click="UpdateServerButton_Click">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <DockPanel>
+                                            <Image Source="Resources\RunUpdate.png" Margin="5,0,0,0"/>
+                                            <TextBlock Text="Update Server" Margin="5,0,5,0"/>
+                                        </DockPanel>
+                                    </Button>
+
+                                    <Button Content="RCON Console" Margin="2" IsEnabled="False"/>
+
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Grid.Row="1">
+
+                                    <Button Margin="2" Click="StopServerButton_Click">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <DockPanel>
+                                            <Image Source="Resources\Stop.png" Margin="5,0,0,0"/>
+                                            <TextBlock Text="Stop Server" Margin="5,0,5,0"/>
+                                        </DockPanel>
+                                    </Button>
+
+                                    <Button Margin="2" Click="ServerFolderButton_Click">
+                                        <Button.Content>
+                                            <DockPanel>
+                                                <Image Source="Resources\FolderOpened.png" Margin="5,0,0,0"/>
+                                                <TextBlock Text="Server Folder" Margin="5,0,5,0"/>
+                                            </DockPanel>
+                                        </Button.Content>
+                                    </Button>
+
+                                    <Button Margin="2" Click="ManageAdminsButton_Click">
+                                        <Button.Content>
+                                            <DockPanel>
+                                                <Image Source="Resources\User.png" Margin="5,0,0,0"/>
+                                                <TextBlock Text="Manage Admins" Margin="5,0,5,0"/>
+                                            </DockPanel>
+                                        </Button.Content>
+                                    </Button>
+
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <Separator Grid.Row="1"/>
+        <GroupBox Header="Editors and Settings" Margin="5,0,5,0" Grid.Row="2">
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Button Content="Game Settings Editor" Margin="5,0,5,0" Click="GameSettingsEditor_Click"/>
+                <Button Content="Server Settings Editor" Margin="5,0,5,0" Click="ServerSettingsEditorButton_Click"/>
+                <Button Margin="5,0,5,0" Click="ManagerSettingsButton_Click" Padding="5">
+                    <DockPanel>
+                        <Image Source="Resources\Settings.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="Manager Settings"/>
+                    </DockPanel>
+                </Button>
+                    <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5">
+                    <DockPanel>
+                        <Image Source="Resources\Add.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="Add Server"/>
+                    </DockPanel>
+                </Button>
+                <Button Margin="5,0,5,0" Click="RemoveServerButton_Click" Padding="5">
+                    <DockPanel>
+                        <Image Source="Resources\Remove.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="Remove Server"/>
+                    </DockPanel>
+                </Button>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="ManagerSettingsButton" Grid.Column="1" Grid.Row="1" Content="Manager Settings" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,25,90" Click="ManagerSettingsButton_Click" Padding="5,1,5,1"/>
+        <Grid Grid.Row="3">
+            <RichTextBox x:Name="MainMenuConsole" Grid.Row="2" Background="Black" Foreground="Lime" Grid.ColumnSpan="2" Margin="5" IsReadOnly="True"/>
+        </Grid>
+        <DockPanel Grid.Row="4">
+            <StatusBar>
+                <StatusBarItem HorizontalAlignment="Left">
+                    <TextBlock x:Name="SteamCMDStatusText" Text="No tasks running." Padding="5,1,5,1"/>
+                </StatusBarItem>
+                <StatusBarItem HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding AppSettings.LastUpdateTime}" HorizontalAlignment="Right" Padding="5,1,5,1"/>
+                </StatusBarItem>
+            </StatusBar>            
+        </DockPanel>
     </Grid>
+    
 </Window>

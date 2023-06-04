@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.IO;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Navigation;
 
@@ -22,31 +10,29 @@ namespace VRisingServerManager
     /// </summary>
     public partial class AdminManager : Window
     {
-        public AdminManager()
+        Server serverToManage;
+
+        public AdminManager(Server server)
         {
             InitializeComponent();
-            ReloadList(Properties.Settings.Default.Save_Path + @"\Settings\adminlist.txt");
+            serverToManage = server;
+            ReloadList(serverToManage.Path + @"\SaveData\Settings\adminlist.txt");
         }
 
         public void ReloadList(string filePath)
         {
-            if (File.Exists(Properties.Settings.Default.Save_Path + @"\Settings\adminlist.txt"))
+            AdminList.Items.Clear();
+            using (StreamReader sr = new StreamReader(filePath))
             {
-                AdminList.Items.Clear();
-                using (StreamReader sr = new StreamReader(filePath))
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        AdminList.Items.Add(line);
-                    }
-                    sr.Close();
+                    AdminList.Items.Add(line);
                 }
+                sr.Close();
             }
-            else
-            {
-                MessageBox.Show("Unable to find adminlist.txt\nPlease make sure server path is correctly configured.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (AdminList.Items.Count > 0)
+                AdminList.SelectedIndex = 0;
         }
 
         private void AddAdminButton_Click(object sender, RoutedEventArgs e)
@@ -66,6 +52,8 @@ namespace VRisingServerManager
             if (AdminList.SelectedIndex != -1)
             {
                 AdminList.Items.RemoveAt(AdminList.SelectedIndex);
+                if (AdminList.Items.Count > 0)
+                    AdminList.SelectedIndex = 0;
             }
             else
             {
@@ -81,9 +69,9 @@ namespace VRisingServerManager
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt"))
+            if (File.Exists(serverToManage.Path + @"\SaveData\Settings\adminlist.txt"))
             {
-                string sPath = string.Format(@"{0}\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", Properties.Settings.Default.Server_Path);
+                string sPath = @$"{serverToManage.Path}\SaveData\Settings\adminlist.txt";
                 StreamWriter SaveFile = new StreamWriter(sPath);
                 foreach (var item in AdminList.Items)
                 {
@@ -100,7 +88,7 @@ namespace VRisingServerManager
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            ReloadList(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt");
+            ReloadList(serverToManage.Path + @"\SaveData\Settings\adminlist.txt");
         }
     }
 }

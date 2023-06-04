@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO.Compression;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
-using System.IO;
-using System.Diagnostics;
-using System.Timers;
-using System.Net.Http;
-using System.IO.Compression;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using VRisingServerManager.RCON;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.ComponentModel;
 
 namespace VRisingServerManager
 {
@@ -28,523 +19,575 @@ namespace VRisingServerManager
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private Process serverProcess = new Process();
-        private static System.Timers.Timer RestartTimer = new System.Timers.Timer(10000);
-        private static System.Timers.Timer AutoRestartTimer = new System.Timers.Timer();
-        private bool userStopped = false;
-        private bool restartInProgress = false;
-        public static int restartAttempts = 0;
-        HttpClient HttpClient = new HttpClient();
-        System.Windows.Forms.Timer ucTimer = new System.Windows.Forms.Timer();
-        private static dWebHook discordSender = new dWebHook();
+        HttpClient? httpClient;
+        public MainSettings vsmSettings = new MainSettings();
+        private static dWebhook discordSender = new dWebhook();
+        private PeriodicTimer? autoUpdateTimer;
 
         public MainWindow()
         {
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\VSMSettings.json"))
+                vsmSettings.Save(vsmSettings);
+            else
+                vsmSettings = vsmSettings.Load();
+
+            DataContext = vsmSettings;
             InitializeComponent();
-            MainMenuConsole.AppendText("VSM started.");
-            if (Properties.Settings.Default.UpgradeRequired)
+
+            vsmSettings.AppSettings.PropertyChanged += AppSettings_PropertyChanged;
+            vsmSettings.Servers.CollectionChanged += Servers_CollectionChanged; // MVVM method not working            
+
+            LogToConsole("V Rising Server Manager started." + ((vsmSettings.Servers.Count > 0) ? "\r" + vsmSettings.Servers.Count.ToString() + " servers loaded from config." : "\rNo servers found, press 'Add Server' to get started."));
+
+            ScanForServers();
+            SetupTimer();
+        }        
+
+        /// <summary>
+        /// Sets up the timer for AutoUpdates
+        /// </summary>
+        private void SetupTimer()
+        {
+            if (vsmSettings.AppSettings.AutoUpdate == true)
             {
-                Properties.Settings.Default.Upgrade();                
-                Properties.Settings.Default.UpgradeRequired = false;
-                Properties.Settings.Default.Save();
+                autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                AutoUpdateLoop();
             }
-            if (Properties.Settings.Default.Save_Path == "notset")
+        }
+
+        private async void AutoUpdateLoop()
+        {
+            while (await autoUpdateTimer.WaitForNextTickAsync())
             {
-                Properties.Settings.Default.Save_Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"AppData\LocalLow\Stunlock Studios\VRisingServer");
-                Properties.Settings.Default.Save();
+                LogToConsole("HELLO");
+                bool foundUpdate = await CheckForUpdate();
+                if (foundUpdate == true && vsmSettings.Servers.Count > 0)
+                {
+                    if (vsmSettings.WebhookSettings.Enabled == true)
+                        SendDiscordMessage("An update was found for the game. Starting auto-update.");
+                    await AutoUpdate();
+                }
             }
-            RestartTimer.Elapsed += OnTimedEvent;
-            RestartTimer.AutoReset = true;
-            ucTimer.Tick += AutoUpdateElapsed;
-            AutoRestartTimer.Elapsed += AutoRestartElapsed;
-            Properties.Settings.Default.SettingChanging += (sender, e) =>
+        }
+        
+        private void LogToConsole(string logMessage)
+        {
+            Dispatcher.Invoke(new Action(() =>
             {
-                if (e.SettingName == "AutoUpdate")
+                MainMenuConsole.AppendText(logMessage + "\r");
+                MainMenuConsole.ScrollToEnd();
+            }));
+        }
+
+        private void SendDiscordMessage(string message)
+        {
+            if (vsmSettings.WebhookSettings.Enabled == false || message == "")
+                return;
+
+            if (discordSender.WebHook == null && vsmSettings.WebhookSettings.URL != "")
+            {
+                discordSender.WebHook = vsmSettings.WebhookSettings.URL;
+            }
+            //else
+            //{
+            //    LogToConsole("Webhook tried to send a message but URL is undefined.");
+            //}
+
+            discordSender.SendMessage(message);
+        }
+
+        /// <summary>
+        /// Updates SteamCMD, used when the executable could not be found
+        /// </summary>
+        /// <returns><see cref="bool"/> true if succeeded</returns>
+        private async Task<bool> UpdateSteamCMD()
+        {
+            httpClient = new HttpClient();
+            string workingDir = Directory.GetCurrentDirectory();
+            LogToConsole("SteamCMD not found. Downloading...");
+            byte[] fileBytes = await httpClient.GetByteArrayAsync(@"https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip");
+            await File.WriteAllBytesAsync(workingDir + @"\steamcmd.zip", fileBytes);
+            if (File.Exists(workingDir + @"\SteamCMD\steamcmd.exe") == true)
+            {
+                File.Delete(workingDir + @"\SteamCMD\steamcmd.exe");
+            }
+            LogToConsole("Unzipping...");
+            ZipFile.ExtractToDirectory(workingDir + @"\steamcmd.zip", workingDir + @"\SteamCMD");
+            if (File.Exists(workingDir + @"\steamcmd.zip"))
+            {
+                File.Delete(workingDir + @"\steamcmd.zip");
+            }
+            httpClient.Dispose();
+
+            LogToConsole("Fetching V Rising AppInfo.");
+            await CheckForUpdate();
+
+            return true;
+        }
+
+        private async Task<bool> UpdateGame(Server server)
+        {
+            if (server.Runtime.Process != null)
+            {
+                LogToConsole("Server is already running. Exiting.");
+                return false;
+            }
+
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\SteamCMD\steamcmd.exe"))
+            {
+                bool sCMDSuccess = await UpdateSteamCMD();
+                if (!sCMDSuccess == true)
                 {
-                    if (e.NewValue.ToString() == "True")
-                        UpdateTimer(0);
-                    else if (ucTimer.Enabled) 
-                        ucTimer.Stop();
+                    LogToConsole("Unable to download SteamCMD. Exiting update process.");
+                    return false;
                 }
-                if (e.SettingName == "AutoRestart")
+            }
+
+            string workingDir = Directory.GetCurrentDirectory();
+            LogToConsole("Updating game server: " + server.Name);
+            string[] installScript = { "force_install_dir \"" + server.Path + "\"", "login anonymous", (vsmSettings.AppSettings.VerifyUpdates) ? "app_update 1829350 validate" : "app_update 1829350", "quit" };
+            if (File.Exists(server.Path + @"\steamcmd.txt"))
+                File.Delete(server.Path + @"\steamcmd.txt");
+            File.WriteAllLines(server.Path + @"\steamcmd.txt", installScript);
+            string parameters = "+runscript " + server.Path + @"\steamcmd.txt";
+            Process steamcmd = new Process
+            {
+                StartInfo = new ProcessStartInfo
                 {
-                    if (e.NewValue.ToString() == "True")
-                        UpdateTimer(1);
-                    else if (AutoRestartTimer.Enabled) 
-                        AutoRestartTimer.Stop();
-                }
-                if (e.SettingName == "WebhookURL")
-                {
-                    discordSender.WebHook = e.NewValue.ToString();
+                    FileName = workingDir + @"\SteamCMD\steamcmd.exe",
+                    Arguments = parameters,
+                    CreateNoWindow = !vsmSettings.AppSettings.ShowSteamWindow
                 }
             };
-            if (Properties.Settings.Default.LastUpdateUNIXTime != "")
-                LastUpdateText.Text = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString();
-            if (Properties.Settings.Default.AutoUpdate == true)
-                UpdateTimer(0);
-            if (Properties.Settings.Default.AutoRestart == true)
-                UpdateTimer(1);
-            discordSender.WebHook = Properties.Settings.Default.WebhookURL;
-            CheckServer();
-        }
-
-        private void StartServer()
-        {
-            Process[] processList = Process.GetProcessesByName("vrisingserver");
-            foreach (Process proc in processList)
-            {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
-                {
-                    System.Windows.MessageBox.Show("Server is already running.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-            }
-            if (restartAttempts == 5)
-            {
-                LogToConsole("Unable to start server 5 times, disabling auto-restart.");
-                AutoRestartCheckbox.IsChecked = false;
-                StartServerButton.IsEnabled = true;
-                StopServerButton.IsEnabled = false;                
-                if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[3] != "")
-                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[3]);
-                return;
-            }
-            if (restartAttempts == 0)
-                SetTimer();
-            restartAttempts++;
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer.exe") == true)
-            {
-                StopServerButton.IsEnabled = true;
-                StartServerButton.IsEnabled = false;
-                string parameters = String.Format(@"-persistentDataPath ""{0}"" -serverName ""{1}"" -saveName ""{2}"" -logFile ""{3}\VRisingServer.log""{4}", Properties.Settings.Default.Save_Path, Properties.Settings.Default.Server_Name, Properties.Settings.Default.Save_Name, Properties.Settings.Default.Log_Path, (Properties.Settings.Default.BindToIP) ? String.Format(@" -address ""{0}""", BindToIPTextbox.Text) : "");
-                Process serverProcess = new Process();
-                serverProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                serverProcess.StartInfo.FileName = Properties.Settings.Default.Server_Path + @"\VRisingServer.exe";
-                serverProcess.StartInfo.UseShellExecute = true;
-                serverProcess.StartInfo.Arguments = parameters;
-                serverProcess.EnableRaisingEvents = true;
-                serverProcess.Exited += new EventHandler(serverProcessExited);
-                serverProcess.Start();
-                StatusText.Text = "Status: Running";
-                LogToConsole("Server starting.\rServer name: " + Properties.Settings.Default.Server_Name + "\rSave name: " + Properties.Settings.Default.Save_Name);
-                userStopped = false;
-                if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[0] != "")
-                    discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[0]);                
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("'VRisingServer.exe' not found. Please make sure server is installed correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void UpdateSteamCMDStatus(string status)
-        {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                SteamCMDStatusText.Text = status;
-            }));
-        }
-        private void UpdateLastUpdateStatus(string status)
-        {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                LastUpdateText.Text = status;
-            }));
-        }
-
-        private void UpdateTimer(int timer)
-        {
-            switch (timer)
-            {
-                case 0:
-                    ucTimer.Interval = Properties.Settings.Default.AutoUpdateInterval * (60 * 1000);
-                    ucTimer.Start();
-                    break;
-                case 1:
-                    AutoRestartTimer.Interval = Properties.Settings.Default.AutoRestartInterval * (60 * 60 * 1000);
-                    AutoRestartTimer.Start();
-                    break;
-            }
-        }
-
-        private async Task UpdateGame()
-        {            
-            if (Process.GetProcessesByName("vrisingserver").Length > 0)
-            {
-                System.Windows.MessageBox.Show("Server is already running. Shut down the server before updating.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == false)
-            {
-                if (System.Windows.Forms.MessageBox.Show("VSM will now download SteamCMD.\nThis is used to update and manage the server.\nIs this ok?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
-                    return;
-                UpdateSteamCMDStatus("SteamCMD: Downloading...");
-                LogToConsole("SteamCMD not found. Downloading...");
-                byte[] fileBytes = await HttpClient.GetByteArrayAsync(@"https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip");
-                await File.WriteAllBytesAsync(Properties.Settings.Default.Server_Path + @"\steamcmd.zip", fileBytes);
-                if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == true)
-                {
-                    File.Delete(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe");
-                }
-                LogToConsole("Unzipping...");
-                ZipFile.ExtractToDirectory(Properties.Settings.Default.Server_Path + @"\steamcmd.zip", Properties.Settings.Default.Server_Path + @"\SteamCMD");
-                if (File.Exists(Properties.Settings.Default.Server_Path + @"\steamcmd.zip"))
-                {
-                    File.Delete(Properties.Settings.Default.Server_Path + @"\steamcmd.zip");
-                }
-            }
-            else
-            {
-                UpdateSteamCMDStatus("SteamCMD: Running...");
-                LogToConsole("SteamCMD found. Running...");
-            }
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt") && File.Exists(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt") && Properties.Settings.Default.VerifyUpdate)
-            {
-                Directory.CreateDirectory(Properties.Settings.Default.Server_Path + @"\Backup");
-                File.Copy(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt", true);
-                File.Copy(Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt", Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt", true);
-            }
-            UpdateSteamCMDStatus("SteamCMD: Updating game...");
-            LogToConsole("Updating game...");
-            string[] installScript = { "force_install_dir \"" + Properties.Settings.Default.Server_Path + "\"", "login anonymous", (Properties.Settings.Default.VerifyUpdate) ? "app_update 1829350 validate" : "app_update 1829350", "quit" };
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt"))
-                File.Delete(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt");
-            File.WriteAllLines(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.txt", installScript);
-            string parameters = "+runscript " + "steamcmd.txt";
-            var steamcmd = Process.Start(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe", parameters);
+            steamcmd.Start();
             await steamcmd.WaitForExitAsync();
-            LogToConsole("Update completed.");
-            if (File.Exists(Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt") && File.Exists(Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt") && Properties.Settings.Default.VerifyUpdate)
+            LogToConsole("Update completed on server: " + server.Name);
+            return true;
+        }
+
+        private async Task<bool> StartServer(Server server)
+        {
+            if (server.Runtime.Process != null)
             {
-                LogToConsole("Restoring backups of adminlist and banlist.");
-                Directory.CreateDirectory(Properties.Settings.Default.Server_Path + @"\Backup");
-                File.Copy(Properties.Settings.Default.Server_Path + @"\Backup\adminlist.txt", Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\adminlist.txt", true);
-                File.Copy(Properties.Settings.Default.Server_Path + @"\Backup\banlist.txt", Properties.Settings.Default.Server_Path + @"\VRisingServer_Data\StreamingAssets\Settings\banlist.txt", true);
+                LogToConsole($"ERROR: {server.Name} is already running");
+                return false;
             }
-            await CheckForUpdate();
+
+            if (File.Exists(server.Path + @"\VRisingServer.exe"))
+            {
+                LogToConsole("Starting server: " + server.Name + (server.Runtime.restartAttempts > 0 ? $" Attempt {server.Runtime.restartAttempts}/3." : ""));
+                if (vsmSettings.WebhookSettings.Enabled == true)
+                    SendDiscordMessage($"Starting server **{server.LaunchSettings.DisplayName}**." + (server.Runtime.restartAttempts > 0 ? $" Attempt {server.Runtime.restartAttempts}/3." : ""));
+                string parameters = $@"-persistentDataPath ""{server.Path + @"\SaveData"}"" -serverName ""{server.Name}"" -saveName ""{server.LaunchSettings.WorldName}"" -logFile ""{server.Path + @"\logs\VRisingServer.log"}""{(server.LaunchSettings.BindToIP ? $@" -address ""{server.LaunchSettings.BindingIP}""" : "")}";
+                Process serverProcess = new()
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        WindowStyle = ProcessWindowStyle.Minimized,
+                        FileName = server.Path + @"\VRisingServer.exe",
+                        UseShellExecute = true,
+                        Arguments = parameters
+                    },
+                    EnableRaisingEvents = true
+                };
+                serverProcess.Exited += new EventHandler((sender, e) => ServerProcessExited(sender, e, server));
+                serverProcess.Start();
+                server.Runtime.IsRunning = true;
+                server.Runtime.userStopped = false;
+                server.Runtime.Process = serverProcess;                
+                return true;
+            }
+            else
+            {
+                LogToConsole("'VRisingServer.exe' not found. Please make sure server is installed correctly.");
+                return false;
+            }
+        }
+
+        private void ScanForServers()
+        {
+            int foundServers = 0;
+
+            Process[] serverProcesses = Process.GetProcessesByName("vrisingserver");
+            foreach (Process process in serverProcesses)
+            {
+                foreach (Server server in vsmSettings.Servers)
+                {
+                    if (process.MainModule.FileName == server.Path + @"\VRisingServer.exe")
+                    {
+                        server.Runtime.IsRunning = true;
+                        process.EnableRaisingEvents = true;
+                        process.Exited += new EventHandler((sender, e) => ServerProcessExited(sender, e, server));
+                        server.Runtime.Process = process;
+                        foundServers++;
+                    }                        
+                }
+            }
+            if (foundServers > 0)
+            {
+                LogToConsole($"Found {foundServers} servers that are running.");
+            }
+        }
+
+        private async Task AutoUpdate()
+        {
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\SteamCMD\steamcmd.exe"))
+            {
+                await UpdateSteamCMD();
+            }            
+
+            List<Task> serverTasks = new List<Task>();
+            List<Server> runningServers = new List<Server>();
+
+            foreach(Server server in vsmSettings.Servers)
+            {
+                if (server.Runtime.IsRunning)
+                {
+                    serverTasks.Add(StopServer(server));
+                    runningServers.Add(server);
+                }
+            }
+
+            LogToConsole($"AutoUpdate starting on {vsmSettings.Servers.Count} server(s)." + ((runningServers.Count > 0) ? $"\rShutting down {runningServers.Count} server(s) before proceeding." : ""));
+
+            await Task.WhenAll(serverTasks.ToArray());
+            serverTasks.Clear();
+
+            foreach (Server server in vsmSettings.Servers)
+            {
+                serverTasks.Add(UpdateGame(server));
+            }
+
+            await Task.WhenAll(serverTasks.ToArray());
+            serverTasks.Clear();
+
+            foreach (Server server in runningServers)
+            {
+                serverTasks.Add(StartServer(server));
+            }
+
+            await Task.WhenAll(serverTasks.ToArray());
+            LogToConsole("Auto-update completed.");
+        }
+
+        private async Task<bool> StopServer(Server server)
+        {
+            LogToConsole("Stopping server: " + server.Name);
+            if (vsmSettings.WebhookSettings.Enabled == true)
+                SendDiscordMessage($"Stopping server **{server.LaunchSettings.DisplayName}**.");
+            bool success;
+            bool close = server.Runtime.Process.CloseMainWindow();            
+            if (close)
+            {
+                await server.Runtime.Process.WaitForExitAsync();
+                server.Runtime.Process = null;
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+            return success;
+        }
+
+        private async Task<bool> RemoveServer(Server server)
+        {            
+            int serverIndex = vsmSettings.Servers.IndexOf(server);
+            if (MessageBox.Show("Are you sure you want to remove the server?\nThis action is permanent and all files will be removed.", "Remove Server - Verification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+                return false;
+            }
+            if (serverIndex != -1)
+            {
+                if (MessageBox.Show($@"Create a backup of the save?{Environment.NewLine}It will be saved to: {Directory.GetCurrentDirectory()}\Backups\{server.Name}_Bak.zip", "Remove Server - Backup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\Backups"))
+                        Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Backups");
+                    if (Directory.Exists(server.Path + @"\SaveData\Saves\v2\" + server.LaunchSettings.WorldName))
+                    {
+                        if (File.Exists(Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip"))
+                            File.Delete(Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip");
+                        ZipFile.CreateFromDirectory(server.Path + @"\Saves\v2\" + server.LaunchSettings.WorldName, Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip");
+                    }                    
+                }
+                vsmSettings.Servers.RemoveAt(serverIndex);
+                if (Directory.Exists(server.Path))
+                    Directory.Delete(server.Path, true);
+                return true;                
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private async Task<bool> CheckForUpdate()
         {
-            if (restartInProgress == true)
-                await Task.Delay(30000);
             bool foundUpdate = false;
-            await Task.Run(() =>
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\SteamCMD\steamcmd.exe"))
             {
-                if (File.Exists(Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe") == false)
+                LogToConsole("ERROR: Could not find SteamCMD when checking for updates.");
+                return foundUpdate;
+            }
+            else
+            {
+                string parameters = @"+login anonymous +app_info_update 1829350 +app_info_print 1829350 +quit";
+                Process steamCMD = new Process
                 {
-                    UpdateSteamCMDStatus("SteamCMD AutoUpdate: ERROR, could not find SteamCMD.");
-                    foundUpdate = false;
-                }
-                else
-                {
-                    UpdateSteamCMDStatus("SteamCMD AutoUpdate: Fetching information.");
-                    string parameters = @"+login anonymous +app_info_update 1829350 +app_info_print 1829350 +quit";
-                    Process steamCMD = new Process();
-                    steamCMD.StartInfo.FileName = Properties.Settings.Default.Server_Path + @"\SteamCMD\steamcmd.exe";
-                    steamCMD.StartInfo.CreateNoWindow = true;
-                    steamCMD.StartInfo.UseShellExecute = false;
-                    steamCMD.StartInfo.Arguments = parameters;
-                    steamCMD.StartInfo.RedirectStandardOutput = true;
-                    steamCMD.Start();
-                    string output = steamCMD.StandardOutput.ReadToEnd();
-                    string[] toScan = output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    steamCMD.WaitForExit();
-                    for (int i = 0; i < toScan.Length; i++)
+                    StartInfo = new ProcessStartInfo
                     {
-                        if (toScan[i].Contains("\"branches\"") && toScan[i + 2].Contains("\"public\""))
+                        FileName = Directory.GetCurrentDirectory() + @"\SteamCMD\steamcmd.exe",
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
+                        Arguments = parameters,
+                        RedirectStandardOutput = true
+                    }
+                };
+                steamCMD.Start();
+                string output = await steamCMD.StandardOutput.ReadToEndAsync();
+                string[] toScan = output.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                await steamCMD.WaitForExitAsync();
+                for (int i = 0; i < toScan.Length; i++)
+                {
+                    if (toScan[i].Contains("\"branches\"") && toScan[i + 2].Contains("\"public\""))
+                    {
+                        string lastUpdated = Regex.Match(toScan[i + 5], "(?<=\")[0-9]+(?=\")").Value;
+                        if (lastUpdated != vsmSettings.AppSettings.LastUpdateTimeUNIX)
                         {
-                            string lastUpdated = Regex.Match(toScan[i + 5], "(?<=\")[0-9]+(?=\")").Value;
-                            if (lastUpdated != Properties.Settings.Default.LastUpdateUNIXTime)
-                            {
-                                Properties.Settings.Default.LastUpdateUNIXTime = lastUpdated;
-                                Properties.Settings.Default.Save();
-                                foundUpdate = true;
-                            }
-                            if (Properties.Settings.Default.LastUpdateUNIXTime == "")
-                            {
-                                Properties.Settings.Default.LastUpdateUNIXTime = lastUpdated;
-                                Properties.Settings.Default.Save();
-                                foundUpdate = false;
-                            }
+                            vsmSettings.AppSettings.LastUpdateTimeUNIX = lastUpdated;
+                            foundUpdate = true;
+                        }
+                        if (vsmSettings.AppSettings.LastUpdateTimeUNIX == "")
+                        {
+                            vsmSettings.AppSettings.LastUpdateTimeUNIX = lastUpdated;
+                            foundUpdate = false;
                         }
                     }
-                    UpdateSteamCMDStatus("SteamCMD Status: Not running");
-                    UpdateLastUpdateStatus("Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(Properties.Settings.Default.LastUpdateUNIXTime)).DateTime.ToString());
                 }
-            });
+                vsmSettings.AppSettings.LastUpdateTime = "Last Update on Steam: " + DateTimeOffset.FromUnixTimeSeconds(long.Parse(vsmSettings.AppSettings.LastUpdateTimeUNIX)).DateTime.ToString();
+            }
+            vsmSettings.Save(vsmSettings);
             return foundUpdate;
         }
 
-        private async void AutoUpdateServer()
+        private async void ReadLog(Server server)
         {
-            if (restartInProgress == true)
-                await Task.Delay(30000);
-            if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[4] != "")
-                discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[4]);
-            userStopped = true;
-            if (Properties.Settings.Default.AutoUpdateRCONMessage)
-                await SendRestartMessage();
-            Process[] processList = Process.GetProcessesByName("vrisingserver");
-            foreach (Process proc in processList)
-            {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
-                {
-                    LogToConsole("Terminating server for update.");
-                    proc.CloseMainWindow();
-                    await proc.WaitForExitAsync();
-                    LogToConsole("Server terminated.");
-                }
-            }
-            await UpdateGame();
-            StartServer();
-        }
-
-        private async Task SendRestartMessage()
-        {
-            RemoteConClient rClient = new RemoteConClient();
-            rClient.UseUtf8 = true;
-            rClient.OnLog += async message =>
-            {
-                if (message == "Authentication success.")
-                {
-                    await Task.Delay(1000);
-                    rClient.SendCommand("announcerestart 5", result =>
-                    {
-                        LogToConsole(result);
-                    });
-                }
-
-            };
-            rClient.OnConnectionStateChange += state =>
-            {
-                if (state == RemoteConClient.ConnectionStateChange.Connected)
-                {
-                    rClient.Authenticate(Properties.Settings.Default.RCON_Pass);
-                }
-            };
-            rClient.Connect(Properties.Settings.Default.RCON_Address, Properties.Settings.Default.RCON_Port);
-            LogToConsole("Waiting 5 minutes to restart.");
-            if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[5] != "")
-                discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[5]);
-            rClient.Disconnect();
-            await Task.Delay(300000);            
-        }
-
-        private void CheckServer()
-        {
-            Process[] processList = Process.GetProcessesByName("vrisingserver");
-            bool foundServer = false;
-            foreach (Process proc in processList)
-            {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
-                {
-                    Process serverProcess = proc;
-                    serverProcess.EnableRaisingEvents = true;
-                    serverProcess.Exited += new EventHandler(serverProcessExited);
-                    foundServer = true;
-                }
-            }
-            if (foundServer == true)
-            {
-                StartServerButton.IsEnabled = false;
-                StopServerButton.IsEnabled = true;
-                StatusText.Text = "Status: Running";
-                LogToConsole("Server found running.");
-            }
-        }
-
-        private async Task<bool> StopServer()
-        {
-            restartInProgress = true;
-            bool foundProcess = false;
-            userStopped = true;
-            Dispatcher.Invoke(new Action(() =>
-            {
-                StopServerButton.IsEnabled = false;
-            }));            
-            LogToConsole("Stopping server.");
-            Process[] processList = Process.GetProcessesByName("vrisingserver");
-            foreach (Process proc in processList)
-            {
-                if (proc.MainModule.FileName == Properties.Settings.Default.Server_Path + @"\VRisingServer.exe")
-                {
-                    proc.CloseMainWindow();
-                    await proc.WaitForExitAsync();
-                    foundProcess = true;
-                }
-            }
-            restartInProgress = false;
-            return foundProcess;
-        }
-
-        private static void SetTimer()
-        {
-            RestartTimer.Start();
-        }
-
-        private async void AutoUpdateElapsed(object? sender, EventArgs e)
-        {
-            bool updateFound = await CheckForUpdate();
-            if (updateFound == true)
-                AutoUpdateServer();
-        }
-
-        private async void AutoRestartElapsed(Object source, ElapsedEventArgs e)
-        {
-            if (Properties.Settings.Default.AutoRestartRCONMessage == true)
-                await SendRestartMessage();
-            bool stoppedServer = await StopServer();
-            if (stoppedServer == true)
-                Dispatcher.Invoke(new Action(() =>
-                {
-                    StartServer();
-                }));
-            else
-                LogToConsole("Could not find server process.");
-        }
-
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            restartAttempts = 0;
-            RestartTimer.Stop();
-            if (Properties.Settings.Default.EnableWebhook == true && Properties.Settings.Default.WebhookURL != "")
-                ReadLog();
-        }
-
-        private void ReadLog()
-        {
-            using (FileStream fs = new FileStream(Properties.Settings.Default.Log_Path + @"\VRisingServer.log", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (FileStream fs = new FileStream(server.Path + @"\Logs\VRisingServer.log", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
             using (StreamReader sr = new StreamReader(fs))
             {
-                string[] toSend;
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                string ipAddress = "";
+                string steamID = "";
+                int foundVariables = 0;
+
+                while (foundVariables < 3 && server.Runtime.Process != null)
                 {
-                    if (line.Contains("SteamPlatformSystem - OnPolicyResponse - Public IP: ") && Properties.Settings.Default.WebhookMessages[6] != "")
+                    string line = await sr.ReadLineAsync();
+                    if (line != null)
                     {
-                        toSend = line.Split("SteamPlatformSystem - OnPolicyResponse - Public IP: ");
-                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[6] + toSend[1]);
-                    }
-                    if (line.Contains("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: ") && Properties.Settings.Default.WebhookMessages[7] != "")
-                    {
-                        toSend = line.Split("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: ");
-                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[7] + toSend[1]);
-                    }
+                        if (line.Contains("SteamPlatformSystem - OnPolicyResponse - Public IP: "))
+                        {
+                            ipAddress = line.Split("SteamPlatformSystem - OnPolicyResponse - Public IP: ")[1];
+                            foundVariables++;
+                        }
+                        if (line.Contains("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: "))
+                        {
+                            steamID = line.Split("SteamNetworking - Successfully logged in with the SteamGameServer API. SteamID: ")[1];
+                            foundVariables++;
+                        }
+                        if (line.Contains("Shutting down Asynchronous Streaming"))
+                            foundVariables++;
+                    }                    
                 }
+
+                if (foundVariables == 3)
+                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** is ready.\rPublic IP: {ipAddress}\rSteam ID: {steamID}");
+
                 sr.Close();
                 fs.Close();
             }
         }
 
-        private void serverProcessExited(object sender, EventArgs e)
+        #region Events
+        private async void ServerProcessExited(object sender, EventArgs e, Server server)
         {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                if (userStopped == false && AutoRestartCheckbox.IsChecked == true)
-                {
-                    if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[2] != "")
-                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[2]);
-                    StatusText.Text = "Status: Stopped";
-                    LogToConsole("Server closed unexpectedly. Restarting.");
-                    StartServer();
-                }
-                else
-                {
-                    if (Properties.Settings.Default.EnableWebhook && discordSender.WebHook != "" && Properties.Settings.Default.WebhookMessages[1] != "")
-                        discordSender.SendMessage(Properties.Settings.Default.WebhookMessages[1]);
-                    StatusText.Text = "Status: Stopped";
-                    StopServerButton.IsEnabled = false;
-                    StartServerButton.IsEnabled = true;
-                    LogToConsole("Server stopped.");
-                    userStopped = false;
-                }
-            }));            
-        }
+            server.Runtime.IsRunning = false;
+            server.Runtime.Process = null;            
 
-        private void LogToConsole(string output)
-        {
-            Dispatcher.Invoke(new Action(() =>
+            if (server.Runtime.restartAttempts >= 3)
             {
-                MainMenuConsole.AppendText("\r" + output);
-                MainMenuConsole.ScrollToEnd();
-            }));            
-        }
+                LogToConsole($"Server '{server.Name}' attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
+                if (vsmSettings.WebhookSettings.Enabled == true)
+                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
+                server.Runtime.restartAttempts = 0;
+                server.AutoRestart = false;
+                return;
+            }
 
-        private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.Save();
-        }
-
-        private void ManageAdminsButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!System.Windows.Application.Current.Windows.OfType<AdminManager>().Any())
+            if (server.AutoRestart == true && server.Runtime.userStopped == false)
             {
-                AdminManager aManager = new AdminManager();
-                aManager.Show();
+                server.Runtime.restartAttempts++;
+                if (vsmSettings.WebhookSettings.Enabled == true)
+                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** stopped unexpectedly. Restarting.");
+                await StartServer(server);
             }
         }
 
-        private void GameSettingsEditorButton_Click(object sender, RoutedEventArgs e)
+        private void AppSettings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (!System.Windows.Application.Current.Windows.OfType<GameSettingsEditor>().Any())
+            switch (e.PropertyName)
             {
-                GameSettingsEditor gSettingsEditor = new GameSettingsEditor();
-                gSettingsEditor.Show();
+                case "AutoUpdate":
+                    if (vsmSettings.AppSettings.AutoUpdate == true)
+                    {
+                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                        AutoUpdateLoop();
+                    }
+                    else
+                    {
+                        if (autoUpdateTimer != null)
+                        {
+                            autoUpdateTimer.Dispose();
+                        }
+                    }
+                    break;
+                case "AutoUpdateInterval":
+                    if (vsmSettings.AppSettings.AutoUpdate == true && autoUpdateTimer != null)
+                    {
+                        autoUpdateTimer.Dispose();
+                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                        AutoUpdateLoop();
+                    }
+                    break;
             }
+        }
+
+        private void Servers_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            int serversLength = ServerTabControl.Items.Count;
+            if (serversLength > 0)
+            {
+                ServerTabControl.SelectedIndex = serversLength - 1;
+            }
+        }
+        #endregion
+
+        #region Buttons
+        private async void StartServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Server server = button.DataContext as Server;
+
+            vsmSettings.Save(vsmSettings);
+
+            bool started = await StartServer(server);
+
+            await Task.Delay(3000);
+
+            if (started == true && vsmSettings.WebhookSettings.Enabled)
+                ReadLog(server);
+        }
+
+        private async void UpdateServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Server server = button.DataContext as Server;
+            await UpdateGame(server);
+        }
+
+        private async void StopServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Server server = button.DataContext as Server;
+            server.Runtime.userStopped = true;            
+            bool success = await StopServer(server);
+            if (success)
+            {
+                LogToConsole("Successfully stopped server: " + server.Name);
+            }
+            else
+            {
+                LogToConsole("Unable to stop server: " + server.Name);
+            }   
+        }
+
+        private async void RemoveServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Server server = ServerTabControl.SelectedItem as Server;
+            if (server == null)
+            {
+                LogToConsole("ERROR: Unable to find selected server to delete");
+                return;
+            }
+            bool success = await RemoveServer(server);
+            if (!success)
+                LogToConsole("There was an error deleting the server or the action was aborted.");
+            else
+                vsmSettings.Save(vsmSettings);
         }
 
         private void ServerSettingsEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!System.Windows.Application.Current.Windows.OfType<ServerSettingsEditor>().Any())
+            if (!Application.Current.Windows.OfType<ServerSettingsEditor>().Any())
             {
                 ServerSettingsEditor sSettingsEditor = new ServerSettingsEditor();
                 sSettingsEditor.Show();
             }
         }
 
+        private void ManageAdminsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Server server = button.DataContext as Server;
+
+            if (!File.Exists(server.Path + @"\SaveData\Settings\adminlist.txt"))
+            {
+                LogToConsole("Unable to find adminlist.txt, please make sure the server is installed correctly.");
+                return;
+            }
+
+            if (!Application.Current.Windows.OfType<AdminManager>().Any())
+            {
+                AdminManager aManager = new AdminManager(server);
+                aManager.Show();
+            }
+        }
+
+        private void ServerFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Server server = button.DataContext as Server;
+
+            if (Directory.Exists(server.Path))
+                Process.Start("explorer.exe", server.Path);
+            else
+                LogToConsole("Unable to find server folder.");
+        }
+        private void AddServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Application.Current.Windows.OfType<CreateServer>().Any())
+            {
+                CreateServer cServer = new(vsmSettings);
+                cServer.Show();
+            }
+        }
+
+        private void GameSettingsEditor_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Application.Current.Windows.OfType<GameSettingsEditor>().Any())
+            {
+                GameSettingsEditor gSettingsEditor = new();
+                gSettingsEditor.Show();
+            }
+        }
+
         private void ManagerSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!System.Windows.Application.Current.Windows.OfType<ManagerSettings>().Any())
+            if (!Application.Current.Windows.OfType<ManagerSettings>().Any())
             {
-                ManagerSettings mSettings = new ManagerSettings();
+                ManagerSettings mSettings = new(vsmSettings);
                 mSettings.Show();
             }
         }
-
-        private void RCONConsoleButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!System.Windows.Application.Current.Windows.OfType<RconConsole>().Any())
-            {
-                RconConsole rConsole = new RconConsole();
-                rConsole.Show();
-            }
-        }
-
-        private void StartServerButton_Click(object sender, RoutedEventArgs e)
-        {
-            StartServer();
-        }
-
-        private async void StopServerButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool stoppedServer = await StopServer();
-            if (stoppedServer == false)
-                LogToConsole("Could not find server process.");
-        }
-
-        private void UpdateServerButton_Click(object sender, RoutedEventArgs e)
-        {
-            _ = UpdateGame();
-        }
-
-        private void OpenServerFolderButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Directory.Exists(Properties.Settings.Default.Server_Path))
-                Process.Start("explorer.exe", Properties.Settings.Default.Server_Path);
-            else
-                System.Windows.MessageBox.Show("Unable to find server folder.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
+        #endregion
     }
 }

@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         mc:Ignorable="d"
-        Title="Game Settings Editor" Height="800" Width="1200" MaxWidth="1300" Icon="/Resources/logo.ico">
+        Title="Game Settings Editor" Height="800" Width="1400" MaxWidth="1500" Icon="/Resources/logo.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Height="20">
+        <Menu>
             <MenuItem Header="_File">
                 <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
                 <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
@@ -26,10 +26,10 @@
                     <MenuItem Header="Standard PvE - Shuffle" Click="LoadPresetButton" Tag="StandardPvE_Shuffle.json"/>
                     <MenuItem Header="PvE Level 30" Click="LoadPresetButton" Tag="Level30PvE.json"/>
                     <MenuItem Header="PvE Level 40" Click="LoadPresetButton" Tag="Level40PvE.json"/>
-                    <MenuItem Header="PvE level 50" Click="LoadPresetButton" Tag="Level50PvE.json"/>
-                    <MenuItem Header="PvE level 60" Click="LoadPresetButton" Tag="Level60PvE.json"/>
-                    <MenuItem Header="PvE level 70" Click="LoadPresetButton" Tag="Level70PvE.json"/>
-                    <MenuItem Header="PvE level 80" Click="LoadPresetButton" Tag="Level80PvE.json"/>
+                    <MenuItem Header="PvE Level 50" Click="LoadPresetButton" Tag="Level50PvE.json"/>
+                    <MenuItem Header="PvE Level 60" Click="LoadPresetButton" Tag="Level60PvE.json"/>
+                    <MenuItem Header="PvE Level 70" Click="LoadPresetButton" Tag="Level70PvE.json"/>
+                    <MenuItem Header="PvE Level 80" Click="LoadPresetButton" Tag="Level80PvE.json"/>
                 </MenuItem>
                 <MenuItem Header="PvP">
                     <MenuItem Header="Standard PvP" Click="LoadPresetButton" Tag="StandardPvP.json"/>
@@ -41,10 +41,10 @@
                     <MenuItem Header="Standard PvP - No Siege" Click="LoadPresetButton" Tag="StandardPvP_NoSiege.json"/>
                     <MenuItem Header="PvP Level 30" Click="LoadPresetButton" Tag="Level30PvP.json"/>
                     <MenuItem Header="PvP Level 40" Click="LoadPresetButton" Tag="Level40PvP.json"/>
-                    <MenuItem Header="PvP level 50" Click="LoadPresetButton" Tag="Level50PvP.json"/>
-                    <MenuItem Header="PvP level 60" Click="LoadPresetButton" Tag="Level60PvP.json"/>
-                    <MenuItem Header="PvP level 70" Click="LoadPresetButton" Tag="Level70PvP.json"/>
-                    <MenuItem Header="PvP level 80" Click="LoadPresetButton" Tag="Level80PvP.json"/>
+                    <MenuItem Header="PvP Level 50" Click="LoadPresetButton" Tag="Level50PvP.json"/>
+                    <MenuItem Header="PvP Level 60" Click="LoadPresetButton" Tag="Level60PvP.json"/>
+                    <MenuItem Header="PvP Level 70" Click="LoadPresetButton" Tag="Level70PvP.json"/>
+                    <MenuItem Header="PvP Level 80" Click="LoadPresetButton" Tag="Level80PvP.json"/>
                     <MenuItem Header="Duo PvP" Click="LoadPresetButton" Tag="Duo_PvP.json"/>
                     <MenuItem Header="Duo PvP - Daily Siege" Click="LoadPresetButton" Tag="DuoPvP_DailySiege.json"/>
                     <MenuItem Header="Duo PvP - Weekend Siege" Click="LoadPresetButton" Tag="DuoPvP_WeekendSiege.json"/>
@@ -56,9 +56,6 @@
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
             <Grid>
-                <Grid.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -67,7 +64,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
+                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -142,7 +139,7 @@
                             <CheckBox Content="Free Castle Destroy" IsChecked="{Binding FreeCastleDestroy, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Destroying an enemy player castle heart requires no materials"/>
                         </StackPanel>
                         <StackPanel Grid.Column="3">
-                            <GroupBox Header="Inactivity Kill" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <GroupBox Header="Inactivity Kill" Margin="5,5,5,5">
                                 <StackPanel>
                                     <CheckBox Content="Enabled" IsChecked="{Binding InactivityKillEnabled, Mode=TwoWay}" ToolTip="Inactive players are automatically killed after a set duration"/>
                                     <TextBlock Text="Minimum Time"/>
@@ -155,7 +152,7 @@
                                     <local:NumericSpinner Value="{Binding InactivityKillTimerMaxItemLevel, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: The maximum gear level that the inactivity min and max timers are based on from 1 - this value"/>
                                 </StackPanel>
                             </GroupBox>
-                            <GroupBox Header="Disable Disconnected Dead" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <GroupBox Header="Disable Disconnected Dead" Margin="5,5,5,5">
                                 <StackPanel>
                                     <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
                                     <TextBlock Text="Timer"/>
@@ -166,7 +163,7 @@
                             </GroupBox>
                         </StackPanel>
                         <StackPanel Grid.Column="4">
-                            <GroupBox Header="Trader Settings" Margin="5,5,5,5" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                            <GroupBox Header="Trader Settings" Margin="5,5,5,5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -187,7 +184,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
+                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -279,9 +276,9 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
+                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" Padding="5,5,5,5">
                     <StackPanel Orientation="Horizontal">
-                        <GroupBox Header="Vampire Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                        <GroupBox Header="Vampire Stat Modifiers" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -309,7 +306,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Equipment Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                        <GroupBox Header="Equipment Stat Modifiers - Global" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -335,7 +332,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Unit Stat Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                        <GroupBox Header="Unit Stat Modifiers" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -355,7 +352,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Castle Stat Modifiers - Global" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                        <GroupBox Header="Castle Stat Modifiers - Global" Margin="5,5,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -381,7 +378,7 @@
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.CastleLimit, Mode=TwoWay}" Step="1" ToolTip="The number of castle hearts a single player is allowed to construct" MaxValue="5" MinValue="1"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
-                                    <GroupBox Header="Heart Limits" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
+                                    <GroupBox Header="Heart Limits" Margin="5,0,0,0">
                                         <TabControl Margin="5,0,5,0">
                                             <TabItem Header="Level 1">
                                                 <Grid>
@@ -490,10 +487,10 @@
                         </GroupBox>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
+                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" Padding="5,5,5,5">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Game Time Modifiers" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                            <GroupBox Header="Game Time Modifiers" Margin="5,5,0,5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -521,10 +518,10 @@
                                     </StackPanel>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Player Interaction Settings" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,5,0,5">
+                            <GroupBox Header="Player Interaction Settings" Margin="5,5,0,5">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <GroupBox Header="VS Player Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Player Weekday Time" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -544,7 +541,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Player Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Player Weekend Time" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -564,7 +561,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekday Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Castle Weekday Time" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -584,7 +581,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekend Time" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Castle Weekend Time" Margin="5,0,0,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -604,8 +601,8 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <TextBlock Text="Time Zone" Margin="5,0,5,0"/>
-                                        <ComboBox x:Name="TimeZoneCombo" SelectedIndex="{Binding PlayerInteractionSettings.TimeZone, Mode=TwoWay}" Height="21.96" VerticalAlignment="Top" Width="75" ToolTip="Time Zone used for various other settings">
+                                        <TextBlock Text="Time Zone" Margin="30,5,5,0"/>
+                                        <ComboBox x:Name="TimeZoneCombo" SelectedIndex="{Binding PlayerInteractionSettings.TimeZone, Mode=TwoWay}" VerticalAlignment="Top" Width="75" ToolTip="Time Zone used for various other settings">
                                             <ComboBoxItem Content="Local" ToolTip="Local System Time"/>
                                             <ComboBoxItem Content="UTC" ToolTip="UTC"/>
                                             <ComboBoxItem Content="PST" ToolTip="PST (Pacific Standard Time, UTC -8)"/>
@@ -619,7 +616,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Padding="5,5,5,5">
+                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" Padding="5,5,5,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -629,7 +626,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Margin="2,5,2,5">
                             <TextBlock Text="Starter Equipment" Margin="5,0,0,0"/>
-                            <ComboBox x:Name="StarterEquipmentCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter equipment">
+                            <ComboBox x:Name="StarterEquipmentCombo" VerticalAlignment="Top" Width="250" Margin="5,0,5,0" ToolTip="Set of starter equipment">
                                 <ComboBoxItem Content=""/>
                                 <ComboBoxItem Content="Gear Level 30 - Copper Equipment"/>
                                 <ComboBoxItem Content="Gear Level 40 - Merciless Copper Equipment"/>
@@ -639,7 +636,7 @@
                                 <ComboBoxItem Content="Gear Level 80 - Sanguine Equipment"/>
                             </ComboBox>
                             <TextBlock Text="Starter Resources" Margin="5,0,0,0"/>
-                            <ComboBox x:Name="StarterResourcesCombo" Height="21.96" VerticalAlignment="Top" Width="200" Margin="5,0,5,0" ToolTip="Set of starter resources">
+                            <ComboBox x:Name="StarterResourcesCombo" VerticalAlignment="Top" Width="250" Margin="5,0,5,0" ToolTip="Set of starter resources">
                                 <ComboBoxItem Content=""/>
                                 <ComboBoxItem Content="Gear Level 30 Supplies"/>
                                 <ComboBoxItem Content="Gear Level 40 Supplies"/>

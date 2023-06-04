@@ -1,0 +1,25 @@
+﻿<Window x:Class="VRisingServerManager.CreateServer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="False"
+        mc:Ignorable="d"
+        Title="Create New Server" Height="140" Width="800" Icon="Resources\Add.png" ResizeMode="CanMinimize">
+    <Grid>
+        <StackPanel>
+            <DockPanel>
+                <TextBlock Text="Server Name:" Margin="5" Width="80"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5" Width="250" MaxLength="30" HorizontalAlignment="Left"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Server Path:" Margin="5" Width="80"/>
+                <TextBox x:Name="ServerPathText" Text="{Binding Path, Mode=TwoWay}" Margin="5" IsEnabled="False" Width="625"/>
+                <Button x:Name="ServerPathButton" DockPanel.Dock="Right" Content="Choose" Margin="5" Click="ServerPathButton_Click"/>
+            </DockPanel>
+            <Button Content="Create" HorizontalAlignment="Center" Width="80" Click="CreateButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

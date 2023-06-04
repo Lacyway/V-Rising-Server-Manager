@@ -15,6 +15,7 @@
 	<FileVersion>2.0.1.0</FileVersion>
 	<AssemblyVersion>2.0.1.0</AssemblyVersion>
 	<ApplicationIcon>logo.ico</ApplicationIcon>
+	<ErrorReport>none</ErrorReport>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -30,15 +31,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+    <Page Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Remove="app.manifest" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="RconConsole.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="App.config" />
+    <None Remove="logo.ico" />
+    <None Remove="Resources\Add.png" />
     <None Remove="Resources\DuoPvP_DailySiege.json" />
     <None Remove="Resources\DuoPvP_NoSiege.json" />
     <None Remove="Resources\DuoPvP_WeekendSiege.json" />
     <None Remove="Resources\Duo_PvP.json" />
+    <None Remove="Resources\FolderOpened.png" />
     <None Remove="Resources\HardcoreDuoPvP.json" />
     <None Remove="Resources\HardcorePvP.json" />
     <None Remove="Resources\Level30PvE.json" />
@@ -54,6 +69,10 @@
     <None Remove="Resources\Level80PvE.json" />
     <None Remove="Resources\Level80PvP.json" />
     <None Remove="Resources\logo.ico" />
+    <None Remove="Resources\Play.png" />
+    <None Remove="Resources\Remove.png" />
+    <None Remove="Resources\RunUpdate.png" />
+    <None Remove="Resources\Settings.png" />
     <None Remove="Resources\SoloPvP.json" />
     <None Remove="Resources\StandardPvE.json" />
     <None Remove="Resources\StandardPvE_Easy.json" />
@@ -66,11 +85,25 @@
     <None Remove="Resources\StandardPvP_NoSiege.json" />
     <None Remove="Resources\StandardPvP_Shuffle.json" />
     <None Remove="Resources\StandardPvP_WeekendSiege.json" />
+    <None Remove="Resources\Stop.png" />
+    <None Remove="Resources\User.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="RconConsole.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="App.config" />
-    <Content Include="logo.ico" />
+    <Resource Include="logo.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -107,15 +140,42 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\logo.ico" />
+    <None Include="RconConsole.xaml" />
+    <None Include="RconConsole.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\FolderOpened.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\logo.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Remove.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\RunUpdate.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\User.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -130,11 +190,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="RMDIR &quot;$(TargetDir)af-ZA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)am-ET/&quot; /S /Q &#xD;&#xA;RMDIR &quot;$(TargetDir)ar-SA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)az-Latn-AZ/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)be-BY/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)bg-BG/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)bn-BD/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)bs-Latn-BA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ca-ES/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)cs-CZ/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)da-DK/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)de-DE/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)el-GR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)en-GB/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)es-ES/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)es-MX/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)et-EE/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)eu-ES/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)fa-IR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)fi-FI/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)fr-CA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)fr-FR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)gl-ES/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)he-IL/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)hi-IN/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)hr-HR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)hu-HU/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)id-ID/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)is-IS/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)it-IT/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ja-JP/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ka-GE/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)kk-KZ/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)km-KH/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)kn-IN/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ko-KR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)lo-LA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)lt-LT/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)lv-LV/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)mk-MK/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ml-IN/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ms-MY/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)nb-NO/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)nl-NL/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)nn-NO/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)pl-PL/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)pt-BR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)pt-PT/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ro-RO/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ru-RU/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sk-SK/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sl-SI/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sq-AL/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sr-Latn-RS/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sv-SE/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)sw-KE/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)ta-IN/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)te-IN/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)th-TH/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)tr-TR/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)uk-UA/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)uz-Latn-UZ/&quot; /S /Q&#xD;&#xA;RMDIR &quot;$(TargetDir)vi-VN/&quot; /S /Q" />
+  </Target>
 
 </Project>

@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Windows.Forms;
 
-public class dWebHook : HttpClient
+public class dWebhook : HttpClient
 {
     private readonly HttpClient dWebClient;
     private static List<KeyValuePair<string, string>> discordValues = new List<KeyValuePair<string, string>>();
@@ -10,7 +10,7 @@ public class dWebHook : HttpClient
     public string? UserName { get; set; } = "V Rising Server Manager";
     public string? ProfilePicture { get; set; } = "https://i.imgur.com/EP0jIoZ.png";
 
-    public dWebHook()
+    public dWebhook()
     {
         dWebClient = new HttpClient();
     }
@@ -30,7 +30,7 @@ public class dWebHook : HttpClient
         }
         catch (System.InvalidOperationException)
         {
-            MessageBox.Show("Error sending to webhook.\nMake sure that the URL is correct.", "Webhook Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //Do nothing
         }
     }
 }

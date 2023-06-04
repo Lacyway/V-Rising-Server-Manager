@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace VRisingServerManager
 {
@@ -20,7 +17,9 @@ namespace VRisingServerManager
         public int TombLimit { get; set; } = 12;
         public int VerminNestLimit { get; set; } = 4;
         public int PrisonCellLimit { get; set; } = 16;
+        [JsonIgnore]
         public PylonPenalties PylonPenalties { get; set; } = new PylonPenalties();
+        [JsonIgnore]
         public FloorPenalties FloorPenalties { get; set; } = new FloorPenalties();
         public HeartLimits HeartLimits { get; set; } = new HeartLimits();
         public int CastleLimit { get; set; } = 2;
@@ -28,13 +27,7 @@ namespace VRisingServerManager
 
     public class VBloodUnitSetting
     {
-        public int UnitId { get; set; } = 1;
-        public int? UnitLevel { get; set; }
-        public bool DefaultUnlocked { get; set; } = false;
-    }
-
-    public class FakeVBloodUnitSetting
-    {
+        [JsonIgnore]
         public string? Name { get; set; }
         public int UnitId { get; set; } = 1;
         public int? UnitLevel { get; set; }
@@ -358,17 +351,21 @@ namespace VRisingServerManager
         public Rcon Rcon { get; set; } = new Rcon();
     }
 
-    public class FakeAchievement
+    public class Achievement
     {
+        [JsonIgnore]
         public string? Name { get; set; }
         public int ID { get; set; }
+        [JsonIgnore]
         public bool Unlocked { get; set; }
     }
 
-    public class FakeResearch
+    public class Research
     {
+        [JsonIgnore]
         public string? Name { get; set; }
         public int ID { get; set; }
+        [JsonIgnore]
         public bool Unlocked { get; set; }
     }
 }
