@@ -10,16 +10,13 @@ Read the [Wiki](https://github.com/Lacyway/V-Rising-Server-Manager/wiki/Initial-
 
 Download the latest [release](https://github.com/Lacyway/V-Rising-Server-Manager/releases).
 
-Extract the files to any folder. Run the program and go to 'Settings' and set up each entry.
-If you have already installed a VRising Server you can point it to that folder. If not, when you are done click 'Update Game Server' and wait for SteamCMD to finish downloading the game.
-
-Press 'Start Game Server' to start the game server.
+Extract the files to any folder. Run the program.
 
 ### Settings Editor
 You can change the settings file using the 'Editors' on the right. Either load one or create a new one by filling the fields and then saving it to the save folder.
-Example: `VRising\Saves\Saves\v1\world1\ServerGameSettings.json` or `VRising\Saves\Saves\v1\world1\ServerHostSettings.json`
+Example: `SaveData\Settings\ServerGameSettings.json` or `SaveData\Settings\ServerHostSettings.json`
 
-### RCON
+### RCON (temporarily disabled)
 The application has a very primitive RCON console built in. If you have RCON enabled in your ServerHostSettings you can connect to it and run the commands on the right. Currently only 2 commands are implemented in the game.
 
 Select a command and write the parameter in the text field at the bottom and click 'Send' to send the command to the server. No need to write the command.
@@ -31,6 +28,7 @@ If you wish to compile it use the [.NET 6.0 SDK, Visual Studio 22](https://dotne
 
 Libraries used
 - source-rcon-server
+- ModernWPF
 
 ## Pictures
 
