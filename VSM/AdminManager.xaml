@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="False"
-        Title="Admin Manager" Height="320" Width="320" WindowStyle="ThreeDBorderWindow" Icon="Resources\User.png" ResizeMode="NoResize">
+        Title="Admin Manager" Height="320" Width="320" Icon="Resources\User.png" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

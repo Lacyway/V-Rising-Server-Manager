@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
-        Title="V Rising Server Manager" Height="650" Width="800">
+        Title="V Rising Server Manager" Height="650" Width="800" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,7 +19,52 @@
         <TabControl x:Name="ServerTabControl" Grid.Row="0" ItemsSource="{Binding Servers}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+
+                        <Image Grid.Column="1" Stretch="None" Margin="2,0,0,0">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                            <Setter Property="Source" Value="Resources\StatusRunning.png"/>
+                                            <Setter Property="ToolTip" Value="Running"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
+                                            <Setter Property="Source" Value="Resources\StatusStopped.png"/>
+                                            <Setter Property="ToolTip" Value="Stopped"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                            <Setter Property="Source" Value="Resources\DownloadNoColor.png"/>
+                                            <Setter Property="ToolTip" Value="Updating"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+
+                        <Button Grid.Column="1" Click="RemoveServerButton_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Path Data="M0,0 L8,8 M8,0 L0,8" StrokeThickness="3" VerticalAlignment="Center" Margin="5,4,0,2" ToolTip="Remove server">
+                                        <Path.Style>
+                                            <Style TargetType="{x:Type Path}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="False">
+                                                        <Setter Property="Stroke" Value="Red" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Stroke" Value="DarkRed" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                    </DockPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
@@ -58,7 +103,7 @@
                                 </Grid>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="Server Management" Grid.Column="1">
+                        <GroupBox Header="Server Management" Grid.Column="1" Margin="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -69,18 +114,59 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <ui:ToggleSwitch Header="Auto Restart" Grid.Row="0" Margin="5" Width="100" Grid.Column="0" HorizontalAlignment="Center" IsOn="{Binding AutoRestart, Mode=TwoWay}"/>
-                                <ui:ToggleSwitch Header="Status" OnContent="Running" OffContent="Off" Grid.Row="0" Margin="5" Width="110" Grid.Column="1" HorizontalAlignment="Center" IsOn="{Binding Runtime.IsRunning}" IsHitTestVisible="False"/>
+                                <DockPanel Grid.Column="1">
+                                    <ui:ToggleSwitch Header="Status" Grid.Row="0" Margin="5" Width="110" Grid.Column="1" HorizontalAlignment="Center" IsHitTestVisible="False">
+                                        <ui:ToggleSwitch.Style>
+                                            <Style TargetType="{x:Type ui:ToggleSwitch}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                                        <Setter Property="IsOn" Value="True"/>
+                                                        <Setter Property="OffContent" Value="Off"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
+                                                        <Setter Property="IsOn" Value="False"/>
+                                                        <Setter Property="OffContent" Value="Off"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                                        <Setter Property="IsOn" Value="False"/>
+                                                        <Setter Property="OffContent" Value="Updating"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ui:ToggleSwitch.Style>
+                                    </ui:ToggleSwitch>
+                                    <ui:ProgressRing>
+                                        <ui:ProgressRing.Style>
+                                            <Style TargetType="{x:Type ui:ProgressRing}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                                        <Setter Property="IsActive" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
+                                                        <Setter Property="IsActive" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                                        <Setter Property="IsActive" Value="True"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ui:ProgressRing.Style>
+                                    </ui:ProgressRing>
+                                </DockPanel>
                                 <StackPanel Grid.Column="0" Grid.Row="1">
 
                                     <Button Margin="2" Click="StartServerButton_Click" ToolTip="Starts the game server.">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="True"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
-                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                                        <Setter Property="IsEnabled" Value="True"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -95,17 +181,20 @@
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="True"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
-                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                                        <Setter Property="IsEnabled" Value="True"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Button.Style>
                                         <DockPanel>
-                                            <Image Source="Resources\RunUpdate.png" Margin="5,0,0,0"/>
+                                            <Image Source="Resources\Refresh.png" Margin="5,0,0,0"/>
                                             <TextBlock Text="Update Server" Margin="5,0,5,0"/>
                                         </DockPanel>
                                     </Button>
@@ -120,11 +209,14 @@
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="False">
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="False"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Runtime.IsRunning}" Value="True">
-                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
+                                                        <Setter Property="IsEnabled" Value="False"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -163,24 +255,28 @@
         <Separator Grid.Row="1"/>
         <GroupBox Header="Editors and Settings" Margin="5,0,5,0" Grid.Row="2">
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button Content="Game Settings Editor" Margin="5,0,5,0" Click="GameSettingsEditor_Click" ToolTip="Opens the Game Settings Editor."/>
-                <Button Content="Server Settings Editor" Margin="5,0,5,0" Click="ServerSettingsEditorButton_Click" ToolTip="Opens the Server Settings Editor."/>
+                <Button Margin="5,0,5,0" Padding="5" Click="GameSettingsEditor_Click" ToolTip="Opens the Game Settings Editor.">
+                    <DockPanel>
+                        <Image Source="Resources\EditDocument.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="Game Settings Editor"/>
+                    </DockPanel>
+                </Button>
+                <Button Margin="5,0,5,0" Padding="5" Click="ServerSettingsEditorButton_Click" ToolTip="Opens the Server Settings Editor.">
+                    <DockPanel>
+                        <Image Source="Resources\EditDocument.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="Server Settings Editor"/>
+                    </DockPanel>
+                </Button>
                 <Button Margin="5,0,5,0" Click="ManagerSettingsButton_Click" Padding="5" ToolTip="Opens the VSM settings.">
                     <DockPanel>
                         <Image Source="Resources\Settings.png" Margin="0,0,5,0"/>
                         <TextBlock Text="VSM Settings"/>
                     </DockPanel>
                 </Button>
-                    <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5" ToolTip="Add a new game server.">
+                <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5" ToolTip="Add a new game server.">
                     <DockPanel>
                         <Image Source="Resources\Add.png" Margin="0,0,5,0"/>
                         <TextBlock Text="Add Server"/>
-                    </DockPanel>
-                </Button>
-                <Button Margin="5,0,5,0" Click="RemoveServerButton_Click" Padding="5" ToolTip="Remove selected game server. &#x0a;WARNING: This also deletes the directory.">
-                    <DockPanel>
-                        <Image Source="Resources\Remove.png" Margin="0,0,5,0"/>
-                        <TextBlock Text="Remove Server"/>
                     </DockPanel>
                 </Button>
             </StackPanel>
@@ -191,13 +287,37 @@
         <DockPanel Grid.Row="4">
             <StatusBar>
                 <StatusBarItem HorizontalAlignment="Left">
-                    <TextBlock x:Name="SteamCMDStatusText" Text="No tasks running." Padding="5,1,5,1"/>
+                    <Button ToolTip="Click to search for a new update." Click="VersionButton_Click">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                        <Button.Content>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="Blue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>                                
+                                <Run Text="Version:"/>
+                                <Run Text="{Binding AppSettings.Version}"/>                                
+                            </TextBlock>
+                        </Button.Content>
+
+                    </Button>
                 </StatusBarItem>
                 <StatusBarItem HorizontalAlignment="Right">
                     <TextBlock Text="{Binding AppSettings.LastUpdateTime}" HorizontalAlignment="Right" Padding="5,1,5,1"/>
                 </StatusBarItem>
-            </StatusBar>            
+            </StatusBar>
         </DockPanel>
     </Grid>
-    
+
 </Window>

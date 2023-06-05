@@ -6,11 +6,14 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5BCAF31-9253-4C8F-97E4-A22F58EB4503}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		VERSION = VERSION
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRisingServerManager", "VSM\VRisingServerManager.csproj", "{7C6E8055-DDF7-4378-B914-B16220BDB90A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{7BC5C92F-E788-4B06-ABAF-097023EF8173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSMUpdater", "VSMUpdater\VSMUpdater.csproj", "{2F749ABE-2914-4859-8094-790E5C7BD3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +25,10 @@ Global
 		{7C6E8055-DDF7-4378-B914-B16220BDB90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C6E8055-DDF7-4378-B914-B16220BDB90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C6E8055-DDF7-4378-B914-B16220BDB90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F749ABE-2914-4859-8094-790E5C7BD3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F749ABE-2914-4859-8094-790E5C7BD3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F749ABE-2914-4859-8094-790E5C7BD3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F749ABE-2914-4859-8094-790E5C7BD3A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

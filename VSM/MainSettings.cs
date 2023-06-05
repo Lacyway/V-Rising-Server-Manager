@@ -20,10 +20,10 @@ namespace VRisingServerManager
         /// Saves the specified <see cref="MainSettings"/> object.
         /// </summary>
         /// <param name="settings">The <see cref="MainSettings"/> object to save.</param>
-        public void Save(MainSettings settings)
+        public static void Save(MainSettings settings)
         {
             string dir = Directory.GetCurrentDirectory() + @"\VSMSettings.json";
-            JsonSerializerOptions jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+            JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
             string SettingsJSON = JsonSerializer.Serialize(settings, jsonOptions);
             File.WriteAllText(dir, SettingsJSON);
         }
@@ -32,7 +32,7 @@ namespace VRisingServerManager
         /// Loads a <see cref="MainSettings"/> object from rootdirectory and returns it.
         /// </summary>
         /// <returns>The loaded <see cref="MainSettings"/> object.</returns>
-        public MainSettings Load()
+        public static MainSettings Load()
         {
             string dir = Directory.GetCurrentDirectory() + @"\VSMSettings.json";
             if (File.Exists(dir))
@@ -85,14 +85,20 @@ namespace VRisingServerManager
     public class ServerRuntime : PropertyChangedBase
     {
         public Process? Process { get; set; }
-        private bool _isRunning = false;
-        public bool IsRunning
+        public bool UserStopped { get; set; } = false;
+        public int RestartAttempts { get; set; } = 0;
+        public enum ServerState
         {
-            get => _isRunning;
-            set => SetField(ref _isRunning, value);
+            Stopped,
+            Running,
+            Updating
         }
-        public bool userStopped { get; set; } = false;
-        public int restartAttempts { get; set; } = 0;
+        private ServerState _state = ServerState.Stopped;
+        public ServerState State
+        {
+            get => _state;
+            set => SetField(ref _state, value);
+        }
     }
 
     /// <summary>
@@ -133,6 +139,12 @@ namespace VRisingServerManager
             get => _autoUpdate;
             set => SetField(ref _autoUpdate, value);
         }
+        private bool _autoUpdateApp = false;
+        public bool AutoUpdateApp
+        {
+            get => _autoUpdateApp;
+            set => SetField(ref _autoUpdateApp, value);
+        }
         private int _autoUpdateInterval = 60;
         private bool _showSteamWindow = false;
         public bool ShowSteamWindow
@@ -157,10 +169,16 @@ namespace VRisingServerManager
             get => _lastUpdateTime;
             set => SetField(ref _lastUpdateTime, value);
         }
+        private string _version = "3.1b";
+        public string Version
+        {
+            get => _version;
+            set => SetField(ref _version, value);
+        }
     }
 
     /// <summary>
-    /// Property of <see cref="MainSettings"/> used to for webhook settings.
+    /// Property of <see cref="MainSettings"/> used for webhook settings.
     /// </summary>
     public class Webhook
     {

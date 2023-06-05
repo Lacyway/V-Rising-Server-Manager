@@ -17,7 +17,7 @@ namespace VRisingServerManager
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            localMainSettings.Save(localMainSettings);
+            MainSettings.Save(localMainSettings);
             Close();
         }
     }

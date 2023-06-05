@@ -57,7 +57,7 @@ namespace VRisingServerManager
             }
 
             settings.Servers.Add(newServer);
-            settings.Save(settings);
+            MainSettings.Save(settings);
             Close();
         }
     }

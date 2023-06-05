@@ -71,6 +71,16 @@ namespace VRisingServerManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadNoColor {
+            get {
+                object obj = ResourceManager.GetObject("DownloadNoColor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Duo_PvP {
@@ -107,6 +117,16 @@ namespace VRisingServerManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("DuoPvP_WeekendSiege", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditDocument {
+            get {
+                object obj = ResourceManager.GetObject("EditDocument", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -283,6 +303,16 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Refresh {
+            get {
+                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Remove {
             get {
                 object obj = ResourceManager.GetObject("Remove", resourceCulture);
@@ -427,6 +457,26 @@ namespace VRisingServerManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("StandardPvP_WeekendSiege", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StatusRunning {
+            get {
+                object obj = ResourceManager.GetObject("StatusRunning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StatusStopped {
+            get {
+                object obj = ResourceManager.GetObject("StatusStopped", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

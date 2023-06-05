@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="650" Width="380" ResizeMode="CanMinimize" Icon="/Resources/logo.ico">
+        Title="Server Settings Editor" Height="650" Width="380" ResizeMode="CanMinimize" Icon="Resources\EditDocument.png">
     <Grid>
         <StackPanel Margin="5,0,5,0">
             

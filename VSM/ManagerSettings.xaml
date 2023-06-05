@@ -7,11 +7,12 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
-        Title="Manager Settings" Height="375" Width="800" Icon="Resources\Settings.png" ResizeMode="NoResize">
+        Title="Manager Settings" Height="400" Width="800" Icon="Resources\Settings.png" ResizeMode="NoResize">
     <Grid>
         <StackPanel Margin="5,0,0,0">
             <GroupBox Header="Main Settings">
                 <StackPanel>
+                    <CheckBox Content="Search For App Updates" IsChecked="{Binding AppSettings.AutoUpdateApp, Mode=TwoWay}" ToolTip="If VSM should look for new versions when started."/>
                     <CheckBox Content="Verify Updates" IsChecked="{Binding AppSettings.VerifyUpdates, Mode=TwoWay}" ToolTip="If SteamCMD should verify updates after updating a game server. Recommended to be enabled."/>
                     <CheckBox Content="Automatically Update Servers" IsChecked="{Binding AppSettings.AutoUpdate, Mode=TwoWay}" ToolTip="If VSM should look for updates for game servers automatically."/>
                     <DockPanel Width="140" HorizontalAlignment="Left">

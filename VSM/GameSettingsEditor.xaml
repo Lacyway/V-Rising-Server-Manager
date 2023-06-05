@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="False"
         mc:Ignorable="d"
-        Title="Game Settings Editor" Height="800" Width="1400" MaxWidth="1500" Icon="/Resources/logo.ico">
+        Title="Game Settings Editor" Height="800" Width="1500" MaxWidth="1500" Icon="Resources\EditDocument.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -54,7 +56,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1" Background="Gray">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -64,7 +66,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" Padding="5,5,5,5">
+                <Expander Header="General Settings" Margin="10,5,10,5" Grid.Row="1" Padding="5,5,5,5" Background="LightGray">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -73,73 +75,73 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock Text="Game Mode" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding GameModeType, Mode=TwoWay}" Margin="5,5,5,5">
+                        <StackPanel Margin="10,0,10,0">
+                            <TextBlock Text="Game Mode"/>
+                            <ComboBox SelectedIndex="{Binding GameModeType, Mode=TwoWay}">
                                 <ComboBoxItem Content="PvE" ToolTip="Defines basics for PvE Gamemode"/>
                                 <ComboBoxItem Content="PvP" ToolTip="Defines basics for PvP Gamemode"/>
                             </ComboBox>
-                            <TextBlock Text="Castle Damage Mode" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding CastleDamageMode, Mode=TwoWay}" Margin="5,5,5,5">
+                            <TextBlock Text="Castle Damage Mode"/>
+                            <ComboBox SelectedIndex="{Binding CastleDamageMode, Mode=TwoWay}">
                                 <ComboBoxItem Content="Never" ToolTip="Players may never deal damage to enemy castle structures"/>
                                 <ComboBoxItem Content="Always" ToolTip="Players may always deal damage to enemy castle structures"/>
                                 <ComboBoxItem Content="Time Restricted" ToolTip="Players may only damage enemy castle structures during certain real-time frames"/>
                             </ComboBox>
-                            <TextBlock Text="Siege Weapon Health" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding SiegeWeaponHealth, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Setting for Siege Golem Health">
+                            <TextBlock Text="Siege Weapon Health"/>
+                            <ComboBox SelectedIndex="{Binding SiegeWeaponHealth, Mode=TwoWay}" ToolTip="Setting for Siege Golem Health">
                                 <ComboBoxItem Content="500 Health"/>
                                 <ComboBoxItem Content="1000 Health"/>
                                 <ComboBoxItem Content="1500 Health"/>
                                 <ComboBoxItem Content="2000 Health"/>
                                 <ComboBoxItem Content="2500 Health"/>
                             </ComboBox>
-                            <TextBlock Text="Player Damage Mode" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding PlayerDamageMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Setting for when players can damage other players (Disabled in PvE)">
+                            <TextBlock Text="Player Damage Mode"/>
+                            <ComboBox SelectedIndex="{Binding PlayerDamageMode, Mode=TwoWay}" ToolTip="Setting for when players can damage other players (Disabled in PvE)">
                                 <ComboBoxItem Content="Always" ToolTip="Players can always deal damage to other players"/>
                                 <ComboBoxItem Content="Time Restricted" ToolTip="Players may only damage other players during certain real-time frames"/>
                             </ComboBox>
-                            <TextBlock Text="Castle Heart Damage Mode" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding CastleHeartDamageMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines interactions with enemy Castle Hearts">
+                            <TextBlock Text="Castle Heart Damage Mode"/>
+                            <ComboBox SelectedIndex="{Binding CastleHeartDamageMode, Mode=TwoWay}" ToolTip="Defines interactions with enemy Castle Hearts">
                                 <ComboBoxItem Content="Can be destroyed when decaying" ToolTip="Players may only destroy enemy castle hearts when the Castle Heart is in Decay"/>
                                 <ComboBoxItem Content="Can be destroyed by players" ToolTip="Players may destroy enemy castle hearts using &quot;key&quot; items in the game"/>
                                 <ComboBoxItem Content="Can be seized or destroyed by players" ToolTip="Players may destroy and seize control of enemy castle hearts using &quot;key&quot; items in the game"/>
                             </ComboBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="PvP Protection Mode" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding PvPProtectionMode, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="The duration where players cannot be damage by other players when joining a PvP server in seconds">
+                        <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                            <TextBlock Text="PvP Protection Mode"/>
+                            <ComboBox SelectedIndex="{Binding PvPProtectionMode, Mode=TwoWay}" ToolTip="The duration where players cannot be damage by other players when joining a PvP server in seconds">
                                 <ComboBoxItem Content="Disabled"/>
                                 <ComboBoxItem Content="Very Short (15 min)"/>
                                 <ComboBoxItem Content="Short (30 min)"/>
                                 <ComboBoxItem Content="Medium (1 hour)"/>
                                 <ComboBoxItem Content="Long (2 hours)"/>
                             </ComboBox>
-                            <TextBlock Text="Death Container Permission" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding DeathContainerPermission, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines who may loot the body when a player dies">
+                            <TextBlock Text="Death Container Permission"/>
+                            <ComboBox SelectedIndex="{Binding DeathContainerPermission, Mode=TwoWay}" ToolTip="Defines who may loot the body when a player dies">
                                 <ComboBoxItem Content="Anyone" ToolTip="Everyone can loot the body"/>
                                 <ComboBoxItem Content="Clan Members" ToolTip="Only self and Clan members may loot the body"/>
                                 <ComboBoxItem Content="Only Self" ToolTip="Only self may loot the body"/>
                             </ComboBox>
-                            <TextBlock Text="Relic Spawn Type" Margin="5,5,5,5"/>
-                            <ComboBox SelectedIndex="{Binding RelicSpawnType, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Defines if the End Game Soul Shard items should be unique or plentiful">
+                            <TextBlock Text="Relic Spawn Type"/>
+                            <ComboBox SelectedIndex="{Binding RelicSpawnType, Mode=TwoWay}" ToolTip="Defines if the End Game Soul Shard items should be unique or plentiful">
                                 <ComboBoxItem Content="Unique" ToolTip="Soul shards are unique - only one of each type may exist at a time on the server"/>
                                 <ComboBoxItem Content="Plentiful" ToolTip="Soul shards are plentiful - a new one is dropped everytime a soul shard boss is slain"/>
                             </ComboBox>
-                            <CheckBox Content="Announce Siege Weapon Spawn" IsChecked="{Binding AnnounceSiegeWeaponSpawn, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Shows a system message in the chat when a Siege Golem is being summoned"/>
-                            <CheckBox Content="Show Siege Weapon Map Icon" IsChecked="{Binding ShowSiegeWeaponMapIcon, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Show Siege Golems on the big map"/>
+                            <CheckBox Content="Announce Siege Weapon Spawn" IsChecked="{Binding AnnounceSiegeWeaponSpawn, Mode=TwoWay}" ToolTip="Shows a system message in the chat when a Siege Golem is being summoned"/>
+                            <CheckBox Content="Show Siege Weapon Map Icon" IsChecked="{Binding ShowSiegeWeaponMapIcon, Mode=TwoWay}" ToolTip="Show Siege Golems on the big map"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="2">
-                            <CheckBox Content="Can Loot Enemy Containers" IsChecked="{Binding CanLootEnemyContainers, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="If players may loot enemy stashes, containers, and crafting stations"/>
-                            <CheckBox Content="Blood Bound Equipment" IsChecked="{Binding BloodBoundEquipment, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="When enabled, most equipment will not be dropped upon death"/>
-                            <CheckBox Content="Teleport Bound Items" IsChecked="{Binding TeleportBoundItems, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="When enabled, some items will prevent you from using waygates"/>
-                            <CheckBox Content="Allow Global Chat" IsChecked="{Binding AllowGlobalChat, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Allow players to write messages that all players on the server can read"/>
-                            <CheckBox Content="All Waypoints Unlocked" IsChecked="{Binding AllWaypointsUnlocked, Mode=TwoWay}" IsEnabled="False" Margin="5,5,5,5" ToolTip="Currently not used"/>
-                            <CheckBox Content="Free Castle Raid" IsChecked="{Binding FreeCastleRaid, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Raiding an enemy players castle heart requires no materials"/>
-                            <CheckBox Content="Free Castle Claim" IsChecked="{Binding FreeCastleClaim, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Seizing an enemy player castle heart requires no materials"/>
-                            <CheckBox Content="Free Castle Destroy" IsChecked="{Binding FreeCastleDestroy, Mode=TwoWay}" Margin="5,5,5,5" ToolTip="Destroying an enemy player castle heart requires no materials"/>
+                        <StackPanel Grid.Column="2" Margin="10,0,10,0">
+                            <CheckBox Content="Can Loot Enemy Containers" IsChecked="{Binding CanLootEnemyContainers, Mode=TwoWay}" ToolTip="If players may loot enemy stashes, containers, and crafting stations"/>
+                            <CheckBox Content="Blood Bound Equipment" IsChecked="{Binding BloodBoundEquipment, Mode=TwoWay}" ToolTip="When enabled, most equipment will not be dropped upon death"/>
+                            <CheckBox Content="Teleport Bound Items" IsChecked="{Binding TeleportBoundItems, Mode=TwoWay}" ToolTip="When enabled, some items will prevent you from using waygates"/>
+                            <CheckBox Content="Allow Global Chat" IsChecked="{Binding AllowGlobalChat, Mode=TwoWay}" ToolTip="Allow players to write messages that all players on the server can read"/>
+                            <CheckBox Content="All Waypoints Unlocked" IsChecked="{Binding AllWaypointsUnlocked, Mode=TwoWay}" IsEnabled="False" ToolTip="Currently not used"/>
+                            <CheckBox Content="Free Castle Raid" IsChecked="{Binding FreeCastleRaid, Mode=TwoWay}" ToolTip="Raiding an enemy players castle heart requires no materials"/>
+                            <CheckBox Content="Free Castle Claim" IsChecked="{Binding FreeCastleClaim, Mode=TwoWay}" ToolTip="Seizing an enemy player castle heart requires no materials"/>
+                            <CheckBox Content="Free Castle Destroy" IsChecked="{Binding FreeCastleDestroy, Mode=TwoWay}" ToolTip="Destroying an enemy player castle heart requires no materials"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="3">
-                            <GroupBox Header="Inactivity Kill" Margin="5,5,5,5">
+                        <StackPanel Grid.Column="3" Margin="10,0,10,0">
+                            <GroupBox Header="Inactivity Kill" Margin="10,0,10,0">
                                 <StackPanel>
                                     <CheckBox Content="Enabled" IsChecked="{Binding InactivityKillEnabled, Mode=TwoWay}" ToolTip="Inactive players are automatically killed after a set duration"/>
                                     <TextBlock Text="Minimum Time"/>
@@ -152,7 +154,7 @@
                                     <local:NumericSpinner Value="{Binding InactivityKillTimerMaxItemLevel, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: The maximum gear level that the inactivity min and max timers are based on from 1 - this value"/>
                                 </StackPanel>
                             </GroupBox>
-                            <GroupBox Header="Disable Disconnected Dead" Margin="5,5,5,5">
+                            <GroupBox Header="Disable Disconnected Dead" Margin="10,0,10,0">
                                 <StackPanel>
                                     <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
                                     <TextBlock Text="Timer"/>
@@ -162,8 +164,8 @@
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="4">
-                            <GroupBox Header="Trader Settings" Margin="5,5,5,5">
+                        <StackPanel Grid.Column="4" Margin="10,0,10,0">
+                            <GroupBox Header="Trader Settings" Margin="10,0,10,0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -179,12 +181,12 @@
                                         <local:DecimalSpinner Value="{Binding TraderModifiers.PriceModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the trader item costs by this value." MaxValue="10" MinValue="0.25"/>
                                         <local:DecimalSpinner Value="{Binding TraderModifiers.RestockTimerModifier, Mode=TwoWay}" Step="0.25" ToolTip="Multiplies the trader restock timer with this value." MaxValue="10" MinValue="0.25"/>
                                     </StackPanel>
-                                </Grid>                                
+                                </Grid>
                             </GroupBox>
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" Padding="5,5,5,5">
+                <Expander Header="Global Settings" Grid.Row="2" Margin="10,5,10,5" Padding="5,5,5,5" Background="LightGray">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -276,9 +278,9 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" Padding="5,5,5,5">
+                <Expander Header="Stat Modifiers" Margin="10,5,10,5" Grid.Row="3" Padding="5,5,5,5" Background="LightGray">
                     <StackPanel Orientation="Horizontal">
-                        <GroupBox Header="Vampire Stat Modifiers" Margin="5,5,0,5">
+                        <GroupBox Header="Vampire Stat Modifiers" Margin="10,0,10,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -306,7 +308,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Equipment Stat Modifiers - Global" Margin="5,5,0,5">
+                        <GroupBox Header="Equipment Stat Modifiers - Global" Margin="10,0,10,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -332,7 +334,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Unit Stat Modifiers" Margin="5,5,0,5">
+                        <GroupBox Header="Unit Stat Modifiers" Margin="10,0,10,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -352,7 +354,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Castle Stat Modifiers - Global" Margin="5,5,0,5">
+                        <GroupBox Header="Castle Stat Modifiers - Global" Margin="10,0,10,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -378,7 +380,7 @@
                                     <local:NumericSpinner Value="{Binding CastleStatModifiers_Global.CastleLimit, Mode=TwoWay}" Step="1" ToolTip="The number of castle hearts a single player is allowed to construct" MaxValue="5" MinValue="1"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
-                                    <GroupBox Header="Heart Limits" Margin="5,0,0,0">
+                                    <GroupBox Header="Heart Limits" Margin="10,0,10,0">
                                         <TabControl Margin="5,0,5,0">
                                             <TabItem Header="Level 1">
                                                 <Grid>
@@ -487,10 +489,10 @@
                         </GroupBox>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" Padding="5,5,5,5">
+                <Expander Header="Game Time Modifiers and Player Interaction Settings" Margin="10,5,10,5" Grid.Row="4" Padding="5,5,5,5" Background="LightGray">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Game Time Modifiers" Margin="5,5,0,5">
+                            <GroupBox Header="Game Time Modifiers" Margin="10,0,10,0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -518,10 +520,10 @@
                                     </StackPanel>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Player Interaction Settings" Margin="5,5,0,5">
+                            <GroupBox Header="Player Interaction Settings" Margin="10,0,10,0">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <GroupBox Header="VS Player Weekday Time" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Player Weekday Time" Margin="10,0,10,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -541,7 +543,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Player Weekend Time" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Player Weekend Time" Margin="10,0,10,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -561,7 +563,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekday Time" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Castle Weekday Time" Margin="10,0,10,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -581,7 +583,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="VS Castle Weekend Time" Margin="5,0,0,0">
+                                        <GroupBox Header="VS Castle Weekend Time" Margin="10,0,10,0">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -616,7 +618,7 @@
                         </StackPanel>
                     </Grid>
                 </Expander>
-                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" Padding="5,5,5,5">
+                <Expander Header="Starter Settings" Grid.Row="5" Margin="10,5,10,5" Padding="5,5,5,5" Background="LightGray">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
