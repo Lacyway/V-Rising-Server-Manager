@@ -46,12 +46,28 @@ if (!Directory.Exists(workingDir + @"\Backups"))
 if (File.Exists(workingDir + @"\VSMSettings.json"));
     File.Copy(workingDir + @"\VSMSettings.json", workingDir + @"\Backups\VSMSettings.bak", true);
 
-ZipFile.ExtractToDirectory(workingDir + @"\temp\VSM.zip", workingDir, true);
+Console.WriteLine();
+
+ZipFile.ExtractToDirectory(workingDir + @"\temp\VSM.zip", workingDir + @"\temp", true);
+
+Console.WriteLine("Copying new files...");
+string[] files = Directory.GetFiles(workingDir + @"\temp");
+
+foreach (string file in files)
+{
+    string fileName = Path.GetFileName(file);    
+    if (fileName != "VSMUpdater.exe" && fileName != "VSM.zip")
+    {
+        Console.WriteLine("Copying: " + fileName);
+        File.Copy(file, workingDir + fileName, true);
+    }
+}
 
 if (Directory.Exists(workingDir + @"\temp"))
     Directory.Delete(workingDir + @"\temp", true);
 
-Console.WriteLine(@"Update done. Backup of the VSMSettings can be found in the \Backup folder.");
+Console.WriteLine();
+Console.WriteLine(@"Update done. Backup of the VSMSettings can be found in the \Backups folder.");
 Console.WriteLine("Press any key to finish...");
 Console.ReadKey();
 
