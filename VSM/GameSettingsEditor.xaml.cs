@@ -6,6 +6,9 @@ using System.Windows.Controls;
 using System.IO;
 using Microsoft.Win32;
 using System.Text.Json;
+using System.Collections.ObjectModel;
+using ModernWpf.Controls;
+using VRisingServerManager.Controls;
 
 namespace VRisingServerManager
 {
@@ -16,9 +19,11 @@ namespace VRisingServerManager
         public List<VBloodUnitSetting> fakeVBloodUnits = new List<VBloodUnitSetting>();
         public List<Research> fakeResearch = new List<Research>();
         public JsonSerializerOptions serializerOptions = new JsonSerializerOptions { WriteIndented = true };
+        private ObservableCollection<Server> servers;
 
-        public GameSettingsEditor()
+        public GameSettingsEditor(ObservableCollection<Server> sentServers)
         {
+            servers = sentServers;
             gameSettings = new GameSettings();
             DataContext = gameSettings;
             InitializeComponent();
@@ -112,7 +117,7 @@ namespace VRisingServerManager
             ResearchData.ItemsSource = fakeResearch;
         }
 
-        private void FileMenuSave_Click(object sender, RoutedEventArgs e)
+        private async void FileMenuSave_Click(object sender, RoutedEventArgs e)
         {
             gameSettings.UnlockedAchievements.Clear();
             foreach (var item in fakeAchievements)
@@ -180,7 +185,49 @@ namespace VRisingServerManager
                 case 6:
                     gameSettings.StarterResourcesId = -2131982548;
                     break;
-            }            
+            }
+
+            if (servers.Count > 0)
+            {
+                ContentDialog yesNoDialog = new()
+                {
+                    Content = "Save to a server automatically? A backup of the original will be created if it exists.",
+                    PrimaryButtonText = "Yes",
+                    SecondaryButtonText = "No"
+                };
+
+                if (await yesNoDialog.ShowAsync() is ContentDialogResult.Primary)
+                {
+                    EditorSaveDialog dialog = new(servers)
+                    {
+                        PrimaryButtonText = "Save",
+                        CloseButtonText = "Cancel"
+                    };
+                    Server server;
+
+                    if (await dialog.ShowAsync() is ContentDialogResult.Primary)
+                    {
+                        server = dialog.GetServer();
+                        if (!Directory.Exists(server.Path + @"\SaveData\Settings"))
+                        {
+                            MessageBox.Show("SaveData folder not found in the server path. Please make sure you have started the server once.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        if (File.Exists(server.Path + @"\SaveData\Settings\ServerGameSettings.json"))
+                            File.Copy(server.Path + @"\SaveData\Settings\ServerGameSettings.json", server.Path + @"\SaveData\Settings\ServerGameSettings.bak", true);
+
+                        string SettingsJSON = JsonSerializer.Serialize(gameSettings, serializerOptions);
+                        File.WriteAllText(server.Path + @"\SaveData\Settings\ServerGameSettings.json", SettingsJSON);
+                        MessageBox.Show("File successfully saved to: \n" + server.Path + @"\SaveData\Settings\ServerGameSettings.json");
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
             try
             {
                 string SettingsJSON = JsonSerializer.Serialize(gameSettings, serializerOptions);

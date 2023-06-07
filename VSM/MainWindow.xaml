@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         Title="V Rising Server Manager" Height="650" Width="800" ResizeMode="CanMinimize">
     <Grid>
@@ -75,32 +75,19 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="Launch Settings" Margin="5" Grid.Column="0">
-                            <StackPanel Orientation="Vertical">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Server Name: " Grid.Column="0" Margin="10,0,0,0"/>
-                                    <TextBox Text="{Binding LaunchSettings.DisplayName, Mode=TwoWay}" Grid.Column="1" Width="300" ToolTip="The name of the server displayed in the server list."/>
-                                </Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="World Name: " Grid.Column="0" Margin="10,5,0,0"/>
-                                    <TextBox Text="{Binding LaunchSettings.WorldName, Mode=TwoWay}" Grid.Column="1" Width="300" Margin="0,5,0,0" ToolTip="The name of the directory where the world will be saved. Does not have to be changed unless you know what you are doing."/>
-                                </Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" Margin="10,0,0,0" IsChecked="{Binding LaunchSettings.BindToIP}" ToolTip="If the server should bind to a specific IP address."/>
-                                    <TextBox Text="{Binding LaunchSettings.BindingIP, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}" ToolTip="The IP address to bind the server to."/>
-                                </Grid>
+                            <StackPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Server Name:" VerticalAlignment="Center" Width="90"/>
+                                    <TextBox Text="{Binding LaunchSettings.DisplayName, Mode=TwoWay}" Width="300" ToolTip="The name of the server displayed in the server list."/>
+                                </DockPanel>
+                                <DockPanel Margin="0,5,0,0">
+                                    <TextBlock Text="World Name:" VerticalAlignment="Center" Width="90"/>
+                                    <TextBox Text="{Binding LaunchSettings.WorldName, Mode=TwoWay}" Width="300" ToolTip="The name of the directory where the world will be saved. Does not have to be changed unless you know what you are doing."/>
+                                </DockPanel>
+                                <DockPanel Margin="0,5,0,0">
+                                    <CheckBox x:Name="BindToIPCheck" Content="Bind to IP" IsChecked="{Binding LaunchSettings.BindToIP}" ToolTip="If the server should bind to a specific IP address."/>
+                                    <TextBox HorizontalAlignment="Right" Text="{Binding LaunchSettings.BindingIP, Mode=TwoWay}" Width="250" IsEnabled="{Binding IsChecked, ElementName=BindToIPCheck}" ToolTip="The IP address to bind the server to."/>
+                                </DockPanel>
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="Server Management" Grid.Column="1" Margin="5">
@@ -199,7 +186,14 @@
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Content="RCON Console" Margin="2" IsEnabled="False" ToolTip="Temporarily disabled."/>
+                                    <Button Margin="2" ToolTip="Opens the RCON Console for the selected server." Click="RconServerButton_Click">
+                                        <Button.Content>
+                                            <DockPanel>
+                                                <Image Source="Resources\Console.png" Margin="5,0,0,0"/>
+                                                <TextBlock Text="RCON Console" Margin="5,0,5,0"/>
+                                            </DockPanel>
+                                        </Button.Content>
+                                    </Button>
 
                                 </StackPanel>
 
@@ -270,7 +264,7 @@
                 <Button Margin="5,0,5,0" Click="ManagerSettingsButton_Click" Padding="5" ToolTip="Opens the VSM settings.">
                     <DockPanel>
                         <Image Source="Resources\Settings.png" Margin="0,0,5,0"/>
-                        <TextBlock Text="VSM Settings"/>
+                        <TextBlock Text="Settings"/>
                     </DockPanel>
                 </Button>
                 <Button Margin="5,0,5,0" Click="AddServerButton_Click" Padding="5" ToolTip="Add a new game server.">
@@ -287,25 +281,10 @@
         <DockPanel Grid.Row="4">
             <StatusBar>
                 <StatusBarItem HorizontalAlignment="Left">
+                    
                     <Button ToolTip="Click to search for a new update." Click="VersionButton_Click">
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <ContentPresenter/>
-                            </ControlTemplate>
-                        </Button.Template>
-
                         <Button.Content>
-                            <TextBlock>
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="Blue"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>                                
+                            <TextBlock>                                                            
                                 <Run Text="Version:"/>
                                 <Run Text="{Binding AppSettings.Version}"/>                                
                             </TextBlock>

@@ -10,9 +10,14 @@ using System.Runtime.CompilerServices;
 
 namespace VRisingServerManager
 {
-    public class MainSettings
+    public class MainSettings : PropertyChangedBase
     {
-        public ObservableCollection<Server> Servers { get; set; } = new ObservableCollection<Server>();
+        private ObservableCollection<Server> _servers = new();
+        public ObservableCollection<Server> Servers
+        {
+            get => _servers;
+            set => SetField(ref _servers, value);
+        }
         public AppSettings AppSettings { get; set; } = new AppSettings();
         public Webhook WebhookSettings { get; set; } = new Webhook();
 
@@ -74,9 +79,61 @@ namespace VRisingServerManager
             get => _autoRestart;
             set => SetField(ref _autoRestart, value);
         }
+        private ServerWebhook _webhookMessages = new();
+        public ServerWebhook WebhookMessages
+        {
+            get => _webhookMessages;
+            set => SetField(ref _webhookMessages, value);
+        }
         [JsonIgnore]
         public ServerRuntime Runtime { get; set; } = new ServerRuntime();
         
+    }
+
+    public class ServerWebhook : PropertyChangedBase
+    {
+        private string _startServer = "Starting server.";
+        public string StartServer
+        {
+            get => _startServer;
+            set => SetField(ref _startServer, value);
+        }
+        private string _stopServer = "Stopping server.";
+        public string StopServer
+        {
+            get => _stopServer;
+            set => SetField(ref _stopServer, value);
+        }
+        private string _serverReady = "Server is ready.";
+        public string ServerReady
+        {
+            get => _serverReady;
+            set => SetField(ref _serverReady, value);
+        }
+        private string _attemptStart3 = "Server attempted to restart 3 times unsuccessfully. Disabling auto-restart.";
+        public string AttemptStart3
+        {
+            get => _attemptStart3;
+            set => SetField(ref _attemptStart3, value);
+        }
+        private string _serverCrash = "Server stopped unexpectedly. Restarting.";
+        public string ServerCrash
+        {
+            get => _serverCrash;
+            set => SetField(ref _serverCrash, value);
+        }
+        private bool _broadcastIP = false;
+        public bool BroadcastIP
+        {
+            get => _broadcastIP;
+            set => SetField(ref _broadcastIP, value);
+        }
+        private bool _broadcastSteamID = false;
+        public bool BroadcastSteamID
+        {
+            get => _broadcastSteamID;
+            set => SetField(ref _broadcastSteamID, value);
+        }
     }
 
     /// <summary>
@@ -104,11 +161,32 @@ namespace VRisingServerManager
     /// <summary>
     /// Property of <see cref="Server"/> used to fetch RCON Settings.
     /// </summary>
-    public class RCONServerSettings
+    public class RCONServerSettings : PropertyChangedBase
     {
-        public string IPAddress { get; set; } = "127.0.0.1";
-        public string Port { get; set; } = "25575";
-        public string Password { get; set; } = "";
+        private bool _enabled = false;
+        public bool Enabled
+        {
+            get => _enabled;
+            set => SetField(ref _enabled, value);
+        }
+        private string _ipAddress = "127.0.0.1";
+        public string IPAddress
+        {
+            get => _ipAddress;
+            set => SetField(ref _ipAddress, value);
+        }
+        private string _port = "25575";
+        public string Port
+        {
+            get => _port;
+            set => SetField(ref _port, value);
+        }
+        private string _password = "";
+        public string Password
+        {
+            get => _password;
+            set => SetField(ref _password, value);
+        }
     }
 
     /// <summary>
@@ -169,21 +247,44 @@ namespace VRisingServerManager
             get => _lastUpdateTime;
             set => SetField(ref _lastUpdateTime, value);
         }
-        private string _version = "3.1.1b";
+        private string _version = "3.2b";
         public string Version
         {
             get => _version;
             set => SetField(ref _version, value);
+        }
+        private bool _darkMode = false;
+        public bool DarkMode
+        {
+            get => _darkMode;
+            set => SetField(ref _darkMode, value);
         }
     }
 
     /// <summary>
     /// Property of <see cref="MainSettings"/> used for webhook settings.
     /// </summary>
-    public class Webhook
+    public class Webhook : PropertyChangedBase
     {
-        public bool Enabled { get; set; } = false;
+        private bool _enabled = false;
+        public bool Enabled
+        {
+            get => _enabled;
+            set => SetField(ref _enabled, value);
+        }
         public string URL { get; set; } = "";
+        private string _updateFound = "An update was found for the game. Starting auto-update.";
+        public string UpdateFound
+        {
+            get => _updateFound;
+            set => SetField(ref _updateFound, value);
+        }
+        private string _updateWait = "Waiting 5 minutes before server(s) are shut down.";
+        public string UpdateWait
+        {
+            get => _updateWait;
+            set => SetField(ref _updateWait, value);
+        }
     }
 }
 

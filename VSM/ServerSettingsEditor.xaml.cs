@@ -3,6 +3,9 @@ using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using System.Text.Json;
+using System.Collections.ObjectModel;
+using ModernWpf.Controls;
+using VRisingServerManager.Controls;
 
 namespace VRisingServerManager
 {
@@ -11,11 +14,13 @@ namespace VRisingServerManager
     /// </summary>
     public partial class ServerSettingsEditor : Window
     {
-        public ServerSettings serverSettings;
-        public JsonSerializerOptions serializerOptions = new JsonSerializerOptions { WriteIndented = true };
+        private ServerSettings serverSettings;
+        private JsonSerializerOptions serializerOptions = new JsonSerializerOptions { WriteIndented = true };
+        private ObservableCollection<Server> servers;
 
-        public ServerSettingsEditor()
+        public ServerSettingsEditor(ObservableCollection<Server> sentServers)
         {
+            servers = sentServers;
             serverSettings = new ServerSettings();
             DataContext = serverSettings;
             InitializeComponent();            
@@ -55,11 +60,52 @@ namespace VRisingServerManager
             }
         }
 
-        private void FileMenuSave_Click(object sender, RoutedEventArgs e)
+        private async void FileMenuSave_Click(object sender, RoutedEventArgs e)
         {
+            if (servers.Count > 0)
+            {
+                ContentDialog yesNoDialog = new()
+                {
+                    Content = "Save to a server automatically? A backup of the original will be created if it exists.",
+                    PrimaryButtonText = "Yes",
+                    SecondaryButtonText = "No"
+                };
+
+                if (await yesNoDialog.ShowAsync() is ContentDialogResult.Primary)
+                {
+                    EditorSaveDialog dialog = new(servers)
+                    {
+                        PrimaryButtonText = "Save",
+                        CloseButtonText = "Cancel"
+                    };
+                    Server server;
+
+                    if (await dialog.ShowAsync() is ContentDialogResult.Primary)
+                    {
+                        server = dialog.GetServer();
+                        if (!Directory.Exists(server.Path + @"\SaveData\Settings"))
+                        {
+                            MessageBox.Show("SaveData folder not found in the server path. Please make sure you have started the server once.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        if (File.Exists(server.Path + @"\SaveData\Settings\ServerHostSettings.json"))
+                            File.Copy(server.Path + @"\SaveData\Settings\ServerHostSettings.json", server.Path + @"\SaveData\Settings\ServerHostSettings.bak", true);
+
+                        string SettingsJSON = JsonSerializer.Serialize(serverSettings, serializerOptions);
+                        File.WriteAllText(server.Path + @"\SaveData\Settings\ServerHostSettings.json", SettingsJSON);
+                        MessageBox.Show("File successfully saved to: \n" + server.Path + @"\SaveData\Settings\ServerHostSettings.json");
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
             try
             {
-                string SettingsJSON = JsonSerializer.Serialize(serverSettings, serializerOptions);                
+                string SettingsJSON = JsonSerializer.Serialize(serverSettings, serializerOptions);
                 SaveFileDialog SaveSettingsDialog = new SaveFileDialog
                 {
                     Filter = "\"JSON files\"|*.json",

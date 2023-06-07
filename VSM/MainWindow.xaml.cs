@@ -11,6 +11,8 @@ using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.ComponentModel;
+using ModernWpf;
+using VRisingServerManager.RCON;
 
 namespace VRisingServerManager
 {
@@ -23,6 +25,7 @@ namespace VRisingServerManager
         private static dWebhook discordSender = new();
         private static HttpClient httpClient = new();
         private PeriodicTimer? autoUpdateTimer;
+        private RemoteConClient rClient;
 
         public MainWindow()
         {
@@ -32,6 +35,12 @@ namespace VRisingServerManager
                 vsmSettings = MainSettings.Load();
 
             DataContext = vsmSettings;
+
+            if (vsmSettings.AppSettings.DarkMode == true)
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+            else
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+
             InitializeComponent();
 
             vsmSettings.AppSettings.PropertyChanged += AppSettings_PropertyChanged;
@@ -88,11 +97,7 @@ namespace VRisingServerManager
             {
                 bool foundUpdate = await CheckForUpdate();
                 if (foundUpdate == true && vsmSettings.Servers.Count > 0)
-                {
-                    if (vsmSettings.WebhookSettings.Enabled == true)
-                        SendDiscordMessage("An update was found for the game. Starting auto-update.");
-                    await AutoUpdate();
-                }
+                    AutoUpdate();
             }
         }
         
@@ -110,14 +115,16 @@ namespace VRisingServerManager
             if (vsmSettings.WebhookSettings.Enabled == false || message == "")
                 return;
 
-            if (discordSender.WebHook == null && vsmSettings.WebhookSettings.URL != "")
+            if (vsmSettings.WebhookSettings.URL == "")
+            {
+                LogToConsole("Discord webhook tried to send a message but URL is undefined.");
+                return;
+            }
+
+            if (discordSender.WebHook == null)
             {
                 discordSender.WebHook = vsmSettings.WebhookSettings.URL;
-            }
-            //else
-            //{
-            //    LogToConsole("Webhook tried to send a message but URL is undefined.");
-            //}
+            }            
 
             discordSender.SendMessage(message);
         }
@@ -176,7 +183,7 @@ namespace VRisingServerManager
             if (File.Exists(server.Path + @"\steamcmd.txt"))
                 File.Delete(server.Path + @"\steamcmd.txt");
             File.WriteAllLines(server.Path + @"\steamcmd.txt", installScript);
-            string parameters = "+runscript " + server.Path + @"\steamcmd.txt";
+            string parameters = $@"+runscript ""{server.Path}\steamcmd.txt""";
             Process steamcmd = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -204,8 +211,9 @@ namespace VRisingServerManager
             if (File.Exists(server.Path + @"\VRisingServer.exe"))
             {
                 LogToConsole("Starting server: " + server.Name + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
-                if (vsmSettings.WebhookSettings.Enabled == true)
-                    SendDiscordMessage($"Starting server **{server.LaunchSettings.DisplayName}**." + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
+                if (vsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StartServer))
+                    //SendDiscordMessage($"Starting server **{server.LaunchSettings.DisplayName}**." + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
+                    SendDiscordMessage(server.WebhookMessages.StartServer);
                 string parameters = $@"-persistentDataPath ""{server.Path + @"\SaveData"}"" -serverName ""{server.Name}"" -saveName ""{server.LaunchSettings.WorldName}"" -logFile ""{server.Path + @"\logs\VRisingServer.log"}""{(server.LaunchSettings.BindToIP ? $@" -address ""{server.LaunchSettings.BindingIP}""" : "")}";
                 Process serverProcess = new()
                 {
@@ -230,6 +238,39 @@ namespace VRisingServerManager
                 LogToConsole("'VRisingServer.exe' not found. Please make sure server is installed correctly.");
                 return false;
             }
+        }
+
+        private async Task SendRconRestartMessage(Server server)
+        {
+            rClient = new()
+            {
+                UseUtf8 = true
+            };
+
+            rClient.OnLog += async message =>
+            {
+                if (message == "Authentication success.")
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    rClient.SendCommand("announcerestart 5", result =>
+                    {
+                        //Do nothing
+                    });
+                }
+
+            };
+
+            rClient.OnConnectionStateChange += state =>
+            {
+                if (state == RemoteConClient.ConnectionStateChange.Connected)
+                {
+                    rClient.Authenticate(server.RconServerSettings.Password);
+                }
+            };
+
+            rClient.Connect(server.RconServerSettings.IPAddress, int.Parse(server.RconServerSettings.Port));
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            rClient.Disconnect();
         }
 
         private void ScanForServers()
@@ -257,23 +298,48 @@ namespace VRisingServerManager
             }
         }
 
-        private async Task AutoUpdate()
+        private async void AutoUpdate()
         {
+            SendDiscordMessage(vsmSettings.WebhookSettings.UpdateFound);
+
             if (!File.Exists(Directory.GetCurrentDirectory() + @"\SteamCMD\steamcmd.exe"))
             {
                 await UpdateSteamCMD();
-            }            
+            }
 
             List<Task> serverTasks = new List<Task>();
             List<Server> runningServers = new List<Server>();
 
-            foreach(Server server in vsmSettings.Servers)
+            foreach (Server server in vsmSettings.Servers)
             {
                 if (server.Runtime.State == ServerRuntime.ServerState.Running)
-                {
-                    serverTasks.Add(StopServer(server));
+                {                    
                     runningServers.Add(server);
                 }
+            }
+
+            foreach (Server server in runningServers)
+            {
+                if (server.RconServerSettings.Enabled == true)
+                {
+                    await SendRconRestartMessage(server);
+                }
+            }
+
+            if (vsmSettings.WebhookSettings.Enabled == true && vsmSettings.WebhookSettings.URL != "" && runningServers.Count > 0)
+            {
+                //SendDiscordMessage("Waiting 5 minutes before server(s) are shut down.");
+                SendDiscordMessage(vsmSettings.WebhookSettings.UpdateWait);
+#if DEBUG
+                await Task.Delay(TimeSpan.FromSeconds(10));
+#else
+                await Task.Delay(TimeSpan.FromMinutes(5));
+#endif
+            }
+
+            foreach (Server server in runningServers)
+            {
+                serverTasks.Add(StopServer(server));
             }
 
             LogToConsole($"AutoUpdate starting on {vsmSettings.Servers.Count} server(s)." + ((runningServers.Count > 0) ? $"\rShutting down {runningServers.Count} server(s) before proceeding." : ""));
@@ -298,10 +364,13 @@ namespace VRisingServerManager
         private async Task<bool> StopServer(Server server)
         {
             LogToConsole("Stopping server: " + server.Name);
-            if (vsmSettings.WebhookSettings.Enabled == true)
-                SendDiscordMessage($"Stopping server **{server.LaunchSettings.DisplayName}**.");
+            if (vsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StopServer))
+                //SendDiscordMessage($"Stopping server **{server.LaunchSettings.DisplayName}**.");
+                SendDiscordMessage(server.WebhookMessages.StopServer);
+
             bool success;
             bool close = server.Runtime.Process.CloseMainWindow();            
+
             if (close)
             {
                 await server.Runtime.Process.WaitForExitAsync();
@@ -315,30 +384,36 @@ namespace VRisingServerManager
             return success;
         }
 
-        private async Task<bool> RemoveServer(Server server)
-        {            
+        private bool RemoveServer(Server server)
+        {
             int serverIndex = vsmSettings.Servers.IndexOf(server);
+            string workingDir = Directory.GetCurrentDirectory();
+            string serverName = server.Name.Replace(" ", "_");
+
             if (MessageBox.Show($"Are you sure you want to remove the server {server.Name}?\nThis action is permanent and all files will be removed.", "Remove Server - Verification", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             {
                 return false;
             }
+
             if (serverIndex != -1)
             {
-                if (MessageBox.Show($@"Create a backup of the save?{Environment.NewLine}It will be saved to: {Directory.GetCurrentDirectory()}\Backups\{server.Name}_Bak.zip", "Remove Server - Backup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show($@"Create a backup of the SaveData?{Environment.NewLine}It will be saved to: {workingDir}\Backups\{serverName}_Bak.zip", "Remove Server - Backup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\Backups"))
-                        Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Backups");
-                    if (Directory.Exists(server.Path + @"\SaveData\Saves\v2\" + server.LaunchSettings.WorldName))
+                    if (!Directory.Exists(workingDir + @"\Backups"))
+                        Directory.CreateDirectory(workingDir + @"\Backups");
+
+                    if (Directory.Exists(server.Path + @"\SaveData\"))
                     {
-                        if (File.Exists(Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip"))
-                            File.Delete(Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip");
-                        ZipFile.CreateFromDirectory(server.Path + @"\Saves\v2\" + server.LaunchSettings.WorldName, Directory.GetCurrentDirectory() + @"\Backups\" + server.Name + "_Bak.zip");
-                    }                    
+                        if (File.Exists(workingDir + @"\Backups\" + serverName + "_Bak.zip"))
+                            File.Delete(workingDir + @"\Backups\" + serverName + "_Bak.zip");
+
+                        ZipFile.CreateFromDirectory(server.Path + @"\SaveData\", workingDir + @"\Backups\" + serverName + "_Bak.zip");
+                    }
                 }
                 vsmSettings.Servers.RemoveAt(serverIndex);
                 if (Directory.Exists(server.Path))
                     Directory.Delete(server.Path, true);
-                return true;                
+                return true;
             }
             else
             {
@@ -424,8 +499,21 @@ namespace VRisingServerManager
                     }                    
                 }
 
-                if (foundVariables == 3)
-                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** is ready.\rPublic IP: {ipAddress}\rSteam ID: {steamID}");
+                if (foundVariables == 3 && vsmSettings.WebhookSettings.Enabled == true)
+                {
+                    List<string> toSendList = new()
+                    {
+                        !string.IsNullOrEmpty(server.WebhookMessages.ServerReady) ? server.WebhookMessages.ServerReady : "",
+                        (server.WebhookMessages.BroadcastIP == true) ? $"Public IP: {ipAddress}" : "",
+                        (server.WebhookMessages.BroadcastSteamID == true) ? $"SteamID: {steamID}" : ""
+                    };
+
+                    if (!toSendList.All(x => string.IsNullOrEmpty(x)))
+                    {
+                        string toSend = string.Join("\r", toSendList);
+                        SendDiscordMessage(toSend);
+                    }
+                }
 
                 sr.Close();
                 fs.Close();
@@ -452,8 +540,9 @@ namespace VRisingServerManager
             if (server.Runtime.RestartAttempts >= 3)
             {
                 LogToConsole($"Server '{server.Name}' attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
-                if (vsmSettings.WebhookSettings.Enabled == true)
-                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
+                if (vsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.AttemptStart3))
+                    //SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
+                    SendDiscordMessage(server.WebhookMessages.AttemptStart3);
                 server.Runtime.RestartAttempts = 0;
                 server.AutoRestart = false;
                 return;
@@ -462,8 +551,9 @@ namespace VRisingServerManager
             if (server.AutoRestart == true && server.Runtime.UserStopped == false)
             {
                 server.Runtime.RestartAttempts++;
-                if (vsmSettings.WebhookSettings.Enabled == true)
-                    SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** stopped unexpectedly. Restarting.");
+                if (vsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.ServerCrash))
+                    //SendDiscordMessage($"Server **{server.LaunchSettings.DisplayName}** stopped unexpectedly. Restarting.");
+                    SendDiscordMessage(server.WebhookMessages.ServerCrash);
                 await StartServer(server);
             }
         }
@@ -498,8 +588,18 @@ namespace VRisingServerManager
                         autoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
 #else
                         autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
-#endif                        
+#endif
                         AutoUpdateLoop();
+                    }
+                    break;
+                case "DarkMode":
+                    if (vsmSettings.AppSettings.DarkMode == true)
+                    {
+                        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                    }
+                    else
+                    {
+                        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                     }
                     break;
             }
@@ -554,7 +654,7 @@ namespace VRisingServerManager
             }   
         }
 
-        private async void RemoveServerButton_Click(object sender, RoutedEventArgs e)
+        private void RemoveServerButton_Click(object sender, RoutedEventArgs e)
         {
             Server server = ((Button)sender).DataContext as Server;
 
@@ -563,7 +663,7 @@ namespace VRisingServerManager
                 LogToConsole("ERROR: Unable to find selected server to delete");
                 return;
             }
-            bool success = await RemoveServer(server);
+            bool success = RemoveServer(server);
             if (!success)
                 LogToConsole("There was an error deleting the server or the action was aborted.");
             else
@@ -574,7 +674,7 @@ namespace VRisingServerManager
         {
             if (!Application.Current.Windows.OfType<ServerSettingsEditor>().Any())
             {
-                ServerSettingsEditor sSettingsEditor = new ServerSettingsEditor();
+                ServerSettingsEditor sSettingsEditor = new ServerSettingsEditor(vsmSettings.Servers);
                 sSettingsEditor.Show();
             }
         }
@@ -618,7 +718,7 @@ namespace VRisingServerManager
         {
             if (!Application.Current.Windows.OfType<GameSettingsEditor>().Any())
             {
-                GameSettingsEditor gSettingsEditor = new();
+                GameSettingsEditor gSettingsEditor = new(vsmSettings.Servers);
                 gSettingsEditor.Show();
             }
         }
@@ -636,6 +736,17 @@ namespace VRisingServerManager
         {
             LookForUpdate();
         }
-        #endregion        
+
+        private void RconServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Server server = ((Button)sender).DataContext as Server;
+
+            if (!Application.Current.Windows.OfType<RconConsole>().Any())
+            {
+                RconConsole rConsole = new(server);
+                rConsole.Show();
+            }
+        }
+        #endregion
     }
 }

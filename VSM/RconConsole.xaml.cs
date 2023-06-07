@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Threading;
 using VRisingServerManager.RCON;
+using System.Windows.Forms.VisualStyles;
 
 namespace VRisingServerManager
 {
@@ -21,11 +13,13 @@ namespace VRisingServerManager
     /// </summary>
     public partial class RconConsole : Window
     {
+        RemoteConClient rClient;
+        Server server;
 
-        public RemoteConClient rClient = new RemoteConClient();
-
-        public RconConsole()
+        public RconConsole(Server loadedServer)
         {
+            server = loadedServer;
+            DataContext = server;
             InitializeComponent();
             RconConsoleOutput.AppendText("RCON client ready.");
         }
@@ -37,12 +31,6 @@ namespace VRisingServerManager
                 RconConsoleOutput.AppendText("\r" + output);
                 RconConsoleOutput.ScrollToEnd();
             }));            
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.Save();
-            LogToConsole("Settings saved.");
         }
 
         private void Connect()
@@ -61,14 +49,13 @@ namespace VRisingServerManager
             {
                 if (state == RemoteConClient.ConnectionStateChange.Connected)
                 {
-                    rClient.Authenticate(Properties.Settings.Default.RCON_Pass);
+                    rClient.Authenticate(server.RconServerSettings.Password);
                     Dispatcher.Invoke(new Action(() =>
                     {
                         DisconnectButton.IsEnabled = true;
                         ParamaterTextbox.IsEnabled = true;
                         SendCommandButton.IsEnabled = true;                        
                     }));
-                    LogToConsole("Connected.");
                 }
                 if (state == RemoteConClient.ConnectionStateChange.Disconnected)
                 {                    
@@ -112,7 +99,7 @@ namespace VRisingServerManager
                         ParamaterTextbox.IsEnabled = false;
                         SendCommandButton.IsEnabled = false;                        
                     }));
-                    LogToConsole("No connection.");
+                    LogToConsole($"Could not connect to {server.RconServerSettings.IPAddress}:{server.RconServerSettings.Port}.");
                 }
             };            
         }
@@ -129,7 +116,7 @@ namespace VRisingServerManager
             }
             await Task.Run(() =>
             {
-                rClient.Connect(Properties.Settings.Default.RCON_Address, Properties.Settings.Default.RCON_Port);
+                rClient.Connect(server.RconServerSettings.IPAddress, int.Parse(server.RconServerSettings.Port));
                 {
                     while (!rClient.Connected)
                     {

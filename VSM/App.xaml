@@ -10,16 +10,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-                <ui:ThemeResources RequestedTheme="Light"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="{x:Type TextBox}">
+            <!--<Style TargetType="{x:Type TextBox}">
                 <Style.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3" />
                     </Style>
                 </Style.Resources>
-            </Style>
+            </Style>-->
 
             <Style TargetType="{x:Type Button}">
                 <Style.Resources>

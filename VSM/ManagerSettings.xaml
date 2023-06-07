@@ -5,33 +5,133 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Manager Settings" Height="400" Width="800" Icon="Resources\Settings.png" ResizeMode="NoResize">
+        Title="Manager Settings" Height="600" MaxHeight="1000" Width="800" Icon="Resources\Settings.png" ResizeMode="CanResize">
     <Grid>
-        <StackPanel Margin="5,0,0,0">
-            <GroupBox Header="Main Settings">
-                <StackPanel>
-                    <CheckBox Content="Search For App Updates" IsChecked="{Binding AppSettings.AutoUpdateApp, Mode=TwoWay}" ToolTip="If VSM should look for new versions when started."/>
-                    <CheckBox Content="Verify Updates" IsChecked="{Binding AppSettings.VerifyUpdates, Mode=TwoWay}" ToolTip="If SteamCMD should verify updates after updating a game server. Recommended to be enabled."/>
-                    <CheckBox Content="Automatically Update Servers" IsChecked="{Binding AppSettings.AutoUpdate, Mode=TwoWay}" ToolTip="If VSM should look for updates for game servers automatically."/>
-                    <DockPanel Width="140" HorizontalAlignment="Left">
-                        <TextBlock Text="Interval:" FontSize="14"/>
-                        <ui:NumberBox Value="{Binding AppSettings.AutoUpdateInterval}" Maximum="1440" Minimum="10" SpinButtonPlacementMode="Hidden" Margin="10,0,0,0" IsEnabled="{Binding AppSettings.AutoUpdate}" ToolTip="How often (in minutes) it should search for updates."/>
-                    </DockPanel>
-                    <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="If the SteamCMD window should be shown or not during updates. Useful when troubleshooting."/>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Webhook Settings">
-                <StackPanel>
-                    <CheckBox Content="Enabled" IsChecked="{Binding WebhookSettings.Enabled, Mode=TwoWay}" ToolTip="If VSM should use a webhook to send discord messages."/>
-                    <DockPanel>
-                        <TextBlock Text="URL:"/>
-                        <TextBox Margin="10,0,10,0" IsEnabled="{Binding WebhookSettings.Enabled}" Text="{Binding WebhookSettings.URL, Mode=TwoWay}" ToolTip="The URL of your discord webhook."/>
-                    </DockPanel>
-                </StackPanel>
-            </GroupBox>
-            <Button Content="Save" HorizontalAlignment="Center" Width="80" Margin="0,0,0,20" Click="SaveButton_Click"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <DockPanel>
+                <TabControl Padding="10" DockPanel.Dock="Top">
+
+                    <TabItem Header="Main Settings">
+                        <GroupBox Header="Main Settings">
+                            <StackPanel>
+                                <CheckBox Content="Search For App Updates" IsChecked="{Binding AppSettings.AutoUpdateApp, Mode=TwoWay}" ToolTip="If VSM should look for new versions when started."/>
+                                <CheckBox Content="Verify Updates" IsChecked="{Binding AppSettings.VerifyUpdates, Mode=TwoWay}" ToolTip="If SteamCMD should verify updates after updating a game server. Recommended to be enabled."/>
+                                <CheckBox Content="Automatically Update Servers" IsChecked="{Binding AppSettings.AutoUpdate, Mode=TwoWay}" ToolTip="If VSM should look for updates for game servers automatically."/>
+                                <DockPanel Width="140" HorizontalAlignment="Left">
+                                    <TextBlock Text="Interval:" VerticalAlignment="Center"/>
+                                    <ui:NumberBox Value="{Binding AppSettings.AutoUpdateInterval}" Maximum="1440" Minimum="10" SpinButtonPlacementMode="Hidden" Margin="10,0,0,0" IsEnabled="{Binding AppSettings.AutoUpdate}" ToolTip="How often (in minutes) it should search for updates."/>
+                                </DockPanel>
+                                <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="If the SteamCMD window should be shown or not during updates. Useful when troubleshooting."/>
+                                <CheckBox Content="Use Dark Mode" IsChecked="{Binding AppSettings.DarkMode, Mode=TwoWay}" ToolTip="If the app should run in dark mode."/>
+                            </StackPanel>
+                        </GroupBox>
+                    </TabItem>
+
+                    <TabItem Header="Webhook Settings">
+                        <GroupBox Header="Webhook Settings">
+                            <StackPanel>
+                                <CheckBox Name="WebhookCheck" Content="Enabled" IsChecked="{Binding WebhookSettings.Enabled}" ToolTip="If VSM should use a webhook to send discord messages."/>
+                                <DockPanel Margin="0,5,0,0">
+                                    <TextBlock Width="75" Text="URL:" VerticalAlignment="Center"/>
+                                    <TextBox IsEnabled="{Binding WebhookSettings.Enabled}" Text="{Binding WebhookSettings.URL, Mode=TwoWay}" ToolTip="The URL of your discord webhook."/>
+                                </DockPanel>
+                                <TextBlock Text="Messages" Margin="0,10,0,0" FontSize="20"/>
+                                <DockPanel Margin="0,5,0,0">
+                                    <TextBlock Width="100" Text="Update Found:" VerticalAlignment="Center"/>
+                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateFound, Mode=TwoWay}" ToolTip="Sent when a game update was found. Leave empty to disable."/>
+                                </DockPanel>
+                                <DockPanel Margin="0,5,0,0">
+                                    <TextBlock Width="100" Text="Update Wait:" VerticalAlignment="Center"/>
+                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateWait, Mode=TwoWay}" ToolTip="Sent when the server waits 5 minutes before shutting down to update. Leave empty to disable."/>
+                                </DockPanel>
+                                <Button Content="Reset" Width="100" HorizontalAlignment="Left" Margin="0,10,0,0" Click="ResetButton_Click" ToolTip="Resets all messages to the default value."/>
+                                <Separator Margin="0,10,0,10"/>
+                                <GroupBox Header="Customize Server Messages">
+                                    <StackPanel>
+                                        <DockPanel>
+                                            <TextBlock Text="Select a server to customize: " VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                            <ComboBox Name="ServerCombo" ItemsSource="{Binding Servers}" DisplayMemberPath="Name" Width="250"/>
+                                            <Button Content="Reset" Name="ResetServerButton" Width="100" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ResetServerButton_Click" ToolTip="Resets all messages to the default value."/>
+                                        </DockPanel>
+                                        <StackPanel Margin="0,10,0,0">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=ServerCombo, Path=SelectedItem}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <DockPanel Margin="0,5,0,0">
+                                                <TextBlock Text="Server Starting: " Width="150" VerticalAlignment="Center"/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StartServer}" ToolTip="Sent when the server starts. Leave empty to disable."/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,5,0,0">
+                                                <TextBlock Text="Server Stopping: " Width="150" VerticalAlignment="Center"/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StopServer}" ToolTip="Sent when the server stops. Leave empty to disable."/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,5,0,0">
+                                                <TextBlock Text="Server Ready: " Width="150" VerticalAlignment="Center"/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerReady}" ToolTip="Sent when the server is ready. Leave empty to disable."/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,5,0,0">
+                                                <TextBlock Text="3 Start Attempts: " Width="150" VerticalAlignment="Center"/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.AttemptStart3, Mode=OneWay}" ToolTip="Sent when the server fails to start 3 times with auto-restart. Leave empty to disable."/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,5,0,0">
+                                                <TextBlock Text="Server Crashed: " Width="150" VerticalAlignment="Center"/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerCrash}" ToolTip="Sent when the server crashes. Leave empty to disable."/>
+                                            </DockPanel>
+                                            <CheckBox Content="Broadcast IP" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastIP}" ToolTip="If the IP should be sent when server is ready."/>
+                                            <CheckBox Content="Broadcast SteamID" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastSteamID}" ToolTip="If the SteamID should be sent when the server is ready."/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </GroupBox>
+                    </TabItem>
+
+                    <TabItem Header="Server Settings">
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock Text="Select a server to customize: " VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <ComboBox Name="ServerCombo2" ItemsSource="{Binding Servers}" DisplayMemberPath="Name" Width="250"/>
+                            </DockPanel>
+                            
+                            <Separator Margin="0,10,0,10"/>
+
+                            <GroupBox Header="RCON">
+                                <StackPanel>
+                                    <CheckBox Name="RCONCheck" Content="Automatic Messages" DataContext="{Binding SelectedItem, ElementName=ServerCombo2}" IsChecked="{Binding RconServerSettings.Enabled}" ToolTip="If automatic RCON functions should be enabled or not, like sending a message before shutting down the server for an update.&#x0a;Requires the fields below to be filled with correct settings."/>
+
+                                    <DockPanel Margin="0,5,0,0">
+                                        <TextBlock Text="IP Address: " Width="150" VerticalAlignment="Center"/>
+                                        <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo2}" IsEnabled="{Binding IsChecked, ElementName=RCONCheck}" Text="{Binding RconServerSettings.IPAddress}" ToolTip="The IP Address to connect to."/>
+                                    </DockPanel>
+                                    <DockPanel Margin="0,5,0,0">
+                                        <TextBlock Text="Port: " Width="150" VerticalAlignment="Center"/>
+                                        <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo2}" IsEnabled="{Binding IsChecked, ElementName=RCONCheck}" Text="{Binding RconServerSettings.Port}" ToolTip="The port to connect to."/>
+                                    </DockPanel>
+                                    <DockPanel Margin="0,5,0,0">
+                                        <TextBlock Text="Password: " Width="150" VerticalAlignment="Center"/>
+                                        <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo2}" IsEnabled="{Binding IsChecked, ElementName=RCONCheck}" Text="{Binding RconServerSettings.Password}" ToolTip="The password used to connect."/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </TabItem>
+
+                </TabControl>
+            </DockPanel>
+        </ScrollViewer>
+        <Button Grid.Row="1" DockPanel.Dock="Bottom" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="80" Margin="0,10,0,10" Click="SaveButton_Click"/>
     </Grid>
 </Window>

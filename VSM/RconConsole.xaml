@@ -3,61 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:p="clr-namespace:VRisingServerManager.Properties"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="RCON Console" Height="500" Width="800" Icon="/Resources/logo.ico" ResizeMode="CanMinimize">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox Header="RCON Settings" Margin="5,5,0,0">
-            <StackPanel>
-                <DockPanel Margin="5,5,5,0">
-                    <TextBlock Text="IP Address:" Margin="0,0,10,0"/>
-                    <TextBox DockPanel.Dock="Right" Width="150" HorizontalAlignment="Right"/>
-                </DockPanel>
-                <DockPanel Margin="5,5,5,0">
-                    <TextBlock Text="Port:" Margin="0,0,10,0"/>
-                    <local:NumericSpinner Step="1" HorizontalAlignment="Right" Width="75"/>
-                </DockPanel>
-                <DockPanel Margin="5,5,5,0">
-                    <TextBlock Text="Password:" Margin="0,0,10,0"/>
-                    <TextBox DockPanel.Dock="Right" Width="150" HorizontalAlignment="Right"/>
-                </DockPanel>
-                <Button x:Name="SaveButton" Content="Save" Margin="5,5,0,0" HorizontalAlignment="Left" Padding="10,1,10,1" Click="SaveButton_Click"/>
-            </StackPanel>
-        </GroupBox>
-        <DockPanel Grid.Row="1" Margin="0,5,0,0">
-            <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Left" Margin="5,0,5,0" Padding="5,0,5,0" Height="18" VerticalAlignment="Top" Click="ConnectButton_Click"/>
-            <Button x:Name="DisconnectButton" Content="Disconnect" HorizontalAlignment="Left" Margin="5,0,5,0" Padding="5,0,5,0" Height="18" VerticalAlignment="Top" Click="DisconnectButton_Click" IsEnabled="False"/>
-        </DockPanel>
-        <GroupBox Header="Command Info" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="150" Margin="5,5,5,5">
-            <TextBlock x:Name="CommandInfoTextbox" TextWrapping="Wrap"/>
-        </GroupBox>
-        <GroupBox Header="Command" Grid.Column="2" Margin="5,0,5,0" Width="150" Height="100">
-            <ListBox x:Name="CommandList" SelectionChanged="CommandList_SelectionChanged">
-                <ListBoxItem Content="announce"/>
-                <ListBoxItem Content="announcerestart"/>
-            </ListBox>
-        </GroupBox>
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+        Title="RCON Console" Height="500" Width="800" MaxWidth="800" Icon="/Resources/logo.ico" ResizeMode="CanMinimize">
+    <StackPanel Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="RCON Settings" Width="250" HorizontalAlignment="Left">
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock Text="IP Address:" Width="80" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding RconServerSettings.IPAddress}" DockPanel.Dock="Right" Width="150" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock Text="Port:" Width="80" VerticalAlignment="Center"/>
+                        <ui:NumberBox Value="{Binding RconServerSettings.Port}" HorizontalAlignment="Right" Width="150" SpinButtonPlacementMode="Hidden" Minimum="1" Maximum="65535"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock Text="Password:" Width="80" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding RconServerSettings.Password}" DockPanel.Dock="Right" Width="150" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,5,0,5" HorizontalAlignment="Center">
+                        <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Left" Click="ConnectButton_Click"/>
+                        <Button x:Name="DisconnectButton" Content="Disconnect" HorizontalAlignment="Left" Click="DisconnectButton_Click" IsEnabled="False" Margin="10,0,0,0"/>
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Commands">
+                <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                    <ListBox x:Name="CommandList" SelectionChanged="CommandList_SelectionChanged">
+                        <ListBoxItem Content="announce"/>
+                        <ListBoxItem Content="announcerestart"/>
+                    </ListBox>
+                    <Border BorderBrush="LightSlateGray" BorderThickness="1">
+                        <TextBlock x:Name="CommandInfoTextbox" TextWrapping="Wrap" Width="400"/>
+                    </Border>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Margin="5">
             <DockPanel>
-                <TextBlock Text="Parameter:" Margin="5,0,5,0"/>
-                <TextBox x:Name="ParamaterTextbox" Width="650" IsEnabled="False"/>
-                <Button x:Name="SendCommandButton" Content="Send" Margin="5,0,5,0" DockPanel.Dock="Right" Click="SendCommandButton_Click" IsEnabled="False"/>
+                <TextBlock Text="Parameter:" Width="80" VerticalAlignment="Center"/>
+                <TextBox x:Name="ParamaterTextbox" Width="625" IsEnabled="False"/>
+                <Button x:Name="SendCommandButton" Content="Send" Margin="5,0,0,0" Click="SendCommandButton_Click" IsEnabled="False"/>
             </DockPanel>
         </StackPanel>
-        <RichTextBox x:Name="RconConsoleOutput" Grid.Row="3" Grid.ColumnSpan="3" Margin="5,5,5,5" Foreground="Lime" Background="Black" IsReadOnly="True"/>
-    </Grid>
+        <RichTextBox x:Name="RconConsoleOutput" Foreground="Lime" Background="Black" IsReadOnly="True" Height="240"/>
+    </StackPanel>
 </Window>

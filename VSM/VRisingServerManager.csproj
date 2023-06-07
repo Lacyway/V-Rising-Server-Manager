@@ -40,13 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="RconConsole.xaml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="App.config" />
     <None Remove="logo.ico" />
     <None Remove="Resources\Add.png" />
+    <None Remove="Resources\Console.png" />
     <None Remove="Resources\DownloadNoColor.png" />
     <None Remove="Resources\DuoPvP_DailySiege.json" />
     <None Remove="Resources\DuoPvP_NoSiege.json" />
@@ -90,10 +87,6 @@
     <None Remove="Resources\StatusStopped.png" />
     <None Remove="Resources\Stop.png" />
     <None Remove="Resources\User.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Remove="RconConsole.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -143,15 +136,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="RconConsole.xaml" />
-    <None Include="RconConsole.xaml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Console.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\DownloadNoColor.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

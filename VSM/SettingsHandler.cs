@@ -246,6 +246,7 @@ namespace VRisingServerManager
     public class API
     {
         public bool Enabled { get; set; } = false;
+        public int BindPort { get; set; } = 9090;
     }
 
     public class GameSettings

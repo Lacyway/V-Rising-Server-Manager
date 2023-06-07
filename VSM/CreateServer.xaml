@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Create New Server" Height="140" Width="800" Icon="Resources\Add.png" ResizeMode="NoResize">
+        Title="Create New Server" Height="160" Width="800" Icon="Resources\Add.png" ResizeMode="NoResize">
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="5">
             <DockPanel>
-                <TextBlock Text="Server Name:" Margin="5" Width="80"/>
+                <TextBlock Text="Server Name:" Width="90" VerticalAlignment="Center"/>
                 <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5" Width="250" MaxLength="30" HorizontalAlignment="Left" ToolTip="The name of the server used in the server manager."/>
             </DockPanel>
             <DockPanel>
-                <TextBlock Text="Server Path:" Margin="5" Width="80"/>
+                <TextBlock Text="Server Path:" Width="90" VerticalAlignment="Center"/>
                 <TextBox x:Name="ServerPathText" Text="{Binding Path, Mode=TwoWay}" Margin="5" IsReadOnly="True" Width="625" ToolTip="The path where the server will be installed."/>
                 <Button x:Name="ServerPathButton" DockPanel.Dock="Right" Content="Choose" Margin="5" Click="ServerPathButton_Click" ToolTip="Choose a directory path."/>
             </DockPanel>

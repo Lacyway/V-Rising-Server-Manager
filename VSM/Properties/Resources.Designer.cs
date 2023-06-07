@@ -73,6 +73,16 @@ namespace VRisingServerManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Console {
+            get {
+                object obj = ResourceManager.GetObject("Console", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DownloadNoColor {
             get {
                 object obj = ResourceManager.GetObject("DownloadNoColor", resourceCulture);
