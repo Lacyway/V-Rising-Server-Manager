@@ -22,10 +22,22 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
-                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
+                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="OpenFile"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Save"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
-                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
+                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Cancel"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Presets">
                 <MenuItem Header="PvE">

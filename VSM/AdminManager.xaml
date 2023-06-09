@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VRisingServerManager"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="False"
+        ui:WindowHelper.UseModernWindowStyle="True"
         Title="Admin Manager" Height="320" Width="320" Icon="Resources\User.png" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="AdminList" Grid.ColumnSpan="2" SelectionMode="Single" Margin="5" Background="LightGray"/>
+        <ListView x:Name="AdminList" Grid.ColumnSpan="2" SelectionMode="Single" Margin="5"/>
         <StackPanel Grid.Row="1">
             <TextBox x:Name="AdminToAdd" Grid.Row="2" Margin="5,5,5,0"/>
         </StackPanel>

@@ -93,14 +93,14 @@
                         <GroupBox Header="Server Management" Grid.Column="1" Margin="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <ui:ToggleSwitch Header="Auto Restart" Grid.Row="0" Margin="5" Width="100" Grid.Column="0" HorizontalAlignment="Center" IsOn="{Binding AutoRestart, Mode=TwoWay}"/>
+                                <ui:ToggleSwitch Header="Auto Restart" Grid.Row="0" Margin="5" Width="100" Grid.Column="0" HorizontalAlignment="Center" IsOn="{Binding AutoRestart, Mode=TwoWay}" ToolTip="If the server should automatically restart after an unexpected crash."/>
                                 <DockPanel Grid.Column="1">
                                     <ui:ToggleSwitch Header="Status" Grid.Row="0" Margin="5" Width="110" Grid.Column="1" HorizontalAlignment="Center" IsHitTestVisible="False">
                                         <ui:ToggleSwitch.Style>
@@ -142,12 +142,13 @@
                                 </DockPanel>
                                 <StackPanel Grid.Column="0" Grid.Row="1">
 
-                                    <Button Margin="2" Click="StartServerButton_Click" ToolTip="Starts the game server.">
+                                    <Button Margin="2" Click="StartServerButton_Click" ToolTip="Starts the game server." HorizontalAlignment="Stretch">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
                                                         <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter Property="Foreground" Value="Gray"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="True"/>
@@ -159,17 +160,18 @@
                                             </Style>
                                         </Button.Style>
                                         <DockPanel>
-                                            <Image Source="Resources\Play.png" Margin="5,0,0,0"/>
+                                            <Image Source="Resources\Play.png" Margin="5,0,0,0" Stretch="None"/>
                                             <TextBlock Text="Start Server" Margin="5,0,5,0"/>
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Margin="2" Click="UpdateServerButton_Click" ToolTip="Updates the game server.">
+                                    <Button Margin="2" Click="UpdateServerButton_Click" ToolTip="Updates the game server." HorizontalAlignment="Stretch">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Running">
                                                         <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter Property="Foreground" Value="Gray"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="True"/>
@@ -181,15 +183,15 @@
                                             </Style>
                                         </Button.Style>
                                         <DockPanel>
-                                            <Image Source="Resources\Refresh.png" Margin="5,0,0,0"/>
+                                            <Image Source="Resources\Refresh.png" Margin="5,0,0,0" Stretch="None"/>
                                             <TextBlock Text="Update Server" Margin="5,0,5,0"/>
                                         </DockPanel>
                                     </Button>
 
-                                    <Button Margin="2" ToolTip="Opens the RCON Console for the selected server." Click="RconServerButton_Click">
+                                    <Button Margin="2" ToolTip="Opens the RCON Console for the selected server." Click="RconServerButton_Click" HorizontalAlignment="Stretch">
                                         <Button.Content>
                                             <DockPanel>
-                                                <Image Source="Resources\Console.png" Margin="5,0,0,0"/>
+                                                <Image Source="Resources\Console.png" Margin="5,0,0,0" Stretch="None"/>
                                                 <TextBlock Text="RCON Console" Margin="5,0,5,0"/>
                                             </DockPanel>
                                         </Button.Content>
@@ -199,7 +201,7 @@
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
 
-                                    <Button Margin="2" Click="StopServerButton_Click" ToolTip="Stops the game server.">
+                                    <Button Margin="2" Click="StopServerButton_Click" ToolTip="Stops the game server." HorizontalAlignment="Stretch">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
@@ -208,33 +210,35 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Stopped">
                                                         <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter Property="Foreground" Value="Gray"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Runtime.State}" Value="Updating">
                                                         <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter Property="Foreground" Value="Gray"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Button.Style>
                                         <DockPanel>
-                                            <Image Source="Resources\Stop.png" Margin="5,0,0,0"/>
+                                            <Image Source="Resources\Stop.png" Margin="5,0,0,0" Stretch="None"/>
                                             <TextBlock Text="Stop Server" Margin="5,0,5,0"/>
-                                        </DockPanel>
+                                        </DockPanel>                                        
                                     </Button>
 
-                                    <Button Margin="2" Click="ServerFolderButton_Click" ToolTip="Opens the game server folder.">
+                                    <Button Margin="2" Click="ServerFolderButton_Click" ToolTip="Opens the game server folder." HorizontalAlignment="Stretch">
                                         <Button.Content>
                                             <DockPanel>
-                                                <Image Source="Resources\FolderOpened.png" Margin="5,0,0,0"/>
+                                                <Image Source="Resources\FolderOpened.png" Margin="5,0,0,0" Stretch="None"/>
                                                 <TextBlock Text="Server Folder" Margin="5,0,5,0"/>
                                             </DockPanel>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button Margin="2" Click="ManageAdminsButton_Click" ToolTip="Manage the administrators of the game server.">
+                                    <Button Margin="2" Click="ManageAdminsButton_Click" ToolTip="Manage the administrators of the game server." HorizontalAlignment="Stretch">
                                         <Button.Content>
                                             <DockPanel>
-                                                <Image Source="Resources\User.png" Margin="5,0,0,0"/>
-                                                <TextBlock Text="Manage Admins" Margin="5,0,5,0"/>
+                                                <Image Source="Resources\User.png" Stretch="None"/>
+                                                <TextBlock Text="Manage Admins"/>
                                             </DockPanel>
                                         </Button.Content>
                                     </Button>

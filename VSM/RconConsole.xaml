@@ -49,6 +49,6 @@
                 <Button x:Name="SendCommandButton" Content="Send" Margin="5,0,0,0" Click="SendCommandButton_Click" IsEnabled="False"/>
             </DockPanel>
         </StackPanel>
-        <RichTextBox x:Name="RconConsoleOutput" Foreground="Lime" Background="Black" IsReadOnly="True" Height="240"/>
+        <RichTextBox x:Name="RconConsoleOutput" Foreground="Lime" Background="Black" IsReadOnly="True" Height="210"/>
     </StackPanel>
 </Window>

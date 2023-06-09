@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local1="clr-namespace:VRisingServerManager.Controls"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="925" Width="400" MaxWidth="400" ResizeMode="CanResize" Icon="Resources\EditDocument.png">    
+        Title="Server Settings Editor" Height="925" Width="400" MaxWidth="400" ResizeMode="CanResize" Icon="Resources\EditDocument.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,10 +16,22 @@
 
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click"/>
-                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click"/>
+                <MenuItem x:Name="FileMenuLoad" Header="_Load" Click="FileMenuLoad_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="OpenFile"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="FileMenuSave" Header="_Save" Click="FileMenuSave_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Save"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
-                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click"/>
+                <MenuItem x:Name="FileMenuExit" Header="_Exit" Click="FileMenuExit_Click">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Cancel"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
 

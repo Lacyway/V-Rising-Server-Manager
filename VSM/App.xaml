@@ -20,13 +20,13 @@
                 </Style.Resources>
             </Style>-->
 
-            <Style TargetType="{x:Type Button}">
+            <!--<Style TargetType="{x:Type Button}">
                 <Style.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3" />
                     </Style>
                 </Style.Resources>
-            </Style>
+            </Style>-->
 
         </ResourceDictionary>
     </Application.Resources>

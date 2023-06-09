@@ -16,14 +16,45 @@ namespace VRisingServerManager
     {
         private ServerSettings serverSettings;
         private JsonSerializerOptions serializerOptions = new JsonSerializerOptions { WriteIndented = true };
-        private ObservableCollection<Server> servers;
+        private readonly ObservableCollection<Server> servers;
 
-        public ServerSettingsEditor(ObservableCollection<Server> sentServers)
+        public ServerSettingsEditor(ObservableCollection<Server> sentServers, bool autoLoad = false, int indexToLoad = -1)
         {
             servers = sentServers;
             serverSettings = new ServerSettings();
             DataContext = serverSettings;
-            InitializeComponent();            
+            InitializeComponent();
+
+            if (autoLoad == true && indexToLoad != -1 && servers.Count > 0)
+            {
+                AutoLoad(indexToLoad);
+            }
+        }
+
+        private void AutoLoad(int serverIndex)
+        {
+            string fileToLoad = servers[serverIndex].Path + @"\SaveData\Settings\ServerHostSettings.json";
+            if (!File.Exists(fileToLoad))
+            {
+                _ = new ContentDialog
+                {
+                    Owner = this,
+                    Title = "Error",
+                    Content = $"Unable to load: {fileToLoad}\nMake sure it exists.",
+                    CloseButtonText = "Ok",
+                    DefaultButton = ContentDialogButton.Close
+                }.ShowAsync();
+                return;
+            }
+                
+
+            using (StreamReader reader = new StreamReader(fileToLoad))
+            {
+                string LoadedJSON = reader.ReadToEnd();
+                ServerSettings LoadedSettings = JsonSerializer.Deserialize<ServerSettings>(LoadedJSON);
+                serverSettings = LoadedSettings;
+                DataContext = serverSettings;
+            }
         }
 
         private void FileMenuLoad_Click(object sender, RoutedEventArgs e)

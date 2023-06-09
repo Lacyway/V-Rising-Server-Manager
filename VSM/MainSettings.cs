@@ -259,6 +259,12 @@ namespace VRisingServerManager
             get => _darkMode;
             set => SetField(ref _darkMode, value);
         }
+        private bool _autoLoadEditor = false;
+        public bool AutoLoadEditor
+        {
+            get => _autoLoadEditor;
+            set => SetField(ref _autoLoadEditor, value);
+        }
     }
 
     /// <summary>

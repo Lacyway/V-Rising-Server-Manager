@@ -674,8 +674,16 @@ namespace VRisingServerManager
         {
             if (!Application.Current.Windows.OfType<ServerSettingsEditor>().Any())
             {
-                ServerSettingsEditor sSettingsEditor = new ServerSettingsEditor(vsmSettings.Servers);
-                sSettingsEditor.Show();
+                if (vsmSettings.AppSettings.AutoLoadEditor == true && !(ServerTabControl.SelectedIndex == -1))
+                {
+                    ServerSettingsEditor sSettingsEditor = new(vsmSettings.Servers, true, ServerTabControl.SelectedIndex);
+                    sSettingsEditor.Show();
+                }
+                else
+                {
+                    ServerSettingsEditor sSettingsEditor = new(vsmSettings.Servers);
+                    sSettingsEditor.Show();
+                }
             }
         }
 
@@ -718,8 +726,16 @@ namespace VRisingServerManager
         {
             if (!Application.Current.Windows.OfType<GameSettingsEditor>().Any())
             {
-                GameSettingsEditor gSettingsEditor = new(vsmSettings.Servers);
-                gSettingsEditor.Show();
+                if (vsmSettings.AppSettings.AutoLoadEditor == true && !(ServerTabControl.SelectedIndex == -1))
+                {
+                    GameSettingsEditor gSettingsEditor = new(vsmSettings.Servers, true, ServerTabControl.SelectedIndex);
+                    gSettingsEditor.Show();
+                }
+                else
+                {
+                    GameSettingsEditor gSettingsEditor = new(vsmSettings.Servers);
+                    gSettingsEditor.Show();
+                }
             }
         }
 

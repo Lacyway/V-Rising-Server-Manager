@@ -21,13 +21,42 @@ namespace VRisingServerManager
         public JsonSerializerOptions serializerOptions = new JsonSerializerOptions { WriteIndented = true };
         private ObservableCollection<Server> servers;
 
-        public GameSettingsEditor(ObservableCollection<Server> sentServers)
+        public GameSettingsEditor(ObservableCollection<Server> sentServers, bool autoLoad = false, int indexToLoad = -1)
         {
             servers = sentServers;
             gameSettings = new GameSettings();
             DataContext = gameSettings;
             InitializeComponent();
             SetupDefaultSettings();
+
+            if (autoLoad == true && indexToLoad != -1 && servers.Count > 0)
+            {
+                AutoLoad(indexToLoad);
+            }
+        }
+
+        private void AutoLoad(int serverIndex)
+        {
+            string fileToLoad = servers[serverIndex].Path + @"\SaveData\Settings\ServerGameSettings.json";
+            if (!File.Exists(fileToLoad))
+            {
+                _ = new ContentDialog
+                {
+                    Owner = this,
+                    Title = "Error",
+                    Content = $"Unable to load: {fileToLoad}\nMake sure it exists.",
+                    CloseButtonText = "Ok",
+                    DefaultButton = ContentDialogButton.Close
+                }.ShowAsync();
+                return;
+            }
+
+
+            using (StreamReader reader = new(fileToLoad))
+            {
+                string LoadedJSON = reader.ReadToEnd();
+                LoadHandler(LoadedJSON);
+            }
         }
 
         private void SetupDefaultSettings()

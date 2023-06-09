@@ -29,6 +29,7 @@
                                 </DockPanel>
                                 <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="If the SteamCMD window should be shown or not during updates. Useful when troubleshooting."/>
                                 <CheckBox Content="Use Dark Mode" IsChecked="{Binding AppSettings.DarkMode, Mode=TwoWay}" ToolTip="If the app should run in dark mode."/>
+                                <CheckBox Content="Auto Load Settings Files" IsChecked="{Binding AppSettings.AutoLoadEditor, Mode=TwoWay}" ToolTip="If the Game and Server Settings Editors should automatically try to load the selected servers files."/>
                             </StackPanel>
                         </GroupBox>
                     </TabItem>

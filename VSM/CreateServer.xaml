@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Create New Server" Height="160" Width="800" Icon="Resources\Add.png" ResizeMode="NoResize">
+        Title="Create New Server" Height="160" Width="825" Icon="Resources\Add.png" ResizeMode="NoResize">
     <Grid>
         <StackPanel Margin="5">
             <DockPanel>
