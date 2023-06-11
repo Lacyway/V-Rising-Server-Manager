@@ -13,8 +13,6 @@
         <controls:NumberBoxFormatter x:Key="DecimalFormatter"/>
     </Window.Resources>
 
-    <!--NumberFormatter="{StaticResource DecimalFormatter}"-->
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

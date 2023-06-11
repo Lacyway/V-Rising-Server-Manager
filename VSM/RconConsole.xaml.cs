@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Threading;
 using VRisingServerManager.RCON;
-using System.Windows.Forms.VisualStyles;
 
 namespace VRisingServerManager
 {
@@ -22,6 +21,7 @@ namespace VRisingServerManager
             DataContext = server;
             InitializeComponent();
             RconConsoleOutput.AppendText("RCON client ready.");
+            CommandList.SelectedIndex = 0;
         }
 
         private void LogToConsole(string output)
@@ -35,8 +35,10 @@ namespace VRisingServerManager
 
         private void Connect()
         {
-            rClient = new RemoteConClient();
-            rClient.UseUtf8 = true;
+            rClient = new()
+            {
+                UseUtf8 = true
+            };
             Dispatcher.Invoke(new Action(() =>
             {
                 ConnectButton.IsEnabled = false;
@@ -160,8 +162,8 @@ namespace VRisingServerManager
         {
             if (CommandList.SelectedIndex != -1 && rClient.Connected == true)
             {
-                rClient.SendCommand(String.Format("{0} {1}", (CommandList.SelectedItem as ListBoxItem).Content.ToString(), ParamaterTextbox.Text), result => { LogToConsole(result); });
-                LogToConsole(String.Format("Sent command '{0}' with parameter '{1}'.", (CommandList.SelectedItem as ListBoxItem).Content.ToString(), ParamaterTextbox.Text));
+                rClient.SendCommand(string.Format("{0} {1}", (CommandList.SelectedItem as ListBoxItem).Content.ToString(), ParamaterTextbox.Text), result => { LogToConsole(result); });
+                LogToConsole(string.Format("Sent command '{0}' with parameter '{1}'.", (CommandList.SelectedItem as ListBoxItem).Content.ToString(), ParamaterTextbox.Text));
             }
             else
             {
