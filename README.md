@@ -16,7 +16,7 @@ Extract the files to any folder. Run the program.
 You can change the settings file using the 'Editors' on the right. Either load one or create a new one by filling the fields and then saving it to the save folder.
 Example: `SaveData\Settings\ServerGameSettings.json` or `SaveData\Settings\ServerHostSettings.json`
 
-### RCON (temporarily disabled)
+### RCON
 The application has a very primitive RCON console built in. If you have RCON enabled in your ServerHostSettings you can connect to it and run the commands on the right. Currently only 2 commands are implemented in the game.
 
 Select a command and write the parameter in the text field at the bottom and click 'Send' to send the command to the server. No need to write the command.
