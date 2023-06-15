@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Threading;
 
 //localhost:9090/metrics
 

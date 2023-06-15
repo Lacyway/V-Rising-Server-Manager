@@ -8,15 +8,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.ComponentModel;
-using ModernWpf;
+using System.Text.Json.Nodes;
 using VRisingServerManager.RCON;
 using ModernWpf.Controls;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Text.Json.Nodes;
+using ModernWpf;
 
 namespace VRisingServerManager
 {
@@ -90,7 +87,7 @@ namespace VRisingServerManager
 #if DEBUG
                 AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
 #else
-                autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(VsmSettings.AppSettings.AutoUpdateInterval));
 #endif
                 AutoUpdateLoop();
             }
@@ -550,7 +547,7 @@ namespace VRisingServerManager
 #if DEBUG
                         AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
 #else
-                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                        AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(VsmSettings.AppSettings.AutoUpdateInterval));
 #endif
                         AutoUpdateLoop();
                     }
@@ -569,7 +566,7 @@ namespace VRisingServerManager
 #if DEBUG
                         AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
 #else
-                        autoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(vsmSettings.AppSettings.AutoUpdateInterval));
+                        AutoUpdateTimer = new PeriodicTimer(TimeSpan.FromMinutes(VsmSettings.AppSettings.AutoUpdateInterval));
 #endif
                         AutoUpdateLoop();
                     }
