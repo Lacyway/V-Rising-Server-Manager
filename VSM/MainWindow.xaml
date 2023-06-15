@@ -277,6 +277,12 @@
                         <TextBlock Text="Add Server"/>
                     </DockPanel>
                 </Button>
+                <Button Margin="5,0,5,0" Click="ManageModsButton_Click" Padding="5" ToolTip="Manage game mods. Currently unstable, use at own risk.">
+                    <DockPanel>
+                        <ui:SymbolIcon Symbol="Manage" Margin="0,0,5,0"/>
+                        <TextBlock Text="Manage Mods"/>
+                    </DockPanel>
+                </Button>
             </StackPanel>
         </GroupBox>
         <Grid Grid.Row="3">

@@ -20,6 +20,7 @@ namespace VRisingServerManager
         }
         public AppSettings AppSettings { get; set; } = new AppSettings();
         public Webhook WebhookSettings { get; set; } = new Webhook();
+        public List<Mod> DownloadedMods { get; set; } = new List<Mod>();
 
         /// <summary>
         /// Saves the specified <see cref="MainSettings"/> object.
@@ -87,7 +88,24 @@ namespace VRisingServerManager
         }
         [JsonIgnore]
         public ServerRuntime Runtime { get; set; } = new ServerRuntime();
-        
+        private bool _bepInExInstalled = false;
+        public bool BepInExInstalled
+        {
+            get => _bepInExInstalled;
+            set => SetField(ref _bepInExInstalled, value);
+        }
+        private string _bepInExVersion = "";
+        public string BepInExVersion
+        {
+            get => _bepInExVersion;
+            set => SetField(ref _bepInExVersion, value);
+        }
+        private List<string> _installedMods = new();
+        public List<string> InstalledMods
+        {
+            get => _installedMods;
+            set => SetField(ref _installedMods, value);
+        }
     }
 
     public class ServerWebhook : PropertyChangedBase
@@ -290,6 +308,34 @@ namespace VRisingServerManager
         {
             get => _updateWait;
             set => SetField(ref _updateWait, value);
+        }
+    }
+
+    public class Mod : PropertyChangedBase
+    {
+        private bool _downloaded = false;
+        public bool Downloaded
+        {
+            get => _downloaded;
+            set => SetField(ref _downloaded, value);
+        }
+        private string _uuid4 = "";
+        public string Uuid4
+        {
+            get => _uuid4;
+            set => SetField(ref _uuid4, value);
+        }
+        private string _archiveName = "";
+        public string ArchiveName
+        {
+            get => _archiveName;
+            set => SetField(ref _archiveName, value);
+        }
+        private List<string> _fileNames = new();
+        public List<string> FileNames
+        {
+            get => _fileNames;
+            set => SetField(ref _fileNames, value);
         }
     }
 }

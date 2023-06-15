@@ -1,0 +1,241 @@
+﻿<Window x:Class="VRisingServerManager.ModManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRisingServerManager"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        mc:Ignorable="d"
+        Title="Mod Manager" Height="610" Width="1100" ResizeMode="NoResize">
+    <StackPanel Orientation="Vertical">
+        <ui:CommandBar>
+            <ui:AppBarButton Label="Refresh Modlist" Icon="Refresh" Click="RefreshModlistButton_Click" ToolTip="Refreshes the modlist."/>
+            <ui:AppBarButton Label="Install BepInEx" Icon="Add" Click="InstallBepInExButton_Click" DataContext="{Binding SelectedItem, ElementName=ServerComboBox}" ToolTip="Install BepInEx on the selected server. Required for mods to run.">
+                <ui:AppBarButton.Style>
+                    <Style TargetType="ui:AppBarButton">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding BepInExInstalled}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:AppBarButton.Style>
+            </ui:AppBarButton>
+
+            <ui:AppBarButton Label="Uninstall BepInEx" Icon="Remove" Click="UninstallBepInExButton_Click" DataContext="{Binding SelectedItem, ElementName=ServerComboBox}" ToolTip="Uninstall BepInEx from from the selected server.">
+                <ui:AppBarButton.Style>
+                    <Style TargetType="ui:AppBarButton">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding BepInExInstalled}" Value="False">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:AppBarButton.Style>
+            </ui:AppBarButton>
+            
+            <ui:CommandBar.Content>
+                <DockPanel>
+                    <TextBlock Text="Server: " VerticalAlignment="Center" Padding="10,0,0,0"/>
+                    <ComboBox Name="ServerComboBox" ItemsSource="{Binding Servers}" DisplayMemberPath="Name" VerticalAlignment="Center" Width="300" Margin="5" SelectionChanged="ServerComboBox_SelectionChanged" ToolTip="Select a server to manage."/>
+                    <TextBlock VerticalAlignment="Center" DataContext="{Binding SelectedItem, ElementName=ServerComboBox}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding BepInExInstalled}" Value="True">
+                                        <Setter Property="Text" Value="BepInEx: Installed, Version: "/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding BepInExInstalled}" Value="False">
+                                        <Setter Property="Text" Value="BepInEx: Not Installed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="{Binding BepInExVersion}" VerticalAlignment="Center" DataContext="{Binding SelectedItem, ElementName=ServerComboBox}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding BepInExInstalled}" Value="False">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding BepInExInstalled}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </DockPanel>
+            </ui:CommandBar.Content>
+        </ui:CommandBar>
+
+        <StackPanel Orientation="Horizontal" Width="Auto">
+            <DataGrid x:Name="ModsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Width="600" Height="500" SelectionChanged="ModsDataGrid_SelectionChanged" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Latest Version" Binding="{Binding Versions[0].Version_Number}" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Downloaded" Binding="{Binding Downloaded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Installed" Binding="{Binding Installed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Header="Mod Info" Padding="5" Margin="5" Width="490" Height="500">
+                <ScrollViewer>
+                    <StackPanel x:Name="ModInfoPanel" DataContext="{Binding SelectedItem, ElementName=ModsDataGrid}">
+                        <Image Name="ModImage" HorizontalAlignment="Center" Stretch="Fill" Width="128" Height="128" Margin="0,0,0,10"/>
+                        <DockPanel>
+                            <StackPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Author: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Owner}"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Created: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Text="{Binding Date_Created}" Margin="0,10,0,0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Downloads: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Name="DownloadsTextBlock" Margin="0,10,0,0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Mod Page: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Margin="0,10,0,0">
+                                        <Hyperlink NavigateUri="{Binding Package_Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                                            Link
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DockPanel>
+                            </StackPanel>
+                            <StackPanel Margin="10,0,0,0">
+                                <DockPanel>
+                                    <TextBlock Text="Version: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Versions[0].Version_Number}"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Last Update: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Text="{Binding Date_Updated}" Margin="0,10,0,0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="File Size: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Name="FileSizeTextBlock" Margin="0,10,0,0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Mod Website: " FontWeight="Bold" Margin="0,10,0,0"/>
+                                    <TextBlock Margin="0,10,0,0">
+                                        <Hyperlink NavigateUri="{Binding Versions[0].Website_Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                                            Link
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DockPanel>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Dependencies: " FontWeight="Bold" Margin="0,10,0,0"/>
+                            <TextBlock Name="DependenciesTextBlock" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Description: " FontWeight="Bold" Margin="0,10,0,0"/>
+                            <TextBlock Text="{Binding Versions[0].Description}" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                        </DockPanel>
+                        <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center">
+                            <DockPanel>
+                                <Button Width="125" Click="DownloadButton_Click" ToolTip="Download the selected mod.">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="False">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <DockPanel>
+                                        <ui:SymbolIcon Symbol="Download"/>
+                                        <TextBlock Text="Download" Margin="5,0,0,0"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button Width="125" Margin="10,0,0,0" Click="InstallButton_Click" ToolTip="Install the selected mod to the selected server.">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="False">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Installed}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <DockPanel>
+                                        <ui:SymbolIcon Symbol="Add"/>
+                                        <TextBlock Text="Install" Margin="5,0,0,0"/>
+                                    </DockPanel>
+                                </Button>
+                            </DockPanel>
+                            <DockPanel Margin="0,10,0,10">
+                                <Button Width="125" Click="RemoveButton_Click" ToolTip="Remove the selected mod archive.">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Downloaded}" Value="False">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <DockPanel>
+                                        <ui:SymbolIcon Symbol="Delete"/>
+                                        <TextBlock Text="Remove" Margin="5,0,0,0"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button Width="125" Margin="10,0,0,0" Click="UninstallButton_click" ToolTip="Uninstall the selected mod from the selected server.">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Installed}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Installed}" Value="False">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Foreground" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <DockPanel>
+                                        <ui:SymbolIcon Symbol="Remove"/>
+                                        <TextBlock Text="Uninstall" Margin="5,0,0,0"/>
+                                    </DockPanel>
+                                </Button>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </StackPanel>
+        <StatusBar>
+            <StatusBarItem>
+                <ui:ProgressBar Name="DownloadProgressBar" IsIndeterminate="True" Height="10" Width="100" Visibility="Hidden" Margin="10,0,0,0"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="DownloadProgressText" Margin="10,0,0,0"/>
+            </StatusBarItem>
+        </StatusBar>
+    </StackPanel>
+</Window>
