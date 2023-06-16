@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ModernWpf.Controls;
+using System.Windows;
 
 namespace VRisingServerManager
 {
@@ -25,6 +26,26 @@ namespace VRisingServerManager
                 ServerCombo2.IsEnabled = false;
                 ResetServerButton.IsEnabled = false;
             }
+        }
+
+        private async void ModSupportCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (localMainSettings.AppSettings.EnableModSupport == false)
+            {
+                return;
+            }
+
+            ContentDialog yesNoDialog = new()
+            {
+                Title = "Warning",
+                Content = "Mod support is still experimental. Most mods will work and install automatically unless the author has a different format that deviates from the standard.\nMake sure that the mods you install work on the latest version and create backups of your saves regularly if you are installing new mods.\nThe server manager cannot be responsible for mods breaking/corrupting your saves.\n\nEnable mod support?",
+                PrimaryButtonText = "Yes",
+                CloseButtonText = "No",
+                Owner = this
+            };
+
+            if (await yesNoDialog.ShowAsync() != ContentDialogResult.Primary)
+                localMainSettings.AppSettings.EnableModSupport = false;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

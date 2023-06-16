@@ -283,6 +283,12 @@ namespace VRisingServerManager
             get => _autoLoadEditor;
             set => SetField(ref _autoLoadEditor, value);
         }
+        private bool _enableModSupport = false;
+        public bool EnableModSupport
+        {
+            get => _enableModSupport;
+            set => SetField(ref _enableModSupport, value);
+        }
     }
 
     /// <summary>

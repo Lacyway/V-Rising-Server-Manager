@@ -327,7 +327,7 @@ namespace VRisingServerManager
         {
             if (DownloadInProgress)
             {
-                MessageBox.Show("INPRO");
+                MessageBox.Show("Another download is in progress.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -597,6 +597,9 @@ namespace VRisingServerManager
 
             string dependencies = string.Join(", ", modInfo.Versions[0].Dependencies);            
             DependenciesTextBlock.Text = dependencies;
+
+            string categories = string.Join(", ", modInfo.Categories);
+            CategoriesTextBlock.Text = categories;
 
             Uri uri = new Uri(modInfo.Versions[0].Icon);
             BitmapImage bitmap = new BitmapImage(uri);

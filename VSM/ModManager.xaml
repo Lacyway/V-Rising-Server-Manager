@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Mod Manager" Height="610" Width="1100" ResizeMode="NoResize">
+        Title="Mod Manager" Height="710" Width="1100" ResizeMode="NoResize">
     <StackPanel Orientation="Vertical">
         <ui:CommandBar>
             <ui:AppBarButton Label="Refresh Modlist" Icon="Refresh" Click="RefreshModlistButton_Click" ToolTip="Refreshes the modlist."/>
@@ -72,7 +72,7 @@
         </ui:CommandBar>
 
         <StackPanel Orientation="Horizontal" Width="Auto">
-            <DataGrid x:Name="ModsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Width="600" Height="500" SelectionChanged="ModsDataGrid_SelectionChanged" SelectionMode="Single">
+            <DataGrid x:Name="ModsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Width="600" Height="600" SelectionChanged="ModsDataGrid_SelectionChanged" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Latest Version" Binding="{Binding Versions[0].Version_Number}" IsReadOnly="True"/>
@@ -81,7 +81,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <GroupBox Header="Mod Info" Padding="5" Margin="5" Width="490" Height="500">
+            <GroupBox Header="Mod Info" Padding="5" Margin="5" Width="490" Height="600">
                 <ScrollViewer>
                     <StackPanel x:Name="ModInfoPanel" DataContext="{Binding SelectedItem, ElementName=ModsDataGrid}">
                         <Image Name="ModImage" HorizontalAlignment="Center" Stretch="Fill" Width="128" Height="128" Margin="0,0,0,10"/>
@@ -134,6 +134,10 @@
                         <DockPanel>
                             <TextBlock Text="Dependencies: " FontWeight="Bold" Margin="0,10,0,0"/>
                             <TextBlock Name="DependenciesTextBlock" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Categories: " FontWeight="Bold" Margin="0,10,0,0"/>
+                            <TextBlock Name="CategoriesTextBlock" TextWrapping="Wrap" Margin="0,10,0,0"/>
                         </DockPanel>
                         <DockPanel>
                             <TextBlock Text="Description: " FontWeight="Bold" Margin="0,10,0,0"/>

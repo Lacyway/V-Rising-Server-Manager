@@ -277,7 +277,22 @@
                         <TextBlock Text="Add Server"/>
                     </DockPanel>
                 </Button>
-                <Button Margin="5,0,5,0" Click="ManageModsButton_Click" Padding="5" ToolTip="Manage game mods. Currently unstable, use at own risk.">
+                <Button Margin="5,0,5,0" Click="ManageModsButton_Click" Padding="5" ToolTipService.ShowOnDisabled="True">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AppSettings.EnableModSupport}" Value="True">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                    <Setter Property="ToolTip" Value="Manage game mods."/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding AppSettings.EnableModSupport}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="Foreground" Value="Gray"/>
+                                    <Setter Property="ToolTip" Value="Enable mod support in settings."/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                     <DockPanel>
                         <ui:SymbolIcon Symbol="Manage" Margin="0,0,5,0"/>
                         <TextBlock Text="Manage Mods"/>

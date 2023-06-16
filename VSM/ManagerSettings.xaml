@@ -28,8 +28,9 @@
                                     <ui:NumberBox Value="{Binding AppSettings.AutoUpdateInterval}" Maximum="1440" Minimum="10" SpinButtonPlacementMode="Hidden" Margin="10,0,0,0" IsEnabled="{Binding AppSettings.AutoUpdate}" ToolTip="How often (in minutes) it should search for updates."/>
                                 </DockPanel>
                                 <CheckBox Content="Show SteamCMD Window" IsChecked="{Binding AppSettings.ShowSteamWindow, Mode=TwoWay}" ToolTip="If the SteamCMD window should be shown or not during updates. Useful when troubleshooting."/>
-                                <CheckBox Content="Use Dark Mode" IsChecked="{Binding AppSettings.DarkMode, Mode=TwoWay}" ToolTip="If the app should run in dark mode."/>
+                                <CheckBox Content="Enable Dark Mode" IsChecked="{Binding AppSettings.DarkMode, Mode=TwoWay}" ToolTip="If the app should run in dark mode."/>
                                 <CheckBox Content="Auto Load Settings Files" IsChecked="{Binding AppSettings.AutoLoadEditor, Mode=TwoWay}" ToolTip="If the Game and Server Settings Editors should automatically try to load the selected servers files."/>
+                                <CheckBox Name="ModSupportCheckBox" Content="Enable Mod Support" IsChecked="{Binding AppSettings.EnableModSupport}" ToolTip="Enable experimental mod support." Click="ModSupportCheckBox_Click"/>
                             </StackPanel>
                         </GroupBox>
                     </TabItem>
