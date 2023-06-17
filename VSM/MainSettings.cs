@@ -110,6 +110,12 @@ namespace VRisingServerManager
 
     public class ServerWebhook : PropertyChangedBase
     {
+        private bool _enabled = false;
+        public bool Enabled
+        {
+            get => _enabled;
+            set => SetField(ref _enabled, value);
+        }
         private string _startServer = "Starting server.";
         public string StartServer
         {

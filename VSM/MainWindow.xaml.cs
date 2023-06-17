@@ -213,8 +213,7 @@ namespace VRisingServerManager
             if (File.Exists(server.Path + @"\VRisingServer.exe"))
             {
                 LogToConsole("Starting server: " + server.Name + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
-                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StartServer))
-                    //SendDiscordMessage($"Starting server **{server.LaunchSettings.DisplayName}**." + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
+                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StartServer) && server.WebhookMessages.Enabled == true)
                     SendDiscordMessage(server.WebhookMessages.StartServer);
                 string parameters = $@"-persistentDataPath ""{server.Path + @"\SaveData"}"" -serverName ""{server.Name}"" -saveName ""{server.LaunchSettings.WorldName}"" -logFile ""{server.Path + @"\logs\VRisingServer.log"}""{(server.LaunchSettings.BindToIP ? $@" -address ""{server.LaunchSettings.BindingIP}""" : "")}";
                 Process serverProcess = new()
@@ -365,7 +364,7 @@ namespace VRisingServerManager
         private async Task<bool> StopServer(Server server)
         {
             LogToConsole("Stopping server: " + server.Name);
-            if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StopServer))
+            if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StopServer) && server.WebhookMessages.Enabled == true)
                 SendDiscordMessage(server.WebhookMessages.StopServer);
 
             server.Runtime.UserStopped = true;
@@ -480,7 +479,7 @@ namespace VRisingServerManager
                     }                    
                 }
 
-                if (foundVariables == 3 && VsmSettings.WebhookSettings.Enabled == true)
+                if (foundVariables == 3 && VsmSettings.WebhookSettings.Enabled == true && server.WebhookMessages.Enabled == true)
                 {
                     List<string> toSendList = new()
                     {
@@ -521,7 +520,7 @@ namespace VRisingServerManager
             if (server.Runtime.RestartAttempts >= 3)
             {
                 LogToConsole($"Server '{server.Name}' attempted to restart 3 times unsuccessfully. Disabling auto-restart.");
-                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.AttemptStart3))
+                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.AttemptStart3) && server.WebhookMessages.Enabled == true)
                     SendDiscordMessage(server.WebhookMessages.AttemptStart3);
                 server.Runtime.RestartAttempts = 0;
                 server.AutoRestart = false;
@@ -531,7 +530,7 @@ namespace VRisingServerManager
             if (server.AutoRestart == true && server.Runtime.UserStopped == false)
             {
                 server.Runtime.RestartAttempts++;
-                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.ServerCrash))
+                if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.ServerCrash) && server.WebhookMessages.Enabled == true)
                     SendDiscordMessage(server.WebhookMessages.ServerCrash);
                 await StartServer(server);
             }

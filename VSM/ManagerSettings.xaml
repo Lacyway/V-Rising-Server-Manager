@@ -46,11 +46,11 @@
                                 <TextBlock Text="Messages" Margin="0,10,0,0" FontSize="20"/>
                                 <DockPanel Margin="0,5,0,0">
                                     <TextBlock Width="100" Text="Update Found:" VerticalAlignment="Center"/>
-                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateFound, Mode=TwoWay}" ToolTip="Sent when a game update was found. Leave empty to disable."/>
+                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateFound, Mode=TwoWay}" ToolTip="Sent when a game update was found. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                 </DockPanel>
                                 <DockPanel Margin="0,5,0,0">
                                     <TextBlock Width="100" Text="Update Wait:" VerticalAlignment="Center"/>
-                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateWait, Mode=TwoWay}" ToolTip="Sent when the server waits 5 minutes before shutting down to update. Leave empty to disable."/>
+                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookSettings.UpdateWait, Mode=TwoWay}" ToolTip="Sent when the server waits 5 minutes before shutting down to update. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                 </DockPanel>
                                 <Button Content="Reset" Width="100" HorizontalAlignment="Left" Margin="0,10,0,0" Click="ResetButton_Click" ToolTip="Resets all messages to the default value."/>
                                 <Separator Margin="0,10,0,10"/>
@@ -72,28 +72,29 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
+                                            <CheckBox Content="Enabled" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsChecked="{Binding WebhookMessages.Enabled}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" ToolTip="Enable or disable webhook for this server." ToolTipService.ShowOnDisabled="True"/>
                                             <DockPanel Margin="0,5,0,0">
                                                 <TextBlock Text="Server Starting: " Width="150" VerticalAlignment="Center"/>
-                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StartServer}" ToolTip="Sent when the server starts. Leave empty to disable."/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StartServer}" ToolTip="Sent when the server starts. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                             </DockPanel>
                                             <DockPanel Margin="0,5,0,0">
                                                 <TextBlock Text="Server Stopping: " Width="150" VerticalAlignment="Center"/>
-                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StopServer}" ToolTip="Sent when the server stops. Leave empty to disable."/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.StopServer}" ToolTip="Sent when the server stops. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                             </DockPanel>
                                             <DockPanel Margin="0,5,0,0">
                                                 <TextBlock Text="Server Ready: " Width="150" VerticalAlignment="Center"/>
-                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerReady}" ToolTip="Sent when the server is ready. Leave empty to disable."/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerReady}" ToolTip="Sent when the server is ready. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                             </DockPanel>
                                             <DockPanel Margin="0,5,0,0">
                                                 <TextBlock Text="3 Start Attempts: " Width="150" VerticalAlignment="Center"/>
-                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.AttemptStart3, Mode=OneWay}" ToolTip="Sent when the server fails to start 3 times with auto-restart. Leave empty to disable."/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.AttemptStart3, Mode=OneWay}" ToolTip="Sent when the server fails to start 3 times with auto-restart. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                             </DockPanel>
                                             <DockPanel Margin="0,5,0,0">
                                                 <TextBlock Text="Server Crashed: " Width="150" VerticalAlignment="Center"/>
-                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerCrash}" ToolTip="Sent when the server crashes. Leave empty to disable."/>
+                                                <TextBox DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" Text="{Binding WebhookMessages.ServerCrash}" ToolTip="Sent when the server crashes. Leave empty to disable." ToolTipService.ShowOnDisabled="True"/>
                                             </DockPanel>
-                                            <CheckBox Content="Broadcast IP" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastIP}" ToolTip="If the IP should be sent when server is ready."/>
-                                            <CheckBox Content="Broadcast SteamID" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastSteamID}" ToolTip="If the SteamID should be sent when the server is ready."/>
+                                            <CheckBox Content="Broadcast IP" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastIP}" ToolTip="If the IP should be sent when server is ready." ToolTipService.ShowOnDisabled="True"/>
+                                            <CheckBox Content="Broadcast SteamID" DataContext="{Binding SelectedItem, ElementName=ServerCombo}" IsEnabled="{Binding IsChecked, ElementName=WebhookCheck}" IsChecked="{Binding WebhookMessages.BroadcastSteamID}" ToolTip="If the SteamID should be sent when the server is ready." ToolTipService.ShowOnDisabled="True"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </GroupBox>
