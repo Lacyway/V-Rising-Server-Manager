@@ -155,20 +155,20 @@
                                     <StackPanel>
                                         <CheckBox Content="Enabled" IsChecked="{Binding InactivityKillEnabled, Mode=TwoWay}" ToolTip="Inactive players are automatically killed after a set duration"/>
                                         <TextBlock Text="Minimum Time"/>
-                                        <local:NumericSpinner Value="{Binding InactivityKillTimeMin, Mode=TwoWay}" ToolTip="Minimum timer before inactive player is killed in seconds based on gear level"/>
+                                        <ui:NumberBox Value="{Binding InactivityKillTimeMin, Mode=TwoWay}" ToolTip="Minimum timer before inactive player is killed in seconds based on gear level"/>
                                         <TextBlock Text="Max Time"/>
-                                        <local:NumericSpinner Value="{Binding InactivityKillTimeMax, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Maximum timer before inactive player is killed in seconds based on gear level"/>
+                                        <ui:NumberBox Value="{Binding InactivityKillTimeMax, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Maximum timer before inactive player is killed in seconds based on gear level" ToolTipService.ShowOnDisabled="True"/>
                                         <TextBlock Text="Safe Time Addition"/>
-                                        <local:NumericSpinner Value="{Binding InactivityKillSafeTimeAddition, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Additional time before an inactive player is killed in seconds when standing in a castle territory"/>
+                                        <ui:NumberBox Value="{Binding InactivityKillSafeTimeAddition, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Additional time before an inactive player is killed in seconds when standing in a castle territory" ToolTipService.ShowOnDisabled="True"/>
                                         <TextBlock Text="Max Item Level"/>
-                                        <local:NumericSpinner Value="{Binding InactivityKillTimerMaxItemLevel, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: The maximum gear level that the inactivity min and max timers are based on from 1 - this value"/>
+                                        <ui:NumberBox Value="{Binding InactivityKillTimerMaxItemLevel, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: The maximum gear level that the inactivity min and max timers are based on from 1 - this value" ToolTipService.ShowOnDisabled="True"/>
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox Header="Disable Disconnected Dead" Margin="10,0,10,0">
                                     <StackPanel>
                                         <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
                                         <TextBlock Text="Timer"/>
-                                        <local:NumericSpinner Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
+                                        <ui:NumberBox Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
                                         <TextBlock Text="Disconnected Sun Immunity Timer"/>
                                         <ui:NumberBox Value="{Binding DisconnectedSunImmunityTime, Mode=TwoWay}" Maximum="3600" Minimum="0.25" SmallChange="0.25" NumberFormatter="{StaticResource DecimalFormatter}" ToolTip="Untested, change at own risk." SpinButtonPlacementMode="Compact"/>
                                     </StackPanel>
@@ -221,7 +221,7 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="Journal V Blood Source Unit Max Distance" VerticalAlignment="Center" Width="275"/>
-                                    <ui:NumberBox Value="{Binding JournalVBloodSourceUnitMaxDistance, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                    <ui:NumberBox Value="{Binding JournalVBloodSourceUnitMaxDistance, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="PvP Vampire Respawn Modifier" VerticalAlignment="Center" Width="275"/>
@@ -305,7 +305,7 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="Research Cost Modifier" VerticalAlignment="Center" Width="275"/>
-                                    <ui:NumberBox Value="{Binding ResearchCostModifier, Mode=TwoWay}" SmallChange="0.25" IsEnabled="False" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                    <ui:NumberBox Value="{Binding ResearchCostModifier, Mode=TwoWay}" SmallChange="0.25" IsEnabled="False" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="Refinement Cost Modifier" VerticalAlignment="Center" Width="275"/>
@@ -317,7 +317,7 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="Research Time Modifier" VerticalAlignment="Center" Width="275"/>
-                                    <ui:NumberBox Value="{Binding ResearchTimeModifier, Mode=TwoWay}" SmallChange="0.25" IsEnabled="False" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                    <ui:NumberBox Value="{Binding ResearchTimeModifier, Mode=TwoWay}" SmallChange="0.25" IsEnabled="False" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Text="Dismantle Resource Modifier" VerticalAlignment="Center" Width="275"/>
@@ -354,7 +354,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Max Energy Modifier" Width="175" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding VampireStatModifiers.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding VampireStatModifiers.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Physical Power Modifier" Width="175" VerticalAlignment="Center"/>
@@ -370,7 +370,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Siege Power Modifier" Width="175" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding VampireStatModifiers.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding VampireStatModifiers.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Damage Received Modifier" Width="175" VerticalAlignment="Center"/>
@@ -378,7 +378,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Revive Cancel Delay" Width="175" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding VampireStatModifiers.ReviveCancelDelay, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding VampireStatModifiers.ReviveCancelDelay, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                 </StackPanel>
                             </GroupBox>
@@ -390,7 +390,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Max Energy Modifier" Width="250" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding EquipmentStatModifiers_Global.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding EquipmentStatModifiers_Global.MaxEnergyModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Resource Yield Modifier" Width="250" VerticalAlignment="Center"/>
@@ -406,7 +406,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Siege Power Modifier" Width="250" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding EquipmentStatModifiers_Global.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding EquipmentStatModifiers_Global.SiegePowerModifier, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Movement Speed Modifier" Width="250" VerticalAlignment="Center"/>
@@ -450,7 +450,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Damage Resistance" Width="250" VerticalAlignment="Center"/>
-                                        <ui:NumberBox Value="{Binding CastleStatModifiers_Global.DamageResistance, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact"/>
+                                        <ui:NumberBox Value="{Binding CastleStatModifiers_Global.DamageResistance, Mode=TwoWay}" IsEnabled="False" SmallChange="0.25" ToolTip="Not used" NumberFormatter="{StaticResource DecimalFormatter}" SpinButtonPlacementMode="Compact" ToolTipService.ShowOnDisabled="True"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="Safety Box Limit" Width="250" VerticalAlignment="Center"/>
