@@ -155,7 +155,7 @@
                                     <StackPanel>
                                         <CheckBox Content="Enabled" IsChecked="{Binding InactivityKillEnabled, Mode=TwoWay}" ToolTip="Inactive players are automatically killed after a set duration"/>
                                         <TextBlock Text="Minimum Time"/>
-                                        <ui:NumberBox Value="{Binding InactivityKillTimeMin, Mode=TwoWay}" ToolTip="Minimum timer before inactive player is killed in seconds based on gear level"/>
+                                        <ui:NumberBox Value="{Binding InactivityKillTimeMin, Mode=TwoWay}" ToolTip="Minimum timer before inactive player is killed in seconds based on gear level" Minimum="1" SmallChange="10" SpinButtonPlacementMode="Compact"/>
                                         <TextBlock Text="Max Time"/>
                                         <ui:NumberBox Value="{Binding InactivityKillTimeMax, Mode=TwoWay}" IsEnabled="False" ToolTip="Not used: Maximum timer before inactive player is killed in seconds based on gear level" ToolTipService.ShowOnDisabled="True"/>
                                         <TextBlock Text="Safe Time Addition"/>
@@ -168,7 +168,7 @@
                                     <StackPanel>
                                         <CheckBox Content="Enabled" IsChecked="{Binding DisableDisconnectedDeadEnabled, Mode=TwoWay}" ToolTip="If dead disconnected players are disabled"/>
                                         <TextBlock Text="Timer"/>
-                                        <ui:NumberBox Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" />
+                                        <ui:NumberBox Value="{Binding DisableDisconnectedDeadTimer, Mode=TwoWay}" ToolTip="The time for a disconnected dead player to become disabled" Minimum="1" SmallChange="10" SpinButtonPlacementMode="Compact"/>
                                         <TextBlock Text="Disconnected Sun Immunity Timer"/>
                                         <ui:NumberBox Value="{Binding DisconnectedSunImmunityTime, Mode=TwoWay}" Maximum="3600" Minimum="0.25" SmallChange="0.25" NumberFormatter="{StaticResource DecimalFormatter}" ToolTip="Untested, change at own risk." SpinButtonPlacementMode="Compact"/>
                                     </StackPanel>

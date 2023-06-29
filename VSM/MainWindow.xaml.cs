@@ -215,7 +215,7 @@ namespace VRisingServerManager
                 LogToConsole("Starting server: " + server.Name + (server.Runtime.RestartAttempts > 0 ? $" Attempt {server.Runtime.RestartAttempts}/3." : ""));
                 if (VsmSettings.WebhookSettings.Enabled == true && !string.IsNullOrEmpty(server.WebhookMessages.StartServer) && server.WebhookMessages.Enabled == true)
                     SendDiscordMessage(server.WebhookMessages.StartServer);
-                string parameters = $@"-persistentDataPath ""{server.Path + @"\SaveData"}"" -serverName ""{server.Name}"" -saveName ""{server.LaunchSettings.WorldName}"" -logFile ""{server.Path + @"\logs\VRisingServer.log"}""{(server.LaunchSettings.BindToIP ? $@" -address ""{server.LaunchSettings.BindingIP}""" : "")}";
+                string parameters = $@"-persistentDataPath ""{server.Path + @"\SaveData"}"" -serverName ""{server.LaunchSettings.DisplayName}"" -saveName ""{server.LaunchSettings.WorldName}"" -logFile ""{server.Path + @"\logs\VRisingServer.log"}""{(server.LaunchSettings.BindToIP ? $@" -address ""{server.LaunchSettings.BindingIP}""" : "")}";
                 Process serverProcess = new()
                 {
                     StartInfo = new ProcessStartInfo
