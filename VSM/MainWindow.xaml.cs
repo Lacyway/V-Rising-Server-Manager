@@ -290,9 +290,18 @@ namespace VRisingServerManager
                         process.Exited += new EventHandler((sender, e) => ServerProcessExited(sender, e, server));
                         server.Runtime.Process = process;
                         foundServers++;
-                    }                        
+                    }
                 }
             }
+
+            foreach (Server server in VsmSettings.Servers)
+            {
+                if (server.AutoStart == true && server.Runtime.State == ServerRuntime.ServerState.Stopped)
+                {
+                    StartServer(server);
+                }
+            }
+
             if (foundServers > 0)
             {
                 LogToConsole($"Found {foundServers} servers that are running.");
@@ -597,11 +606,9 @@ namespace VRisingServerManager
         private async void StartServerButton_Click(object sender, RoutedEventArgs e)
         {
             Server server = ((Button)sender).DataContext as Server;
-
             MainSettings.Save(VsmSettings);
 
             bool started = await StartServer(server);
-
             await Task.Delay(3000);
 
             if (started == true && VsmSettings.WebhookSettings.Enabled)

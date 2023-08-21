@@ -129,6 +129,11 @@
                                     </DockPanel>
                                 </StackPanel>
                             </GroupBox>
+                            <GroupBox Header="Other">
+                                <StackPanel>
+                                    <CheckBox x:Name="AutoStartCheck" Content="Auto Start" DataContext="{Binding SelectedItem, ElementName=ServerCombo2}" IsChecked="{Binding AutoStart}" ToolTip="If the server should automatically start when opening the app."/>
+                                </StackPanel>
+                            </GroupBox>
                         </StackPanel>
                     </TabItem>
 

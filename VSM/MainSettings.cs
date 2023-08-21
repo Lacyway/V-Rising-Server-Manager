@@ -80,6 +80,12 @@ namespace VRisingServerManager
             get => _autoRestart;
             set => SetField(ref _autoRestart, value);
         }
+        private bool _autoStart = false;
+        public bool AutoStart
+        {
+            get => _autoStart;
+            set => SetField(ref _autoStart, value);
+        }
         private ServerWebhook _webhookMessages = new();
         public ServerWebhook WebhookMessages
         {
@@ -271,7 +277,7 @@ namespace VRisingServerManager
             get => _lastUpdateTime;
             set => SetField(ref _lastUpdateTime, value);
         }
-        private string _version = "3.3.3b";
+        private string _version = "3.3.4b";
         public string Version
         {
             get => _version;
