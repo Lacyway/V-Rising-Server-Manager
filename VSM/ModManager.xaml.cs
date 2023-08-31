@@ -129,115 +129,122 @@ namespace VRisingServerManager
 
             if (await yesNoDialog.ShowAsync() is ContentDialogResult.Primary)
             {
-                string workingDir = Directory.GetCurrentDirectory();
-                ModInfo bixMod = new();
-                foreach (ModInfo mod in Mods.ModList)
+                try
                 {
-                    if (mod.Full_Name == "BepInEx-BepInExPack_V_Rising")
-                        bixMod = mod;
-                }
-
-                foreach (Mod downloadedMod in VsmSettings.DownloadedMods)
-                {
-                    if (downloadedMod.Uuid4 == bixMod.Uuid4)
+                    string workingDir = Directory.GetCurrentDirectory();
+                    ModInfo bixMod = new();
+                    foreach (ModInfo mod in Mods.ModList)
                     {
-                        if (Directory.Exists(workingDir + @"\Mods\temp"))
-                            Directory.Delete(workingDir + @"\Mods\temp", true);
-
-                        Directory.CreateDirectory(workingDir + @"\Mods\temp");
-                        ZipFile.ExtractToDirectory(workingDir + @"\Mods\" + downloadedMod.ArchiveName, workingDir + @"\Mods\temp", true);
-
-                        string[] dirs1 = Directory.GetDirectories(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
-                        string[] files1 = Directory.GetFiles(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
-                        foreach (string file in files1)
-                            File.Move(file, server.Path + @"\" + Path.GetFileName(file), true);
-
-                        foreach (string dir in dirs1)
-                        {
-                            DirectoryInfo dirInfo = new(dir);
-                            if (Directory.Exists(server.Path + @"\" + dirInfo.Name))
-                                Directory.Delete(server.Path + @"\" + dirInfo.Name, true);
-                            Directory.Move(dir, server.Path + @"\" + dirInfo.Name);
-                        }
-
-                        Directory.Delete(workingDir + @"\Mods\temp", true);
-                        server.InstalledMods.Add(bixMod.Uuid4);
-                        server.BepInExInstalled = true;
-                        server.BepInExVersion = bixMod.Versions[0].Version_Number;
-                        bixMod.Installed = true;
-                        MainSettings.Save(VsmSettings);
-
-                        _ = new ContentDialog
-                        {
-                            Owner = this,
-                            Title = "BepInEx - Install",
-                            Content = $"BepInEx was installed on {server.Name}.",
-                            CloseButtonText = "Ok",
-                            DefaultButton = ContentDialogButton.Close
-                        }.ShowAsync();
-
-                        return;
+                        if (mod.Uuid4 == "b86fcaaf-297a-45c8-82a0-fcbd7806fdc4")
+                            bixMod = mod;
                     }
-                }
 
-                if (!Directory.Exists(workingDir + @"\Mods"))
-                    Directory.CreateDirectory(workingDir + @"\Mods");
+                    foreach (Mod downloadedMod in VsmSettings.DownloadedMods)
+                    {
+                        if (downloadedMod.Uuid4 == bixMod.Uuid4 && downloadedMod.Downloaded == true)
+                        {
+                            if (Directory.Exists(workingDir + @"\Mods\temp"))
+                                Directory.Delete(workingDir + @"\Mods\temp", true);
 
-                using Stream stream = await hClient.GetStreamAsync(bixMod.Versions[0].Download_Url);
-                using (var fileStream = File.Create(workingDir + @"\Mods\" + bixMod.Versions[0].Full_Name + ".zip"))
-                {
-                    await stream.CopyToAsync(fileStream);
-                }
+                            Directory.CreateDirectory(workingDir + @"\Mods\temp");
+                            ZipFile.ExtractToDirectory(workingDir + @"\Mods\" + downloadedMod.ArchiveName, workingDir + @"\Mods\temp", true);
 
-                Mod modToSave = new()
-                {
-                    Downloaded = true,
-                    ArchiveName = bixMod.Versions[0].Full_Name + ".zip",
-                    Uuid4 = bixMod.Uuid4
-                };
+                            string[] dirs1 = Directory.GetDirectories(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
+                            string[] files1 = Directory.GetFiles(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
+                            foreach (string file in files1)
+                                File.Move(file, server.Path + @"\" + Path.GetFileName(file), true);
 
-                VsmSettings.DownloadedMods.Add(modToSave);
-                int modIndex = Mods.ModList.IndexOf(bixMod);
-                Mods.ModList[modIndex].Downloaded = true;
+                            foreach (string dir in dirs1)
+                            {
+                                DirectoryInfo dirInfo = new(dir);
+                                if (Directory.Exists(server.Path + @"\" + dirInfo.Name))
+                                    Directory.Delete(server.Path + @"\" + dirInfo.Name, true);
+                                Directory.Move(dir, server.Path + @"\" + dirInfo.Name);
+                            }
 
-                if (Directory.Exists(workingDir + @"\Mods\temp"))
+                            Directory.Delete(workingDir + @"\Mods\temp", true);
+                            server.InstalledMods.Add(bixMod.Uuid4);
+                            server.BepInExInstalled = true;
+                            server.BepInExVersion = bixMod.Versions[0].Version_Number;
+                            bixMod.Installed = true;
+                            MainSettings.Save(VsmSettings);
+
+                            _ = new ContentDialog
+                            {
+                                Owner = this,
+                                Title = "BepInEx - Install",
+                                Content = $"BepInEx was installed on {server.Name}.",
+                                CloseButtonText = "Ok",
+                                DefaultButton = ContentDialogButton.Close
+                            }.ShowAsync();
+
+                            return;
+                        }
+                    }
+
+                    if (!Directory.Exists(workingDir + @"\Mods"))
+                        Directory.CreateDirectory(workingDir + @"\Mods");
+
+                    using Stream stream = await hClient.GetStreamAsync(bixMod.Versions[0].Download_Url);
+                    using (var fileStream = File.Create(workingDir + @"\Mods\" + bixMod.Versions[0].Full_Name + ".zip"))
+                    {
+                        await stream.CopyToAsync(fileStream);
+                    }
+
+                    Mod modToSave = new()
+                    {
+                        Downloaded = true,
+                        ArchiveName = bixMod.Versions[0].Full_Name + ".zip",
+                        Uuid4 = bixMod.Uuid4
+                    };
+
+                    VsmSettings.DownloadedMods.Add(modToSave);
+                    int modIndex = Mods.ModList.IndexOf(bixMod);
+                    Mods.ModList[modIndex].Downloaded = true;
+
+                    if (Directory.Exists(workingDir + @"\Mods\temp"))
+                        Directory.Delete(workingDir + @"\Mods\temp", true);
+
+                    Directory.CreateDirectory(workingDir + @"\Mods\temp");
+                    ZipFile.ExtractToDirectory(workingDir + @"\Mods\" + modToSave.ArchiveName, workingDir + @"\Mods\temp", true);
+
+                    string[] dirs = Directory.GetDirectories(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
+                    string[] files = Directory.GetFiles(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
+                    foreach (string file in files)
+                    {
+                        File.Move(file, server.Path + @"\" + Path.GetFileName(file), true);
+                    }
+
+                    foreach (string dir in dirs)
+                    {
+                        DirectoryInfo dirInfo = new(dir);
+                        if (Directory.Exists(server.Path + @"\" + dirInfo.Name))
+                            Directory.Delete(server.Path + @"\" + dirInfo.Name, true);
+                        Directory.Move(dir, server.Path + @"\" + dirInfo.Name);
+                    }
+
                     Directory.Delete(workingDir + @"\Mods\temp", true);
+                    server.InstalledMods.Add(bixMod.Uuid4);
+                    server.BepInExInstalled = true;
+                    server.BepInExVersion = bixMod.Versions[0].Version_Number;
+                    bixMod.Installed = true;
+                    MainSettings.Save(VsmSettings);
 
-                Directory.CreateDirectory(workingDir + @"\Mods\temp");
-                ZipFile.ExtractToDirectory(workingDir + @"\Mods\" + modToSave.ArchiveName, workingDir + @"\Mods\temp", true);
+                    _ = new ContentDialog
+                    {
+                        Owner = this,
+                        Title = "BepInEx - Install",
+                        Content = $"BepInEx was installed on {server.Name}.",
+                        CloseButtonText = "Ok",
+                        DefaultButton = ContentDialogButton.Close
+                    }.ShowAsync();
 
-                string[] dirs = Directory.GetDirectories(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
-                string[] files = Directory.GetFiles(workingDir + @"\Mods\temp\BepInExPack_V_Rising");
-                foreach (string file in files)
-                {
-                    File.Move(file, server.Path + @"\" + Path.GetFileName(file), true);
+                    return;
                 }
-
-                foreach (string dir in dirs)
+                catch (Exception ex)
                 {
-                    DirectoryInfo dirInfo = new(dir);
-                    if (Directory.Exists(server.Path + @"\" + dirInfo.Name))
-                        Directory.Delete(server.Path + @"\" + dirInfo.Name, true);
-                    Directory.Move(dir, server.Path + @"\" + dirInfo.Name);
+                    MessageBox.Show("Error installing BepInEx: \n" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                Directory.Delete(workingDir + @"\Mods\temp", true);
-                server.InstalledMods.Add(bixMod.Uuid4);
-                server.BepInExInstalled = true;
-                server.BepInExVersion = bixMod.Versions[0].Version_Number;
-                bixMod.Installed = true;
-                MainSettings.Save(VsmSettings);
-
-                _ = new ContentDialog
-                {
-                    Owner = this,
-                    Title = "BepInEx - Install",
-                    Content = $"BepInEx was installed on {server.Name}.",
-                    CloseButtonText = "Ok",
-                    DefaultButton = ContentDialogButton.Close
-                }.ShowAsync();
-
-                return;
 
 
             }
