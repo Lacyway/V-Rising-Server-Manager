@@ -296,8 +296,11 @@ namespace VRisingServerManager
 
                 foreach (ModInfo mod in Mods.ModList)
                 {
-                    if (mod.Full_Name == "BepInEx-BepInExPack_V_Rising")
+                    if (mod.Uuid4 == "b86fcaaf-297a-45c8-82a0-fcbd7806fdc4")
+                    {
                         mod.Installed = false;
+                        RemoveMod(mod);
+                    }
                 }
 
                 server.InstalledMods = new();
@@ -307,15 +310,6 @@ namespace VRisingServerManager
 
                 foreach (ModInfo modInfo in Mods.ModList)
                     modInfo.Installed = false;
-
-                //foreach (Mod downloadedMod in vsmSettings.DownloadedMods)
-                //{
-                //    if (downloadedMod.Uuid4 == "b86fcaaf-297a-45c8-82a0-fcbd7806fdc4")
-                //    {
-                //        vsmSettings.DownloadedMods.Remove(downloadedMod);
-                //        break;
-                //    }
-                //}
 
                 _ = new ContentDialog
                 {
