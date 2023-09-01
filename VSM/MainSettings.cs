@@ -277,7 +277,7 @@ namespace VRisingServerManager
             get => _lastUpdateTime;
             set => SetField(ref _lastUpdateTime, value);
         }
-        private string _version = "3.3.4b";
+        private string _version = "3.3.5b";
         public string Version
         {
             get => _version;
