@@ -348,6 +348,7 @@ namespace VRisingServerManager
         public string GameSettingsPreset { get; set; } = "";
         public bool AdminOnlyDebugEvents { get; set; } = true;
         public bool DisableDebugEvents { get; set; } = false;
+        public bool HideIPAddress { get; set; } = false;
         public API API { get; set; } = new API();
         public Rcon Rcon { get; set; } = new Rcon();
     }

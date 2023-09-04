@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local1="clr-namespace:VRisingServerManager.Controls"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="Server Settings Editor" Height="925" Width="400" MaxWidth="400" ResizeMode="CanResize" Icon="Resources\EditDocument.png">
+        Title="Server Settings Editor" Height="975" Width="400" MaxWidth="400" ResizeMode="CanResize" Icon="Resources\EditDocument.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -95,6 +95,7 @@
                 </DockPanel>
                 <CheckBox Content="AdminOnlyDebugEvents" Height="20" IsChecked="{Binding AdminOnlyDebugEvents, Mode=TwoWay}" FontSize="12"/>
                 <CheckBox Content="DisableDebugEvents" Height="20" IsChecked="{Binding DisableDebugEvents, Mode=TwoWay}" FontSize="12"/>
+                <CheckBox Content="HideIPAddress" Height="20" IsChecked="{Binding HideIPAddress, Mode=TwoWay}" FontSize="12" ToolTip="When set to true the server can only be connected to via Steam Peer-to-Peer."/>
                 <CheckBox Content="API Enabled" Height="20" IsChecked="{Binding API.Enabled, Mode=TwoWay}" ToolTip="Enable or disable API functionality." FontSize="12"/>
                 <DockPanel>
                     <TextBlock Text="API Port" Height="20"/>
